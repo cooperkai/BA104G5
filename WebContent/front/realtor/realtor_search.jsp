@@ -1,5 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.realtor.model.*"%>
+<%@ page import="com.realestate.model.*"%>
+
+<jsp:useBean id="realtorSvc" scope="page"
+	class="com.realtor.model.RealtorService" />
+<jsp:useBean id="realestateSvc" scope="page"
+	class="com.realestate.model.RealEstateService" />
+
+
+<%
+	List<RealtorVO> list = realtorSvc.getAll();
+	pageContext.setAttribute("list", list);
+	
+	List<RealEstateVO> estatelist = realestateSvc.getAll();
+	pageContext.setAttribute("estatelist", estatelist);
+	
+%>
+
+
 
 
 <!DOCTYPE html>
@@ -118,30 +138,20 @@
 			<div class="col-xs-12 col-sm-12 btn_padding">
 				<div class="row">
 					<div class="btn-group">
-						<button type="button"
-							class="bigger btn btn-primary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">地
-							區</button>
-						<div class="dropdown-menu">
-							<li class="dropdown-header">北部地區</li> <a class="dropdown-item"
-								href="#">台北市</a><br> <a class="dropdown-item" href="#">新北市</a><br>
-							<a class="dropdown-item" href="#">桃園市</a><br> <a
-								class="dropdown-item" href="#">中壢區</a><br>
-							<li class="dropdown-header">中部地區</li> <a class="dropdown-item"
-								href="#">中一市</a><br> <a class="dropdown-item" href="#">中二市</a><br>
-							<a class="dropdown-item" href="#">中三市</a><br> <a
-								class="dropdown-item" href="#">中四區</a><br>
-						</div>
+						<b>選擇地區:</b> <select size="1" name="rtr_area">
+							<option value="搜尋服務地區">搜尋服務地區</option>
+							<c:forEach var="realtorVO" items="${realtorSvc.all}">
+								<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area }</option>
+							</c:forEach>
+						</select>
 					</div>
 					<div class="btn-group">
-						<button type="button"
-							class="bigger btn btn-primary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">房仲公司</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">AA房仲公司</a><br> <a
-								class="dropdown-item" href="#">BB房仲公司</a><br> <a
-								class="dropdown-item" href="#">BB房仲公司</a><br>
-						</div>
+						<b>選擇服務公司:</b> <select name="re_no">
+							<option value="搜尋服務公司">搜尋服務公司</option>
+							<c:forEach var="realestateVO" items="${realestateSvc.all}">
+								<option value="${realestateVO.re_no}">${realestateVO.re_name}</option>
+							</c:forEach>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -163,376 +173,57 @@
 	</div>
 
 
-
 	<!-- 搜尋房仲顯示的畫面================================================================================ -->
-	<div class="container container_size">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
-				<div class="col-xs-12 col-sm-3">
-					<img src="https://api.fnkr.net/testimg/180x200/5555ff">
-				</div>
+	<%@ include file="/page/page1.file" %> 
+	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+		<div class="container container_size">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
+					<div class="col-xs-12 col-sm-3">
+						<img src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}" 
+						alt="${realtorVO.rtr_name}個人照片"
+						style="width:180px; height:200px;">
+					</div>
 
-				<div class="col-xs-12 col-sm-3">
-					<ul class="list-unstyled info_estate">
-						<li>房仲姓名: 很會賣</li>
-						<li>房仲公司: 屹立不搖</li>
-						<li>服務地區: 紅燈下</li>
-					</ul>
-				</div>
+					<div class="col-xs-12 col-sm-3">
+						<ul class="list-unstyled info_estate">
+							<li>房仲姓名 ${realtorVO.rtr_name}</li>
+							<li>房仲公司 ${realestateVO.re_name}</li>
+							<li>服務地區 ${realtorVO.rtr_area}</li>
+						</ul>
+					</div>
 
-				<div class="col-xs-12 col-sm-3">
-					<h2 class="intro_estate">簡介</h2>
-					<p class="intro_content text_overflow">Lorem ipsum dolor sit
-						amet, consectetur adipisicing elit. Nulla dolore alias ducimus
-						magnam, repellendus nobis! Tempora, magni. Dignissimos, non,
-						omnis?lorem40</p>
-				</div>
+					<div class="col-xs-12 col-sm-3">
+						<h2 class="intro_estate">簡介</h2>
+						<p class="intro_content text_overflow">${realtorVO.rtr_intro}</p>
+					</div>
 
-				<div class="col-sm-3">
-					<div class="wrapper">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="heart_size">
-									<a class="heart_main" href="#"> <i class="fa fa-heart"
-										aria-hidden="true">加入最愛</i>
-									</a>
+					<div class="col-sm-3">
+						<div class="wrapper">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="heart_size">
+										<a class="heart_main" href="#"> <i class="fa fa-heart"
+											aria-hidden="true">加入最愛</i>
+										</a>
+									</div>
 								</div>
-							</div>
-							<div class="row forward_estate">
-								<button class="button" style="vertical-align: middle">
-									<span class="forward_word">查看詳請</span>
-								</button>
+								<div class="row forward_estate">
+									<button class="button" style="vertical-align: middle">
+										<span class="forward_word">查看詳請</span>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
+				</div>
 			</div>
 		</div>
-	</div>
-	<br>
-	<div class="container container_size">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
-				<div class="col-xs-12 col-sm-3">
-					<img src="https://api.fnkr.net/testimg/180x200/5555ff">
-				</div>
+		<br>
+	</c:forEach>
+	<%@include file="/page/page2.file"%>
 
-				<div class="col-xs-12 col-sm-3">
-					<ul class="list-unstyled info_estate">
-						<li>房仲姓名: 很會賣</li>
-						<li>房仲公司: 屹立不搖</li>
-						<li>服務地區: 紅燈下</li>
-					</ul>
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<h2 class="intro_estate">簡介</h2>
-					<p class="intro_content text_overflow">Lorem ipsum dolor sit
-						amet, consectetur adipisicing elit. Nulla dolore alias ducimus
-						magnam, repellendus nobis! Tempora, magni. Dignissimos, non,
-						omnis?lorem40</p>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="wrapper">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="heart_size">
-									<a class="heart_main" href="#"> <i class="fa fa-heart"
-										aria-hidden="true">加入最愛</i>
-									</a>
-								</div>
-							</div>
-							<div class="row forward_estate">
-								<button class="button" style="vertical-align: middle">
-									<span class="forward_word">查看詳請</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="container container_size">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
-				<div class="col-xs-12 col-sm-3">
-					<img src="https://api.fnkr.net/testimg/180x200/5555ff">
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<ul class="list-unstyled info_estate">
-						<li>房仲姓名: 很會賣</li>
-						<li>房仲公司: 屹立不搖</li>
-						<li>服務地區: 紅燈下</li>
-					</ul>
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<h2 class="intro_estate">簡介</h2>
-					<p class="intro_content text_overflow">Lorem ipsum dolor sit
-						amet, consectetur adipisicing elit. Nulla dolore alias ducimus
-						magnam, repellendus nobis! Tempora, magni. Dignissimos, non,
-						omnis?lorem40</p>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="wrapper">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="heart_size">
-									<a class="heart_main" href="#"> <i class="fa fa-heart"
-										aria-hidden="true">加入最愛</i>
-									</a>
-								</div>
-							</div>
-							<div class="row forward_estate">
-								<button class="button" style="vertical-align: middle">
-									<span class="forward_word">查看詳請</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="container container_size">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
-				<div class="col-xs-12 col-sm-3">
-					<img src="https://api.fnkr.net/testimg/180x200/5555ff">
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<ul class="list-unstyled info_estate">
-						<li>房仲姓名: 很會賣</li>
-						<li>房仲公司: 屹立不搖</li>
-						<li>服務地區: 紅燈下</li>
-					</ul>
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<h2 class="intro_estate">簡介</h2>
-					<p class="intro_content text_overflow">Lorem ipsum dolor sit
-						amet, consectetur adipisicing elit. Nulla dolore alias ducimus
-						magnam, repellendus nobis! Tempora, magni. Dignissimos, non,
-						omnis?lorem40</p>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="wrapper">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="heart_size">
-									<a class="heart_main" href="#"> <i class="fa fa-heart"
-										aria-hidden="true">加入最愛</i>
-									</a>
-								</div>
-							</div>
-							<div class="row forward_estate">
-								<button class="button" style="vertical-align: middle">
-									<span class="forward_word">查看詳請</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="container container_size">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
-				<div class="col-xs-12 col-sm-3">
-					<img src="https://api.fnkr.net/testimg/180x200/5555ff">
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<ul class="list-unstyled info_estate">
-						<li>房仲姓名: 很會賣</li>
-						<li>房仲公司: 屹立不搖</li>
-						<li>服務地區: 紅燈下</li>
-					</ul>
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<h2 class="intro_estate">簡介</h2>
-					<p class="intro_content text_overflow">Lorem ipsum dolor sit
-						amet, consectetur adipisicing elit. Nulla dolore alias ducimus
-						magnam, repellendus nobis! Tempora, magni. Dignissimos, non,
-						omnis?lorem40</p>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="wrapper">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="heart_size">
-									<a class="heart_main" href="#"> <i class="fa fa-heart"
-										aria-hidden="true">加入最愛</i>
-									</a>
-								</div>
-							</div>
-							<div class="row forward_estate">
-								<button class="button" style="vertical-align: middle">
-									<span class="forward_word">查看詳請</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="container container_size">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
-				<div class="col-xs-12 col-sm-3">
-					<img src="https://api.fnkr.net/testimg/180x200/5555ff">
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<ul class="list-unstyled info_estate">
-						<li>房仲姓名: 很會賣</li>
-						<li>房仲公司: 屹立不搖</li>
-						<li>服務地區: 紅燈下</li>
-					</ul>
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<h2 class="intro_estate">簡介</h2>
-					<p class="intro_content text_overflow">Lorem ipsum dolor sit
-						amet, consectetur adipisicing elit. Nulla dolore alias ducimus
-						magnam, repellendus nobis! Tempora, magni. Dignissimos, non,
-						omnis?lorem40</p>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="wrapper">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="heart_size">
-									<a class="heart_main" href="#"> <i class="fa fa-heart"
-										aria-hidden="true">加入最愛</i>
-									</a>
-								</div>
-							</div>
-							<div class="row forward_estate">
-								<button class="button" style="vertical-align: middle">
-									<span class="forward_word">查看詳請</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="container container_size">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
-				<div class="col-xs-12 col-sm-3">
-					<img src="https://api.fnkr.net/testimg/180x200/5555ff">
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<ul class="list-unstyled info_estate">
-						<li>房仲姓名: 很會賣</li>
-						<li>房仲公司: 屹立不搖</li>
-						<li>服務地區: 紅燈下</li>
-					</ul>
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<h2 class="intro_estate">簡介</h2>
-					<p class="intro_content text_overflow">Lorem ipsum dolor sit
-						amet, consectetur adipisicing elit. Nulla dolore alias ducimus
-						magnam, repellendus nobis! Tempora, magni. Dignissimos, non,
-						omnis?lorem40</p>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="wrapper">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="heart_size">
-									<a class="heart_main" href="#"> <i class="fa fa-heart"
-										aria-hidden="true">加入最愛</i>
-									</a>
-								</div>
-							</div>
-							<div class="row forward_estate">
-								<button class="button" style="vertical-align: middle">
-									<span class="forward_word">查看詳請</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="container container_size">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
-				<div class="col-xs-12 col-sm-3">
-					<img src="https://api.fnkr.net/testimg/180x200/5555ff">
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<ul class="list-unstyled info_estate">
-						<li>房仲姓名: 很會賣</li>
-						<li>房仲公司: 屹立不搖</li>
-						<li>服務地區: 紅燈下</li>
-					</ul>
-				</div>
-
-				<div class="col-xs-12 col-sm-3">
-					<h2 class="intro_estate">簡介</h2>
-					<p class="intro_content text_overflow">Lorem ipsum dolor sit
-						amet, consectetur adipisicing elit. Nulla dolore alias ducimus
-						magnam, repellendus nobis! Tempora, magni. Dignissimos, non,
-						omnis?lorem40</p>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="wrapper">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="heart_size">
-									<a class="heart_main" href="#"> <i class="fa fa-heart"
-										aria-hidden="true">加入最愛</i>
-									</a>
-								</div>
-							</div>
-							<div class="row forward_estate">
-								<button class="button" style="vertical-align: middle">
-									<span class="forward_word">查看詳請</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<br>
 
 	<!-- 這個預設是放左邊，加了text-center才變中間 -->
 	<div class="text-center">

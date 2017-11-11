@@ -27,7 +27,8 @@
 				<b>輸入房仲IDemail:</b>
 				<input type="text" name="rtr_id" value="realtor001@gmail.com"><br>
 
-				<b>選擇地區:</b> <select size="1" name="rtr_area">
+				<b>選擇地區:</b> 
+				<select size="1" name="rtr_area">
 				<option value="">
 				<c:forEach var="realtorVO" items="${realtorSvc.all}">
 					<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area }</option>
