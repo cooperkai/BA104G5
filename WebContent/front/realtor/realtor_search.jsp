@@ -13,10 +13,9 @@
 <%
 	List<RealtorVO> list = realtorSvc.getAll();
 	pageContext.setAttribute("list", list);
-	
+
 	List<RealEstateVO> estatelist = realestateSvc.getAll();
 	pageContext.setAttribute("estatelist", estatelist);
-	
 %>
 
 
@@ -137,22 +136,29 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 btn_padding">
 				<div class="row">
-					<div class="btn-group">
-						<b>選擇地區:</b> <select size="1" name="rtr_area">
-							<option value="搜尋服務地區">搜尋服務地區</option>
-							<c:forEach var="realtorVO" items="${realtorSvc.all}">
-								<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area }</option>
-							</c:forEach>
-						</select>
-					</div>
-					<div class="btn-group">
-						<b>選擇服務公司:</b> <select name="re_no">
-							<option value="搜尋服務公司">搜尋服務公司</option>
-							<c:forEach var="realestateVO" items="${realestateSvc.all}">
-								<option value="${realestateVO.re_no}">${realestateVO.re_name}</option>
-							</c:forEach>
-						</select>
-					</div>
+					<FORM METHOD="post"
+						ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do"
+						name="form1">
+						<div class="btn-group">
+							<b>選擇地區:</b> <select size="1" name="rtr_area">
+								<option value="">搜尋服務地區</option>
+								<c:forEach var="realtorVO" items="${realtorSvc.all}">
+									<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="btn-group">
+							<b>選擇服務公司:</b> <select name="re_no">
+								<option value="">搜尋服務公司</option>
+								<c:forEach var="realestateVO" items="${realestateSvc.all}">
+									<option value="${realestateVO.re_no}">${realestateVO.re_name}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<input type="hidden" name="action"
+							value="listRealtor_ByCompositeQuery"> <input
+							type="submit" value="送出">
+					</form>
 				</div>
 			</div>
 		</div>
@@ -160,35 +166,37 @@
 	<br>
 
 
-
+	<!-- 搜尋房仲顯示的畫面================================================================================ -->
+	<%@ include file="/page/pagesearch.file"%>
 	<!-- 共有幾位房仲 -->
 	<div class="container container_size totatl_estate">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
 				<div class="vertical-horizontal">
-					<a href="#">共有XXXXX位房仲</a>
+					<p>
+						共有<font color=red><%=rowNumber%></font>位房仲
+					</p>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
-	<!-- 搜尋房仲顯示的畫面================================================================================ -->
-	<%@ include file="/page/page1.file" %> 
-	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>"
+		end="<%=pageIndex+rowsPerPage-1%>">
 		<div class="container container_size">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
 					<div class="col-xs-12 col-sm-3">
-						<img src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}" 
-						alt="${realtorVO.rtr_name}個人照片"
-						style="width:180px; height:200px;">
+						<img
+							src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
+							alt="${realtorVO.rtr_name}個人照片"
+							style="width: 180px; height: 200px;">
 					</div>
 
 					<div class="col-xs-12 col-sm-3">
 						<ul class="list-unstyled info_estate">
 							<li>房仲姓名 ${realtorVO.rtr_name}</li>
-							<li>房仲公司 ${realestateVO.re_name}</li>
+							<li>房仲公司 ${realestateSvc.getOne(realtorVO.re_no).re_name}</li>
 							<li>服務地區 ${realtorVO.rtr_area}</li>
 						</ul>
 					</div>
@@ -216,31 +224,13 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
 		<br>
 	</c:forEach>
-	<%@include file="/page/page2.file"%>
+	<%@include file="/page/pagesearch2.file"%>
 
-
-	<!-- 這個預設是放左邊，加了text-center才變中間 -->
-	<div class="text-center">
-		<ul class="pagination pagination-lg">
-			<li><a href="#">&laquo;</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li class="active"><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">6</a></li>
-			<li><a href="#">7</a></li>
-			<li><a href="#">8</a></li>
-			<li><a href="#">9</a></li>
-			<li><a href="#">&raquo;</a></li>
-		</ul>
-	</div>
 	<!-- end阿蓋的搜尋房仲 =========================================================================================-->
 
 

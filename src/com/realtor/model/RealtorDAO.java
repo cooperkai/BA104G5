@@ -607,6 +607,7 @@ public class RealtorDAO implements RealtorDAO_interface {
 				realtorvo.setRtr_state(rs.getString("RTR_STATE"));
 				list.add(realtorvo);
 			}
+			System.out.println("●●finalSQL = " + finalSQL);
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());

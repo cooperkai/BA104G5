@@ -18,7 +18,7 @@
 	<%-- 萬用複合查詢-以下欄位-可隨意增減 --%>
 	<ul>
 		<li>
-			<FORM METHOD="post"	ACTION="realtor.do"	name="form1">
+			<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do"	name="form1">
 				<b><font color=blue>萬用複合查詢:</font></b> 
 				<br> <b>輸入房仲編號:</b> 
 				<input type="text" name="rtr_no" value="RT00000001"><br> 

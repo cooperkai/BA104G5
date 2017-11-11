@@ -641,6 +641,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 				realtorvo.setRtr_state(rs.getString("RTR_STATE"));
 				list.add(realtorvo);
 			}
+			System.out.println("●●finalSQL = " + finalSQL);
 
 		} catch (ClassNotFoundException ce) {
 			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
