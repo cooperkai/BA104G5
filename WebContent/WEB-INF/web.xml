@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>BA104G5_Ann</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 照片用 -->
+	<servlet>
+		<servlet-name>ShowImage</servlet-name>
+		<servlet-class>com.tool.controller.ShowImage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowImage</servlet-name>
+		<url-pattern>/tool/showimage.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 後端系統公告 -->
+	<servlet>
+		<servlet-name>AnnServlet</servlet-name>
+		<servlet-class>com.ann.controller.AnnServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AnnServlet</servlet-name>
+		<url-pattern>/back/ann/ann.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 後端新聞 -->
+	<servlet>
+		<servlet-name>NewsServlet</servlet-name>
+		<servlet-class>com.news.controller.NewsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewsServlet</servlet-name>
+		<url-pattern>/back/news/news.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 後端新聞類別 -->
+	<servlet>
+		<servlet-name>NewsTypeServlet</servlet-name>
+		<servlet-class>com.newstype.controller.NewsTypeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewsTypeServlet</servlet-name>
+		<url-pattern>/back/newstype/newstype.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 前端房仲 -->
+	<servlet>
+		<servlet-name>RealtorServlet</servlet-name>
+		<servlet-class>com.realtor.controller.RealtorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RealtorServlet</servlet-name>
+		<url-pattern>/front/realtor/realtor.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 前端房仲登出 -->
+	<servlet>
+		<servlet-name>RealtorLogout</servlet-name>
+		<servlet-class>com.realtor.controller.RealtorLogout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RealtorLogout</servlet-name>
+		<url-pattern>/front/realtor/realtorlogout.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 前端房仲修改資料 -->
+	<servlet>
+		<servlet-name>RealtorChange</servlet-name>
+		<servlet-class>com.realtor.controller.RealtorChange</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RealtorChange</servlet-name>
+		<url-pattern>/front/realtor/realtorchange.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 前端房仲公司 -->
+	<servlet>
+		<servlet-name>RealEstateServlet</servlet-name>
+		<servlet-class>com.realestate.controller.RealEstateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RealEstateServlet</servlet-name>
+		<url-pattern>/front/realestate/realestate.do</url-pattern>
+	</servlet-mapping>
+
+</web-app>
