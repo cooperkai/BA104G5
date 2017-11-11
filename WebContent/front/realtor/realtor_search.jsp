@@ -11,10 +11,10 @@
 
 
 <%
-	List<RealtorVO> list = realtorSvc.getAll();
+	List<RealtorVO> list = (List<RealtorVO>)request.getAttribute("list");
 	pageContext.setAttribute("list", list);
 
-	List<RealEstateVO> estatelist = realestateSvc.getAll();
+	List<RealEstateVO> estatelist = (List<RealEstateVO>)request.getAttribute("estatelist");
 	pageContext.setAttribute("estatelist", estatelist);
 %>
 
@@ -81,7 +81,7 @@
 							data-placement="bottom">最新消息</a></li>
 						<li><a href="#">常見問題</a></li>
 						<li><a href="#">看房去</a></li>
-						<li><a href="#">找房仲</a></li>
+						<li><a href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=query">找房仲</a></li>
 						<li><a href="#">安家商城</a></li>
 						<li><a href="#">加入我們</a></li>
 					</ul>
@@ -140,7 +140,7 @@
 						ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do"
 						name="form1">
 						<div class="btn-group">
-							<b>選擇地區:</b> <select size="1" name="rtr_area">
+							<b>選擇地區:</b> <select size="1" name="rtr_area" id="rtr_area">
 								<option value="">搜尋服務地區</option>
 								<c:forEach var="realtorVO" items="${realtorSvc.all}">
 									<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area }</option>
@@ -148,7 +148,7 @@
 							</select>
 						</div>
 						<div class="btn-group">
-							<b>選擇服務公司:</b> <select name="re_no">
+							<b>選擇服務公司:</b> <select name="re_no" id="re_no">
 								<option value="">搜尋服務公司</option>
 								<c:forEach var="realestateVO" items="${realestateSvc.all}">
 									<option value="${realestateVO.re_no}">${realestateVO.re_name}</option>
@@ -266,6 +266,21 @@
 		</div>
 	</footer>
 
-
+<script>
+$(function(){
+	$('#rtr_area').change(function(){
+		console.log($('#rtr_area').find(":selected").val());
+		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&rtr_area="+$('#rtr_area').find(":selected").val();
+		})
+})
+</script>
+<script>
+$(function(){
+	$('#re_no').change(function(){
+		console.log($('#re_no').find(":selected").val());
+		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&re_no="+$('#re_no').find(":selected").val();
+		})
+})
+</script>
 </body>
 </html>

@@ -677,40 +677,40 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		RealtorJDBCDAO dao = new RealtorJDBCDAO();
 
 		// 專門塞房仲照片以及簡介
-		 for (int i = 1; i <= 12; i++) {
-		 if (i <= 9) {
-		 FileInputStream in = new
-		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
-		 ".jpg");
-		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
-		 i + ".txt");
-		 String rtr_no = "RT0000000" + i;
-		 byte[] realtorpic = new byte[in.available()];
-		 in.read(realtorpic);
-		 RealtorVO vo4 = new RealtorVO();
-		 vo4.setRtr_photo(realtorpic);
-		 vo4.setRtr_intro(reader);
-		 vo4.setRtr_no(rtr_no);
-		 dao.updatePhoto(vo4);
-		 in.close();
-		 } else {
-		 FileInputStream in = new
-		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
-		 ".jpg");
-		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
-		 i + ".txt");
-		 String rtr_no = "RT000000" + i;
-		 byte[] realtorpic = new byte[in.available()];
-		 in.read(realtorpic);
-		 RealtorVO vo4 = new RealtorVO();
-		 vo4.setRtr_photo(realtorpic);
-		 vo4.setRtr_intro(reader);
-		 vo4.setRtr_no(rtr_no);
-		 dao.updatePhoto(vo4);
-		 in.close();
-		 }
-		 }
-		 System.out.println("-----------------------------------------------------------------------------------");
+//		 for (int i = 1; i <= 12; i++) {
+//		 if (i <= 9) {
+//		 FileInputStream in = new
+//		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
+//		 ".jpg");
+//		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
+//		 i + ".txt");
+//		 String rtr_no = "RT0000000" + i;
+//		 byte[] realtorpic = new byte[in.available()];
+//		 in.read(realtorpic);
+//		 RealtorVO vo4 = new RealtorVO();
+//		 vo4.setRtr_photo(realtorpic);
+//		 vo4.setRtr_intro(reader);
+//		 vo4.setRtr_no(rtr_no);
+//		 dao.updatePhoto(vo4);
+//		 in.close();
+//		 } else {
+//		 FileInputStream in = new
+//		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
+//		 ".jpg");
+//		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
+//		 i + ".txt");
+//		 String rtr_no = "RT000000" + i;
+//		 byte[] realtorpic = new byte[in.available()];
+//		 in.read(realtorpic);
+//		 RealtorVO vo4 = new RealtorVO();
+//		 vo4.setRtr_photo(realtorpic);
+//		 vo4.setRtr_intro(reader);
+//		 vo4.setRtr_no(rtr_no);
+//		 dao.updatePhoto(vo4);
+//		 in.close();
+//		 }
+//		 }
+//		 System.out.println("-----------------------------------------------------------------------------------");
 
 		FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor1.jpg");
 		byte[] realtorpic = new byte[in.available()];
@@ -833,26 +833,26 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		// }
 		
 		//map萬用查詢
-//		Map<String, String[]> map = new TreeMap<String, String[]>();
-//		map.put("RTR_NO", new String[] { "RT00000001" });
-//		map.put("RTR_ID", new String[] { "realtor001@gmail.com" });
-//		map.put("RTR_NAME", new String[] { "葦小寶" });
-//		map.put("RTR_AREA", new String[] { "區" });
-//		map.put("RE_NO", new String[] { "RE00000001" });
-//		List<RealtorVO> list = dao.getAll(map);
-//		for(RealtorVO arealtor : list){
-//			System.out.println(arealtor.getRtr_no());
-//			 System.out.println(arealtor.getRtr_id());
-//			 System.out.println(arealtor.getRtr_psw());
-//			 System.out.println(arealtor.getRtr_name());
-//			 System.out.println(arealtor.getRtr_photo());
-//			 System.out.println(arealtor.getRtr_area());
-//			 System.out.println(arealtor.getRtr_intro());
-//			 System.out.println(arealtor.getRtr_idno());
-//			 System.out.println(arealtor.getRe_no());
-//			 System.out.println(arealtor.getRtr_state());
-//			System.out.println();
-//		}
+		Map<String, String[]> map = new TreeMap<String, String[]>();
+		map.put("RTR_NO", new String[] { "RT00000001" });
+		map.put("RTR_ID", new String[] { "realtor001@gmail.com" });
+		map.put("RTR_NAME", new String[] { "葦小寶" });
+		map.put("RTR_AREA", new String[] { "區" });
+		map.put("RE_NO", new String[] { "RE00000001" });
+		List<RealtorVO> list = dao.getAll(map);
+		for(RealtorVO arealtor : list){
+			System.out.println(arealtor.getRtr_no());
+			 System.out.println(arealtor.getRtr_id());
+			 System.out.println(arealtor.getRtr_psw());
+			 System.out.println(arealtor.getRtr_name());
+			 System.out.println(arealtor.getRtr_photo());
+			 System.out.println(arealtor.getRtr_area());
+			 System.out.println(arealtor.getRtr_intro());
+			 System.out.println(arealtor.getRtr_idno());
+			 System.out.println(arealtor.getRe_no());
+			 System.out.println(arealtor.getRtr_state());
+			System.out.println();
+		}
 		
 		
 		 

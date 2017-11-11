@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.realtor.model.*"%>
 
- 
+
 <%
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 	RealtorVO realtorVO2 = (RealtorVO) request.getAttribute("realtorVO");
@@ -13,13 +13,13 @@
 		return;
 	}
 %>
- 
+
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="utf-8"> 
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -87,7 +87,8 @@
 						data-placement="bottom">最新消息</a></li>
 					<li><a href="#">常見問題</a></li>
 					<li><a href="#">看房去</a></li>
-					<li><a href="#">找房仲</a></li>
+					<li><a
+						href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=query">找房仲</a></li>
 					<li><a href="#">安家商城</a></li>
 					<li><a href="#">加入我們</a></li>
 				</ul>
@@ -135,7 +136,9 @@
 				<div class="navigation">
 					<h3>個人資料管理</h3>
 					<ul>
-						<li><a href="<%=request.getContextPath()%>/front/realtor/realtor_data.jsp"><i class="glyphicon glyphicon-user">&nbsp;基本資料</i></a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/front/realtor/realtor_data.jsp"><i
+								class="glyphicon glyphicon-user">&nbsp;基本資料</i></a></li>
 					</ul>
 					<ul>
 						<li><a
@@ -176,74 +179,64 @@
 
 			<!-- 右邊房仲相關資料區include資料用 =====================================-->
 			<div class="col-sm-12 col-sm-8 form_realtor">
+
 				<!-- 房仲資料已下 ====================================================-->
-				
-				
-				
-				
 				<!-- 房仲顯示基本資料用 =================================================-->
+				<div class="modal-header">
+					<h4 class="modal-title">個人資料</h4>
+				</div>
+				<div class="form-group div0">
+					<label for="rtr_photo"></label> <img
+						src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
+						class="w3ls-mobile rtr_photo"
+						alt="<%=realtorVO.getRtr_name()%>個人照片" data-pin-nopin="true">
+				</div>
+				<div class="form-group">
+					<label for="rtr_id">e-mail帳號</label>
+					<div>
+						<h5><%=realtorVO.getRtr_id()%></h5>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="rtr_name">姓名</label>
+					<div>
+						<h5 class=""><%=realtorVO.getRtr_name()%></h5>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="rtr_idno">身分證</label>
+					<div>
+						<h5 class=""><%=realtorVO.getRtr_idno()%></h5>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="rtr_area">服務地區</label>
+					<div>
+						<h5 class="">${realtorVO.rtr_area}</h5>
+					</div>
+				</div>
 
-				
-					<div class="modal-header">
-						<h4 class="modal-title">個人資料</h4>
-					</div>
-					<div class="form-group div0">
-						<label for="rtr_photo"></label> <img
-							src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
-							class="w3ls-mobile rtr_photo"
-							alt="<%=realtorVO.getRtr_name()%>個人照片" data-pin-nopin="true">
-					</div>
-					<div class="form-group">
-						<label for="rtr_id">e-mail帳號</label>
-						<div>
-							<h5><%=realtorVO.getRtr_id()%></h5>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="rtr_name">姓名</label>
-						<div>
-							<h5 class=""><%=realtorVO.getRtr_name()%></h5>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="rtr_idno">身分證</label>
-						<div>
-							<h5 class=""><%=realtorVO.getRtr_idno()%></h5>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="rtr_area">服務地區</label>
-						<div>
-							<h5 class="">${realtorVO.rtr_area}</h5>
-						</div>
-					</div>
+				<div class="form-group">
+					<label for="ann_content">簡介</label>
+					<textarea rows="10" class="form-control intro_cooper"
+						name="rtr_intro" placeholder="簡介"><%=realtorVO.getRtr_intro()%></textarea>
+				</div>
+				<div class="modal-footer">
+					<form METHOD="post" ACTION="realtorchange.do">
+						<!-- <a href='#realtor_jump' data-toggle="modal" class="btn">修改資料</a> -->
+						<input type="hidden" name="action" value="getOne_For_Update">
+						<input type="hidden" name="rtr_no" value="${realtorVO.rtr_no}">
+						<input type="submit" class="btn" value="送出修改">
+					</form>
+				</div>
 
-					<div class="form-group">
-						<label for="ann_content">簡介</label>
-						<textarea rows="10" class="form-control intro_cooper"
-							name="rtr_intro" placeholder="簡介"><%=realtorVO.getRtr_intro()%></textarea>
-					</div>
-					<div class="modal-footer">
-						<form METHOD="post" ACTION="realtorchange.do">
-							<!-- <a href='#realtor_jump' data-toggle="modal" class="btn">修改資料</a> -->
-							<input type="hidden" name="action" value="getOne_For_Update">
-							<input type="hidden" name="rtr_no" value="${realtorVO.rtr_no}">
-							<input type="submit" class="btn" value="送出修改">
-						</form>
-					</div>
-				
 				<!-- 結束房仲顯示基本資料用 =================================================-->
-				
-			
-
 				<%-- <jsp:include page="/front/realtor/realtor_data.jsp" flush="true" /> --%>
-				<jsp:include page="/front/realtor/realtor_psw.jsp" flush="true" />
-
+				<%-- <jsp:include page="/front/realtor/realtor_psw.jsp" flush="true" /> --%>
 				<!-- 房仲資料已上 =====================================================-->
+
 			</div>
 			<!-- 右邊房仲相關資料區include資料用結束 =====================================-->
-
-
 			<!-- 充版面用 -->
 			<div class="col-sm-1"></div>
 			<!-- 充版面用 -->

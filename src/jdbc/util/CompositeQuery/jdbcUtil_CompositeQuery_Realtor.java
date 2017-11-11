@@ -48,7 +48,6 @@ public class jdbcUtil_CompositeQuery_Realtor {
 		// 配合 req.getParameterMap()方法 回傳
 		// java.util.Map<java.lang.String,java.lang.String[]> 之測試
 		Map<String, String[]> map = new TreeMap<String, String[]>();
-		map.put("RTR_NO", new String[] { "RT00000001" });
 		map.put("RTR_ID", new String[] { "realtor001@gmail.com" });
 		map.put("RTR_NAME", new String[] { "葦小寶" });
 		map.put("RTR_AREA", new String[] { "北投區" });

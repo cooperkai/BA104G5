@@ -20,9 +20,6 @@ import com.realtor.model.RealtorVO;
 @SuppressWarnings("serial")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 50 * 50 * 1024 * 1024)
 public class ShowImage extends HttpServlet {
-	public ShowImage() {
-
-	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
