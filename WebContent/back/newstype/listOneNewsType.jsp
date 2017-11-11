@@ -1,39 +1,39 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.news.model.*"%>
 <%@ page import="com.newstype.model.*"%>
 
-<!-- ¨ú¥Xcontroller NewsTypeServlet.java¤w¦s¤JrequestªºNewsTypeVOª«¥ó -->
+<!-- å–å‡ºcontroller NewsTypeServlet.javaå·²å­˜å…¥requestçš„NewsTypeVOç‰©ä»¶ -->
 <%
 	NewsTypeVO newstypeVO = (NewsTypeVO) request.getAttribute("newstypeVO");
 %>
 
-<!-- ¨ú¥X¹ïÀ³ªºNewsVOª«¥ó -->
+<!-- å–å‡ºå°æ‡‰çš„NewsVOç‰©ä»¶ -->
 <%
 	NewsService newsSvc = new NewsService();
 	NewsVO newsVO = newsSvc.getOne(newstypeVO.getNtype_no());
 %>
 
 
-<!-- «áºÝinclude -->
+<!-- å¾Œç«¯include -->
 <jsp:include page="/back/backend/backend_page.jsp" flush="true" />
-<!-- «áºÝinclude -->
+<!-- å¾Œç«¯include -->
 
-<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 <div class="col-xs-12 col-sm-10 maincontext">
-	<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+	<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 
-	<!-- ¥H¤U¬O§A¥i¥H©ñªº¤º®e ================================================================================ -->
-	<!-- ·s»DºØÃþ ========================================================================================= -->
+	<!-- ä»¥ä¸‹æ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================ -->
+	<!-- æ–°èžç¨®é¡ž ========================================================================================= -->
 	<div class="container cooper_house">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 table_bgcolor">
 				<table class="table table-hover table_main">
-					<caption class="title_pr">·s»DºØÃþ</caption>
+					<caption class="title_pr">æ–°èžç¨®é¡ž</caption>
 					<thead>
 						<tr class="col_title">
-							<th>·s»DºØÃþ½s¸¹</th>
-							<th>·s»DºØÃþ</th>
+							<th>æ–°èžç¨®é¡žç·¨è™Ÿ</th>
+							<th>æ–°èžç¨®é¡ž</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -50,14 +50,14 @@
 								<a
 									href="<%=request.getContextPath()%>/back/newstype/listAllNewsType.jsp"><img
 									src="<%=request.getContextPath()%>/images/back1.gif"
-									width="100" height="32" border="0">¦^·s»DºØÃþ</a>
+									width="100" height="32" border="0">å›žæ–°èžç¨®é¡ž</a>
 							</h4>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<%-- ¿ù»~ªí¦C --%> <c:if test="${not empty errorMsgs}">
-								<font style="color: red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+							<%-- éŒ¯èª¤è¡¨åˆ— --%> <c:if test="${not empty errorMsgs}">
+								<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 								<ul>
 									<c:forEach var="message" items="${errorMsgs}">
 										<li style="color: red">${message}</li>
@@ -70,8 +70,8 @@
 			</div>
 		</div>
 	</div>
-	<!-- ¥H¤W¬O§A¥i¥H©ñªº¤º®e ================================================================================== -->
+	<!-- ä»¥ä¸Šæ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================== -->
 
-	<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+	<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->
 </div>
-<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->

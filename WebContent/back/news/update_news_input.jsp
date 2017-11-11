@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.news.model.*"%>
@@ -10,9 +10,9 @@
 	pageContext.setAttribute("list", list);
 %>
 
-<!-- «áºİinclude -->
+<!-- å¾Œç«¯include -->
 <jsp:include page="/back/backend/backend_page.jsp" flush="true" />
-<!-- «áºİinclude -->
+<!-- å¾Œç«¯include -->
 
 <style >
  table, th, td {
@@ -21,15 +21,15 @@
 </style>
 
 
-<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 <div class="col-xs-12 col-sm-10 maincontext">
-	<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+	<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 
-	<!-- ¥H¤U¬O§A¥i¥H©ñªº¤º®e ================================================================================ -->
-	<!--­×§ï·s»D¤½§i========================================================================================= -->
-	<%-- ¿ù»~ªí¦C --%>
+	<!-- ä»¥ä¸‹æ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================ -->
+	<!--ä¿®æ”¹æ–°èå…¬å‘Š========================================================================================= -->
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -43,19 +43,19 @@
 				<form role="form" METHOD="post" ACTION="news.do"
 					enctype="multipart/form-data" name="news">
 					<div class="modal-header">
-						<h4 class="modal-title">­×§ï©Ğ¥«³Ì·s®ø®§</h4>
+						<h4 class="modal-title">ä¿®æ”¹æˆ¿å¸‚æœ€æ–°æ¶ˆæ¯</h4>
 					</div>
 					<div class="form-group">
-						<label for="news_no">·s»D½s¸¹</label>
+						<label for="news_no">æ–°èç·¨è™Ÿ</label>
 						<div>
 							<h5 class="update_color"><%=newsVO.getNews_no()%></h5>
 						</div>
 					</div>
-					<!-- ÂÂª©ªº¼gªk -->
+					<!-- èˆŠç‰ˆçš„å¯«æ³• -->
 					<!-- <div class="form-group"> -->
-					<!-- <label for="ntype_no">·s»DºØÃş</label> <select -->
+					<!-- <label for="ntype_no">æ–°èç¨®é¡</label> <select -->
 					<!-- class="form-control btn_cooper" id="sel1" name="ntype_no"> -->
-					<!-- <option name="default_item1" value="">½Ğ¿ï¾Ü</option> -->
+					<!-- <option name="default_item1" value="">è«‹é¸æ“‡</option> -->
 					<!-- <option class="onitem" value="LK002" -->
 					<%-- ${(newsVO.ntype_no=='LK002')? 'selected': ''}>LK002</option> --%>
 					<!-- <option class="onitem" value="GH003" -->
@@ -65,13 +65,13 @@
 					<!-- </select> -->
 					<!-- </div> -->
 					
-					<!-- ·sª©±q§O·s»DºØÃşªºtable join¹L¨Ó -->
+					<!-- æ–°ç‰ˆå¾åˆ¥æ–°èç¨®é¡çš„table joinéä¾† -->
 					<jsp:useBean id="newstypeSvc" scope="page"
 						class="com.newstype.model.NewsTypeService" />
 					<div class="form-group">
-						<label for="ntype_no">·s»DºØÃş</label> <select
+						<label for="ntype_no">æ–°èç¨®é¡</label> <select
 							class="form-control btn_cooper" id="sel1" name="ntype_no">
-							<option name="default_item1" value="">½Ğ¿ï¾Ü</option>
+							<option name="default_item1" value="">è«‹é¸æ“‡</option>
 							<c:forEach var="newstypeVO" items="${newstypeSvc.all}">
 								<option class="onitem" value="${newstypeVO.ntype_no}"
 									${(newsVO.ntype_no==newstypeVO.ntype_no)? 'selected': ''}>[${newstypeVO.ntype_no}
@@ -82,23 +82,23 @@
 
 
 					<div class="form-group">
-						<label for="news_title">·s»D¼ĞÃD</label> <input type="text"
+						<label for="news_title">æ–°èæ¨™é¡Œ</label> <input type="text"
 							class="form-control" name="news_title"
-							value="<%=(newsVO == null) ? "­×§ï·s»D¼ĞÃD" : newsVO.getNews_title()%>">
+							value="<%=(newsVO == null) ? "ä¿®æ”¹æ–°èæ¨™é¡Œ" : newsVO.getNews_title()%>">
 					</div>
 					<div class="form-group">
-						<label for="news_content">·s»D¤º®e</label>
+						<label for="news_content">æ–°èå…§å®¹</label>
 						<textarea rows="10" class="form-control" name="news_content"
-							value="<%=(newsVO == null) ? "­×§ï·s»D¤º®e" : newsVO.getNews_content()%>"></textarea>
+							value="<%=(newsVO == null) ? "ä¿®æ”¹æ–°èå…§å®¹" : newsVO.getNews_content()%>"></textarea>
 					</div>
 					<div class="form-group dropdown">
-						<label for="news_content">­×§ï·s»Dª¬ºA</label> <select name="news_state"
+						<label for="news_content">ä¿®æ”¹æ–°èç‹€æ…‹</label> <select name="news_state"
 							class="form-control btn_cooper" id="sel1">
-							<option name="default_item2" value="">½Ğ¿ï¾Ü</option>
-							<option class="onitem" value="¤½§i¤¤"
-								${(newsVO.news_state=='¤½§i¤¤')? 'selected': ''}>¤½§i¤¤</option>
-							<option class="offitem" value="¤wºM¾P"
-								${(newsVO.news_state=='¤wºM¾P')? 'selected': ''}>¤wºM¾P</option>
+							<option name="default_item2" value="">è«‹é¸æ“‡</option>
+							<option class="onitem" value="å…¬å‘Šä¸­"
+								${(newsVO.news_state=='å…¬å‘Šä¸­')? 'selected': ''}>å…¬å‘Šä¸­</option>
+							<option class="offitem" value="å·²æ’¤éŠ·"
+								${(newsVO.news_state=='å·²æ’¤éŠ·')? 'selected': ''}>å·²æ’¤éŠ·</option>
 						</select>
 					</div>
 					<!-- <div class="" style="height: 145.8px; width: 194px;"> -->
@@ -109,30 +109,30 @@
 						<input type="file" name="news_photo">
 					</div>
 					<div class="form-group">
-						<label for="empno_no">­û¤u½s¸¹</label><input type="text"
+						<label for="empno_no">å“¡å·¥ç·¨è™Ÿ</label><input type="text"
 							class="form-control" name="emp_no"
 							value="<%=(newsVO == null) ? "EM00000002" : newsVO.getEmp_no()%>" />
 					</div>
 					<div class="modal-footer">
 						<!-- <input type="hidden" name="action" value="leave"> -->
 						<!-- <button type="submit" class="btn btn-default" data-dismiss="modal" -->
-						<!-- value="Â÷¶}">Â÷¶}</button> -->
+						<!-- value="é›¢é–‹">é›¢é–‹</button> -->
 						<input type="hidden" name="action" value="update">
 						<input type="hidden" name="news_no" value="${newsVO.news_no}">
-						<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> <!--±µ¦¬­ì°e¥X­×§ïªº¨Ó·½ºô­¶¸ô®|«á,¦A°eµ¹Controller·Ç³ÆÂà¥æ¤§¥Î-->
-						<input type="hidden" name="whichPage" value="<%=request.getParameter("whichPage")%>"> <!--¥u¥Î©ó:istAllEmp.jsp-->
-						<button type="submit" class="btn btn_cooper" value="°e¥X­×§ï">°e¥X­×§ï</button>
+						<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> <!--æ¥æ”¶åŸé€å‡ºä¿®æ”¹çš„ä¾†æºç¶²é è·¯å¾‘å¾Œ,å†é€çµ¦Controlleræº–å‚™è½‰äº¤ä¹‹ç”¨-->
+						<input type="hidden" name="whichPage" value="<%=request.getParameter("whichPage")%>"> <!--åªç”¨æ–¼:istAllEmp.jsp-->
+						<button type="submit" class="btn btn_cooper" value="é€å‡ºä¿®æ”¹">é€å‡ºä¿®æ”¹</button>
 					</div>
 				</form>
 			</div>
 		</div>
-		<br>°e¥X­×§ïªº¨Ó·½ºô­¶¸ô®|:<br><b>
+		<br>é€å‡ºä¿®æ”¹çš„ä¾†æºç¶²é è·¯å¾‘:<br><b>
    <font color=blue>request.getParameter("requestURL"):</font> <%=request.getParameter("requestURL")%><br>
-   <font color=blue>request.getParameter("whichPage"): </font> <%=request.getParameter("whichPage")%> (¦¹½d¨Ò¥Ø«e¥u¥Î©ó:istAllEmp.jsp))</b>
+   <font color=blue>request.getParameter("whichPage"): </font> <%=request.getParameter("whichPage")%> (æ­¤ç¯„ä¾‹ç›®å‰åªç”¨æ–¼:istAllEmp.jsp))</b>
 	</div>
-	<!-- µ²§ô­×§ï·s»D¤½§i ===================================================================================== -->
-	<!-- ¥H¤W¬O§A¥i¥H©ñªº¤º®e ================================================================================= -->
+	<!-- çµæŸä¿®æ”¹æ–°èå…¬å‘Š ===================================================================================== -->
+	<!-- ä»¥ä¸Šæ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================= -->
 
-	<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+	<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->
 </div>
-<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->

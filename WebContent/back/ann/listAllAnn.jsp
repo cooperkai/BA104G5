@@ -1,8 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.ann.model.*"%>
-<%--±Ä¥Î EL ªº¼gªk¨ú­È --%>
+<%--æŽ¡ç”¨ EL çš„å¯«æ³•å–å€¼ --%>
 
 <%
 	AnnVO annVO = (AnnVO) request.getAttribute("annVO");
@@ -11,34 +11,34 @@
 	pageContext.setAttribute("list", list);
 %>
 
-<!-- «áºÝinclude -->
+<!-- å¾Œç«¯include -->
 <jsp:include page="/back/backend/backend_page.jsp" flush="true" />
-<!-- «áºÝinclude -->
+<!-- å¾Œç«¯include -->
  
-<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 <div class="col-xs-12 col-sm-10 maincontext">
-	<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+	<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 
 
-	<!-- ¥H¤U¬O§A¥i¥H©ñªº¤º®e ================================================================================== -->
-	<!--·s¼W¨t²Î¤½§i================================================================================ -->
+	<!-- ä»¥ä¸‹æ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================== -->
+	<!--æ–°å¢žç³»çµ±å…¬å‘Š================================================================================ -->
 	<div class="container cooper_ann">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 table_bgcolor">
 				<table class="table table-hover table_main">
 					<caption class="title_pr">
-						¨t²Î¤½§i<a href='#ann_jump' data-toggle="modal"
-							class="btn btn_cooper modal_jump cooper_ann_href"> ·s¼W¨t²Î¤½§i </a>
+						ç³»çµ±å…¬å‘Š<a href='#ann_jump' data-toggle="modal"
+							class="btn btn_cooper modal_jump cooper_ann_href"> æ–°å¢žç³»çµ±å…¬å‘Š </a>
 					</caption>
 					<thead>
 						<tr class="col_title">
-							<th>¤½§i½s¸¹</th>
-							<th>¤½§i¼ÐÃD</th>
-							<th>¤½§i¤º®e</th>
-							<th>¤½§iª¬ºA</th>
-							<th>¤½§i®É¶¡</th>
-							<th>­û¤u½s¸¹</th>
-							<th>­×§ï¤½§iª¬ºA</th>
+							<th>å…¬å‘Šç·¨è™Ÿ</th>
+							<th>å…¬å‘Šæ¨™é¡Œ</th>
+							<th>å…¬å‘Šå…§å®¹</th>
+							<th>å…¬å‘Šç‹€æ…‹</th>
+							<th>å…¬å‘Šæ™‚é–“</th>
+							<th>å“¡å·¥ç·¨è™Ÿ</th>
+							<th>ä¿®æ”¹å…¬å‘Šç‹€æ…‹</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -52,7 +52,7 @@
 								<td>
 									<div class="dropdown">${annVO.ann_state}
 										<!-- <select class="form-control btn_cooper" id="sel1"> -->
-										<!-- <option class="default_item">½Ð¿ï¾Ü</option> -->
+										<!-- <option class="default_item">è«‹é¸æ“‡</option> -->
 										<%-- <option class="onitem btn_cooper">${annVO.ann_state}</option> --%>
 										<!-- </select> -->
 									</div>
@@ -62,7 +62,7 @@
 								<td>
 									<form METHOD="post" ACTION="ann.do">
 										<input class="btn btn_cooper modal_jump cooper_ann_href"
-											type="submit" value="­×§ï¨t²Î¤½§i"> <input type="hidden"
+											type="submit" value="ä¿®æ”¹ç³»çµ±å…¬å‘Š"> <input type="hidden"
 											name="ann_no" value="${annVO.ann_no}"> <input
 											type="hidden" name="action" value="getOne_For_Update">
 									</form>
@@ -80,38 +80,38 @@
 								<a
 									href="<%=request.getContextPath()%>/back/backend/select_page_home.jsp"><img
 									src="<%=request.getContextPath()%>/images/back1.gif"
-									width="100" height="32" border="0">¦^«áºÝ­º­¶</a>
+									width="100" height="32" border="0">å›žå¾Œç«¯é¦–é </a>
 							</h4>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<FORM METHOD="post" ACTION="ann.do">
-								<b>¿ï¾Ü¤½§i½s¸¹:</b> <select size="1" name="ann_no">
+								<b>é¸æ“‡å…¬å‘Šç·¨è™Ÿ:</b> <select size="1" name="ann_no">
 									<c:forEach var="annVO" items="${list}">
 										<option value="${annVO.ann_no}">${annVO.ann_no}
 									</c:forEach>
 								</select> <input type="hidden" name="action" value="getOne_For_Display">
-								<input type="submit" value="°e¥X">
+								<input type="submit" value="é€å‡º">
 							</FORM>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<FORM METHOD="post" ACTION="ann.do">
-								<b>¿ï¾Ü§R°£¤½§i½s¸¹:</b> <select size="1" name="ann_no">
+								<b>é¸æ“‡åˆªé™¤å…¬å‘Šç·¨è™Ÿ:</b> <select size="1" name="ann_no">
 									<c:forEach var="annVO" items="${list}">
 										<option value="${annVO.ann_no}">${annVO.ann_no}
 									</c:forEach>
 								</select> <input type="hidden" name="action" value="delete"> <input
-									class="delete_confirm btn btn-danger" type="submit" value="°e¥X">
+									class="delete_confirm btn btn-danger" type="submit" value="é€å‡º">
 							</FORM>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<%-- ¿ù»~ªí¦C --%> <c:if test="${not empty errorMsgs}">
-								<font style="color: red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+							<%-- éŒ¯èª¤è¡¨åˆ— --%> <c:if test="${not empty errorMsgs}">
+								<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 								<ul>
 									<c:forEach var="message" items="${errorMsgs}">
 										<li style="color: red">${message}</li>
@@ -128,98 +128,98 @@
 
 
 
-	<!-- ¼u¥X·s¼W¨t²Î¤½§i============================================================= -->
+	<!-- å½ˆå‡ºæ–°å¢žç³»çµ±å…¬å‘Š============================================================= -->
 	<div class="modal fade" id="ann_jump">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">·s¼W¨t²Î¤½§i</h4>
+					<h4 class="modal-title">æ–°å¢žç³»çµ±å…¬å‘Š</h4>
 				</div>
 				<div class="modal-body">
 					<form role="form" METHOD="post" ACTION="ann.do" name="ann">
 						<div class="form-group">
-							<label for="ann_title">¤½§i¼ÐÃD</label> <input type="text"
+							<label for="ann_title">å…¬å‘Šæ¨™é¡Œ</label> <input type="text"
 								class="form-control" name="ann_title"
-								value="<%=(annVO == null) ? "·s¼W¤½§i¦WºÙ" : annVO.getAnn_title()%>" />
+								value="<%=(annVO == null) ? "æ–°å¢žå…¬å‘Šåç¨±" : annVO.getAnn_title()%>" />
 						</div>
 						<div class="form-group">
-							<label for="ann_content">¤½§i¤º®e</label>
+							<label for="ann_content">å…¬å‘Šå…§å®¹</label>
 							<textarea rows="10" class="form-control" name="ann_content"
-								value="<%=(annVO == null) ? "·s¼W¤½§i¤º®e" : annVO.getAnn_content()%>"></textarea>
+								value="<%=(annVO == null) ? "æ–°å¢žå…¬å‘Šå…§å®¹" : annVO.getAnn_content()%>"></textarea>
 						</div>
 						<div class="form-group dropdown">
-							<label for="ann_state">¤½§iª¬ºA</label> <select name="ann_state"
+							<label for="ann_state">å…¬å‘Šç‹€æ…‹</label> <select name="ann_state"
 								class="form-control btn_cooper" id="sel1">
-								<option name="default_item" value="">½Ð¿ï¾Ü</option>
-								<option class="onitem" value="¤½§i¤¤"
-									${(annVO.ann_state=='¤½§i¤¤')? 'selected': ''}>¤½§i¤¤</option>
-								<option class="onitem" value="¤wºM¾P"
-									${(annVO.ann_state=='¤wºM¾P')? 'selected': ''}>¤wºM¾P</option>
+								<option name="default_item" value="">è«‹é¸æ“‡</option>
+								<option class="onitem" value="å…¬å‘Šä¸­"
+									${(annVO.ann_state=='å…¬å‘Šä¸­')? 'selected': ''}>å…¬å‘Šä¸­</option>
+								<option class="onitem" value="å·²æ’¤éŠ·"
+									${(annVO.ann_state=='å·²æ’¤éŠ·')? 'selected': ''}>å·²æ’¤éŠ·</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="emp_no">­û¤u½s¸¹</label> <input type="text"
+							<label for="emp_no">å“¡å·¥ç·¨è™Ÿ</label> <input type="text"
 								class="form-control" name="emp_no"
 								value="<%=(annVO == null) ? "EM00000002" : annVO.getEmp_no()%>" />
 						</div>
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Â÷¶}</button>
+								data-dismiss="modal">é›¢é–‹</button>
 							<input type="hidden" name="action" value="insert">
-							<button type="submit" class="btn btn_cooper" value="°e¥X·s¼W">°e¥X·s¼W</button>
+							<button type="submit" class="btn btn_cooper" value="é€å‡ºæ–°å¢ž">é€å‡ºæ–°å¢ž</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- µ²§ô·s¼W¨t²Î¤½§i ============================================================================ -->
+	<!-- çµæŸæ–°å¢žç³»çµ±å…¬å‘Š ============================================================================ -->
 
 
 
 
-	<!-- ¼u¥X­×§ï¨t²Î¤½§i ============================================================================= -->
+	<!-- å½ˆå‡ºä¿®æ”¹ç³»çµ±å…¬å‘Š ============================================================================= -->
 	<!-- 	<div class="modal2 fade" id="ann_jump_update"> -->
 	<!-- 		<div class="modal-dialog"> -->
 	<!-- 			<div class="modal-content2"> -->
 	<!-- 				<div class="modal-header2"> -->
 	<!-- 					<button type="button" class="close" data-dismiss="modal" -->
 	<!-- 						aria-hidden="true">&times;</button> -->
-	<!-- 					<h4 class="modal-title">­×§ï¨t²Î¤½§i</h4> -->
+	<!-- 					<h4 class="modal-title">ä¿®æ”¹ç³»çµ±å…¬å‘Š</h4> -->
 	<!-- 				</div> -->
 	<!-- 				<div class="modal-body2"> -->
 	<!-- 					<form role="form" METHOD="post" ACTION="ann.do" name="ann"> -->
 	<!-- 						<div class="form-group"> -->
-	<!-- 							<label for="ann_title">¤½§i½s¸¹</label> -->
+	<!-- 							<label for="ann_title">å…¬å‘Šç·¨è™Ÿ</label> -->
 	<!-- 							<div> -->
 	<%-- 								<h5 class="update_color"><%=annVO.getAnn_no()%></h5> --%>
 	<!-- 							</div> -->
 	<!-- 						</div> -->
 	<!-- 						<div class="form-group"> -->
-	<!-- 							<label for="ann_title">¤½§i¼ÐÃD</label> <input type="text" -->
+	<!-- 							<label for="ann_title">å…¬å‘Šæ¨™é¡Œ</label> <input type="text" -->
 	<!-- 								class="form-control" name="ann_title" -->
-	<%-- 								value="<%=(annVO == null) ? "­×§ï¤½§i¦WºÙ" : annVO.getAnn_title()%>" /> --%>
+	<%-- 								value="<%=(annVO == null) ? "ä¿®æ”¹å…¬å‘Šåç¨±" : annVO.getAnn_title()%>" /> --%>
 	<!-- 						</div> -->
 	<!-- 						<div class="form-group"> -->
-	<!-- 							<label for="ann_content">¤½§i¤º®e</label> -->
+	<!-- 							<label for="ann_content">å…¬å‘Šå…§å®¹</label> -->
 	<!-- 							<textarea rows="10" class="form-control" name="ann_content" -->
-	<%-- 								value="<%=(annVO == null) ? "­×§ï¤½§i¤º®e" : annVO.getAnn_content()%>"></textarea> --%>
+	<%-- 								value="<%=(annVO == null) ? "ä¿®æ”¹å…¬å‘Šå…§å®¹" : annVO.getAnn_content()%>"></textarea> --%>
 	<!-- 						</div> -->
 	<!-- 						<div class="form-group dropdown"> -->
-	<!-- 							<label for="ann_state">­×§ï¤½§iª¬ºA</label> <select name="ann_state" -->
+	<!-- 							<label for="ann_state">ä¿®æ”¹å…¬å‘Šç‹€æ…‹</label> <select name="ann_state" -->
 	<!-- 								class="form-control btn_cooper" id="sel1"> -->
-	<!-- 								<option class="default_item">½Ð¿ï¾Ü</option> -->
-	<!-- 								<option class="onitem" value="¤½§i¤¤" -->
-	<%-- 									${(annVO.ann_state=='¤½§i¤¤')? 'selected': ''}>¤½§i¤¤</option> --%>
-	<!-- 								<option class="onitem" value="¤wºM¾P" -->
-	<%-- 									${(annVO.ann_state=='¤wºM¾P')? 'selected': ''}>¤wºM¾P</option> --%>
+	<!-- 								<option class="default_item">è«‹é¸æ“‡</option> -->
+	<!-- 								<option class="onitem" value="å…¬å‘Šä¸­" -->
+	<%-- 									${(annVO.ann_state=='å…¬å‘Šä¸­')? 'selected': ''}>å…¬å‘Šä¸­</option> --%>
+	<!-- 								<option class="onitem" value="å·²æ’¤éŠ·" -->
+	<%-- 									${(annVO.ann_state=='å·²æ’¤éŠ·')? 'selected': ''}>å·²æ’¤éŠ·</option> --%>
 	<!-- 							</select> -->
 	<!-- 						</div> -->
 	<!-- 						<div class="form-group"> -->
-	<!-- 							<label for="emp_no">­û¤u½s¸¹</label> <input type="text" -->
+	<!-- 							<label for="emp_no">å“¡å·¥ç·¨è™Ÿ</label> <input type="text" -->
 	<!-- 								class="form-control" name="emp_no" -->
 	<%-- 								value="<%=(annVO == null) ? "EM00000002" : annVO.getEmp_no()%>" /> --%>
 	<!-- 						</div> -->
@@ -227,22 +227,22 @@
 	<!-- 						<div class="modal-footer2"> -->
 	<!-- 							<input type="hidden" name="action" value="leave"> -->
 	<!-- 							<button type="submit" class="btn btn-default" -->
-	<!-- 								data-dismiss="modal" value="Â÷¶}">Â÷¶}</button> -->
+	<!-- 								data-dismiss="modal" value="é›¢é–‹">é›¢é–‹</button> -->
 	<%-- 							<input type="hidden" name="ann_no" value="${annVO.ann_no}"> --%>
 	<!-- 							<input type="hidden" name="action" value="update"> -->
-	<!-- 							<button type="submit" class="btn btn_cooper" value="°e¥X­×§ï">°e¥X­×§ï</button> -->
+	<!-- 							<button type="submit" class="btn btn_cooper" value="é€å‡ºä¿®æ”¹">é€å‡ºä¿®æ”¹</button> -->
 	<!-- 						</div> -->
 	<!-- 					</form> -->
 	<!-- 				</div> -->
 	<!-- 			</div> -->
 	<!-- 		</div> -->
 	<!-- 	</div> -->
-	<!-- µ²§ô­×§ï¨t²Î¤½§i ================================================================================== -->
+	<!-- çµæŸä¿®æ”¹ç³»çµ±å…¬å‘Š ================================================================================== -->
 
 
-<!-- ¥H¤W¬O§A¥i¥H©ñªº¤º®e ================================================================================== -->
+<!-- ä»¥ä¸Šæ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================== -->
 
-<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->
 </div>
-<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->
 

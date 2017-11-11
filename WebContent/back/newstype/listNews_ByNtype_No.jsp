@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.news.model.*"%>
 
@@ -10,7 +10,7 @@
 	class="com.newstype.model.NewsTypeService" />
 
 
-<!-- ¥H¤U¬O§A¥i¥H©ñªº¤º®e ================================================================================== -->
+<!-- ä»¥ä¸‹æ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================== -->
 
 <style type="text/css">
 .newstype_title, .newstype_col {
@@ -27,18 +27,18 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 table_bgcolor">
 			<table class="table table-hover table_main">
-				<caption class="title_pr newstype_title">©Ð¥«·s»DºØÃþ¦Cªí</caption>
+				<caption class="title_pr newstype_title">æˆ¿å¸‚æ–°èžç¨®é¡žåˆ—è¡¨</caption>
 				<thead>
 					<tr class="col_title newstype_col">
-						<th>·s»D½s¸¹</th>
-						<th>·s»DºØÃþ</th>
-						<th>·s»D¼ÐÃD</th>
-						<th>·s»D¤º®e</th>
-						<th>·s»Dª¬ºA</th>
-						<th>·s»D·Ó¤ù</th>
-						<th>·s¼W®É¶¡</th>
-						<th>­û¤u½s¸¹</th>
-						<th>­×§ï·s»Dª¬ºA</th>
+						<th>æ–°èžç·¨è™Ÿ</th>
+						<th>æ–°èžç¨®é¡ž</th>
+						<th>æ–°èžæ¨™é¡Œ</th>
+						<th>æ–°èžå…§å®¹</th>
+						<th>æ–°èžç‹€æ…‹</th>
+						<th>æ–°èžç…§ç‰‡</th>
+						<th>æ–°å¢žæ™‚é–“</th>
+						<th>å“¡å·¥ç·¨è™Ÿ</th>
+						<th>ä¿®æ”¹æ–°èžç‹€æ…‹</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -65,16 +65,16 @@
 							<td>${newsVO.news_date}</td>
 							<td>${newsVO.emp_no}</td>
 							<td>
-								<!-- ¸õÂà¨ì©Ð¥«·s»D­×§ï·s»D¤º®e -->
+								<!-- è·³è½‰åˆ°æˆ¿å¸‚æ–°èžä¿®æ”¹æ–°èžå…§å®¹ -->
 								<form METHOD="post"
 									ACTION="<%=request.getContextPath()%>/back/news/news.do">
 									<input class="btn btn_cooper modal_jump cooper_ann_href"
-										id="btn_newstype" type="submit" value="­×§ï·s»D¤½§i"> <input
+										id="btn_newstype" type="submit" value="ä¿®æ”¹æ–°èžå…¬å‘Š"> <input
 										type="hidden" name="news_no" value="${newsVO.news_no}">
 									<input type="hidden" name="requestURL"
 										value="<%=request.getServletPath()%>"> <input
 										type="hidden" name="action" value="getOne_For_Update">
-								</form> <!-- end¸õÂà¨ì©Ð¥«·s»D­×§ï·s»D¤º®e -->
+								</form> <!-- endè·³è½‰åˆ°æˆ¿å¸‚æ–°èžä¿®æ”¹æ–°èžå…§å®¹ -->
 							</td>
 						</tr>
 					</c:forEach>
@@ -88,14 +88,14 @@
 					<!-- <a -->
 					<%-- href="<%=request.getContextPath()%>/back/newstype/listAllNewsType.jsp"><img --%>
 					<%-- src="<%=request.getContextPath()%>/images/back1.gif" width="100" --%>
-					<!-- height="32" border="0">¦^·s»DºØÃþ</a> -->
+					<!-- height="32" border="0">å›žæ–°èžç¨®é¡ž</a> -->
 					<!-- </h4> -->
 					<!-- </td> -->
 					<!-- </tr> -->
 				<tr>
 					<td>
-						<%-- ¿ù»~ªí¦C --%> <c:if test="${not empty errorMsgs}">
-							<font style="color: red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+						<%-- éŒ¯èª¤è¡¨åˆ— --%> <c:if test="${not empty errorMsgs}">
+							<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 							<ul>
 								<c:forEach var="message" items="${errorMsgs}">
 									<li style="color: red">${message}</li>
@@ -108,4 +108,4 @@
 		</div>
 	</div>
 </div>
-<!-- ¥H¤W¬O§A¥i¥H©ñªº¤º®e =========================================================================== -->
+<!-- ä»¥ä¸Šæ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ =========================================================================== -->

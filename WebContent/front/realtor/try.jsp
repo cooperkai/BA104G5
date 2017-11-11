@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.realtor.model.*"%>
@@ -15,25 +15,25 @@
 </head>
 <body>
 
-	<%-- ёUҐОЅЖ¦X¬dёЯ-ҐH¤UДж¦м-ҐiАH·NјWґо --%>
+	<%-- иђ¬з”Ёи¤‡еђ€жџҐи©ў-д»Ґдё‹ж¬„дЅЌ-еЏЇйљЁж„Џеўћжё› --%>
 	<ul>
 		<li>
 			<FORM METHOD="post"	ACTION="realtor.do"	name="form1">
-				<b><font color=blue>ёUҐОЅЖ¦X¬dёЯ:</font></b> 
-				<br> <b>їй¤J©РҐтЅsё№:</b> 
+				<b><font color=blue>иђ¬з”Ёи¤‡еђ€жџҐи©ў:</font></b> 
+				<br> <b>ијёе…Ґж€їд»Із·Ёи™џ:</b> 
 				<input type="text" name="rtr_no" value="RT00000001"><br> 
-				<b>їй¤J©РҐт©m¦W:</b>
-				<input type="text" name="rtr_name" value="ё«¤pД_"><br> 
-				<b>їй¤J©РҐтIDemail:</b>
+				<b>ијёе…Ґж€їд»Іе§“еђЌ:</b>
+				<input type="text" name="rtr_name" value="и‘¦е°ЏеЇ¶"><br> 
+				<b>ијёе…Ґж€їд»ІIDemail:</b>
 				<input type="text" name="rtr_id" value="realtor001@gmail.com"><br>
 
-				<b>їпѕЬ¦a°П:</b> <select size="1" name="rtr_area">
+				<b>йЃёж“‡ењ°еЌЂ:</b> <select size="1" name="rtr_area">
 				<option value="">
 				<c:forEach var="realtorVO" items="${realtorSvc.all}">
 					<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area }</option>
 				</c:forEach>
 				</select><br> 
-				<b>їпѕЬЄA°И¤ЅҐq:</b> 
+				<b>йЃёж“‡жњЌе‹™е…¬еЏё:</b> 
 				<select name="re_no">
 				<option value="">
 				<c:forEach var="realestateVO" items="${realestateSvc.all}">
@@ -41,13 +41,13 @@
 				</c:forEach>
 				</select>
 				 <input type="hidden" name="action" value="listRealtor_ByCompositeQuery">
-				<input type="submit" value="°eҐX"> 
+				<input type="submit" value="йЂЃе‡є"> 
 			</FORM>
 		</li>
 	</ul>
-<%-- їщ»~Єн¦C --%>
+<%-- йЊЇиЄ¤иЎЁе€— --%>
 <c:if test="${not empty errorMsgs}">
-	<font color='red'>ЅР­ЧҐїҐH¤Uїщ»~:</font>
+	<font color='red'>и«‹дї®ж­Јд»Ґдё‹йЊЇиЄ¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>

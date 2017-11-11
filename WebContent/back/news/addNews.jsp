@@ -1,8 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.news.model.*"%>
-<%--±Ä¥Î EL ªº¼gªk¨ú­È --%>
+<%--æŽ¡ç”¨ EL çš„å¯«æ³•å–å€¼ --%>
 
 <%
 	NewsVO newsVO = (NewsVO) request.getAttribute("newsVO");
@@ -11,13 +11,13 @@
 	pageContext.setAttribute("list", list);
 %>
 
-<!-- «áºÝinclude -->
+<!-- å¾Œç«¯include -->
 <jsp:include page="/back/backend/backend_page.jsp" flush="true" />
-<!-- «áºÝinclude -->
+<!-- å¾Œç«¯include -->
 
-<%-- ¿ù»~ªí¦C --%>
+<%-- éŒ¯èª¤è¡¨åˆ— --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color: red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color: red">${message}</li>
@@ -26,31 +26,31 @@
 </c:if>
 
 
-<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 <div class="col-xs-12 col-sm-10 maincontext">
-<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 
-<!-- ¥H¤U¬O§A¥i¥H©ñªº¤º®e ================================================================================== -->
+<!-- ä»¥ä¸‹æ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================== -->
 
-	<!-- ¼u¥X·s¼W©Ð¥«³Ì·s®ø®§=====================================================================================-->
+	<!-- å½ˆå‡ºæ–°å¢žæˆ¿å¸‚æœ€æ–°æ¶ˆæ¯=====================================================================================-->
 	<div class="modal fade modal_jump" id="house_jump">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">·s¼W©Ð¥«³Ì·s®ø®§</h4>
+					<h4 class="modal-title">æ–°å¢žæˆ¿å¸‚æœ€æ–°æ¶ˆæ¯</h4>
 				</div>
 				<div class="modal-body">
 					<form role="form" METHOD="post" ACTION="news.do"
 						enctype="multipart/form-data" name="house">
-						<!-- ©I¥sNews_Type table-->
+						<!-- å‘¼å«News_Type table-->
 						<jsp:useBean id="newstypeSvc" scope="page"
 							class="com.newstype.model.NewsTypeService" />
 						<div class="form-group">
-							<label for="ntype_no">·s»DºØÃþ</label> <select
+							<label for="ntype_no">æ–°èžç¨®é¡ž</label> <select
 								class="form-control btn_cooper" id="sel1" name="ntype_no">
-								<option class="default_item">½Ð¿ï¾Ü</option>
+								<option class="default_item">è«‹é¸æ“‡</option>
 								<c:forEach var="newstypeVO" items="${newstypeSvc.all}">
 									<option value="${newtypeVO.ntype_no}"
 										${(newsVO.ntype_no==newstypeVO.ntype_no) ? 'selected': '' }>${newstypeVO.n_type}</option>
@@ -59,47 +59,47 @@
 						</div>
 
 						<div class="form-group">
-							<label for="news_title">·s»D¼ÐÃD</label> <input type="text"
+							<label for="news_title">æ–°èžæ¨™é¡Œ</label> <input type="text"
 								class="form-control" name="news_title"
-								value="<%=(newsVO == null) ? "·s¼W·s»D¼ÐÃD" : "newsVO.getNews_title()"%>">
+								value="<%=(newsVO == null) ? "æ–°å¢žæ–°èžæ¨™é¡Œ" : "newsVO.getNews_title()"%>">
 						</div>
 						<div class="form-group">
-							<label for="news_content">·s»D¤º®e</label>
+							<label for="news_content">æ–°èžå…§å®¹</label>
 							<textarea rows="10" class="form-control" name="news_content"
-								value="<%=(newsVO == null) ? "·s¼W·s»D¤º®e" : newsVO.getNews_content()%>"></textarea>
+								value="<%=(newsVO == null) ? "æ–°å¢žæ–°èžå…§å®¹" : newsVO.getNews_content()%>"></textarea>
 						</div>
 						<div class="form-group dropdown">
-							<label for="ann_content">­×§ï·s»Dª¬ºA</label> <select name="news_state"
+							<label for="ann_content">ä¿®æ”¹æ–°èžç‹€æ…‹</label> <select name="news_state"
 								class="form-control btn_cooper" id="sel1">
-								<option class="default_item">½Ð¿ï¾Ü</option>
-								<option class="onitem" value="¤½§i¤¤"
-									${(newsVO.news_state=='¤½§i¤¤')? 'selected': ''}>¤½§i¤¤</option>
-								<option class="offitem" value="¤wºM¾P"
-									${(newsVO.news_state=='¤wºM¾P')? 'selected': ''}>¤wºM¾P</option>
+								<option class="default_item">è«‹é¸æ“‡</option>
+								<option class="onitem" value="å…¬å‘Šä¸­"
+									${(newsVO.news_state=='å…¬å‘Šä¸­')? 'selected': ''}>å…¬å‘Šä¸­</option>
+								<option class="offitem" value="å·²æ’¤éŠ·"
+									${(newsVO.news_state=='å·²æ’¤éŠ·')? 'selected': ''}>å·²æ’¤éŠ·</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<input type="file" name="news_photo">
 						</div>
 						<div class="form-group">
-							<label for="empno_no">­û¤u½s¸¹</label><input type="text"
+							<label for="empno_no">å“¡å·¥ç·¨è™Ÿ</label><input type="text"
 								class="form-control" name="emp_no"
 								value="<%=(newsVO == null) ? "EM00000002" : newsVO.getEmp_no()%>" />
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Â÷¶}</button>
+								data-dismiss="modal">é›¢é–‹</button>
 							<input type="hidden" name="action" value="insert">
-							<button type="submit" class="btn btn_cooper" value="°e¥X·s¼W">°e¥X·s¼W</button>
+							<button type="submit" class="btn btn_cooper" value="é€å‡ºæ–°å¢ž">é€å‡ºæ–°å¢ž</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- µ²§ô©Ð¥«³Ì·s®ø®§ -->
-<!-- ¥H¤W¬O§A¥i¥H©ñªº¤º®e ================================================================================== -->
+	<!-- çµæŸæˆ¿å¸‚æœ€æ–°æ¶ˆæ¯ -->
+<!-- ä»¥ä¸Šæ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================== -->
 
-<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->
 </div>
-<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->

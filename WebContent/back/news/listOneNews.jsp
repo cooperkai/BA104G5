@@ -1,13 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.news.model.*"%>
 <%@ page import="com.newstype.model.*"%>
-<%-- ¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È --%>
+<%-- æ­¤é æš«ç·´ç¿’æŽ¡ç”¨ Script çš„å¯«æ³•å–å€¼ --%>
 
 <%--
 // 	NewsVO newsVO = (NewsVO) request.getAttribute("newsVO");
 --%>
 
-<!-- ¨ú¥XController NewsServlet.java¤w¦s¤JrequestªºnewsVOreqª«¥ó-04¨t¦C -->
+<!-- å–å‡ºController NewsServlet.javaå·²å­˜å…¥requestçš„newsVOreqç‰©ä»¶-04ç³»åˆ— -->
 <%
 	NewsVO newsVO = (NewsVO) request.getAttribute("newsVO");
 %>
@@ -18,42 +18,42 @@
 %>
 
 
-<!-- «áºÝinclude -->
+<!-- å¾Œç«¯include -->
 <jsp:include page="/back/backend/backend_page.jsp" flush="true" />
-<!-- «áºÝinclude -->
+<!-- å¾Œç«¯include -->
 
-<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 <div class="col-xs-12 col-sm-10 maincontext">
-	<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+	<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 
-	<!-- ¥H¤U¬O§A¥i¥H©ñªº¤º®e ================================================================================ -->
-	<!-- ©Ð¥«³Ì·s®ø®§ ========================================================================================= -->
+	<!-- ä»¥ä¸‹æ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================ -->
+	<!-- æˆ¿å¸‚æœ€æ–°æ¶ˆæ¯ ========================================================================================= -->
 	<div class="container cooper_house">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 table_bgcolor">
 				<table class="table table-hover table_main">
 					<caption class="title_pr">
-						©Ð¥«³Ì·s®ø®§
+						æˆ¿å¸‚æœ€æ–°æ¶ˆæ¯
 					</caption>
 					<thead>
 						<tr class="col_title">
-							<th>·s»D½s¸¹</th>
-							<th>·s»DºØÃþ</th>
-							<th>·s»D¼ÐÃD</th>
-							<th>·s»D¤º®e</th>
-							<th>·s»Dª¬ºA</th>
-							<th>·s»D·Ó¤ù</th>
-							<th>·s¼W®É¶¡</th>
-							<th>­û¤u½s¸¹</th>
+							<th>æ–°èžç·¨è™Ÿ</th>
+							<th>æ–°èžç¨®é¡ž</th>
+							<th>æ–°èžæ¨™é¡Œ</th>
+							<th>æ–°èžå…§å®¹</th>
+							<th>æ–°èžç‹€æ…‹</th>
+							<th>æ–°èžç…§ç‰‡</th>
+							<th>æ–°å¢žæ™‚é–“</th>
+							<th>å“¡å·¥ç·¨è™Ÿ</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="col_name">
 							<td>${newsVO.news_no}</td>
-							<!-- ÂÂª©ªº¼gªk -->
+							<!-- èˆŠç‰ˆçš„å¯«æ³• -->
 							<%--<td>${newsVO.ntype_no}</td> --%>
 
-							<!-- ·sª©±q§O·s»DºØÃþªºtable join¹L¨Ó -04¨t¦C-->
+							<!-- æ–°ç‰ˆå¾žåˆ¥æ–°èžç¨®é¡žçš„table joinéŽä¾† -04ç³»åˆ—-->
 							<td>${newsVO.ntype_no}[<%=newstypeVO.getNews_type()%>]
 							</td>
 
@@ -62,8 +62,8 @@
 							<td>
 								<div class="dropdown">${newsVO.news_state}
 									<!-- <select class="form-control btn_cooper" id="sel1"> -->
-									<!-- <option class="onitem">¤½§i¤¤</option> -->
-									<!-- <option class="offitem">¤wºM¾P</option> -->
+									<!-- <option class="onitem">å…¬å‘Šä¸­</option> -->
+									<!-- <option class="offitem">å·²æ’¤éŠ·</option> -->
 									<!-- </select> -->
 								</div>
 							</td>
@@ -83,7 +83,7 @@
 								<a
 									href="<%=request.getContextPath()%>/back/news/listAllNews.jsp"><img
 									src="<%=request.getContextPath()%>/images/back1.gif"
-									width="100" height="32" border="0">¦^©Ð¥«³Ì·s®ø®§</a>
+									width="100" height="32" border="0">å›žæˆ¿å¸‚æœ€æ–°æ¶ˆæ¯</a>
 							</h4>
 						</td>
 					</tr>
@@ -91,29 +91,29 @@
 			</div>
 		</div>
 	</div>
-	<!-- ©Ð¥«³Ì·s®ø®§=====================================================================================-->
+	<!-- æˆ¿å¸‚æœ€æ–°æ¶ˆæ¯=====================================================================================-->
 
 
 
-	<!-- ©Ð¥«³Ì·s®ø®§ ========================================================================================= -->
+	<!-- æˆ¿å¸‚æœ€æ–°æ¶ˆæ¯ ========================================================================================= -->
 	<!-- 	<div class="container cooper_house"> -->
 	<!-- 		<div class="row"> -->
 	<!-- 			<div class="col-xs-12 col-sm-12 table_bgcolor"> -->
 	<!-- 				<table class="table table-hover table_main"> -->
 	<!-- 					<caption class="title_pr"> -->
-	<!-- 						©Ð¥«³Ì·s®ø®§ <a href='#house_jump' data-toggle="modal" -->
-	<!-- 							class="btn btn_cooper modal_jump cooper_ann_href"> ·s¼W©Ð¥«³Ì·s®ø®§ </a> -->
+	<!-- 						æˆ¿å¸‚æœ€æ–°æ¶ˆæ¯ <a href='#house_jump' data-toggle="modal" -->
+	<!-- 							class="btn btn_cooper modal_jump cooper_ann_href"> æ–°å¢žæˆ¿å¸‚æœ€æ–°æ¶ˆæ¯ </a> -->
 	<!-- 					</caption> -->
 	<!-- 					<thead> -->
 	<!-- 						<tr class="col_title"> -->
-	<!-- 							<th>·s»D½s¸¹</th> -->
-	<!-- 							<th>·s»DºØÃþ</th> -->
-	<!-- 							<th>·s»D¼ÐÃD</th> -->
-	<!-- 							<th>·s»D¤º®e</th> -->
-	<!-- 							<th>·s»Dª¬ºA</th> -->
-	<!-- 							<th>·s»D·Ó¤ù</th> -->
-	<!-- 							<th>·s¼W®É¶¡</th> -->
-	<!-- 							<th>­û¤u½s¸¹</th> -->
+	<!-- 							<th>æ–°èžç·¨è™Ÿ</th> -->
+	<!-- 							<th>æ–°èžç¨®é¡ž</th> -->
+	<!-- 							<th>æ–°èžæ¨™é¡Œ</th> -->
+	<!-- 							<th>æ–°èžå…§å®¹</th> -->
+	<!-- 							<th>æ–°èžç‹€æ…‹</th> -->
+	<!-- 							<th>æ–°èžç…§ç‰‡</th> -->
+	<!-- 							<th>æ–°å¢žæ™‚é–“</th> -->
+	<!-- 							<th>å“¡å·¥ç·¨è™Ÿ</th> -->
 	<!-- 						</tr> -->
 	<!-- 					</thead> -->
 	<!-- 					<tbody> -->
@@ -125,8 +125,8 @@
 	<!-- 							<td> -->
 	<%-- 								<div class="dropdown">${newsVO.news_state} --%>
 	<!-- 									<select class="form-control btn_cooper" id="sel1"> -->
-	<!-- 									<option class="onitem">¤½§i¤¤</option> -->
-	<!-- 									<option class="offitem">¤wºM¾P</option> -->
+	<!-- 									<option class="onitem">å…¬å‘Šä¸­</option> -->
+	<!-- 									<option class="offitem">å·²æ’¤éŠ·</option> -->
 	<!-- 									</select> -->
 	<!-- 								</div> -->
 	<!-- 							</td> -->
@@ -146,7 +146,7 @@
 	<!-- 								<a -->
 	<%-- 									href="<%=request.getContextPath()%>/back/news/listAllNews.jsp"><img --%>
 	<%-- 									src="<%=request.getContextPath()%>/images/back1.gif" --%>
-	<!-- 									width="100" height="32" border="0">¦^©Ð¥«³Ì·s®ø®§</a> -->
+	<!-- 									width="100" height="32" border="0">å›žæˆ¿å¸‚æœ€æ–°æ¶ˆæ¯</a> -->
 	<!-- 							</h4> -->
 	<!-- 						</td> -->
 	<!-- 					</tr> -->
@@ -154,13 +154,13 @@
 	<!-- 			</div> -->
 	<!-- 		</div> -->
 	<!-- 	</div> -->
-	<!-- ©Ð¥«³Ì·s®ø®§=====================================================================================-->
+	<!-- æˆ¿å¸‚æœ€æ–°æ¶ˆæ¯=====================================================================================-->
 
 
 
 
-	<!-- ¥H¤W¬O§A¥i¥H©ñªº¤º®e ================================================================================== -->
+	<!-- ä»¥ä¸Šæ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================== -->
 
-	<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+	<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->
 </div>
-<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->

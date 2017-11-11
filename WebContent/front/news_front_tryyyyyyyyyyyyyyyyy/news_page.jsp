@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
 <!--
@@ -30,12 +30,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="/css/flexslider.css" type="text/css"
 	media="screen" />
 
-<!-- �箸�柙s -->
+<!-- 嚙賜捂嚙賣��s -->
 <script type="application/x-javascript">
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 	
 </script>
 <script src="<%=request.getContextPath()%>/front/js_front/jquery.min.js"></script>
-<!-- �箸�柙s -->
+<!-- 嚙賜捂嚙賣��s -->
 
 </head>
 <body>
@@ -111,8 +111,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h4>Twitter Feed</h4>
 					<label></label>
 					<p>
-						hey <a href="#">@webfan </a> just been using James George��s
-						website template. i can��t believe he gives them away!
+						hey <a href="#">@webfan </a> just been using James George嚙踝蕭s
+						website template. i can嚙踝蕭t believe he gives them away!
 					</p>
 					<h6>1 day ago</h6>
 					<p>
@@ -289,7 +289,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="footer">
 		<div class="container">
 			<p>
-				Copyrights 穢 2015 Archive All rights reserved | Template by <a
+				Copyrights 蝛� 2015 Archive All rights reserved | Template by <a
 					href="http://w3layouts.com/">W3layouts</a>
 			</p>
 		</div>

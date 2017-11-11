@@ -1,11 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.realtor.model.*"%>
 
 
-<%-- ¸U¥Î½Æ¦X¬d¸ß-¥i¥Ñ«È¤áºİselect_page.jspÀH·N¼W´î¥ô¦ó·Q¬d¸ßªºÄæ¦ì --%>
-<%-- ¦¹­¶¥u§@¬°½Æ¦X¬d¸ß®É¤§µ²ªG½m²ß¡A¥iµø»İ­n¦A¼W¥[¤À­¶¡B°e¥X­×§ï¡B§R°£¤§¥\¯à--%>
+<%-- è¬ç”¨è¤‡åˆæŸ¥è©¢-å¯ç”±å®¢æˆ¶ç«¯select_page.jspéš¨æ„å¢æ¸›ä»»ä½•æƒ³æŸ¥è©¢çš„æ¬„ä½ --%>
+<%-- æ­¤é åªä½œç‚ºè¤‡åˆæŸ¥è©¢æ™‚ä¹‹çµæœç·´ç¿’ï¼Œå¯è¦–éœ€è¦å†å¢åŠ åˆ†é ã€é€å‡ºä¿®æ”¹ã€åˆªé™¤ä¹‹åŠŸèƒ½--%>
 <jsp:useBean id="listRealtor_ByCompositeQuery" scope="request" type="java.util.List<RealtorVO>"/>
 
 <jsp:useBean id="realestateSvc" scope="page" class="com.realestate.model.RealEstateService"/>
@@ -53,11 +53,11 @@
 </head>
 <body bgcolor='white'>
 
-<h4>¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È:</h4>
+<h4>æ­¤é ç·´ç¿’æ¡ç”¨ EL çš„å¯«æ³•å–å€¼:</h4>
 
-<%-- ¿ù»~ªí¦C --%>
+<%-- éŒ¯èª¤è¡¨åˆ— --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>
@@ -67,32 +67,32 @@
 
 <table>
 	<tr>
-		<th>©Ğ¥ò½s¸¹</th>
-		<th>©Ğ¥ò©m¦W</th>
-		<th>©Ğ¥òID</th>
-		<th>ªA°È¦a°Ï</th>
-		<th>ªA°È¤½¥q</th>
-		<th>­×§ï</th>
+		<th>æˆ¿ä»²ç·¨è™Ÿ</th>
+		<th>æˆ¿ä»²å§“å</th>
+		<th>æˆ¿ä»²ID</th>
+		<th>æœå‹™åœ°å€</th>
+		<th>æœå‹™å…¬å¸</th>
+		<th>ä¿®æ”¹</th>
 	</tr>
 	<%@ include file="/page/pageByCompositeQuery.file" %> 
 	<c:forEach var="realtorVO" items="${listRealtor_ByCompositeQuery}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr align='center' valign='middle' ${(realtorVO.rtr_no==param.rtr_no) ? 'bgcolor=#CCCCFF':''}><!--±N­×§ïªº¨º¤@µ§¥[¤J¹ï¤ñ¦â¦Ó¤w-->
+		<tr align='center' valign='middle' ${(realtorVO.rtr_no==param.rtr_no) ? 'bgcolor=#CCCCFF':''}><!--å°‡ä¿®æ”¹çš„é‚£ä¸€ç­†åŠ å…¥å°æ¯”è‰²è€Œå·²-->
 			<td>${realtorVO.rtr_no}</td>
 			<td>${realtorVO.rtr_name}</td>
 			<td>${realtorVO.rtr_id}</td>
 			<td>${realtorVO.rtr_area}</td>
 			<td><c:forEach var="realestateVO" items="${realestateSvc.all}">
                     <c:if test="${realtorVO.re_no==realestateVO.re_no}">
-	                    ${realestateVO.re_no}¡i${realestateVO.re_name}¡j
+	                    ${realestateVO.re_no}ã€${realestateVO.re_name}ã€‘
                     </c:if>
                 </c:forEach>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="­×§ï"> 
+			     <input type="submit" value="ä¿®æ”¹"> 
 			     <input type="hidden" name="rtr_no"      value="${realtorVO.rtr_no}">
-			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--°e¥X¥»ºô­¶ªº¸ô®|µ¹Controller-->
-			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--°e¥X·í«e¬O²Ä´X­¶µ¹Controller-->
+			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--é€å‡ºæœ¬ç¶²é çš„è·¯å¾‘çµ¦Controller-->
+			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--é€å‡ºç•¶å‰æ˜¯ç¬¬å¹¾é çµ¦Controller-->
 			     <input type="hidden" name="action"	    value="getOne_For_Update"></FORM>
 			</td>
 		</tr>
@@ -100,6 +100,6 @@
 </table>
 <%@include file="/page/pageByCompositeQuery2.file"%>
 
-<br>¥»ºô­¶ªº¸ô®|:<br><b>
+<br>æœ¬ç¶²é çš„è·¯å¾‘:<br><b>
    <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br>
    <font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> </b>

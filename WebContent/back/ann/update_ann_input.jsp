@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.ann.model.*"%>
@@ -10,20 +10,20 @@
 	pageContext.setAttribute("list", list);
 %>
 
-<!-- «áºÝinclude -->
+<!-- å¾Œç«¯include -->
 <jsp:include page="/back/backend/backend_page.jsp" flush="true" />
-<!-- «áºÝinclude -->
+<!-- å¾Œç«¯include -->
 
-<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 <div class="col-xs-12 col-sm-10 maincontext">
-<!-- ¤@©w­n¯d¦íªº<div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„<div> ================================================================================== -->
 
 
-<!-- ¥H¤U¬O§A¥i¥H©ñªº¤º®e ================================================================================ -->
-<!--­×§ï¨t²Î¤½§i========================================================================================= -->
-	<%-- ¿ù»~ªí¦C --%>
+<!-- ä»¥ä¸‹æ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================ -->
+<!--ä¿®æ”¹ç³»çµ±å…¬å‘Š========================================================================================= -->
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -36,51 +36,51 @@
 			<div class="col-xs-12 col-sm-6 col-sm-offset-3 form_ann">
 				<form role="form" METHOD="post" ACTION="ann.do" name="ann">
 					<div class="modal-header">
-						<h4 class="modal-title">­×§ï¨t²Î¤½§i</h4>
+						<h4 class="modal-title">ä¿®æ”¹ç³»çµ±å…¬å‘Š</h4>
 					</div>
 					<div class="form-group">
-						<label for="ann_no">¤½§i½s¸¹</label>
+						<label for="ann_no">å…¬å‘Šç·¨è™Ÿ</label>
 						<div>
 							<h5 class="update_color"><%=annVO.getAnn_no()%></h5>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="ann_title">¤½§i¼ÐÃD</label> <input type="text"
+						<label for="ann_title">å…¬å‘Šæ¨™é¡Œ</label> <input type="text"
 							class="form-control" name="ann_title"
-							value="<%=(annVO == null) ? " ­×§ï¤½§i¼ÐÃD " : annVO.getAnn_title()%>" />
+							value="<%=(annVO == null) ? " ä¿®æ”¹å…¬å‘Šæ¨™é¡Œ " : annVO.getAnn_title()%>" />
 					</div>
 					<div class="form-group">
-						<label for="ann_content">¤½§i¤º®e</label>
+						<label for="ann_content">å…¬å‘Šå…§å®¹</label>
 						<textarea rows="10" class="form-control" name="ann_content"
-							value="<%=(annVO == null) ? "­×§ï¤½§i¤º®e " : annVO.getAnn_content()%>"></textarea>
+							value="<%=(annVO == null) ? "ä¿®æ”¹å…¬å‘Šå…§å®¹ " : annVO.getAnn_content()%>"></textarea>
 					</div>
 					<div class="form-group dropdown">
-						<label for="ann_state">­×§ï¤½§iª¬ºA</label> <select name="ann_state"
+						<label for="ann_state">ä¿®æ”¹å…¬å‘Šç‹€æ…‹</label> <select name="ann_state"
 							class="form-control btn_cooper" id="sel1">
-							<option class="default_item">½Ð¿ï¾Ü</option>
-							<option class="onitem" value="¤½§i¤¤"
-								${(annVO.ann_state=='¤½§i¤¤' )? 'selected': ''}>¤½§i¤¤</option>
-							<option class="onitem" value="¤wºM¾P"
-								${(annVO.ann_state=='¤wºM¾P' )? 'selected': ''}>¤wºM¾P</option>
+							<option class="default_item">è«‹é¸æ“‡</option>
+							<option class="onitem" value="å…¬å‘Šä¸­"
+								${(annVO.ann_state=='å…¬å‘Šä¸­' )? 'selected': ''}>å…¬å‘Šä¸­</option>
+							<option class="onitem" value="å·²æ’¤éŠ·"
+								${(annVO.ann_state=='å·²æ’¤éŠ·' )? 'selected': ''}>å·²æ’¤éŠ·</option>
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="emp_no">­û¤u½s¸¹</label> <input type="text"
+						<label for="emp_no">å“¡å·¥ç·¨è™Ÿ</label> <input type="text"
 							class="form-control" name="emp_no"
 							value="<%=(annVO == null) ? " EM00000002 " : annVO.getEmp_no()%>" />
 					</div>
 					<div class="modal-footer">						
 						<input type="hidden" name="ann_no" value="${annVO.ann_no}">
 						<input type="hidden" name="action" value="update">
-						<button type="submit" class="btn btn_cooper" value="°e¥X­×§ï">°e¥X­×§ï</button>
+						<button type="submit" class="btn btn_cooper" value="é€å‡ºä¿®æ”¹">é€å‡ºä¿®æ”¹</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-<!-- µ²§ô­×§ï¨t²Î¤½§i ===================================================================================== -->
-<!-- ¥H¤W¬O§A¥i¥H©ñªº¤º®e ================================================================================= -->
+<!-- çµæŸä¿®æ”¹ç³»çµ±å…¬å‘Š ===================================================================================== -->
+<!-- ä»¥ä¸Šæ˜¯ä½ å¯ä»¥æ”¾çš„å…§å®¹ ================================================================================= -->
 
-<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->
 </div>
-<!-- ¤@©w­n¯d¦íªº</div> ================================================================================== -->
+<!-- ä¸€å®šè¦ç•™ä½çš„</div> ================================================================================== -->
