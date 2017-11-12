@@ -4,16 +4,22 @@
 <%@ page import="com.realtor.model.*"%>
 <%@ page import="com.realestate.model.*"%>
 
-<jsp:useBean id="realtorSvc" scope="page"
-	class="com.realtor.model.RealtorService" />
+<%-- <jsp:useBean id="realtorSvc" scope="page" --%>
+<%-- 	class="com.realtor.model.RealtorService" /> --%>
 <jsp:useBean id="realestateSvc" scope="page"
 	class="com.realestate.model.RealEstateService" />
 
 <jsp:useBean id="listQueryB" scope="request"
 	type="java.util.List<RealtorVO>" />
 
+<%
 
-
+List<RealEstateVO> estatelist =(List<RealEstateVO>)request.getAttribute("estatelist");
+pageContext.setAttribute("estatelist", estatelist);
+List<RealtorVO> list2 = (List<RealtorVO>)request.getAttribute("list2");
+pageContext.setAttribute("list2", list2);
+%>
+ 
 <%--
 	List<RealtorVO> list = (List<RealtorVO>)request.getAttribute("list");
 	pageContext.setAttribute("list", list);
@@ -127,12 +133,12 @@
 						<input type="text" class="form-control" placeholder="請輸入關鍵字">
 						<span class="" id="cooper_btn_realtor"> 
 						<input type="hidden" name="action" value="listQueryB">
-						<input type="hidden" name="RTR_NO" value="listQueryB">
-						<input type="hidden" name="RTR_ID" value="listQueryB">
-						<input type="hidden" name="RTR_NAME" value="listQueryB">
-						<input type="hidden" name="RTR_AREA" value="listQueryB">
-						<input type="hidden" name="RE_NO" value="listQueryB">
-						<input type="hidden" name="RTR_INTRO" value="listQueryB">				 
+						<input type="hidden" name="action" value="RTR_NAME">
+						<input type="hidden" name="action" value="RTR_ID">
+						<input type="hidden" name="action" value="RTR_AREA">
+						<input type="hidden" name="action" value="RTR_INTRO">
+						<input type="hidden" name="action" value="RTR_NO">
+						<input type="hidden" name="action" value="RE_NO">				 
 						<input type="submit" value="搜尋">
 						</span>
 					</div>
@@ -155,7 +161,7 @@
 						<div class="btn-group">
 							<b>選擇地區:</b> <select size="1" name="RTR_AREA" id="rtr_area">
 								<option value="">搜尋服務地區</option>
-								<c:forEach var="realtorVO" items="${realtorSvc.all}">
+								<c:forEach var="realtorVO" items="${list2}">
 									<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area }</option>
 								</c:forEach>
 							</select>
@@ -163,7 +169,7 @@
 						<div class="btn-group">
 							<b>選擇服務公司:</b> <select name="RE_NO" id="re_no">
 								<option value="">搜尋服務公司</option>
-								<c:forEach var="realestateVO" items="${realestateSvc.all}">
+								<c:forEach var="realestateVO" items="${estatelist}">
 									<option value="${realestateVO.re_no}">${realestateVO.re_name}</option>
 								</c:forEach>
 							</select>
@@ -208,7 +214,7 @@
 					<div class="col-xs-12 col-sm-3">
 						<ul class="list-unstyled info_estate">
 							<li>房仲姓名 ${realtorVO.rtr_name}</li>
-							<li>房仲公司 ${realestateSvc.getOne(realtorVO.re_no).re_name}</li>
+							<li>房仲公司 ${realestateSvc.getOne(realtorVO.re_no).getRe_name()}</li>
 							<li>服務地區 ${realtorVO.rtr_area}</li>
 						</ul>
 					</div>

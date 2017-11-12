@@ -111,163 +111,6 @@ public class RealtorServlet extends HttpServlet {
 			}
 		}
 
-		// if ("update".equals(action)) {
-		// List<String> errorMsgs = new LinkedList<String>();
-		// req.setAttribute("errorMsgs", errorMsgs);
-		//
-		// try {
-		// System.out.println("realtor_update");
-		// /*****************************
-		// * 1.接收請求參數 - 輸入格式的錯誤處理
-		// *****************/
-		// String rtr_no = req.getParameter("rtr_no");
-		// String rtr_id = req.getParameter("rtr_id");
-		// String rtr_psw = req.getParameter("rtr_psw");
-		// String rtr_name = req.getParameter("rtr_name");
-		// String rtr_area = req.getParameter("rtr_area");
-		// String rtr_intro = req.getParameter("rtr_intro");
-		// String rtr_idno = req.getParameter("rtr_idno");
-		// String re_no = req.getParameter("re_no");
-		// String rtr_state = req.getParameter("rtr_state");
-		//
-		// RealtorVO realtorVO = new RealtorVO();
-		//
-		// byte[] rtr_photo = null;
-		// try {
-		// Part photo = req.getPart("rtr_photo");
-		// if
-		// (!photo.getContentType().equalsIgnoreCase("application/octet-stream"))
-		// {
-		// InputStream in = photo.getInputStream();
-		// rtr_photo = new byte[in.available()];
-		// in.read(rtr_photo);
-		// in.close();
-		// } else {
-		// rtr_photo = realtorVO.getRtr_photo();
-		// }
-		// } catch (FileNotFoundException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// realtorVO.setRtr_id(rtr_id);
-		// realtorVO.setRtr_psw(rtr_psw);
-		// realtorVO.setRtr_name(rtr_name);
-		// realtorVO.setRtr_photo(rtr_photo);
-		// realtorVO.setRtr_area(rtr_area);
-		// realtorVO.setRtr_intro(rtr_intro);
-		// realtorVO.setRtr_idno(rtr_idno);
-		// realtorVO.setRe_no(re_no);
-		// realtorVO.setRtr_state(rtr_state);
-		//
-		// // Send the use back to the form, if there were errors
-		// if (!errorMsgs.isEmpty()) {
-		// req.setAttribute("realtorVO", realtorVO); // 含有輸入格式錯誤的newsVO物件,也存入req
-		// RequestDispatcher failureView =
-		// req.getRequestDispatcher("/realtor/listAllRealtor.jsp");
-		// failureView.forward(req, res);
-		// return; // 程式中斷
-		// }
-		// /*************************** 2.開始修改資料
-		// *****************************************/
-		// RealtorService realtorSvc = new RealtorService();
-		// realtorVO = realtorSvc.update(rtr_id, rtr_name, rtr_photo, rtr_area,
-		// rtr_intro);
-		//
-		// /****************************
-		// * 3.修改完成,準備轉交(Send the Success view)
-		// *************/
-		// req.setAttribute("realtorVO", realtorVO);
-		// String url = "/realtor/listOneRealtor.jsp";
-		// RequestDispatcher successView = req.getRequestDispatcher(url);
-		// successView.forward(req, res);
-		//
-		// /*************************** 其他可能的錯誤處理
-		// **********************************/
-		// } catch (Exception e) {
-		// // errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-		// RequestDispatcher failureView =
-		// req.getRequestDispatcher("/realtor/listAllRealtor.jsp");
-		// failureView.forward(req, res);
-		// }
-		//
-		// }
-
-		// if ("insert".equals(action)) {
-		// List<String> errorMsgs = new LinkedList<String>();
-		// req.setAttribute("errorMsgs", errorMsgs);
-		//
-		// try {
-		// System.out.println("realtor_insert");
-		// /*****************************
-		// * 1.接收請求參數 - 輸入格式的錯誤處理
-		// *****************/
-		// String rtr_id = req.getParameter("rtr_id");
-		// String rtr_psw = req.getParameter("rtr_psw");
-		// String rtr_name = req.getParameter("rtr_name");
-		// String rtr_area = req.getParameter("rtr_area");
-		// String rtr_intro = req.getParameter("rtr_intro");
-		// String rtr_idno = req.getParameter("rtr_idno");
-		//
-		//
-		// RealtorVO realtorVO = new RealtorVO();
-		//
-		// byte[] rtr_photo = null;
-		// try {
-		// Part photo = req.getPart("rtr_photo");
-		// if
-		// (!photo.getContentType().equalsIgnoreCase("application/octet-stream"))
-		// {
-		// InputStream in = photo.getInputStream();
-		// rtr_photo = new byte[in.available()];
-		// in.read(rtr_photo);
-		// in.close();
-		// } else {
-		// rtr_photo = realtorVO.getRtr_photo();
-		// }
-		// } catch (FileNotFoundException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// realtorVO.setRtr_id(rtr_id);
-		// realtorVO.setRtr_psw(rtr_psw);
-		// realtorVO.setRtr_name(rtr_name);
-		// realtorVO.setRtr_photo(rtr_photo);
-		// realtorVO.setRtr_area(rtr_area);
-		// realtorVO.setRtr_intro(rtr_intro);
-		// realtorVO.setRtr_idno(rtr_idno);
-
-		// // Send the use back to the form, if there were errors
-		// if (!errorMsgs.isEmpty()) {
-		// req.setAttribute("realtorVO", realtorVO); // 含有輸入格式錯誤的newsVO物件,也存入req
-		// RequestDispatcher failureView =
-		// req.getRequestDispatcher("/realtor/listAllRealtor.jsp");
-		// failureView.forward(req, res);
-		// return; // 程式中斷
-		// }
-		// /*************************** 2.開始修改資料
-		// *****************************************/
-		// RealtorService realtorSvc = new RealtorService();
-		// realtorVO = realtorSvc.add(rtr_id, rtr_psw, rtr_name, rtr_photo,
-		// rtr_area, rtr_intro, rtr_idno);
-		//
-		// /****************************
-		// * 3.修改完成,準備轉交(Send the Success view)
-		// *************/
-		// req.setAttribute("realtorVO", realtorVO);
-		// String url = "/realtor/listAllRealtor.jsp";
-		// RequestDispatcher successView = req.getRequestDispatcher(url);
-		// successView.forward(req, res);
-		//
-		// /*************************** 其他可能的錯誤處理
-		// **********************************/
-		// } catch (Exception e) {
-		// // errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-		// RequestDispatcher failureView =
-		// req.getRequestDispatcher("/realtor/listAllRealtor.jsp");
-		// failureView.forward(req, res);
-		// }
-		// }
-
 		// 來自房仲登入的請求
 		if ("realtorLogin".equals(action)) {
 
@@ -419,13 +262,99 @@ public class RealtorServlet extends HttpServlet {
 		// }
 		// }
 
+		// if ("query".equals(action)) {
+		// System.out.println(action);
+		// List<String> errorMsgs = new LinkedList<String>();
+		// req.setAttribute("errorMsgs", errorMsgs);
+		//
+		// try {
+		// // 採用Map<String,String[]> getParameterMap()的方法
+		// // 注意:an immutable java.util.Map
+		// // Map<String, String[]> map = req.getParameterMap();
+		// HttpSession session = req.getSession();
+		// Map<String, String[]> map = (Map<String, String[]>)
+		// session.getAttribute("map");
+		// if (req.getParameter("whichPage") == null) {
+		// HashMap<String, String[]> map1 = (HashMap<String, String[]>)
+		// req.getParameterMap();
+		// HashMap<String, String[]> map2 = new HashMap<String, String[]>();
+		// map2 = (HashMap<String, String[]>) map1.clone();
+		// session.setAttribute("map", map2);
+		// map = (HashMap<String, String[]>) req.getParameterMap();
+		// }
+		// RealtorService realtorSvc = new RealtorService();
+		// RealEstateService realestateSvc = new RealEstateService();
+		// List<RealtorVO> list = realtorSvc.getAll(map);
+		// List<RealEstateVO> estatelist = realestateSvc.getAll();
+		//
+		// /**************************** 3.查詢完成,準備轉交(Send the Success
+		// view)************/
+		// req.setAttribute("list", list);
+		// req.setAttribute("estatelist", estatelist);
+		// RequestDispatcher successView =
+		// req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
+		// successView.forward(req, res);
+		//
+		// /**************************** 其他可能的錯誤處理
+		// **********************************/
+		// } catch (Exception e) {
+		// errorMsgs.add(e.getMessage());
+		// RequestDispatcher failureView =
+		// req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
+		// failureView.forward(req, res);
+		// }
+		// }
+
+		// if ("listQueryB".equals(action)) {
+		//
+		// List<String> errorMsgs = new LinkedList<String>();
+		// req.setAttribute("errorMsgs", errorMsgs);
+		// try {
+		//
+		// Map<String, String[]> map = new HashMap<String, String[]>();
+		//
+		// // String RTR_AREA = req.getParameter("RTR_AREA").trim();
+		// // System.out.println(RTR_AREA);
+		// // RTR_AREA = new String(RTR_AREA.getBytes("ISO-8859-1"),
+		// // "UTF-8");
+		// // map.put("RTR_AREA", new String[] {RTR_AREA});
+		// String RE_NO = req.getParameter("RE_NO").trim();
+		// RE_NO = new String(RE_NO.getBytes("ISO-8859-1"), "UTF-8");
+		// map.put("RE_NO", new String[] { RE_NO });
+		//
+		// RealtorService realtorSvc = new RealtorService();
+		// List<RealtorVO> list = realtorSvc.getAll(map);
+		// /**************************** 3.查詢完成,準備轉交(Send the Success view)
+		// ************/
+		// String whichPage = req.getParameter("whichPage");
+		// req.setAttribute("whichPage", whichPage);
+		// req.setAttribute("list", list);
+		// RequestDispatcher successView =
+		// req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
+		// successView.forward(req, res);
+		//
+		// /**************************** 其他可能的錯誤處理
+		// **********************************/
+		// } catch (Exception e) {
+		// errorMsgs.add(e.getMessage());
+		// RequestDispatcher failureView =
+		// req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
+		// failureView.forward(req, res);
+		// }
+		// }
+		
+		
+		
+
 		// 房仲複合查詢
 		if ("listQueryB".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
+			
 			try {
+			
 				/***************************
 				 * 1.將輸入資料轉為Map
 				 **********************************/
@@ -446,10 +375,18 @@ public class RealtorServlet extends HttpServlet {
 				 ***************************************/
 				RealtorService realtorSvc = new RealtorService();
 				List<RealtorVO> list = realtorSvc.getAll(map);
+				
+				RealEstateService realestateSvc = new RealEstateService();
+				List<RealEstateVO> estatelist = realestateSvc.getAll();
+				List<RealtorVO> list2 = realtorSvc.getAll();
+				
+				
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
 				req.setAttribute("listQueryB", list);
+				req.setAttribute("list2", list2);
+				req.setAttribute("estatelist", estatelist);
 				// 資料庫取出的list物件,存入request
 				RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 				successView.forward(req, res);
@@ -463,77 +400,6 @@ public class RealtorServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-
-//		if ("query".equals(action)) {
-//			System.out.println(action);
-//			List<String> errorMsgs = new LinkedList<String>();
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			try {
-//				// 採用Map<String,String[]> getParameterMap()的方法
-//				// 注意:an immutable java.util.Map
-//				// Map<String, String[]> map = req.getParameterMap();
-//				HttpSession session = req.getSession();
-//				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");
-//				if (req.getParameter("whichPage") == null) {
-//					HashMap<String, String[]> map1 = (HashMap<String, String[]>) req.getParameterMap();
-//					HashMap<String, String[]> map2 = new HashMap<String, String[]>();
-//					map2 = (HashMap<String, String[]>) map1.clone();
-//					session.setAttribute("map", map2);
-//					map = (HashMap<String, String[]>) req.getParameterMap();
-//				}
-//				RealtorService realtorSvc = new RealtorService();
-//				RealEstateService realestateSvc = new RealEstateService();
-//				List<RealtorVO> list = realtorSvc.getAll(map);
-//				List<RealEstateVO> estatelist = realestateSvc.getAll();
-//
-//				/**************************** 3.查詢完成,準備轉交(Send the Success view)************/
-//				req.setAttribute("list", list);
-//				req.setAttribute("estatelist", estatelist);
-//				RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
-//				successView.forward(req, res);
-//
-//				/**************************** 其他可能的錯誤處理 **********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
-
-//		if ("listQueryB".equals(action)) {
-//
-//			List<String> errorMsgs = new LinkedList<String>();
-//			req.setAttribute("errorMsgs", errorMsgs);
-//			try {
-//			
-//				Map<String, String[]> map = new HashMap<String, String[]>();
-//
-//				// String RTR_AREA = req.getParameter("RTR_AREA").trim();
-//				// System.out.println(RTR_AREA);
-//				// RTR_AREA = new String(RTR_AREA.getBytes("ISO-8859-1"),
-//				// "UTF-8");
-//				// map.put("RTR_AREA", new String[] {RTR_AREA});
-//				String RE_NO = req.getParameter("RE_NO").trim();
-//				RE_NO = new String(RE_NO.getBytes("ISO-8859-1"), "UTF-8");
-//				map.put("RE_NO", new String[] { RE_NO });
-//				
-//				RealtorService realtorSvc = new RealtorService();
-//				List<RealtorVO> list = realtorSvc.getAll(map);
-//				/**************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-//				String whichPage = req.getParameter("whichPage");
-//				req.setAttribute("whichPage", whichPage);
-//				req.setAttribute("list", list);
-//				RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
-//				successView.forward(req, res);
-//
-//				/**************************** 其他可能的錯誤處理 **********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
 
 	}
 }

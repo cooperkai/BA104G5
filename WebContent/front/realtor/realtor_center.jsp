@@ -4,7 +4,7 @@
 <%@ page import="com.realtor.model.*"%>
 
 
-<%
+<% 
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 	RealtorVO realtorVO2 = (RealtorVO) request.getAttribute("realtorVO");
 	if (realtorVO == null) { // 如為 null, 代表此user未登入過 , 才做以下工作

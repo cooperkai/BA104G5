@@ -671,11 +671,11 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 			}
 		}
 		return list;
-	} // 房仲萬用複合查詢結束
+	} // 房仲萬用複合查詢結束 
 
 	public static void main(String[] args) throws IOException {
 		RealtorJDBCDAO dao = new RealtorJDBCDAO();
-
+ 
 		// 專門塞房仲照片以及簡介
 		 for (int i = 1; i <= 12; i++) {
 		 if (i <= 9) {
