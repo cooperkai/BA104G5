@@ -38,11 +38,11 @@ public class jdbcUtil_CompositeQuery_Realtor {
 
 				System.out.println("有送出查詢資料的欄位數count = " + count);
 			}
-		}
+		} 
 		
 		return whereCondition.toString();
 	}
-
+ 
 	public static void main(String argv[]) {
 
 		// 配合 req.getParameterMap()方法 回傳

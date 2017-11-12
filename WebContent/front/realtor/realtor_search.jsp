@@ -6,10 +6,10 @@
 
 <jsp:useBean id="realtorSvc" scope="page"
 	class="com.realtor.model.RealtorService" />
-<jsp:useBean id="realestateSvc" scope="page"
+ <jsp:useBean id="realestateSvc" scope="page" 
 	class="com.realestate.model.RealEstateService" />
 	
-<jsp:useBean id="listRealtor_ByCompositeQuery" scope="request" type="java.util.List<RealtorVO>" />
+<jsp:useBean id="listRealtor_ByCompositeQueryB" scope="request" type="java.util.List<RealtorVO>" />
 	
 
 
@@ -84,7 +84,7 @@
 							data-placement="bottom">最新消息</a></li>
 						<li><a href="#">常見問題</a></li>
 						<li><a href="#">看房去</a></li>
-						<li><a href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery">找房仲</a></li>
+						<li><a href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQueryB">找房仲</a></li>
 						<li><a href="#">安家商城</a></li>
 						<li><a href="#">加入我們</a></li>
 					</ul>
@@ -159,7 +159,7 @@
 							</select>
 						</div>
 						<input type="hidden" name="action"
-							value="listRealtor_ByCompositeQuery"> <input
+							value="listRealtor_ByCompositeQueryB"> <input
 							type="submit" value="送出">
 					</form>
 				</div>
@@ -184,7 +184,7 @@
 		</div>
 	</div>
 
-	<c:forEach var="realtorVO" items="${listRealtor_ByCompositeQuery}" begin="<%=pageIndex%>"
+	<c:forEach var="realtorVO" items="${listRealtor_ByCompositeQueryB}" begin="<%=pageIndex%>"
 		end="<%=pageIndex+rowsPerPage-1%>">
 		<div class="container container_size">
 			<div class="row">
@@ -270,20 +270,20 @@
 	</footer>
 
 <script>
-$(document).ready(function(){
-	$('#rtr_area').change(function(){
-		console.log($('#rtr_area').find(":selected").text());
-		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&RTR_AREA="+$('#rtr_area').find(":selected").text();
-		});
-});
+// $(document).ready(function(){
+// 	$('#rtr_area').change(function(){
+// 		console.log($('#rtr_area').find(":selected").text());
+<%-- 		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&RTR_AREA="+$('#rtr_area').find(":selected").val(); --%>
+// 		});
+// });
 </script>
 <script>
-$(document).ready(function(){
-	$('#re_no').change(function(){
-		console.log($('#re_no').find(":selected").val());
-		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&RE_NO="+$('#re_no').find(":selected").val();
-		});
-});
+// $(document).ready(function(){
+// 	$('#re_no').change(function(){
+// 		console.log($('#re_no').find(":selected").val());
+<%-- 		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&RE_NO="+$('#re_no').find(":selected").val(); --%>
+// 		});
+// });
 </script>
 </body>
 </html>
