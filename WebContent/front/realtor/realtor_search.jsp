@@ -6,11 +6,12 @@
 
 <jsp:useBean id="realtorSvc" scope="page"
 	class="com.realtor.model.RealtorService" />
- <jsp:useBean id="realestateSvc" scope="page" 
+<jsp:useBean id="realestateSvc" scope="page"
 	class="com.realestate.model.RealEstateService" />
-	
-<jsp:useBean id="listRealtor_ByCompositeQueryB" scope="request" type="java.util.List<RealtorVO>" />
-	
+
+<jsp:useBean id="listQueryB" scope="request"
+	type="java.util.List<RealtorVO>" />
+
 
 
 <%--
@@ -19,7 +20,7 @@
 
 	List<RealEstateVO> estatelist = (List<RealEstateVO>)request.getAttribute("estatelist");
 	pageContext.setAttribute("estatelist", estatelist);
---%>
+ --%>
 
 
 
@@ -84,7 +85,8 @@
 							data-placement="bottom">最新消息</a></li>
 						<li><a href="#">常見問題</a></li>
 						<li><a href="#">看房去</a></li>
-						<li><a href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQueryB">找房仲</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB">找房仲</a></li>
 						<li><a href="#">安家商城</a></li>
 						<li><a href="#">加入我們</a></li>
 					</ul>
@@ -119,11 +121,19 @@
 	<div class="container container_size">
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-sm-offset-1 search_size">
-				<form>
+				<form method="post"
+					ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="請輸入關鍵字">
-						<span class="input-group-btn"> <a href="#"
-							class="btn btn-info">搜尋</a>
+						<span class="" id="cooper_btn_realtor"> 
+						<input type="hidden" name="action" value="listQueryB">
+						<input type="hidden" name="RTR_NO" value="listQueryB">
+						<input type="hidden" name="RTR_ID" value="listQueryB">
+						<input type="hidden" name="RTR_NAME" value="listQueryB">
+						<input type="hidden" name="RTR_AREA" value="listQueryB">
+						<input type="hidden" name="RE_NO" value="listQueryB">
+						<input type="hidden" name="RTR_INTRO" value="listQueryB">				 
+						<input type="submit" value="搜尋">
 						</span>
 					</div>
 				</form>
@@ -158,8 +168,7 @@
 								</c:forEach>
 							</select>
 						</div>
-						<input type="hidden" name="action"
-							value="listRealtor_ByCompositeQueryB"> <input
+						<input type="hidden" name="action" value="listQueryB"> <input
 							type="submit" value="送出">
 					</form>
 				</div>
@@ -170,7 +179,7 @@
 
 
 	<!-- 搜尋房仲顯示的畫面================================================================================ -->
-	<%@ include file="/page/pagesearch.file"%> 
+	<%@ include file="/page/pagesearch.file"%>
 	<!-- 共有幾位房仲 -->
 	<div class="container container_size totatl_estate">
 		<div class="row">
@@ -184,7 +193,7 @@
 		</div>
 	</div>
 
-	<c:forEach var="realtorVO" items="${listRealtor_ByCompositeQueryB}" begin="<%=pageIndex%>"
+	<c:forEach var="realtorVO" items="${listQueryB}" begin="<%=pageIndex%>"
 		end="<%=pageIndex+rowsPerPage-1%>">
 		<div class="container container_size">
 			<div class="row">
@@ -269,19 +278,19 @@
 		</div>
 	</footer>
 
-<script>
+	<script> 
 // $(document).ready(function(){
 // 	$('#rtr_area').change(function(){
 // 		console.log($('#rtr_area').find(":selected").text());
-<%-- 		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&RTR_AREA="+$('#rtr_area').find(":selected").val(); --%>
+<%-- 		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB&RTR_AREA="+$('#rtr_area').find(":selected").text(); --%>
 // 		});
 // });
 </script>
-<script>
+	<script>
 // $(document).ready(function(){
 // 	$('#re_no').change(function(){
 // 		console.log($('#re_no').find(":selected").val());
-<%-- 		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&RE_NO="+$('#re_no').find(":selected").val(); --%>
+<%-- 		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB&RE_NO="+$('#re_no').find(":selected").val(); --%>
 // 		});
 // });
 </script>

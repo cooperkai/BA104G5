@@ -2,13 +2,13 @@
 
   <%if (rowsPerPage<rowNumber) {%>
     <%if(pageIndex>=rowsPerPage){%>
-        <A href="<%=request.getContextPath()%>/front/realtor/realtor.do?whichPage=1&action=listRealtor_ByCompositeQueryB">至第一頁</A>&nbsp;
-        <A href="<%=request.getContextPath()%>/front/realtor/realtor.do?whichPage=<%=whichPage-1%>&action=listRealtor_ByCompositeQueryB">上一頁 </A>
+        <A href="<%=request.getContextPath()%>/front/realtor/realtor.do?whichPage=1&action=listQueryB">至第一頁</A>&nbsp;
+        <A href="<%=request.getContextPath()%>/front/realtor/realtor.do?whichPage=<%=whichPage-1%>&action=listQueryB">上一頁 </A>
     <%}%>
   
     <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
-        <td><A href="<%=request.getContextPath()%>/front/realtor/realtor.do?whichPage=<%=whichPage+1%>&action=listRealtor_ByCompositeQueryB">下一頁 </A>&nbsp;
-        <td><A href="<%=request.getContextPath()%>/front/realtor/realtor.do?whichPage=<%=pageNumber%>&action=listRealtor_ByCompositeQueryB">至最後一頁</A>&nbsp;
+        <td><A href="<%=request.getContextPath()%>/front/realtor/realtor.do?whichPage=<%=whichPage+1%>&action=listQueryB">下一頁 </A>&nbsp;
+        <td><A href="<%=request.getContextPath()%>/front/realtor/realtor.do?whichPage=<%=pageNumber%>&action=listQueryB">至最後一頁</A>&nbsp;
     <%}%>
   <%}%>   
  
@@ -22,6 +22,6 @@
          <%}%> 
        </select>
        <input type="submit" value="確定" >
-       <input type="hidden" name="action" value="listRealtor_ByCompositeQueryB">  
+       <input type="hidden" name="action" value="listQueryB">  
     </FORM>
   <%}%>

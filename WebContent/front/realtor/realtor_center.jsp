@@ -88,7 +88,7 @@
 					<li><a href="#">常見問題</a></li>
 					<li><a href="#">看房去</a></li>
 					<li><a
-						href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQueryB">找房仲</a></li>
+						href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB">找房仲</a></li>
 					<li><a href="#">安家商城</a></li>
 					<li><a href="#">加入我們</a></li>
 				</ul>
@@ -140,7 +140,7 @@
 							href="<%=request.getContextPath()%>/front/realtor/realtor_data.jsp"><i
 								class="glyphicon glyphicon-user">&nbsp;基本資料</i></a></li>
 					</ul>
-					<ul>
+					<ul> 
 						<li><a
 							href="<%=request.getContextPath()%>/front/realtor/realtor_psw.jsp"><i
 								class="glyphicon glyphicon-pencil">&nbsp;修改密碼</i></a></li>

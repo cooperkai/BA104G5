@@ -373,14 +373,13 @@ public class RealtorServlet extends HttpServlet {
 		// failureView.forward(req, res);
 		// }
 		// }
-		//
-		//
+
 		// //房仲查詢
 		// if ("query".equals(action)) {
 		//
 		// List<String> errorMsgs = new LinkedList<String>();
 		// req.setAttribute("errorMsgs", errorMsgs);
-		//
+
 		// try {
 		// // 採用Map<String,String[]> getParameterMap()的方法
 		// // 注意:an immutable java.util.Map
@@ -400,8 +399,7 @@ public class RealtorServlet extends HttpServlet {
 		// RealEstateService realestateSvc = new RealEstateService();
 		// List<RealtorVO> list = realtorSvc.getAll(map);
 		// List<RealEstateVO> estatelist = realestateSvc.getAll();
-		//
-		//
+
 		// /***************************
 		// * 3.查詢完成,準備轉交(Send the Success view)
 		// ************/
@@ -410,7 +408,7 @@ public class RealtorServlet extends HttpServlet {
 		// RequestDispatcher successView =
 		// req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 		// successView.forward(req, res);
-		//
+
 		// /*************************** 其他可能的錯誤處理
 		// **********************************/
 		// } catch (Exception e) {
@@ -422,7 +420,7 @@ public class RealtorServlet extends HttpServlet {
 		// }
 
 		// 房仲複合查詢
-		if ("listRealtor_ByCompositeQueryB".equals(action)) {
+		if ("listQueryB".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -451,7 +449,7 @@ public class RealtorServlet extends HttpServlet {
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
-				req.setAttribute("listRealtor_ByCompositeQueryB", list); //
+				req.setAttribute("listQueryB", list);
 				// 資料庫取出的list物件,存入request
 				RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 				successView.forward(req, res);
@@ -465,9 +463,9 @@ public class RealtorServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-//
+
 //		if ("query".equals(action)) {
-//
+//			System.out.println(action);
 //			List<String> errorMsgs = new LinkedList<String>();
 //			req.setAttribute("errorMsgs", errorMsgs);
 //
@@ -489,78 +487,47 @@ public class RealtorServlet extends HttpServlet {
 //				List<RealtorVO> list = realtorSvc.getAll(map);
 //				List<RealEstateVO> estatelist = realestateSvc.getAll();
 //
-//				/***************************
-//				 * 3.查詢完成,準備轉交(Send the Success view)
-//				 ************/
+//				/**************************** 3.查詢完成,準備轉交(Send the Success view)************/
 //				req.setAttribute("list", list);
 //				req.setAttribute("estatelist", estatelist);
 //				RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 //				successView.forward(req, res);
 //
-//				/***************************
-//				 * 其他可能的錯誤處理
-//				 **********************************/
+//				/**************************** 其他可能的錯誤處理 **********************************/
 //			} catch (Exception e) {
 //				errorMsgs.add(e.getMessage());
 //				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 //				failureView.forward(req, res);
 //			}
 //		}
-//
-//		if ("listRealtor_ByCompositeQuery".equals(action)) {
+
+//		if ("listQueryB".equals(action)) {
 //
 //			List<String> errorMsgs = new LinkedList<String>();
 //			req.setAttribute("errorMsgs", errorMsgs);
-//
 //			try {
-//				/***************************
-//				 * 1.將輸入資料轉為Map
-//				 **********************************/
-//				// 採用Map<String,String[]> getParameterMap()的方法
-//				// 注意:an immutable java.util.Map
-//				// Map<String, String[]> map = req.getParameterMap();
-//				// HttpSession session = req.getSession();
-//				// Map<String, String[]> map = (Map<String,
-//				// String[]>)session.getAttribute("map");
-//				// if (req.getParameter("whichPage") == null){
-//				// HashMap<String, String[]> map1 = (HashMap<String,
-//				// String[]>)req.getParameterMap();
-//				// HashMap<String, String[]> map2 = new HashMap<String,
-//				// String[]>();
-//				// map2 = (HashMap<String, String[]>)map1.clone();
-//				// session.setAttribute("map",map2);
-//				// map = (HashMap<String, String[]>)req.getParameterMap();
-//				// }
-//				/***************************
-//				 * 2.開始複合查詢
-//				 ***************************************/
+//			
 //				Map<String, String[]> map = new HashMap<String, String[]>();
 //
-//				String RTR_AREA = req.getParameter("RTR_AREA").trim();
-//				RTR_AREA = new String(RTR_AREA.getBytes("ISO-8859-1"), "UTF-8");
-//				map.put("RTR_AREA", new String[] { RTR_AREA });
-//				// String RE_NO = req.getParameter("RE_NO").trim();
-//				// RE_NO = new String(RE_NO.getBytes("ISO-8859-1"), "UTF-8");
-//				// map.put("RE_NO", new String[] { RE_NO });
-//				// 如果要模糊搜尋就在這邊設定同樣的parameter值
-//				// map.put("rtr_no", new String[]{rtrNo});
-//				// map.put("rtr_area", new String[]{rtrNo});
-//				// map.put("rtr_area", new String[]{rtrNo});
-//				// map.put("rtr_area", new String[]{rtrNo});
+//				// String RTR_AREA = req.getParameter("RTR_AREA").trim();
+//				// System.out.println(RTR_AREA);
+//				// RTR_AREA = new String(RTR_AREA.getBytes("ISO-8859-1"),
+//				// "UTF-8");
+//				// map.put("RTR_AREA", new String[] {RTR_AREA});
+//				String RE_NO = req.getParameter("RE_NO").trim();
+//				RE_NO = new String(RE_NO.getBytes("ISO-8859-1"), "UTF-8");
+//				map.put("RE_NO", new String[] { RE_NO });
+//				
 //				RealtorService realtorSvc = new RealtorService();
 //				List<RealtorVO> list = realtorSvc.getAll(map);
-//				/***************************
-//				 * 3.查詢完成,準備轉交(Send the Success view)
-//				 ************/
+//				/**************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 //				String whichPage = req.getParameter("whichPage");
 //				req.setAttribute("whichPage", whichPage);
 //				req.setAttribute("list", list);
 //				RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 //				successView.forward(req, res);
 //
-//				/***************************
-//				 * 其他可能的錯誤處理
-//				 **********************************/
+//				/**************************** 其他可能的錯誤處理 **********************************/
 //			} catch (Exception e) {
 //				errorMsgs.add(e.getMessage());
 //				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");

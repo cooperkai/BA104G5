@@ -15,7 +15,7 @@ public class jdbcUtil_CompositeQuery_Realtor {
 		String aCondition = null;
 		// 用於varchar
 		if ("RTR_NO".equals(columnName) || "RTR_ID".equals(columnName) || "RTR_NAME".equals(columnName)
-				|| "RTR_AREA".equals(columnName) || "RE_NO".equals(columnName))
+				|| "RTR_AREA".equals(columnName) || "RE_NO".equals(columnName) || "RTR_INTRO".equals(columnName))
 			aCondition = columnName + " like '%" + value + "%'";
 
 		return aCondition + " ";
@@ -52,6 +52,7 @@ public class jdbcUtil_CompositeQuery_Realtor {
 		map.put("RTR_NAME", new String[] { "葦小寶" });
 		map.put("RTR_AREA", new String[] { "北投區" });
 		map.put("RE_NO", new String[] { "RE00000001" });
+		map.put("RTR_INTRO", new String[] { "g" });
 		map.put("action", new String[] { "getXXX" }); // 注意Map裡面會含有action的key
 
 		String finalSQL = "SELECT * FROM REALTOR " + jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map)
