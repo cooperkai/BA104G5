@@ -14,8 +14,8 @@ public class jdbcUtil_CompositeQuery_Realtor {
 
 		String aCondition = null;
 		// 用於varchar
-		if ("rtr_no".equals(columnName) || "rtr_id".equals(columnName) || "rtr_name".equals(columnName)
-				|| "rtr_area".equals(columnName) || "re_no".equals(columnName))
+		if ("RTR_NO".equals(columnName) || "RTR_ID".equals(columnName) || "RTR_NAME".equals(columnName)
+				|| "RTR_AREA".equals(columnName) || "RE_NO".equals(columnName))
 			aCondition = columnName + " like '%" + value + "%'";
 
 		return aCondition + " ";
@@ -27,7 +27,7 @@ public class jdbcUtil_CompositeQuery_Realtor {
 		int count = 0;
 		for (String key : keys) {
 			String value = map.get(key)[0];
-			if (value != null && value.trim().length() != 0 && !"action".equals(key)) {
+			if (value != null && value.trim().length() != 0	&& !"action".equals(key)) {
 				count++;
 				String aCondition = get_aCondition_For_Oracle(key, value.trim());
 
@@ -39,7 +39,7 @@ public class jdbcUtil_CompositeQuery_Realtor {
 				System.out.println("有送出查詢資料的欄位數count = " + count);
 			}
 		}
-
+		
 		return whereCondition.toString();
 	}
 

@@ -21,21 +21,21 @@
 			<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do"	name="form1">
 				<b><font color=blue>萬用複合查詢:</font></b> 
 				<br> <b>輸入房仲編號:</b> 
-				<input type="text" name="rtr_no" value="RT00000001"><br> 
+				<input type="text" name="RTR_NO" value="RT00000001"><br> 
 				<b>輸入房仲姓名:</b>
-				<input type="text" name="rtr_name" value="葦小寶"><br> 
+				<input type="text" name="RTR_NAME" value="葦小寶"><br> 
 				<b>輸入房仲IDemail:</b>
-				<input type="text" name="rtr_id" value="realtor001@gmail.com"><br>
+				<input type="text" name="RTR_ID" value="realtor001@gmail.com"><br>
 
 				<b>選擇地區:</b> 
-				<select size="1" name="rtr_area">
+				<select size="1" name="RTR_AREA">
 				<option value="">
 				<c:forEach var="realtorVO" items="${realtorSvc.all}">
 					<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area }</option>
 				</c:forEach>
 				</select><br> 
 				<b>選擇服務公司:</b> 
-				<select name="re_no">
+				<select name="RE_NO">
 				<option value="">
 				<c:forEach var="realestateVO" items="${realestateSvc.all}">
 					<option value="${realestateVO.re_no}">${realestateVO.re_name}</option>

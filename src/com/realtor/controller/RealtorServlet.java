@@ -95,7 +95,9 @@ public class RealtorServlet extends HttpServlet {
 					errorMsgs.add("查無此房仲");
 				}
 
-				/******************** 3.查詢完成,準備轉交(Send the Success view)*************/
+				/********************
+				 * 3.查詢完成,準備轉交(Send the Success view)
+				 *************/
 				req.setAttribute("realtorVO", realtorVO);
 				String url = "/realtor/update_realtor_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交給update_realtor_input.jsp
@@ -308,6 +310,117 @@ public class RealtorServlet extends HttpServlet {
 			res.sendRedirect("realtor_center.jsp"); // 重導至會員中心
 		} // 來自房仲登入的請求[結束]
 
+		// // 房仲複合查詢
+		// if ("listRealtor_ByCompositeQuery".equals(action)) {
+		//
+		// List<String> errorMsgs = new LinkedList<String>();
+		// req.setAttribute("errorMsgs", errorMsgs);
+		//
+		// try {
+		// /*************************** 1.將輸入資料轉為Map
+		// **********************************/
+		// // 採用Map<String,String[]> getParameterMap()的方法
+		// // 注意:an immutable java.util.Map
+		// // Map<String, String[]> map = req.getParameterMap();
+		// // HttpSession session = req.getSession();
+		// // Map<String, String[]> map = (Map<String,
+		// // String[]>)session.getAttribute("map");
+		// // if (req.getParameter("whichPage") == null){
+		// // HashMap<String, String[]> map1 = (HashMap<String,
+		// // String[]>)req.getParameterMap();
+		// // HashMap<String, String[]> map2 = new HashMap<String,
+		// // String[]>();
+		// // map2 = (HashMap<String, String[]>)map1.clone();
+		// // session.setAttribute("map",map2);
+		// // map = (HashMap<String, String[]>)req.getParameterMap();
+		// // }
+		// /*************************** 2.開始複合查詢
+		// ***************************************/
+		// Map<String, String[]> map = new HashMap<String, String[]>();
+		//
+		//// String rtr_area = req.getParameter("rtr_area").trim();
+		//// rtr_area = new String(rtr_area.getBytes("ISO-8859-1"),"UTF-8");
+		//// System.out.println(rtr_area);
+		//// map.put("rtr_area", new String[]{rtr_area});
+		//
+		// String re_no = req.getParameter("re_no").trim();
+		// System.out.println(re_no);
+		// re_no = new String(re_no.getBytes("ISO-8859-1"),"UTF-8");
+		// map.put("re_no", new String[]{re_no});
+		// //如果要模糊搜尋就在這邊設定同樣的parameter值
+		//// map.put("rtr_no", new String[]{rtrNo});
+		//// map.put("rtr_area", new String[]{rtrNo});
+		//// map.put("rtr_area", new String[]{rtrNo});
+		//// map.put("rtr_area", new String[]{rtrNo});
+		// RealtorService realtorSvc = new RealtorService();
+		// List<RealtorVO> list = realtorSvc.getAll(map);
+		// /***************************
+		// * 3.查詢完成,準備轉交(Send the Success view)
+		// ************/
+		// String whichPage = req.getParameter("whichPage");
+		// req.setAttribute("whichPage", whichPage);
+		// req.setAttribute("list", list);
+		// RequestDispatcher successView =
+		// req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
+		// successView.forward(req, res);
+		//
+		// /*************************** 其他可能的錯誤處理
+		// **********************************/
+		// } catch (Exception e) {
+		// errorMsgs.add(e.getMessage());
+		// RequestDispatcher failureView =
+		// req.getRequestDispatcher("/front/realtor/try.jsp");
+		// failureView.forward(req, res);
+		// }
+		// }
+		//
+		//
+		// //房仲查詢
+		// if ("query".equals(action)) {
+		//
+		// List<String> errorMsgs = new LinkedList<String>();
+		// req.setAttribute("errorMsgs", errorMsgs);
+		//
+		// try {
+		// // 採用Map<String,String[]> getParameterMap()的方法
+		// // 注意:an immutable java.util.Map
+		// //Map<String, String[]> map = req.getParameterMap();
+		// HttpSession session = req.getSession();
+		// Map<String, String[]> map = (Map<String, String[]>)
+		// session.getAttribute("map");
+		// if (req.getParameter("whichPage") == null) {
+		// HashMap<String, String[]> map1 = (HashMap<String, String[]>)
+		// req.getParameterMap();
+		// HashMap<String, String[]> map2 = new HashMap<String, String[]>();
+		// map2 = (HashMap<String, String[]>) map1.clone();
+		// session.setAttribute("map", map2);
+		// map = (HashMap<String, String[]>) req.getParameterMap();
+		// }
+		// RealtorService realtorSvc = new RealtorService();
+		// RealEstateService realestateSvc = new RealEstateService();
+		// List<RealtorVO> list = realtorSvc.getAll(map);
+		// List<RealEstateVO> estatelist = realestateSvc.getAll();
+		//
+		//
+		// /***************************
+		// * 3.查詢完成,準備轉交(Send the Success view)
+		// ************/
+		// req.setAttribute("list", list);
+		// req.setAttribute("estatelist", estatelist);
+		// RequestDispatcher successView =
+		// req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
+		// successView.forward(req, res);
+		//
+		// /*************************** 其他可能的錯誤處理
+		// **********************************/
+		// } catch (Exception e) {
+		// errorMsgs.add(e.getMessage());
+		// RequestDispatcher failureView =
+		// req.getRequestDispatcher("/front/realtor/try.jsp");
+		// failureView.forward(req, res);
+		// }
+		// }
+
 		// 房仲複合查詢
 		if ("listRealtor_ByCompositeQuery".equals(action)) {
 
@@ -319,54 +432,35 @@ public class RealtorServlet extends HttpServlet {
 				// 採用Map<String,String[]> getParameterMap()的方法
 				// 注意:an immutable java.util.Map
 				// Map<String, String[]> map = req.getParameterMap();
-				// HttpSession session = req.getSession();
-				// Map<String, String[]> map = (Map<String,
-				// String[]>)session.getAttribute("map");
-				// if (req.getParameter("whichPage") == null){
-				// HashMap<String, String[]> map1 = (HashMap<String,
-				// String[]>)req.getParameterMap();
-				// HashMap<String, String[]> map2 = new HashMap<String,
-				// String[]>();
-				// map2 = (HashMap<String, String[]>)map1.clone();
-				// session.setAttribute("map",map2);
-				// map = (HashMap<String, String[]>)req.getParameterMap();
-				// }
+				HttpSession session = req.getSession();
+				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");
+				if (req.getParameter("whichPage") == null) {
+					HashMap<String, String[]> map1 = (HashMap<String, String[]>) req.getParameterMap();
+					HashMap<String, String[]> map2 = new HashMap<String, String[]>();
+					map2 = (HashMap<String, String[]>) map1.clone();
+					session.setAttribute("map", map2);
+					map = (HashMap<String, String[]>) req.getParameterMap();
+					System.out.println(map.get("RTR_AREA").toString().hashCode());
+				}
 				/*************************** 2.開始複合查詢 ***************************************/
-				Map<String, String[]> map = new HashMap<String, String[]>();
-				
-//				String rtr_area = req.getParameter("rtr_area").trim();
-//				rtr_area = new String(rtr_area.getBytes("ISO-8859-1"),"UTF-8");
-//System.out.println(rtr_area);				
-//				map.put("rtr_area", new String[]{rtr_area});
-			
-				String re_no = req.getParameter("re_no").trim();
-System.out.println(re_no);
-				re_no = new String(re_no.getBytes("ISO-8859-1"),"UTF-8");
-				map.put("re_no", new String[]{re_no});
-				//如果要模糊搜尋就在這邊設定同樣的parameter值
-//				map.put("rtr_no", new String[]{rtrNo});
-//				map.put("rtr_area", new String[]{rtrNo});
-//				map.put("rtr_area", new String[]{rtrNo});
-//				map.put("rtr_area", new String[]{rtrNo});
 				RealtorService realtorSvc = new RealtorService();
 				List<RealtorVO> list = realtorSvc.getAll(map);
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
-				req.setAttribute("list", list);
+				req.setAttribute("listRealtor_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
 				RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/try.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 				failureView.forward(req, res);
 			}
 		}
+
 		
-		
-		//房仲查詢
 		if ("query".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -375,7 +469,7 @@ System.out.println(re_no);
 			try {
 				// 採用Map<String,String[]> getParameterMap()的方法
 				// 注意:an immutable java.util.Map
-				//Map<String, String[]> map = req.getParameterMap();
+				// Map<String, String[]> map = req.getParameterMap();
 				HttpSession session = req.getSession();
 				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");
 				if (req.getParameter("whichPage") == null) {
@@ -390,7 +484,6 @@ System.out.println(re_no);
 				List<RealtorVO> list = realtorSvc.getAll(map);
 				List<RealEstateVO> estatelist = realestateSvc.getAll();
 
-				
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
@@ -399,12 +492,15 @@ System.out.println(re_no);
 				RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 				successView.forward(req, res);
 
-				/*************************** 其他可能的錯誤處理 **********************************/
+				/***************************
+				 * 其他可能的錯誤處理
+				 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/try.jsp");
 				failureView.forward(req, res);
 			}
 		}
+
 	}
 }

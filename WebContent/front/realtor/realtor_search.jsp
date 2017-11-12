@@ -8,15 +8,18 @@
 	class="com.realtor.model.RealtorService" />
 <jsp:useBean id="realestateSvc" scope="page"
 	class="com.realestate.model.RealEstateService" />
+	
+<jsp:useBean id="listRealtor_ByCompositeQuery" scope="request" type="java.util.List<RealtorVO>" />
+	
 
 
-<%
+<%--
 	List<RealtorVO> list = (List<RealtorVO>)request.getAttribute("list");
 	pageContext.setAttribute("list", list);
 
 	List<RealEstateVO> estatelist = (List<RealEstateVO>)request.getAttribute("estatelist");
 	pageContext.setAttribute("estatelist", estatelist);
-%>
+--%>
 
 
 
@@ -81,7 +84,7 @@
 							data-placement="bottom">最新消息</a></li>
 						<li><a href="#">常見問題</a></li>
 						<li><a href="#">看房去</a></li>
-						<li><a href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=query">找房仲</a></li>
+						<li><a href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery">找房仲</a></li>
 						<li><a href="#">安家商城</a></li>
 						<li><a href="#">加入我們</a></li>
 					</ul>
@@ -140,7 +143,7 @@
 						ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do"
 						name="form1">
 						<div class="btn-group">
-							<b>選擇地區:</b> <select size="1" name="rtr_area" id="rtr_area">
+							<b>選擇地區:</b> <select size="1" name="RTR_AREA" id="rtr_area">
 								<option value="">搜尋服務地區</option>
 								<c:forEach var="realtorVO" items="${realtorSvc.all}">
 									<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area }</option>
@@ -148,7 +151,7 @@
 							</select>
 						</div>
 						<div class="btn-group">
-							<b>選擇服務公司:</b> <select name="re_no" id="re_no">
+							<b>選擇服務公司:</b> <select name="RE_NO" id="re_no">
 								<option value="">搜尋服務公司</option>
 								<c:forEach var="realestateVO" items="${realestateSvc.all}">
 									<option value="${realestateVO.re_no}">${realestateVO.re_name}</option>
@@ -167,7 +170,7 @@
 
 
 	<!-- 搜尋房仲顯示的畫面================================================================================ -->
-	<%@ include file="/page/pagesearch.file"%>
+	<%@ include file="/page/pagesearch.file"%> 
 	<!-- 共有幾位房仲 -->
 	<div class="container container_size totatl_estate">
 		<div class="row">
@@ -181,7 +184,7 @@
 		</div>
 	</div>
 
-	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>"
+	<c:forEach var="realtorVO" items="${listRealtor_ByCompositeQuery}" begin="<%=pageIndex%>"
 		end="<%=pageIndex+rowsPerPage-1%>">
 		<div class="container container_size">
 			<div class="row">
@@ -229,7 +232,7 @@
 		</div>
 		<br>
 	</c:forEach>
-	<%@include file="/page/pagesearch2.file"%>
+	<%@include file="/page/pageByCompositeQuery2.file"%>
 
 	<!-- end阿蓋的搜尋房仲 =========================================================================================-->
 
@@ -267,20 +270,20 @@
 	</footer>
 
 <script>
-$(function(){
+$(document).ready(function(){
 	$('#rtr_area').change(function(){
-		console.log($('#rtr_area').find(":selected").val());
-		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&rtr_area="+$('#rtr_area').find(":selected").val();
-		})
-})
+		console.log($('#rtr_area').find(":selected").text());
+		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&RTR_AREA="+$('#rtr_area').find(":selected").text();
+		});
+});
 </script>
 <script>
-$(function(){
+$(document).ready(function(){
 	$('#re_no').change(function(){
 		console.log($('#re_no').find(":selected").val());
-		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&re_no="+$('#re_no').find(":selected").val();
-		})
-})
+		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery&RE_NO="+$('#re_no').find(":selected").val();
+		});
+});
 </script>
 </body>
 </html>

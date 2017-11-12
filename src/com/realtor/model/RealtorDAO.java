@@ -573,7 +573,6 @@ public class RealtorDAO implements RealtorDAO_interface {
 		return realtorlist;
 	}// 得到房仲Id(email)結束
 
-	// 房仲萬用複合查詢
 	@Override
 	public List<RealtorVO> getAll(Map<String, String[]> map) {
 
@@ -588,7 +587,7 @@ public class RealtorDAO implements RealtorDAO_interface {
 
 			con = ds.getConnection();
 			String finalSQL = "SELECT * FROM REALTOR " + jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map)
-			+ "ORDER BY RTR_NO";
+					+ "ORDER BY RTR_NO";
 			pstmt = con.prepareStatement(finalSQL);
 
 			rs = pstmt.executeQuery();

@@ -88,7 +88,7 @@
 					<li><a href="#">常見問題</a></li>
 					<li><a href="#">看房去</a></li>
 					<li><a
-						href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=query">找房仲</a></li>
+						href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listRealtor_ByCompositeQuery">找房仲</a></li>
 					<li><a href="#">安家商城</a></li>
 					<li><a href="#">加入我們</a></li>
 				</ul>
