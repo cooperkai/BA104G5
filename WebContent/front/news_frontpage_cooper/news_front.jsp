@@ -328,7 +328,14 @@
 	                      <p>
 	                        ${annVO.ann_content}
 	                      </p>
-							<button class="ann_btn"> 按我</button>
+	                      <div style="text-align:center;">
+	                      <form method="post" action="<%=request.getContextPath()%>/back/ann/ann.do">
+	                      <input type="hidden" name="requestURL" value="requestURL">
+	                      <input type="hidden" name="ann_no"  value="${annVO.ann_no}">
+	                      <input type="hidden" name="action" value="getOne_For_Display">
+	                      <button class="ann_btn"> 按我</button>
+	                      </form>
+							</div>
 	                    </div>
 	                  </li>
                   </c:forEach>

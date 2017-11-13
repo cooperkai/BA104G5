@@ -133,12 +133,12 @@ pageContext.setAttribute("list2", list2);
 						<input type="text" class="form-control" placeholder="請輸入關鍵字">
 						<span class="" id="cooper_btn_realtor"> 
 						<input type="hidden" name="action" value="listQueryB">
-						<input type="hidden" name="action" value="RTR_NAME">
-						<input type="hidden" name="action" value="RTR_ID">
-						<input type="hidden" name="action" value="RTR_AREA">
-						<input type="hidden" name="action" value="RTR_INTRO">
-						<input type="hidden" name="action" value="RTR_NO">
-						<input type="hidden" name="action" value="RE_NO">				 
+						<input type="hidden" name="action" value="${realtorVO.rtr_name}">
+						<input type="hidden" name="action" value="${realtorVO.rtr_id}">
+						<input type="hidden" name="action" value="${realtorVO.rtr_area}">
+						<input type="hidden" name="action" value="${realtorVO.rtr_intro}">
+						<input type="hidden" name="action" value="${realtorVO.rtr_no}">
+						<input type="hidden" name="action" value="${realtorVO.re_no}">				 
 						<input type="submit" value="搜尋">
 						</span>
 					</div>
