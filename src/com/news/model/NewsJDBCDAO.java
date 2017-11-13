@@ -27,7 +27,7 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 	private static final String GET_ALL_STMT = 
 			"SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News ORDER BY News_No";
 	
-	private static final String GET_ALL_BY_TIME = "SELECT * FROM News ORDER BY News_Date DESC";
+	private static final String GET_ALL_BY_TIME = "SELECT * FROM News ORDER BY News_Date DESC";//查詢全部照時間排序
 
 	// 新增
 	@Override
@@ -304,7 +304,7 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 		}
 
 		return newsList;
-	}
+	}//搜尋條件依照發布時間結束
 	
 	
 	
@@ -316,9 +316,9 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 
 		// 新增
 //		NewsVO vo = new NewsVO();
-//		for (int i = 0; i < 6; i++) {
+//		for (int i = 0; i < 1; i++) {
 //			vo.setNtype_no("HN001");
-//			vo.setNews_title("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+//			vo.setNews_title("jj");
 //			vo.setNews_content("     我是<p>-***//**容我是房市內容! ");
 //			byte[] pic = getPictureByteArray("WebContent/images/newsphoto/HN001.jpg");
 //			vo.setNews_photo(pic);
@@ -367,7 +367,7 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 //		 }
 		
 		
-		// 查全部
+		// 查全部依時間排序
 		 List<NewsVO> newsList = dao.getAllByTime();
 		 for (NewsVO anews : newsList) {
 		 System.out.println(anews.getNews_no());
@@ -380,12 +380,6 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 		 System.out.println(anews.getEmp_no());
 		 System.out.println();
 		 }
-		
-		
-		
-		
-		
-		
 	}
 
 	// 上傳照片的方法

@@ -43,5 +43,10 @@ public class NewsService {
 	public List<NewsVO> getAll() {
 		return dao.getAll();
 	}
-
+	
+	//查詢全部照時間排序
+	public List<NewsVO> getAllByTime() {
+		return dao.getAllByTime();
+	}
+	
 }

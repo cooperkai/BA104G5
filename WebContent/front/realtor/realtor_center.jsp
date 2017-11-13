@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.realtor.model.*"%>
 
-
+ 
 <% 
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 	RealtorVO realtorVO2 = (RealtorVO) request.getAttribute("realtorVO");

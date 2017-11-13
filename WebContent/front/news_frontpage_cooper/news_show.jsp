@@ -6,13 +6,14 @@
 
 <%-- 採用 EL 的寫法取值 --%>
 
-
-
 <%
 	NewsVO newsVO = (NewsVO) request.getAttribute("newsVO");
 	NewsService newsSvc = new NewsService();
 	List<NewsVO> list = newsSvc.getAll();
 	pageContext.setAttribute("list", list);
+	
+	List<NewsVO> listTime = newsSvc.getAllByTime();
+	pageContext.setAttribute("listTime", listTime);
 %>
 
 <!DOCTYPE html>
@@ -211,59 +212,17 @@
 								<!-- Related Posts -->
 								<div class="post-detail mar-top-md mar-bottom-md">
 									<div class="post-detail-body sep-xs">
-										<h3 class="text-primary text-uppercase text-center">RELATED
-											POSTS</h3>
+										<h3 class="text-primary text-uppercase text-center">最新發佈</h3>
 										<div class="owl-carousel" id="related-posts">
-											<a href="#" rel=""
-												title="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">
-												<img src="assets/images/works/work-1.jpg" alt=""
+										<c:forEach var="newsVO2" items="${listTime}"><form method="post" action="news.do">
+											<a href="<%=request.getContextPath()%>/front/news/news.do?action=getOne_For_Display&news_no=${newsVO2.news_no}" rel=""
+												title="${newsVO2.news_title}">
+												<img src="<%=request.getContextPath()%>/tool/showimage.do?action=news_photo&news_no=${newsVO2.news_no}" alt="新聞照片"
 												class="img-responsive" />
-												<h5 class="text-center text-success text-uppercase">Lorem
-													ipsum dolor sit amet, consectetur adipisicing elit.</h5> <i
-												class="text-center text-muted">April 17, 2015</i>
-											</a> <a href="#" rel=""
-												title="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">
-												<img src="assets/images/works/work-2.jpg" alt=""
-												class="img-responsive" />
-												<h5 class="text-center text-primary text-uppercase">Lorem
-													ipsum dolor sit amet, consectetur adipisicing elit.</h5> <i
-												class="text-center text-muted">April 17, 2015</i>
-											</a> <a href="#" rel=""
-												title="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">
-												<img src="assets/images/works/work-3.jpg" alt=""
-												class="img-responsive" />
-												<h5 class="text-center text-primary text-uppercase">Lorem
-													ipsum dolor sit amet, consectetur adipisicing elit.</h5> <i
-												class="text-center text-muted">April 17, 2015</i>
-											</a> <a href="#" rel=""
-												title="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">
-												<img src="assets/images/works/work-4.png" alt=""
-												class="img-responsive" />
-												<h5 class="text-center text-primary text-uppercase">Lorem
-													ipsum dolor sit amet, consectetur adipisicing elit.</h5> <i
-												class="text-center text-muted">April 17, 2015</i>
-											</a> <a href="#" rel=""
-												title="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">
-												<img src="assets/images/works/work-5.jpg" alt=""
-												class="img-responsive" />
-												<h5 class="text-center text-primary text-uppercase">Lorem
-													ipsum dolor sit amet, consectetur adipisicing elit.</h5> <i
-												class="text-center text-muted">April 17, 2015</i>
-											</a> <a href="#" rel=""
-												title="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">
-												<img src="assets/images/works/work-6.jpg" alt=""
-												class="img-responsive" />
-												<h5 class="text-center text-success">Lorem ipsum dolor
-													sit amet, consectetur adipisicing elit.</h5> <i
-												class="text-center text-muted">April 17, 2015</i>
-											</a> <a href="#" rel=""
-												title="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">
-												<img src="assets/images/works/work-7.jpg" alt=""
-												class="img-responsive" />
-												<h5 class="text-center text-primary text-uppercase">Lorem
-													ipsum dolor sit amet, consectetur adipisicing elit.</h5> <i
-												class="text-center text-muted">April 17, 2015</i>
-											</a>
+												<h5 class="text-center text-success text-uppercase">${newsVO2.news_content}</h5> <i
+												class="text-center text-muted">${newsVO2.news_date}</i>
+											</a> </form>
+										</c:forEach>
 										</div>
 									</div>
 								</div>

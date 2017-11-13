@@ -30,7 +30,8 @@ public class NewsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+		
+		//查單一
 		if ("getOne_For_Display".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -41,6 +42,7 @@ public class NewsServlet extends HttpServlet {
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 **********************/
 				String news_no = req.getParameter("news_no");
+System.out.println(news_no);
 				if (news_no == null || (news_no.trim()).length() == 0) {// 來自listAllNews.jsp的請求
 					errorMsgs.add("請輸入新聞編號");
 				}
@@ -88,8 +90,10 @@ public class NewsServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher("/back/news/listAllNews.jsp");
 				failureView.forward(req, res);
 			}
-		}
-
+		}//查單一結束
+		
+		
+		//查單一修改結束
 		if ("getOne_For_Update".equals(action)) { // 來自listAllNews.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -122,9 +126,10 @@ public class NewsServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
-
-		}
-
+		}//查單一修改結束
+		
+		
+		//更新新聞
 		if ("update".equals(action)) { // 來自update_news_input.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -176,7 +181,6 @@ public class NewsServlet extends HttpServlet {
 				byte[] news_photo = null;
 				try {
 					Part photo = req.getPart("news_photo");
-//					System.out.println(photo.getContentType());
 					if (!photo.getContentType().equalsIgnoreCase("application/octet-stream")) {
 						InputStream in = photo.getInputStream();
 						news_photo = new byte[in.available()];
@@ -227,15 +231,16 @@ public class NewsServlet extends HttpServlet {
 				String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
-System.out.println("news_update_url: " + url);
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				// errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/back/news/listAllNews.jsp");
 				failureView.forward(req, res);
 			}
-		}
-
+		}//更新新聞結束
+		
+		
+		//新增新聞
 		if ("insert".equals(action)) { // 來自addNews.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -323,8 +328,18 @@ System.out.println("news_update_url: " + url);
 				RequestDispatcher failureView = req.getRequestDispatcher("/back/news/listAllNews.jsp");
 				failureView.forward(req, res);
 			}
-		}
-
+		}//新增新聞結束
+		
+		//依新聞發布時間排序
+		if("getAllByTime".equals(action)){
+			
+			
+			
+			
+			
+		}//依新聞發布時間排序結束
+		
+		
 		if ("leave".equals(action)) {
 			System.out.println("news_leave_in");
 			String url = "/back/news/listAllNews.jsp";
