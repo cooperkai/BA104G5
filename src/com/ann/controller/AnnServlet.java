@@ -33,10 +33,9 @@ public class AnnServlet extends HttpServlet {
 			
 			String requestURL = req.getParameter("requestURL");// 送出查詢的來源網頁路徑
 			
-			System.out.println("ann_getOne_For_Display");
+			System.out.println(requestURL);
 
 			try {
-				System.out.println("getOne_For_Display_try_in");
 				/*****************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 **********************/

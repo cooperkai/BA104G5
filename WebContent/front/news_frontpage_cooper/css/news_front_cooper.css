@@ -1,3 +1,5 @@
+@CHARSET "UTF-8";
+
 #cooper_footer {
 	max-height: 173px;
     font-weight: 700;
@@ -11,7 +13,7 @@
 }
 
 .from_internet::before {
-    content: "¤@";
+    content: "ä¸€";
 }
 
 a {

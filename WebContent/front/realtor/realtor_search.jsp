@@ -122,25 +122,17 @@ pageContext.setAttribute("list2", list2);
 		<div class="col-xs-12 col-sm-8"></div>
 	</div>
 	<!-- 麵包屑結束 -->
-
+ 
 	<!--Search Bar-->
 	<div class="container container_size">
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-sm-offset-1 search_size">
-				<form method="post"
-					ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="請輸入關鍵字">
-						<span class="" id="cooper_btn_realtor"> 
+				<form method="post" ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do">
+					<div class="">
+						<input type="text" name="RTR_AREA" value="" placeholder="請輸入關鍵字">
 						<input type="hidden" name="action" value="listQueryB">
-						<input type="hidden" name="action" value="${realtorVO.rtr_name}">
-						<input type="hidden" name="action" value="${realtorVO.rtr_id}">
-						<input type="hidden" name="action" value="${realtorVO.rtr_area}">
-						<input type="hidden" name="action" value="${realtorVO.rtr_intro}">
-						<input type="hidden" name="action" value="${realtorVO.rtr_no}">
-						<input type="hidden" name="action" value="${realtorVO.re_no}">				 
 						<input type="submit" value="搜尋">
-						</span>
+					
 					</div>
 				</form>
 			</div>
@@ -157,12 +149,12 @@ pageContext.setAttribute("list2", list2);
 				<div class="row">
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do"
-						name="form1">
+						id="form1">
 						<div class="btn-group">
 							<b>選擇地區:</b> <select size="1" name="RTR_AREA" id="rtr_area">
 								<option value="">搜尋服務地區</option>
 								<c:forEach var="realtorVO" items="${list2}">
-									<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area }</option>
+									<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -174,8 +166,8 @@ pageContext.setAttribute("list2", list2);
 								</c:forEach>
 							</select>
 						</div>
-						<input type="hidden" name="action" value="listQueryB"> <input
-							type="submit" value="送出">
+						<input type="hidden" name="action" value="listQueryB"> 
+						<input type="submit" value="送出">
 					</form>
 				</div>
 			</div>
@@ -283,6 +275,19 @@ pageContext.setAttribute("list2", list2);
 			</p>
 		</div>
 	</footer>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	 $('#rtr_area option').click(function(){
+		 $('#form1').submit();
+	 })
+	 $('#re_no option').click(function(){
+		 $('#form1').submit();
+	})
+})
+</script>
+
 
 	<script> 
 // $(document).ready(function(){

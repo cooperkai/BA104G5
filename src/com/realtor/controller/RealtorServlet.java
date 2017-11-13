@@ -351,8 +351,7 @@ public class RealtorServlet extends HttpServlet {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
-			
+		
 			try {
 			
 				/***************************

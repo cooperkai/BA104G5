@@ -26,6 +26,8 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 			"SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News WHERE News_No = ?";
 	private static final String GET_ALL_STMT = 
 			"SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News ORDER BY News_No";
+	
+	private static final String GET_ALL_BY_TIME = "SELECT * FROM News ORDER BY News_Date DESC";
 
 	// 新增
 	@Override
@@ -242,6 +244,70 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 
 		return newsList;
 	}
+	
+	
+	//搜尋條件依照發布時間
+	@Override
+	public List<NewsVO> getAllByTime() {
+		
+		List<NewsVO> newsList = new ArrayList<NewsVO>();
+		NewsVO newsvo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, password);
+			pstmt = con.prepareStatement(GET_ALL_BY_TIME);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				newsvo = new NewsVO();
+				newsvo.setNews_no(rs.getString("News_No"));
+				newsvo.setNtype_no(rs.getString("NType_No"));
+				newsvo.setNews_title(rs.getString("News_Title"));
+				newsvo.setNews_content(rs.getString("News_Content"));
+				newsvo.setNews_photo(rs.getBytes("News_Photo"));
+				newsvo.setNews_state(rs.getString("News_State"));
+				newsvo.setNews_date(rs.getDate("News_Date"));
+				newsvo.setEmp_no(rs.getString("EMP_No"));
+				newsList.add(newsvo);
+			}
+
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException re) {
+					re.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		return newsList;
+	}
+	
+	
+	
 
 	// 測試
 	public static void main(String[] args) throws IOException {
@@ -249,18 +315,18 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 		NewsJDBCDAO dao = new NewsJDBCDAO();
 
 		// 新增
-		NewsVO vo = new NewsVO();
-		for (int i = 0; i < 6; i++) {
-			vo.setNtype_no("HN001");
-			vo.setNews_title("34536535353   ");
-			vo.setNews_content("     我是<p>-***//**容我是房市內容! ");
-			byte[] pic = getPictureByteArray("WebContent/images/newsphoto/HN001.jpg");
-			vo.setNews_photo(pic);
-			vo.setNews_state("公告中");
-			vo.setEmp_no("EM00000002");
-			dao.insert(vo);
-		}
-		System.out.println("---------------------------------");
+//		NewsVO vo = new NewsVO();
+//		for (int i = 0; i < 6; i++) {
+//			vo.setNtype_no("HN001");
+//			vo.setNews_title("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+//			vo.setNews_content("     我是<p>-***//**容我是房市內容! ");
+//			byte[] pic = getPictureByteArray("WebContent/images/newsphoto/HN001.jpg");
+//			vo.setNews_photo(pic);
+//			vo.setNews_state("公告中");
+//			vo.setEmp_no("EM00000002");
+//			dao.insert(vo);
+//		}
+//		System.out.println("---------------------------------");
 
 		// 修改
 //		 NewsVO vo2 = new NewsVO();
@@ -299,6 +365,27 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 //		 System.out.println(anews.getEmp_no());
 //		 System.out.println();
 //		 }
+		
+		
+		// 查全部
+		 List<NewsVO> newsList = dao.getAllByTime();
+		 for (NewsVO anews : newsList) {
+		 System.out.println(anews.getNews_no());
+		 System.out.println(anews.getNtype_no());
+		 System.out.println(anews.getNews_title());
+		 System.out.println(anews.getNews_content());
+		 System.out.println(anews.getNews_photo());
+		 System.out.println(anews.getNews_state());
+		 System.out.println(anews.getNews_date());
+		 System.out.println(anews.getEmp_no());
+		 System.out.println();
+		 }
+		
+		
+		
+		
+		
+		
 	}
 
 	// 上傳照片的方法
@@ -316,4 +403,5 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 
 		return baos.toByteArray();
 	}
+
 }
