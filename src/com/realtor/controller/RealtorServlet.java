@@ -379,7 +379,7 @@ public class RealtorServlet extends HttpServlet {
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
-				req.setAttribute("listQueryB", list);
+				req.setAttribute("list", list);
 				req.setAttribute("list2", list2);
 				req.setAttribute("estatelist", estatelist);
 				// 資料庫取出的list物件,存入request
@@ -396,11 +396,10 @@ public class RealtorServlet extends HttpServlet {
 			}
 		} // 房仲複合查詢結束
 
-		//房仲查詢關鍵字
+		// 房仲查詢關鍵字
 		if ("findBykeyword".equals(action)) {
 			String keyword = req.getParameter("keyword");
 			System.out.println("關建字: " + keyword);
-			String sortedCondition = req.getParameter("sortedCondition");
 			Integer whichPage = 0;
 			try {
 				Integer.valueOf(req.getParameter("whichPage"));
@@ -409,8 +408,19 @@ public class RealtorServlet extends HttpServlet {
 			}
 
 			RealtorService realtorSvc = new RealtorService();
+			List<RealtorVO> list = realtorSvc.findByKeyword(keyword);
+			if (list.size() == 0) {
+				req.setAttribute("警告", "查無資料， 請重新查詢");
+			}
 
-		}//房仲查詢關鍵字結束
+
+			req.setAttribute("list", list);
+			req.setAttribute("keyword", keyword);
+			req.setAttribute("action", action);
+			req.setAttribute("whichPage", whichPage);
+			RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
+			successView.forward(req, res);
+		} // 房仲查詢關鍵字結束
 
 	}
 }

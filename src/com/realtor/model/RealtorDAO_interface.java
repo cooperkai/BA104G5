@@ -20,7 +20,7 @@ public interface RealtorDAO_interface {
 //	public List<RealtorVO> getNameList();//列出所有房仲姓名
 //	public List<RealtorVO> getAreaList();//列出所有房仲所屬地區
 	public List<RealtorVO> getAll(Map<String, String[]> map);//萬用複合查詢(傳入參數型態Map)(回傳 List)
-	public List<RealtorVO> finByKeyword(String keyword, String sortedCondition);//複合查詢ByKeyword
+	public List<RealtorVO> findByKeyword(String keyword);//複合查詢ByKeyword
 	
 	
 

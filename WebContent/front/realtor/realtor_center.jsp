@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.realtor.model.*"%>
+<%@ page import="com.realestate.model.*"%>
 
+<jsp:useBean id="realestateSvc" scope="page" class="com.realestate.model.RealEstateService"/>
  
 <% 
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
@@ -87,8 +89,14 @@
 						data-placement="bottom">最新消息</a></li>
 					<li><a href="#">常見問題</a></li>
 					<li><a href="#">看房去</a></li>
-					<li><a
-						href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB">找房仲</a></li>
+					<!-- 判斷房仲VO，有的話就不顯示找房仲 -->
+					<c:if test="${realtorVO == null}">
+						<li><a href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB">
+							找房仲
+							</a>
+						</li>
+					</c:if>
+					<!-- 判斷房仲VO，有的話就不顯示找房仲結束 -->
 					<li><a href="#">安家商城</a></li>
 					<li><a href="#">加入我們</a></li>
 				</ul>
@@ -97,10 +105,11 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a
 						href="<%=request.getContextPath()%>/front/realtor/realtor_center.jsp">
-							<span class="glyphicon glyphicon-user"></span> <c:if
-								test="${realtorVO != null}">
+							<span class="glyphicon glyphicon-user"></span> 
+							<c:if test="${realtorVO != null}">
 								<%=realtorVO.getRtr_name()%>
-							</c:if> <c:if test="${realtorVO == null}">
+							</c:if> 
+							<c:if test="${realtorVO == null}">
 								註冊
 							</c:if>
 					</a></li>
@@ -210,6 +219,12 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label for="re_no">房仲公司</label>
+					<div> 
+						<h5 class="">${realestateSvc.getOne(realtorVO.re_no).getRe_name()}</h5>
+					</div>
+				</div>
+				<div class="form-group">
 					<label for="rtr_area">服務地區</label>
 					<div>
 						<h5 class="">${realtorVO.rtr_area}</h5>
@@ -226,7 +241,7 @@
 						<!-- <a href='#realtor_jump' data-toggle="modal" class="btn">修改資料</a> -->
 						<input type="hidden" name="action" value="getOne_For_Update">
 						<input type="hidden" name="rtr_no" value="${realtorVO.rtr_no}">
-						<input type="submit" class="btn" value="送出修改">
+						<input type="submit" class="btn" value="選擇修改資料">
 					</form>
 				</div>
 

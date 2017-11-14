@@ -640,7 +640,7 @@ public class RealtorDAO implements RealtorDAO_interface {
 
 	// 房仲萬用複合查詢ByKeyword
 	@Override
-	public List<RealtorVO> finByKeyword(String keyword, String sortedCondition) {
+	public List<RealtorVO> findByKeyword(String keyword) {
 
 		List<RealtorVO> list = new ArrayList<RealtorVO>();
 		RealtorVO realtorvo = null;
@@ -652,8 +652,7 @@ public class RealtorDAO implements RealtorDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			String finalSQL = "select * from Realtor " + RealtorFindByKeyWord.getKeyWordSQL(keyword) + " ORDER BY "
-					+ sortedCondition;
+			String finalSQL = "select * from Realtor " + RealtorFindByKeyWord.getKeyWordSQL(keyword) + " ORDER BY RTR_NO";
 			pstmt = con.prepareStatement(finalSQL);
 
 			rs = pstmt.executeQuery();

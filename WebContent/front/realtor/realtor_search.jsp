@@ -9,24 +9,15 @@
 <jsp:useBean id="realestateSvc" scope="page"
 	class="com.realestate.model.RealEstateService" />
 
-<jsp:useBean id="listQueryB" scope="request"
-	type="java.util.List<RealtorVO>" />
+
+<jsp:useBean id="list" scope="request" type="java.util.List<RealtorVO>" />
 
 <%
-
-List<RealEstateVO> estatelist =(List<RealEstateVO>)request.getAttribute("estatelist");
-pageContext.setAttribute("estatelist", estatelist);
-List<RealtorVO> list2 = (List<RealtorVO>)request.getAttribute("list2");
-pageContext.setAttribute("list2", list2);
-%>
- 
-<%--
-	List<RealtorVO> list = (List<RealtorVO>)request.getAttribute("list");
-	pageContext.setAttribute("list", list);
-
-	List<RealEstateVO> estatelist = (List<RealEstateVO>)request.getAttribute("estatelist");
+	List<RealEstateVO> estatelist = (List<RealEstateVO>) request.getAttribute("estatelist");
 	pageContext.setAttribute("estatelist", estatelist);
- --%>
+	List<RealtorVO> list2 = (List<RealtorVO>) request.getAttribute("list2");
+	pageContext.setAttribute("list2", list2);
+%>
 
 
 
@@ -112,27 +103,17 @@ pageContext.setAttribute("list2", list2);
 
 
 	<!-- 阿蓋的搜尋房仲 ============================================================================================-->
-	<!-- 麵包屑 -->
-	<div class="container container_size">
-		<div class="col-12 col-md-9 col-xl-8"></div>
-		<ol class="breadcrumb bread_size">
-			<li><a href="#">首頁</a></li>
-			<li class="active"><a href="#">找房仲</a></li>
-		</ol>
-		<div class="col-xs-12 col-sm-8"></div>
-	</div>
-	<!-- 麵包屑結束 -->
- 
+
 	<!--Search Bar-->
 	<div class="container container_size">
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-sm-offset-1 search_size">
-				<form method="post" ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do">
+				<form method="post"
+					action="<%=request.getContextPath()%>/front/realtor/realtor.do">
 					<div class="">
-						<input type="text" name="RTR_AREA" value="" placeholder="請輸入關鍵字">
-						<input type="hidden" name="action" value="listQueryB">
+						<input type="text" name="keyword" value="" placeholder="請輸入關鍵字">
+						<input type="hidden" name="action" value="findBykeyword">
 						<input type="submit" value="搜尋">
-					
 					</div>
 				</form>
 			</div>
@@ -166,8 +147,8 @@ pageContext.setAttribute("list2", list2);
 								</c:forEach>
 							</select>
 						</div>
-						<input type="hidden" name="action" value="listQueryB"> 
-						<input type="submit" value="送出">
+						<input type="hidden" name="action" value="listQueryB"> <input
+							type="submit" value="送出">
 					</form>
 				</div>
 			</div>
@@ -191,7 +172,7 @@ pageContext.setAttribute("list2", list2);
 		</div>
 	</div>
 
-	<c:forEach var="realtorVO" items="${listQueryB}" begin="<%=pageIndex%>"
+	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>"
 		end="<%=pageIndex+rowsPerPage-1%>">
 		<div class="container container_size">
 			<div class="row">
@@ -206,7 +187,8 @@ pageContext.setAttribute("list2", list2);
 					<div class="col-xs-12 col-sm-3">
 						<ul class="list-unstyled info_estate">
 							<li>房仲姓名 ${realtorVO.rtr_name}</li>
-							<li>房仲公司 ${realestateSvc.getOne(realtorVO.re_no).getRe_name()}</li>
+							<li>房仲公司
+								${realestateSvc.getOne(realtorVO.re_no).getRe_name()}</li>
 							<li>服務地區 ${realtorVO.rtr_area}</li>
 						</ul>
 					</div>
@@ -231,6 +213,11 @@ pageContext.setAttribute("list2", list2);
 										<span class="forward_word">查看詳請</span>
 									</button>
 								</div>
+								<div class="row forward_estate">
+									<button class="button" style="vertical-align: middle; background-color: red;">
+										<span class="forward_word">聊天or伴遊</span>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -239,8 +226,13 @@ pageContext.setAttribute("list2", list2);
 		</div>
 		<br>
 	</c:forEach>
+	<div class="container">
+	<div class="row">
+	<div class="col-sm-12">
 	<%@include file="/page/pageByCompositeQuery2.file"%>
-
+	</div>
+	</div>
+	</div>
 	<!-- end阿蓋的搜尋房仲 =========================================================================================-->
 
 
@@ -277,7 +269,7 @@ pageContext.setAttribute("list2", list2);
 	</footer>
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 $(document).ready(function(){
 	 $('#rtr_area option').click(function(){
 		 $('#form1').submit();

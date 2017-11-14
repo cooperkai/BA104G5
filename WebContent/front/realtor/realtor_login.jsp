@@ -61,7 +61,7 @@ body {
 	<div class="container text-center" id="outter">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
-				<a href="sellercenter.jsp"><img src="images/For House logo.png"
+				<a href="realtor_center.jsp"><img src="images/For House logo.png"
 					width="120px"></a>
 			</div>
 		</div>
