@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.news.model.NewsService;
 import com.news.model.NewsVO;
+import com.promo.model.PromoService;
+import com.promo.model.PromoVO;
 import com.realtor.model.RealtorService;
 import com.realtor.model.RealtorVO;
 
@@ -30,7 +32,8 @@ public class ShowImage extends HttpServlet {
 		res.setContentType("image/*");
 		ServletOutputStream out = res.getOutputStream();
 		String action = req.getParameter("action");
-		//新聞
+
+		// 新聞
 		if ("news_photo".equals(action)) {
 			String news_no = req.getParameter("news_no");
 			NewsService newsSvc = new NewsService();
@@ -54,8 +57,9 @@ public class ShowImage extends HttpServlet {
 				out.write(pic);
 				in.close();
 			}
-		}
-		//房仲
+		} // end
+
+		// 房仲
 		if ("rtr_photo".equals(action)) {
 			String rtr_no = req.getParameter("rtr_no");
 			RealtorService realtorSvc = new RealtorService();
@@ -81,7 +85,33 @@ public class ShowImage extends HttpServlet {
 				out.write(pic);
 				in.close();
 			}
-		}
-	}
+		} // end
 
+		// 促銷
+		if ("promo_photo".equals(action)) {
+			String promo_no = req.getParameter("promo_no");
+			PromoService promoSvc = new PromoService();
+			try {
+				PromoVO promoVO = promoSvc.getOne(promo_no);
+				InputStream in = new ByteArrayInputStream(promoVO.getPromo_photo());
+				byte[] buffer = new byte[in.available()];
+				int len = 0;
+				try {
+					while ((len = in.read(buffer)) != -1)
+						out.write(buffer, 0, len);
+					out.close();
+					return;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} catch (Exception e) {
+				FileInputStream in = new FileInputStream(getServletContext().getRealPath("/images/nopic.jpg"));
+				byte[] pic = new byte[in.available()];
+				in.read(pic);
+				out.write(pic);
+				in.close();
+			}
+		} // end
+
+	}
 }

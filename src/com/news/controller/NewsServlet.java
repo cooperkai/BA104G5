@@ -42,7 +42,6 @@ public class NewsServlet extends HttpServlet {
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 **********************/
 				String news_no = req.getParameter("news_no");
-System.out.println(news_no);
 				if (news_no == null || (news_no.trim()).length() == 0) {// 來自listAllNews.jsp的請求
 					errorMsgs.add("請輸入新聞編號");
 				}
