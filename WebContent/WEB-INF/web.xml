@@ -23,7 +23,7 @@
 		<url-pattern>/tool/showimage.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- 後端系統公告 -->
+	<!-- 公告用 -->
 	<servlet>
 		<servlet-name>AnnServlet</servlet-name>
 		<servlet-class>com.ann.controller.AnnServlet</servlet-class>
@@ -33,7 +33,7 @@
 		<url-pattern>/back/ann/ann.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- 後端新聞 -->
+	<!-- 新聞用 -->
 	<servlet>
 		<servlet-name>NewsServlet</servlet-name>
 		<servlet-class>com.news.controller.NewsServlet</servlet-class>
@@ -43,7 +43,7 @@
 		<url-pattern>/back/news/news.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- 後端新聞類別 -->
+	<!-- 新聞類別用 -->
 	<servlet>
 		<servlet-name>NewsTypeServlet</servlet-name>
 		<servlet-class>com.newstype.controller.NewsTypeServlet</servlet-class>
@@ -53,7 +53,7 @@
 		<url-pattern>/back/newstype/newstype.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- 前端房仲 -->
+	<!-- 房仲登入、查詢用 -->
 	<servlet>
 		<servlet-name>RealtorServlet</servlet-name>
 		<servlet-class>com.realtor.controller.RealtorServlet</servlet-class>
@@ -63,7 +63,7 @@
 		<url-pattern>/front/realtor/realtor.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- 前端房仲登出 -->
+	<!-- 房仲登出判斷用 -->
 	<servlet>
 		<servlet-name>RealtorLogout</servlet-name>
 		<servlet-class>com.realtor.controller.RealtorLogout</servlet-class>
@@ -73,7 +73,7 @@
 		<url-pattern>/front/realtor/realtorlogout.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- 前端房仲修改資料 -->
+	<!-- 房仲更改資料用 -->
 	<servlet>
 		<servlet-name>RealtorChange</servlet-name>
 		<servlet-class>com.realtor.controller.RealtorChange</servlet-class>
@@ -83,7 +83,7 @@
 		<url-pattern>/front/realtor/realtorchange.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- 前端房仲公司 -->
+	<!-- 房仲公司類別用 -->
 	<servlet>
 		<servlet-name>RealEstateServlet</servlet-name>
 		<servlet-class>com.realestate.controller.RealEstateServlet</servlet-class>
@@ -91,6 +91,16 @@
 	<servlet-mapping>
 		<servlet-name>RealEstateServlet</servlet-name>
 		<url-pattern>/front/realestate/realestate.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 促銷用 -->
+	<servlet>
+		<servlet-name>PromoServlet</servlet-name>
+		<servlet-class>com.promo.controller.PromoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PromoServlet</servlet-name>
+		<url-pattern>/back/promo/promoservlet.do</url-pattern>
 	</servlet-mapping>
 
 </web-app>

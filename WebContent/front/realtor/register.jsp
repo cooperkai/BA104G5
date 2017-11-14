@@ -120,6 +120,20 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label for="re_no" class="col-sm-2 control-label">服務公司</label>
+							<div class="col-sm-9">
+								<jsp:useBean id="realestateSvc" scope="page"
+									class="com.realestate.model.RealEstateService" />
+								<select class="selectpicker show-tick form-control" size="1" name="re_no">
+									<option name="default_item">選擇服務公司</option>
+									<c:forEach var="realestateVO" items="${realestateSvc.all}">
+										<option value="${realestateVO.re_no}"
+											${(realtorVO.re_no==realestateVO.re_no)? 'selected':'' }>${realestateVO.re_name}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
 							<label for="rtr_area" class="col-sm-2 control-label">服務地區</label>
 							<div class="col-sm-9">
 
@@ -149,43 +163,43 @@
 
 							</div>
 						</div>
-							<div class="form-group">
-								<label for="rtr_idno" class="col-sm-2 control-label">身分證</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="rtr_idno"
-										name="rtr_idno" placeholder="身分證"
-										value="<%=(realtorVOreg == null) ? "" : realtorVOreg.getRtr_idno()%>">
-								</div>
+						<div class="form-group">
+							<label for="rtr_idno" class="col-sm-2 control-label">身分證</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="rtr_idno"
+									name="rtr_idno" placeholder="身分證"
+									value="<%=(realtorVOreg == null) ? "" : realtorVOreg.getRtr_idno()%>">
 							</div>
-							<div class="form-group">
-								<label for="rtr_intro" class="col-sm-2 control-label">簡介</label>
-								<div class="col-sm-9">
-									<textarea class="form-control" rows="5" id="rtr_intro"
-										name="rtr_intro"><%=(realtorVOreg == null) ? "" : realtorVOreg.getRtr_intro()%></textarea>
-								</div>
+						</div>
+						<div class="form-group">
+							<label for="rtr_intro" class="col-sm-2 control-label">簡介</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" rows="5" id="rtr_intro"
+									name="rtr_intro"><%=(realtorVOreg == null) ? "" : realtorVOreg.getRtr_intro()%></textarea>
 							</div>
+						</div>
 
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10" id="aggrement">
-									<div class="checkbox">
-										<label> <input type="checkbox" name="aggrement"
-											id="aggrement2"
-											<%=(realtorVOreg != null && realtorVOreg.getAggrement().equals("on")) ? "checked" : ""%> />
-											若要繼續註冊，請先閱讀並同意好房事的<a href="">服務條款</a> & <a href="">隱私權政策</a>
-										</label>
-									</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10" id="aggrement">
+								<div class="checkbox">
+									<label> <input type="checkbox" name="aggrement"
+										id="aggrement2"
+										<%=(realtorVOreg != null && realtorVOreg.getAggrement().equals("on")) ? "checked" : ""%> />
+										若要繼續註冊，請先閱讀並同意好房事的<a href="">服務條款</a> & <a href="">隱私權政策</a>
+									</label>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-2"></label>
-								<div class="col-sm-9">
-									<button type="submit" class="btn btn-warning btn-lg savebutton">加入</button>
-									<div class="col-sm-offset-11 col-sm-1 magicdiv">
-										<button type="button" class="btn btn-default btn-xs"
-											id="magicBtn1">貼</button>
-									</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2"></label>
+							<div class="col-sm-9">
+								<button type="submit" class="btn btn-warning btn-lg savebutton">加入</button>
+								<div class="col-sm-offset-11 col-sm-1 magicdiv">
+									<button type="button" class="btn btn-default btn-xs"
+										id="magicBtn1">貼</button>
 								</div>
 							</div>
+						</div>
 					</form>
 				</div>
 			</div>

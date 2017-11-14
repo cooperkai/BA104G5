@@ -74,7 +74,7 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 				}
 			}
 		}
-	}
+	}//新增結束
 
 	// 修改
 	@Override

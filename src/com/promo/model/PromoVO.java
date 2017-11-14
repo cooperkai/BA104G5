@@ -13,7 +13,6 @@ public class PromoVO implements Serializable {
 	private byte[] promo_photo;
 	private String promo_state;
 	private Date promo_date;
-	private String emp_no;
 
 	public String getPromo_no() {
 		return promo_no;
@@ -77,14 +76,6 @@ public class PromoVO implements Serializable {
 
 	public void setPromo_date(Date promo_date) {
 		this.promo_date = promo_date;
-	}
-
-	public String getEmp_no() {
-		return emp_no;
-	}
-
-	public void setEmp_no(String emp_no) {
-		this.emp_no = emp_no;
 	}
 
 }

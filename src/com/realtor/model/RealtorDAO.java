@@ -28,8 +28,8 @@ public class RealtorDAO implements RealtorDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO)"
-			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO) "
+			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?)";
 	// private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_ID=?,
 	// RTR_NAME=?, RTR_PHOTO=?, RTR_AREA=?, RTR_INTRO=? WHERE RTR_NO =
 	// ?";//預留給之後可能要改服務地區，還有emailID帳號
@@ -63,6 +63,7 @@ public class RealtorDAO implements RealtorDAO_interface {
 			pstmt.setString(5, realtorVO.getRtr_area());
 			pstmt.setString(6, realtorVO.getRtr_intro());
 			pstmt.setString(7, realtorVO.getRtr_idno());
+			pstmt.setString(8, realtorVO.getRe_no());
 
 			pstmt.executeUpdate();
 			con.commit();

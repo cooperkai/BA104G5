@@ -11,7 +11,7 @@ public class RealtorService {
 	}
 
 	public RealtorVO add(String rtr_id, String rtr_psw, String rtr_name, byte[] rtr_photo, String rtr_area,
-			String rtr_intro, String rtr_idno) {
+			String rtr_intro, String rtr_idno, String re_no) {
 
 		RealtorVO realtorVO = new RealtorVO();
 		realtorVO.setRtr_id(rtr_id);
@@ -21,6 +21,7 @@ public class RealtorService {
 		realtorVO.setRtr_area(rtr_area);
 		realtorVO.setRtr_intro(rtr_intro);
 		realtorVO.setRtr_idno(rtr_idno);
+		realtorVO.setRe_no(re_no);
 
 		dao.insert(realtorVO);
 		return realtorVO;

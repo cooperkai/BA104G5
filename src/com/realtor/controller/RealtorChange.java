@@ -50,6 +50,7 @@ public class RealtorChange extends HttpServlet {
 				String rtr_psw = req.getParameter("rtr_psw");
 				String rtr_psw2 = req.getParameter("rtr_psw2").trim();
 				String rtr_name = req.getParameter("rtr_name");
+				String re_no = req.getParameter("re_no");
 				String rtr_area = req.getParameter("rtr_area");
 				String rtr_intro = req.getParameter("rtr_intro");
 				String rtr_idno = req.getParameter("rtr_idno");
@@ -112,6 +113,7 @@ public class RealtorChange extends HttpServlet {
 				realtorVOreg.setRtr_area(rtr_area);
 				realtorVOreg.setRtr_intro(rtr_intro);
 				realtorVOreg.setRtr_idno(rtr_idno);
+				realtorVOreg.setRe_no(re_no);
 				realtorVOreg.setAggrement(aggrement);
 
 
@@ -124,7 +126,7 @@ public class RealtorChange extends HttpServlet {
 				}
 				/*************************** 2.開始新增資料 *****************************************/
 				RealtorVO realtorVO = new RealtorVO();
-				realtorVO = realtorSvc.add(rtr_id, rtr_psw, rtr_name, rtr_photo, rtr_area, rtr_intro, rtr_idno);
+				realtorVO = realtorSvc.add(rtr_id, rtr_psw, rtr_name, rtr_photo, rtr_area, rtr_intro, rtr_idno, re_no);
 
 				/****************************
 				 * 3.修改完成,準備轉交(Send the Success view)
