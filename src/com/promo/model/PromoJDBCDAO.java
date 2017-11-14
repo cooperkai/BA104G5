@@ -22,7 +22,7 @@ public class PromoJDBCDAO implements PromoDAO_interface {
 	private static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String userid = "cooperkai";
 	private static final String password = "cooperkai";
-
+ 
 	private static final String INSERT_STMT = "INSERT INTO Promo (Promo_No, Promo_From, Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State) VALUES('PRO'||LPAD(TO_CHAR(SEQ_PRO.NEXTVAL), 7, '0'), ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE Promo SET Promo_From=?, Promo_To=?, Promo_Name=?, Promo_Content=?, Promo_Photo=?, Promo_State=? WHERE Promo_No = ?";
 	private static final String GET_ONE_STMT = "SELECT Promo_No, to_char(Promo_From, 'yyyy-mm-dd')Promo_From, to_char(Promo_To, 'yyyy-mm-dd')Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State, to_char(Promo_Date, 'yyyy-mm-dd')Promo_Date FROM Promo WHERE Promo_No = ?";

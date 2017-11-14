@@ -22,7 +22,7 @@ public class PromoDAO implements PromoDAO_interface {
 		} catch (NamingException ne) {
 			ne.printStackTrace();
 		}
-	}
+	} 
 
 	private static final String INSERT_STMT = "INSERT INTO Promo (Promo_No, Promo_From, Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State) VALUES('PRO'||LPAD(TO_CHAR(SEQ_PRO.NEXTVAL), 7, '0'), ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE Promo SET Promo_From=?, Promo_To=?, Promo_Name=?, Promo_Content=?, Promo_Photo=?, Promo_State=? WHERE Promo_No = ?";

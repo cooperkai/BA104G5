@@ -9,7 +9,7 @@ public class PromoService {
 	public PromoService() {
 		dao = new PromoDAO();
 	}
-
+ 
 	// 新增
 	public PromoVO add(java.sql.Date promo_from, java.sql.Date promo_to, String promo_name, String promo_content,
 			byte[] promo_photo, String promo_state) {
