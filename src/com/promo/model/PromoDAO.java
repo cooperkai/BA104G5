@@ -101,7 +101,6 @@ public class PromoDAO implements PromoDAO_interface {
 			con.commit();
 			con.setAutoCommit(true);
 
-			con.setAutoCommit(false);
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -149,7 +148,6 @@ public class PromoDAO implements PromoDAO_interface {
 				promovo.setPromo_no(rs.getString("Promo_No"));
 			}
 
-			con.setAutoCommit(false);
 		} catch (SQLException se) {
 			se.printStackTrace();
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -182,6 +180,8 @@ public class PromoDAO implements PromoDAO_interface {
 		ResultSet rs = null;
 
 		try {
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 
 			rs = pstmt.executeQuery();
@@ -198,7 +198,6 @@ public class PromoDAO implements PromoDAO_interface {
 				promoList.add(promovo);
 			}
 
-			con.setAutoCommit(false);
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -230,6 +229,7 @@ public class PromoDAO implements PromoDAO_interface {
 		ResultSet rs = null;
 
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_BY_TIME);
 
 			rs = pstmt.executeQuery();
@@ -247,7 +247,6 @@ public class PromoDAO implements PromoDAO_interface {
 				promoList.add(promovo);
 			}
 
-			con.setAutoCommit(false);
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -290,7 +289,6 @@ public class PromoDAO implements PromoDAO_interface {
 			con.commit();
 			con.setAutoCommit(true);
 
-			con.setAutoCommit(false);
 		} catch (SQLException se) {
 			se.printStackTrace();
 			throw new RuntimeException("A database error occured. " + se.getMessage());

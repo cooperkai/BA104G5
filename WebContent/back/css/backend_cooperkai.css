@@ -113,3 +113,11 @@
 	background-color: #FF9797;
 	color: black;
 }
+
+
+/* 促銷修改照片預覽 */
+#imgpreview, .promo_photo {
+	width: 50%;
+	height: 291.2px;
+}
+

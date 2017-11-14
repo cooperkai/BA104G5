@@ -104,7 +104,6 @@ public class PromoJDBCDAO implements PromoDAO_interface {
 			con.commit();
 			con.setAutoCommit(true);
 
-			con.setAutoCommit(false);
 		} catch (ClassNotFoundException ce) {
 			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
 		} catch (SQLException se) {
@@ -155,7 +154,6 @@ public class PromoJDBCDAO implements PromoDAO_interface {
 				promovo.setPromo_no(rs.getString("Promo_No"));
 			}
 
-			con.setAutoCommit(false);
 		} catch (ClassNotFoundException ce) {
 			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
 		} catch (SQLException se) {
@@ -208,7 +206,6 @@ public class PromoJDBCDAO implements PromoDAO_interface {
 				promoList.add(promovo);
 			}
 
-			con.setAutoCommit(false);
 		} catch (ClassNotFoundException ce) {
 			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
 		} catch (SQLException se) {
@@ -261,7 +258,6 @@ public class PromoJDBCDAO implements PromoDAO_interface {
 				promoList.add(promovo);
 			}
 
-			con.setAutoCommit(false);
 		} catch (ClassNotFoundException ce) {
 			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
 		} catch (SQLException se) {
@@ -307,7 +303,6 @@ public class PromoJDBCDAO implements PromoDAO_interface {
 			con.commit();
 			con.setAutoCommit(true);
 
-			con.setAutoCommit(false);
 		} catch (ClassNotFoundException ce) {
 			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
 		} catch (SQLException se) {

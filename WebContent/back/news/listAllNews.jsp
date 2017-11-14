@@ -183,8 +183,7 @@
 						</div>
 						<div class="form-group">
 							<label for="news_content">新聞內容</label>
-							<textarea rows="10" class="form-control" name="news_content"
-								value="<%=(newsVO == null) ? "新增新聞內容" : newsVO.getNews_content()%>"></textarea>
+							<textarea rows="10" class="form-control" name="news_content"><%=(newsVO == null) ? "請新增新聞內容" : newsVO.getNews_content()%></textarea>
 						</div>
 						<div class="form-group dropdown">
 							<label for="news_content">修改新聞狀態</label> <select
@@ -205,8 +204,6 @@
 								value="<%=(newsVO == null) ? "EM00000002" : newsVO.getEmp_no()%>" />
 						</div>
 						<div class="modal-footer">
-							<%-- <button type="button" class="btn btn-default"
-								data-dismiss="modal">離開</button> --%>
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn_cooper" value="送出新增">送出新增</button>
 						</div>

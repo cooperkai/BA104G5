@@ -1,13 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.promo.model.*"%>
 
 <%
-
-PromoVO promoVO = (PromoVO) request.getAttribute("promoVO");
-PromoService promoSvc = new PromoService(); 
-
+	PromoVO promoVO = (PromoVO) request.getAttribute("promoVO");
+	PromoService promoSvc = new PromoService();
+	List<PromoVO> list = promoSvc.getAll();
+	pageContext.setAttribute("list", list);
 %>
 
 
@@ -34,35 +35,77 @@ PromoService promoSvc = new PromoService();
 						<tr class="col_title">
 							<th>促銷編號</th>
 							<th>促銷時間</th>
-							<th>促銷名稱</th>
+							<th>促銷標題</th>
 							<th>促銷內容</th>
 							<th>促銷照片</th>
 							<th>修改狀態</th>
 							<th>新增時間</th>
-							<th>員工編號</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="col_name">
-							<td>PR100000</td>
-							<td>2017-12-12~2017-12-31</td>
-							<td class="text_overflow">剩但傑</td>
-							<td class="tex class="text_overflow "t_overflow">只剩下但，所以就有特價</td>
-							<td><img style="width: 100%; display: block;"
-								src="https://api.fnkr.net/testimg/180x100"></td>
-							<td>
-								<div class="dropdown">
-									<select class="form-control btn_cooper" id="sel1">
-										<option class="onitem">已上架</option>
-										<option class="offitem">已下架</option>
-										<option class="yetitem">未上架</option>
-									</select>
-								</div>
-							</td>
-							<td>2017-12-01</td>
-							<td>EP100000</td>
-						</tr>
+						<%@include file="/page/page1.file"%>
+						<c:forEach var="promoVO" items="${list}" begin="<%=pageIndex%>"
+							end="<%=pageIndex+rowsPerPage-1%>">
+							<tr class="col_name"
+								${(promoVO.promo_no==param.promo_no) ? 'bgcolor=#54FF9F' : ''}>
+								<td>${promoVO.promo_no}</td>
+								<td><fmt:formatDate value="${promoVO.promo_from}"
+										pattern="yyyy-MM-dd" />~<fmt:formatDate
+										value="${promoVO.promo_to}" pattern="yyyy-MM-dd" /></td>
+								<td class="text_overflow">${promoVO.promo_name}</td>
+								<td class="text_overflow">${promoVO.promo_content}</td>
+								<td>
+									<div class="" style="height: 145.8px; width: 194px;">
+										<img style="height: 145.8px; width: 194px;"
+											src="<%=request.getContextPath()%>/tool/showimage.do?action=promo_photo&promo_no=${promoVO.promo_no}" />
+									</div>
+								</td>
+
+								<td>
+									<div class="dropdown">${promoVO.promo_state}</div>
+								</td>
+								<td>${promoVO.promo_date}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
+				</table>
+				<%@include file="/page/page2.file"%>
+
+				<table class="table_main">
+					<tr>
+						<td>
+							<h4>
+								<a
+									href="<%=request.getContextPath()%>/back/backend/select_page_home.jsp"><img
+									src="<%=request.getContextPath()%>/images/back1.gif"
+									width="100" height="32" border="0">回後端首頁</a>
+							</h4>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<FORM METHOD="post" ACTION="promo.do">
+								<b>選擇促銷編號:</b> <select size="1" name="promo_no">
+									<c:forEach var="promoVO" items="${list}">
+										<option value="${promoVO.promo_no}">${promoVO.promo_no}
+									</c:forEach>
+								</select> <input type="hidden" name="action" value="getOne_For_Display">
+								<input type="submit" value="送出">
+							</FORM>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<%-- 錯誤表列 --%> <c:if test="${not empty errorMsgs}">
+								<font style="color: red">請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+						</td>
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -79,7 +122,15 @@ PromoService promoSvc = new PromoService();
 					<h4 class="modal-title">新增促銷活動</h4>
 				</div>
 				<div class="modal-body">
-					<form role="form" METHOD="post" ACTION="" name="promo">
+					<form role="form" METHOD="post" ACTION="/back/promo/promo.do"
+						name="promo">
+						
+						<div class="form-group div0">
+							<label for="promo_photo">促銷照片</label> 
+							<input type="file"	name="promo_photo" onchange="readURL(this);"> 
+							<img name="promo_photo" id="imgpreview" alt="preview image" />
+						</div>
+						
 						<label for="promo_period">促銷時間</label>
 						<div class="col-sm-12">
 							<div class="form-group">
@@ -96,30 +147,30 @@ PromoService promoSvc = new PromoService();
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="promo_name">促銷名稱</label> <input type="text"
-								class="form-control" name="promo_name" placeholder="新增促銷名稱">
+							<label for="promo_name">促銷標題</label> <input type="text"
+								class="form-control" name="promo_name"
+								value="<%=(promoVO == null) ? "新增促銷標題" : promoVO.getPromo_name()%>">
 						</div>
 						<div class="form-group">
 							<label for="promo_content">促銷內容:</label>
-							<textarea rows="10" class="form-control" name="promo_content"
-								placeholder="新增促銷內容"></textarea>
+							<textarea rows="10" class="form-control" name="promo_content"><%=(promoVO == null) ? "請輸入促銷內容" : promoVO.getPromo_content()%></textarea>
 						</div>
 						<div class="form-group dropdown">
 							<label for="ann_content">修改狀態</label> <select name="promo_state"
 								class="form-control btn_cooper" id="sel1">
-								<option class="default_item">請選擇</option>
-								<option class="onitem" value="已上架">已上架</option>
-								<option class="offitem" value="已下架">已下架</option>
-								<option class="yetitem" value="未上架">未上架</option>
+								<option name="default_item2" value="">請選擇</option>
+								<option class="onitem" value="已上架"
+									${(promoVO.promo_state=='已上架')? 'selected': ''}>已上架</option>
+								<option class="offitem" value="已下架"
+									${(promoVO.promo_state=='已下架')? 'selected': ''}>已下架</option>
+								<option class="offitem" value="未上架"
+									${(promoVO.promo_state=='未上架')? 'selected': ''}>未上架</option>
 							</select>
-						</div>
-						<div class="form-group">
-							<label for="empno_no">員工編號</label> <input type="text"
-								class="form-control" name="emp_no" placeholder="輸入員工編號">
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">離開</button>
+
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn_cooper" value="送出新增">送出新增</button>
 						</div>
@@ -129,43 +180,6 @@ PromoService promoSvc = new PromoService();
 		</div>
 	</div>
 	<!-- 結束促銷活動 =============================================================================-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- 結束促銷資訊 ================================================================================== -->
 	<!-- 以上是你可以放的內容 ================================================================================== -->
 
