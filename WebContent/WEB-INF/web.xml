@@ -12,7 +12,7 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
+ 
 	<!-- 照片用 -->
 	<servlet>
 		<servlet-name>ShowImage</servlet-name>

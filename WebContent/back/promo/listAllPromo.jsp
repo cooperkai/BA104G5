@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.promo.model.*"%>
-
+ 
 <%
 	PromoVO promoVO = (PromoVO) request.getAttribute("promoVO");
 	PromoService promoSvc = new PromoService();

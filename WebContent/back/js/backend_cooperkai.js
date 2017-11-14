@@ -1,7 +1,7 @@
 //model，彈出來用的
 function setBstModalMaxHeight(element) {
 	this.$element = $(element);
-	this.$modalContent = this.$element.find('.modal-content');
+	this.$modalContent = this.$element.find('.modal-content'); 
 	var $window = $(window);
 	var $modalContentOH = this.$modalContent.outerHeight();
 	var $modalContentIH = this.$modalContent.innerHeight();
