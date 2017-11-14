@@ -14,6 +14,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import jdbc.util.CompositeQuery.RealtorFindByKeyWord;
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Realtor;
 
 public class RealtorDAO implements RealtorDAO_interface {
@@ -573,6 +574,7 @@ public class RealtorDAO implements RealtorDAO_interface {
 		return realtorlist;
 	}// 得到房仲Id(email)結束
 
+	// 房仲萬用複合查詢
 	@Override
 	public List<RealtorVO> getAll(Map<String, String[]> map) {
 
@@ -635,5 +637,69 @@ public class RealtorDAO implements RealtorDAO_interface {
 		}
 		return list;
 	} // 房仲萬用複合查詢結束
+
+	// 房仲萬用複合查詢ByKeyword
+	@Override
+	public List<RealtorVO> finByKeyword(String keyword, String sortedCondition) {
+
+		List<RealtorVO> list = new ArrayList<RealtorVO>();
+		RealtorVO realtorvo = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			String finalSQL = "select * from Realtor " + RealtorFindByKeyWord.getKeyWordSQL(keyword) + " ORDER BY "
+					+ sortedCondition;
+			pstmt = con.prepareStatement(finalSQL);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				realtorvo = new RealtorVO();
+				realtorvo.setRtr_no(rs.getString("RTR_NO"));
+				realtorvo.setRtr_id(rs.getString("RTR_ID"));
+				realtorvo.setRtr_psw(rs.getString("RTR_PSW"));
+				realtorvo.setRtr_name(rs.getString("RTR_NAME"));
+				realtorvo.setRtr_photo(rs.getBytes("RTR_PHOTO"));
+				realtorvo.setRtr_area(rs.getString("RTR_AREA"));
+				realtorvo.setRtr_intro(rs.getString("RTR_INTRO"));
+				realtorvo.setRtr_idno(rs.getString("RTR_IDNO"));
+				realtorvo.setRe_no(rs.getString("RE_NO"));
+				realtorvo.setRtr_state(rs.getString("RTR_STATE"));
+				list.add(realtorvo);
+			}
+			System.out.println("getKeywordSQL: " + finalSQL);
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException re) {
+					re.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	} // 房仲萬用複合查詢結束 ByKeyword
 
 }

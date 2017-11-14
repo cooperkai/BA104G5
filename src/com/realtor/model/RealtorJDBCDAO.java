@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import jdbc.util.CompositeQuery.RealtorFindByKeyWord;
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Realtor;
 
 public class RealtorJDBCDAO implements RealtorDAO_interface {
@@ -690,8 +691,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, password);
-			String finalSQL = "SELECT * FROM REALTOR " + jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map)
-					+ "ORDER BY RTR_NO";
+			String finalSQL = "select * from Realtor " +  RealtorFindByKeyWord.getKeyWordSQL(keyword) + " ORDER BY " + sortedCondition;
 			pstmt = con.prepareStatement(finalSQL);
 
 			rs = pstmt.executeQuery();
@@ -710,7 +710,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 				realtorvo.setRtr_state(rs.getString("RTR_STATE"));
 				list.add(realtorvo);
 			}
-			System.out.println("●●finalSQL = " + finalSQL);
+			System.out.println("getKeywordSQL: " + finalSQL);
 
 		} catch (ClassNotFoundException ce) {
 			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
@@ -903,14 +903,34 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		// }
 
 		// map萬用查詢
-		Map<String, String[]> map = new TreeMap<String, String[]>();
-		map.put("RTR_NO", new String[] { "RT00000001" });
-		map.put("RTR_ID", new String[] { "realtor001@gmail.com" });
-		map.put("RTR_NAME", new String[] { "葦小寶" });
-		map.put("RTR_AREA", new String[] { "區" });
-		map.put("RE_NO", new String[] { "RE00000001" });
-		List<RealtorVO> list = dao.getAll(map);
-		for (RealtorVO arealtor : list) {
+//		Map<String, String[]> map = new TreeMap<String, String[]>();
+//		map.put("RTR_NO", new String[] { "RT00000001" });
+//		map.put("RTR_ID", new String[] { "realtor001@gmail.com" });
+//		map.put("RTR_NAME", new String[] { "葦小寶" });
+//		map.put("RTR_AREA", new String[] { "區" });
+//		map.put("RE_NO", new String[] { "RE00000001" });
+//		List<RealtorVO> list = dao.getAll(map);
+//		for (RealtorVO arealtor : list) {
+//			System.out.println(arealtor.getRtr_no());
+//			System.out.println(arealtor.getRtr_id());
+//			System.out.println(arealtor.getRtr_psw());
+//			System.out.println(arealtor.getRtr_name());
+//			System.out.println(arealtor.getRtr_photo());
+//			System.out.println(arealtor.getRtr_area());
+//			System.out.println(arealtor.getRtr_intro());
+//			System.out.println(arealtor.getRtr_idno());
+//			System.out.println(arealtor.getRe_no());
+//			System.out.println(arealtor.getRtr_state());
+//			System.out.println();
+//		}
+		
+		
+		
+		//查詢房仲ByKeyword
+		String keyword = "信";
+		String sortedCondition = "RTR_AREA";
+		List<RealtorVO> list2 = dao.finByKeyword(keyword, sortedCondition);
+		for (RealtorVO arealtor : list2) {
 			System.out.println(arealtor.getRtr_no());
 			System.out.println(arealtor.getRtr_id());
 			System.out.println(arealtor.getRtr_psw());
@@ -922,7 +942,8 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 			System.out.println(arealtor.getRe_no());
 			System.out.println(arealtor.getRtr_state());
 			System.out.println();
-		}
+		}//查詢房仲ByKeyword結束
+		
 
 	}// 測試結束
 

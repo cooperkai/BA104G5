@@ -342,18 +342,15 @@ public class RealtorServlet extends HttpServlet {
 		// failureView.forward(req, res);
 		// }
 		// }
-		
-		
-		
 
 		// 房仲複合查詢
 		if ("listQueryB".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-		
+
 			try {
-			
+
 				/***************************
 				 * 1.將輸入資料轉為Map
 				 **********************************/
@@ -374,12 +371,11 @@ public class RealtorServlet extends HttpServlet {
 				 ***************************************/
 				RealtorService realtorSvc = new RealtorService();
 				List<RealtorVO> list = realtorSvc.getAll(map);
-				
+
 				RealEstateService realestateSvc = new RealEstateService();
 				List<RealEstateVO> estatelist = realestateSvc.getAll();
 				List<RealtorVO> list2 = realtorSvc.getAll();
-				
-				
+
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
@@ -398,7 +394,23 @@ public class RealtorServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 				failureView.forward(req, res);
 			}
-		}
+		} // 房仲複合查詢結束
+
+		//房仲查詢關鍵字
+		if ("findBykeyword".equals(action)) {
+			String keyword = req.getParameter("keyword");
+			System.out.println("關建字: " + keyword);
+			String sortedCondition = req.getParameter("sortedCondition");
+			Integer whichPage = 0;
+			try {
+				Integer.valueOf(req.getParameter("whichPage"));
+			} catch (Exception e) {
+				whichPage = 1;
+			}
+
+			RealtorService realtorSvc = new RealtorService();
+
+		}//房仲查詢關鍵字結束
 
 	}
 }

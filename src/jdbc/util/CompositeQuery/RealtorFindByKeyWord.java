@@ -32,38 +32,42 @@ public class RealtorFindByKeyWord {
 			if (i == 0) {
 				whereCondition.append(" where ");
 			}
-			whereCondition.append("( ");
+			whereCondition.append("(");
 			whereCondition.append(getAWordForOracle(conditionList.get(i)));
-			whereCondition.append(" )");
+			whereCondition.append(")");
 
 			if (i != conditionList.size() - 1) {
 				whereCondition.append(" and ");
-			}
+			} 
 		}
 		return whereCondition.toString();
 	}
 
 	private static Object getAWordForOracle(String condition) {
-
 		String wordForOracle = null;
-
 		if (condition.contains("區")) {
 			condition = condition.replaceAll("區", "區").trim();
-			wordForOracle = condition;
+			wordForOracle = " RTR_AREA like '%" + condition + "%'";
 		} else if (condition.contains("信")) {
 			condition = condition.replaceAll("信", "信義").trim();
-			wordForOracle = condition;
+			wordForOracle = " RTR_INTRO like '%" + condition + "%'";
 		} else if (condition.contains("永")) {
 			condition = condition.replaceAll("永", "永慶").trim();
-			wordForOracle = condition;
+			wordForOracle = " RTR_INTRO like '%" + condition + "%'";
 		} else if (condition.contains("東")) {
 			condition = condition.replaceAll("東", "東森").trim();
-			wordForOracle = condition;
+			wordForOracle = " RTR_INTRO like '%" + condition + "%'";
 		} else {
 			condition = condition.trim();
-			wordForOracle = "RTR_NAME like '%" + condition + "%' or RTR_AREA like '%" + "%' or RTR_INTRO like '%"
-					+ condition + "%' ";
+			wordForOracle = "RTR_NAME like '%" + condition + "%' or RTR_AREA like '%" + condition + "%' or RTR_INTRO like '%" + condition + "%' ";
 		}
 		return wordForOracle;
 	}
+	
+	public static void main(String[] args){
+		
+		String finalSQL = "select * from Realtor " + RealtorFindByKeyWord.getKeyWordSQL("信") + "ORDER BY RTR_NO";
+		System.out.println(finalSQL);
+		
+	} 
 }

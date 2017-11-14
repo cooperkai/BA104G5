@@ -109,4 +109,9 @@ public class RealtorService {
 	public List<RealtorVO> getAll(Map<String, String[]> map){
 		return dao.getAll(map);
 	}
+	
+	//關鍵字查詢
+		public List<RealtorVO> findByKeyword(String keyword, String sortedCondition){
+			return dao.finByKeyword(keyword, sortedCondition);
+		}
 }
