@@ -622,7 +622,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, password);
 			String finalSQL = "SELECT * FROM REALTOR " + jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map)
-			+ "ORDER BY RTR_NO";
+					+ "ORDER BY RTR_NO";
 			pstmt = con.prepareStatement(finalSQL);
 
 			rs = pstmt.executeQuery();
@@ -671,51 +671,121 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 			}
 		}
 		return list;
-	} // 房仲萬用複合查詢結束 
+	} // 房仲萬用複合查詢結束
+
+	
+	
+	// 房仲萬用複合查詢ByKeyword
+	@Override
+	public List<RealtorVO> finByKeyword(String keyword, String sortedCondition) {
+
+		List<RealtorVO> list = new ArrayList<RealtorVO>();
+		RealtorVO realtorvo = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, password);
+			String finalSQL = "SELECT * FROM REALTOR " + jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map)
+					+ "ORDER BY RTR_NO";
+			pstmt = con.prepareStatement(finalSQL);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				realtorvo = new RealtorVO();
+				realtorvo.setRtr_no(rs.getString("RTR_NO"));
+				realtorvo.setRtr_id(rs.getString("RTR_ID"));
+				realtorvo.setRtr_psw(rs.getString("RTR_PSW"));
+				realtorvo.setRtr_name(rs.getString("RTR_NAME"));
+				realtorvo.setRtr_photo(rs.getBytes("RTR_PHOTO"));
+				realtorvo.setRtr_area(rs.getString("RTR_AREA"));
+				realtorvo.setRtr_intro(rs.getString("RTR_INTRO"));
+				realtorvo.setRtr_idno(rs.getString("RTR_IDNO"));
+				realtorvo.setRe_no(rs.getString("RE_NO"));
+				realtorvo.setRtr_state(rs.getString("RTR_STATE"));
+				list.add(realtorvo);
+			}
+			System.out.println("●●finalSQL = " + finalSQL);
+
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException re) {
+					re.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	} // 房仲萬用複合查詢結束 ByKeyword
 
 	public static void main(String[] args) throws IOException {
 		RealtorJDBCDAO dao = new RealtorJDBCDAO();
- 
+
 		// 專門塞房仲照片以及簡介
-//		 for (int i = 1; i <= 12; i++) {
-//		 if (i <= 9) {
-//		 FileInputStream in = new
-//		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
-//		 ".jpg");
-//		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
-//		 i + ".txt");
-//		 String rtr_no = "RT0000000" + i;
-//		 byte[] realtorpic = new byte[in.available()];
-//		 in.read(realtorpic);
-//		 RealtorVO vo4 = new RealtorVO();
-//		 vo4.setRtr_photo(realtorpic);
-//		 vo4.setRtr_intro(reader);
-//		 vo4.setRtr_no(rtr_no);
-//		 dao.updatePhoto(vo4);
-//		 in.close();
-//		 } else {
-//		 FileInputStream in = new
-//		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
-//		 ".jpg");
-//		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
-//		 i + ".txt");
-//		 String rtr_no = "RT000000" + i;
-//		 byte[] realtorpic = new byte[in.available()];
-//		 in.read(realtorpic);
-//		 RealtorVO vo4 = new RealtorVO();
-//		 vo4.setRtr_photo(realtorpic);
-//		 vo4.setRtr_intro(reader);
-//		 vo4.setRtr_no(rtr_no);
-//		 dao.updatePhoto(vo4);
-//		 in.close();
-//		 }
-//		 }
-//		 System.out.println("-----------------------------------------------------------------------------------");
-//
-//		FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor1.jpg");
-//		byte[] realtorpic = new byte[in.available()];
-//		in.read(realtorpic);
-//		in.close();
+		// for (int i = 1; i <= 12; i++) {
+		// if (i <= 9) {
+		// FileInputStream in = new
+		// FileInputStream("WebContent/images/realtorphoto/realtor" + i +
+		// ".jpg");
+		// String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
+		// i + ".txt");
+		// String rtr_no = "RT0000000" + i;
+		// byte[] realtorpic = new byte[in.available()];
+		// in.read(realtorpic);
+		// RealtorVO vo4 = new RealtorVO();
+		// vo4.setRtr_photo(realtorpic);
+		// vo4.setRtr_intro(reader);
+		// vo4.setRtr_no(rtr_no);
+		// dao.updatePhoto(vo4);
+		// in.close();
+		// } else {
+		// FileInputStream in = new
+		// FileInputStream("WebContent/images/realtorphoto/realtor" + i +
+		// ".jpg");
+		// String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
+		// i + ".txt");
+		// String rtr_no = "RT000000" + i;
+		// byte[] realtorpic = new byte[in.available()];
+		// in.read(realtorpic);
+		// RealtorVO vo4 = new RealtorVO();
+		// vo4.setRtr_photo(realtorpic);
+		// vo4.setRtr_intro(reader);
+		// vo4.setRtr_no(rtr_no);
+		// dao.updatePhoto(vo4);
+		// in.close();
+		// }
+		// }
+		// System.out.println("-----------------------------------------------------------------------------------");
+		//
+		// FileInputStream in = new
+		// FileInputStream("WebContent/images/realtorphoto/realtor1.jpg");
+		// byte[] realtorpic = new byte[in.available()];
+		// in.read(realtorpic);
+		// in.close();
 
 		// 新增
 		// RealtorVO vo = new RealtorVO();
@@ -831,8 +901,8 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		// System.out.println(arealtorId.getRtr_id());
 		// System.out.println();
 		// }
-		
-		//map萬用查詢
+
+		// map萬用查詢
 		Map<String, String[]> map = new TreeMap<String, String[]>();
 		map.put("RTR_NO", new String[] { "RT00000001" });
 		map.put("RTR_ID", new String[] { "realtor001@gmail.com" });
@@ -840,23 +910,20 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		map.put("RTR_AREA", new String[] { "區" });
 		map.put("RE_NO", new String[] { "RE00000001" });
 		List<RealtorVO> list = dao.getAll(map);
-		for(RealtorVO arealtor : list){
+		for (RealtorVO arealtor : list) {
 			System.out.println(arealtor.getRtr_no());
-			 System.out.println(arealtor.getRtr_id());
-			 System.out.println(arealtor.getRtr_psw());
-			 System.out.println(arealtor.getRtr_name());
-			 System.out.println(arealtor.getRtr_photo());
-			 System.out.println(arealtor.getRtr_area());
-			 System.out.println(arealtor.getRtr_intro());
-			 System.out.println(arealtor.getRtr_idno());
-			 System.out.println(arealtor.getRe_no());
-			 System.out.println(arealtor.getRtr_state());
+			System.out.println(arealtor.getRtr_id());
+			System.out.println(arealtor.getRtr_psw());
+			System.out.println(arealtor.getRtr_name());
+			System.out.println(arealtor.getRtr_photo());
+			System.out.println(arealtor.getRtr_area());
+			System.out.println(arealtor.getRtr_intro());
+			System.out.println(arealtor.getRtr_idno());
+			System.out.println(arealtor.getRe_no());
+			System.out.println(arealtor.getRtr_state());
 			System.out.println();
 		}
-		
-		
-		 
-		
+
 	}// 測試結束
 
 	// 使用String 上傳房仲簡介用
@@ -872,5 +939,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 
 		return sb.toString();
 	}
+
+
 
 }
