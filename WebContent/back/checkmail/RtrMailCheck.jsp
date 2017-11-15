@@ -8,7 +8,11 @@
 	List<RealtorVO> list = realtorSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
-
+<%
+response.setHeader("Cache-Control", "no-store");
+response.setHeader("Pragma", "no-cache");
+response.setDateHeader("Expires", 0);
+%>
 
 <!-- 後端include -->
 <jsp:include page="/back/backend/backend_page.jsp" flush="true" />

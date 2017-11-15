@@ -12,6 +12,11 @@
 	pageContext.setAttribute("list", list);
 %>
 
+<%
+response.setHeader("Cache-Control", "no-store");
+response.setHeader("Pragma", "no-cache");
+response.setDateHeader("Expires", 0);
+%>
 <!-- 為了new NewsTypeService用 -04系列 -->
 <jsp:useBean id="newstypeSvc" scope="page"
 	class="com.newstype.model.NewsTypeService" />

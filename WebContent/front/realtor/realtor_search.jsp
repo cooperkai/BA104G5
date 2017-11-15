@@ -19,7 +19,11 @@
 	pageContext.setAttribute("list2", list2);
 %>
 
-
+<%
+response.setHeader("Cache-Control", "no-store");
+response.setHeader("Pragma", "no-cache");
+response.setDateHeader("Expires", 0);
+%>
 
 
 <!DOCTYPE html>

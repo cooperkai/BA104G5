@@ -1,9 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
+<%
+response.setHeader("Cache-Control", "no-store");
+response.setHeader("Pragma", "no-cache");
+response.setDateHeader("Expires", 0);
+%>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -43,7 +50,7 @@
 			});
 		}
 			function fblogin(){	
-				  //===¹ê§@(¶ñ¤Jµ{¦¡½X)
+				  //===å¯¦ä½œ(å¡«å…¥ç¨‹å¼ç¢¼)
 					var xhr=new XMLHttpRequest();
 				  xhr.onreadystatechange=function(){
 					  if(xhr.readyState==4){
@@ -64,7 +71,7 @@
 //	 					  pic=response.data.url;
 //	 				  });
 				  });
-				  //«Ø¥ß¦nGet³s±µ»P°e¥X½Ğ¨D
+				  //å»ºç«‹å¥½Geté€£æ¥èˆ‡é€å‡ºè«‹æ±‚
 					var url="<%=request.getContextPath()%>/mem/MemServlet?action=FBLogin&name="+name+"&email="+email+"&id="+fbid;
 					xhr.open("Get",url,true);
 					xhr.send(null);

@@ -15,7 +15,11 @@
 	List<NewsVO> listTime = newsSvc.getAllByTime();
 	pageContext.setAttribute("listTime", listTime);
 %>
-
+<%
+response.setHeader("Cache-Control", "no-store");
+response.setHeader("Pragma", "no-cache");
+response.setDateHeader("Expires", 0);
+%>
 <!DOCTYPE html>
 <html lang="">
 

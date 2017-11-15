@@ -49,7 +49,7 @@ public class CheckMailServlet extends HttpServlet {
 
 				
 				// 寄信通知
-				String rtr_id = "eatkaikai@gmail.com";
+				String rtr_id = "d0788107@gmail.com";
 				String msg = "非常感謝你加入本網站[ 房仲 ]會員，已經為你開啟使用本網站服務的權利了，請一定Ipad溫開水!" 
 						+ "\r\n" + "請不用懷疑，馬上點開下面網址: "
 						+ "http://localhost:8081/BA104G5/front/realtor/realtor_login.jsp";
