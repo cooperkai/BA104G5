@@ -14,10 +14,10 @@
 <jsp:include page="/back/backend/backend_page.jsp" flush="true" />
 <!-- 後端include -->
 
-<style >
- table, th, td {
-    border: 0px solid #CCCCFF;
-  }
+<style>
+table, th, td {
+	border: 0px solid #CCCCFF;
+}
 </style>
 
 
@@ -64,7 +64,7 @@
 					<%-- ${(newsVO.ntype_no=='HN001')? 'selected': ''}>HN001</option> --%>
 					<!-- </select> -->
 					<!-- </div> -->
-					
+
 					<!-- 新版從別新聞種類的table join過來 -->
 					<jsp:useBean id="newstypeSvc" scope="page"
 						class="com.newstype.model.NewsTypeService" />
@@ -101,12 +101,17 @@
 								${(newsVO.news_state=='已撤銷')? 'selected': ''}>已撤銷</option>
 						</select>
 					</div>
-					<!-- <div class="" style="height: 145.8px; width: 194px;"> -->
-					<!-- <img style="height: 145.8px; width: 194px;" -->
-					<%-- src="<%=request.getContextPath()%>/tool/showimage.do?action=news_photo&news_no=${newsVO.news_no}"> --%>
-					<!-- </div> -->
 					<div class="form-group">
-						<input type="file" name="news_photo">
+						<label for="news_photo">先前照片</label>
+						<div class="" style="height: 145.8px; width: 194px;">
+							<img style="height: 145.8px; width: 194px;"
+								src="<%=request.getContextPath()%>/tool/showimage.do?action=news_photo&news_no=${newsVO.news_no}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="news_content">照片預覽</label> <input type="file"
+							name="news_photo" onchange="readURL(this);"> <img
+							name="news_photo" id="imgpreview" alt="照片預覽" />
 					</div>
 					<div class="form-group">
 						<label for="empno_no">員工編號</label><input type="text"
@@ -114,21 +119,23 @@
 							value="<%=(newsVO == null) ? "EM00000002" : newsVO.getEmp_no()%>" />
 					</div>
 					<div class="modal-footer">
-						<!-- <input type="hidden" name="action" value="leave"> -->
-						<!-- <button type="submit" class="btn btn-default" data-dismiss="modal" -->
-						<!-- value="離開">離開</button> -->
-						<input type="hidden" name="action" value="update">
-						<input type="hidden" name="news_no" value="${newsVO.news_no}">
-						<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> <!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
-						<input type="hidden" name="whichPage" value="<%=request.getParameter("whichPage")%>"> <!--只用於:istAllEmp.jsp-->
+						<input type="hidden" name="action" value="update"> <input
+							type="hidden" name="news_no" value="${newsVO.news_no}"> <input
+							type="hidden" name="requestURL"
+							value="<%=request.getParameter("requestURL")%>">
+						<!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
+						<input type="hidden" name="whichPage"
+							value="<%=request.getParameter("whichPage")%>">
+						<!--只用於:istAllEmp.jsp-->
 						<button type="submit" class="btn btn_cooper" value="送出修改">送出修改</button>
 					</div>
 				</form>
 			</div>
 		</div>
-		<br>送出修改的來源網頁路徑:<br><b>
-   <font color=blue>request.getParameter("requestURL"):</font> <%=request.getParameter("requestURL")%><br>
-   <font color=blue>request.getParameter("whichPage"): </font> <%=request.getParameter("whichPage")%> (此範例目前只用於:istAllEmp.jsp))</b>
+		<br>送出修改的來源網頁路徑:<br> <b> <font color=blue>request.getParameter("requestURL"):</font>
+			<%=request.getParameter("requestURL")%><br> <font color=blue>request.getParameter("whichPage"):
+		</font> <%=request.getParameter("whichPage")%> (此範例目前只用於:istAllEmp.jsp))
+		</b>
 	</div>
 	<!-- 結束修改新聞公告 ===================================================================================== -->
 	<!-- 以上是你可以放的內容 ================================================================================= -->

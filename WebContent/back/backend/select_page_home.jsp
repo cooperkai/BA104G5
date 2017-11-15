@@ -161,7 +161,9 @@
 							<div class="panel-body panelbody ann_table">
 								<a href='<%=request.getContextPath()%>/back/ann/listAllAnn.jsp' class='cooper_ann_href'>管理系統公告</a>
 							</div>
-							<div class="panel-body panelbody promo_table">管理促銷資訊</div>
+							<div class="panel-body panelbody promo_table">
+								<a href='<%=request.getContextPath()%>/back/promo/listAllPromo.jsp' class='cooper_ann_href'>管理促銷資訊</a>
+							</div>
 						</div>
 						<!-- </div> -->
 						<!-- <div class="panel panel-primary"> -->

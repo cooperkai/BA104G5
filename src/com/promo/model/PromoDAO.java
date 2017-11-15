@@ -1,7 +1,6 @@
 package com.promo.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class PromoDAO implements PromoDAO_interface {
+
 	private static DataSource ds = null;
 	static {
 		try {
@@ -22,12 +22,12 @@ public class PromoDAO implements PromoDAO_interface {
 		} catch (NamingException ne) {
 			ne.printStackTrace();
 		}
-	} 
+	}
 
-	private static final String INSERT_STMT = "INSERT INTO Promo (Promo_No, Promo_From, Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State) VALUES('PRO'||LPAD(TO_CHAR(SEQ_PRO.NEXTVAL), 7, '0'), ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_STMT = "UPDATE Promo SET Promo_From=?, Promo_To=?, Promo_Name=?, Promo_Content=?, Promo_Photo=?, Promo_State=? WHERE Promo_No = ?";
-	private static final String GET_ONE_STMT = "SELECT Promo_No, to_char(Promo_From, 'yyyy-mm-dd')Promo_From, to_char(Promo_To, 'yyyy-mm-dd')Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State, to_char(Promo_Date, 'yyyy-mm-dd')Promo_Date FROM Promo WHERE Promo_No = ?";
-	private static final String GET_ALL_STMT = "SELECT Promo_No, to_char(Promo_From, 'yyyy-mm-dd')Promo_From, to_char(Promo_To, 'yyyy-mm-dd')Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State, to_char(Promo_Date, 'yyyy-mm-dd')Promo_Date FROM Promo ORDER BY Promo_No";
+	private static final String INSERT_STMT = "INSERT INTO Promo (Promo_No, Promo_From, Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State, EMP_NO) VALUES('PRO'||LPAD(TO_CHAR(SEQ_PRO.NEXTVAL), 7, '0'), ?, ?, ?, ?, ?, ?, ?)";
+	private static final String UPDATE_STMT = "UPDATE Promo SET Promo_From=?, Promo_To=?, Promo_Name=?, Promo_Content=?, Promo_Photo=?, Promo_State=?, EMP_NO=? WHERE Promo_No = ?";
+	private static final String GET_ONE_STMT = "SELECT Promo_No, to_char(Promo_From, 'yyyy-mm-dd')Promo_From, to_char(Promo_To, 'yyyy-mm-dd')Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State, to_char(Promo_Date, 'yyyy-mm-dd')Promo_Date, EMP_NO FROM Promo WHERE Promo_No = ?";
+	private static final String GET_ALL_STMT = "SELECT Promo_No, to_char(Promo_From, 'yyyy-mm-dd')Promo_From, to_char(Promo_To, 'yyyy-mm-dd')Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State, to_char(Promo_Date, 'yyyy-mm-dd')Promo_Date, EMP_NO FROM Promo ORDER BY Promo_No";
 	private static final String GET_ALL_BY_TIME = "SELECT * FROM Promo ORDER BY Promo_To DESC";// 查詢全部照著期限To
 	private static final String UPDATE_FOR_PHOTO = "UPDATE Promo SET Promo_Photo=?, Promo_Content=? WHERE Promo_No=?";// 專門上傳照片，內容
 
@@ -51,12 +51,14 @@ public class PromoDAO implements PromoDAO_interface {
 			pstmt.setString(4, promoVO.getPromo_content());
 			pstmt.setBytes(5, promoVO.getPromo_photo());
 			pstmt.setString(6, promoVO.getPromo_state());
+			pstmt.setString(7, promoVO.getEmp_no());
 
 			pstmt.executeUpdate();
 			con.commit();
 			con.setAutoCommit(true);
 
 		} catch (SQLException se) {
+			se.printStackTrace();
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (pstmt != null) {
@@ -95,7 +97,8 @@ public class PromoDAO implements PromoDAO_interface {
 			pstmt.setString(4, promoVO.getPromo_content());
 			pstmt.setBytes(5, promoVO.getPromo_photo());
 			pstmt.setString(6, promoVO.getPromo_state());
-			pstmt.setString(7, promoVO.getPromo_no());
+			pstmt.setString(7, promoVO.getEmp_no());
+			pstmt.setString(8, promoVO.getPromo_no());
 
 			pstmt.executeUpdate();
 			con.commit();
@@ -146,6 +149,7 @@ public class PromoDAO implements PromoDAO_interface {
 				promovo.setPromo_state(rs.getString("Promo_State"));
 				promovo.setPromo_date(rs.getDate("Promo_Date"));
 				promovo.setPromo_no(rs.getString("Promo_No"));
+				promovo.setEmp_no(rs.getString("EMP_No"));
 			}
 
 		} catch (SQLException se) {
@@ -180,7 +184,6 @@ public class PromoDAO implements PromoDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 
@@ -195,6 +198,7 @@ public class PromoDAO implements PromoDAO_interface {
 				promovo.setPromo_state(rs.getString("Promo_State"));
 				promovo.setPromo_date(rs.getDate("Promo_Date"));
 				promovo.setPromo_no(rs.getString("Promo_No"));
+				promovo.setEmp_no(rs.getString("EMP_No"));
 				promoList.add(promovo);
 			}
 
@@ -309,5 +313,4 @@ public class PromoDAO implements PromoDAO_interface {
 			}
 		}
 	}// 專門上傳照片，內容結束
-
 }

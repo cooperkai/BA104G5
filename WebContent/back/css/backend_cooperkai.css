@@ -116,7 +116,9 @@
 
 
 /* 促銷修改照片預覽 */
-#imgpreview, .promo_photo {
+#imgpreview, 
+.promo_photo,
+.mews_photo {
 	width: 50%;
 	height: 291.2px;
 }

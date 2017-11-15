@@ -39,7 +39,7 @@
 	<nav class="navbar navbar-fixed-top main">
 	<div class="container-fluid">
 		<div class="navbar-header col-xs-12 col-sm-3">
-			<a class="navbar-brand " href="#"><img class="navshadow"
+			<a class="navbar-brand " href="<%=request.getContextPath() %>/back/backend/select_page_home.jsp"><img class="navshadow"
 				src="<%=request.getContextPath()%>/images/For House logo.png"
 				width="120px"></a>
 		</div>

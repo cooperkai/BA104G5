@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import com.news.model.NewsVO;
 import com.promo.model.PromoService;
 import com.promo.model.PromoVO;
 
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 50 * 50 * 1024 * 1024)
 public class PromoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -33,6 +35,10 @@ public class PromoServlet extends HttpServlet {
 		if ("getOne_For_Display".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+
+			String requestURL = req.getParameter("requestURL");// 送出修改的來源網頁路徑
+			System.out.println("promo_getOne_For_Update: " + requestURL);
+			String whichPage = req.getParameter("whichPage");
 
 			try {
 				System.out.println("promo_getOne_For_Display_try_in");
@@ -64,14 +70,15 @@ public class PromoServlet extends HttpServlet {
 					return;// 程式中斷
 				}
 
-				/*****************************
+				/******************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
-				req.setAttribute("promoVO", promoVO); // 資料庫取出的promoVO物件,存入req
-				String url = "/back/promo/listOnePromo.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
-
+				if (requestURL.equals("/back/promo/listAllPromo.jsp")) {
+					req.setAttribute("promoVO", promoVO); // 資料庫取出的promoVO物件,存入req
+					String url = requestURL;
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
+				}
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
@@ -103,7 +110,7 @@ public class PromoServlet extends HttpServlet {
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
 				req.setAttribute("promoVO", promoVO);
-				String url = "/back/news/update_news_input.jsp";
+				String url = "/back/promo/update_promo_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交update_promoVO_input.jsp
 				successView.forward(req, res);
 
@@ -156,6 +163,8 @@ public class PromoServlet extends HttpServlet {
 					errorMsgs.add("請選擇促銷狀態");
 				}
 
+				String emp_no = req.getParameter("emp_no");
+
 				PromoVO promoVO = new PromoVO();
 
 				byte[] promo_photo = null;
@@ -189,6 +198,7 @@ public class PromoServlet extends HttpServlet {
 				promoVO.setPromo_photo(promo_photo);
 				promoVO.setPromo_state(promo_state);
 				promoVO.setPromo_no(promo_no);
+				promoVO.setEmp_no(emp_no);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -201,7 +211,7 @@ public class PromoServlet extends HttpServlet {
 				/*************************** 2.開始修改資料 *****************************************/
 				PromoService promoSvc = new PromoService();
 				promoVO = promoSvc.update(promo_from, promo_to, promo_name, promo_content, promo_photo, promo_state,
-						promo_no);
+						promo_no, emp_no);
 
 				/*******************************
 				 * 3.修改完成,準備轉交(Send the Success view)
@@ -220,7 +230,7 @@ public class PromoServlet extends HttpServlet {
 		} // 更新促銷結束
 
 		// 新增促銷
-		if ("insert".equals(action)) { // 來自addPromo.jsp的請求
+		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -228,15 +238,12 @@ public class PromoServlet extends HttpServlet {
 			try {
 
 				System.out.println("promo_insert_try_in");
-				/******************************
+				/********************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 *****************/
 				String promo_name = req.getParameter("promo_name");
-				String promo_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,100}$";
 				if (promo_name == null || promo_name.trim().length() == 0) {
 					errorMsgs.add("促銷標題: 請勿空白");
-				} else if (!promo_name.trim().matches(promo_titleReg)) {// 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("促銷標題: 只能是中、英文字母、數字");
 				}
 
 				String promo_content = req.getParameter("promo_content").trim();
@@ -250,22 +257,12 @@ public class PromoServlet extends HttpServlet {
 					errorMsgs.add("請選擇促銷狀態");
 				}
 
-				PromoVO promoVO = new PromoVO();
-
 				byte[] promo_photo = null;
-				try {
-					Part photo = req.getPart("promo_photo");
-					if (!photo.getContentType().equalsIgnoreCase("application/octet-stream")) {
-						InputStream in = photo.getInputStream();
-						promo_photo = new byte[in.available()];
-						in.read(promo_photo);
-						in.close();
-					} else {
-						promo_photo = promoVO.getPromo_photo();
-					}
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
+				Part photo = req.getPart("promo_photo");
+				InputStream in = photo.getInputStream();
+				promo_photo = new byte[in.available()];
+				in.read(promo_photo);
+				in.close();
 
 				java.sql.Date promo_from = null;
 				java.sql.Date promo_to = null;
@@ -276,12 +273,16 @@ public class PromoServlet extends HttpServlet {
 					errorMsgs.add("請選擇日期");
 				}
 
+				String emp_no = req.getParameter("emp_no");
+
+				PromoVO promoVO = new PromoVO();
 				promoVO.setPromo_from(promo_from);
 				promoVO.setPromo_to(promo_to);
 				promoVO.setPromo_name(promo_name);
 				promoVO.setPromo_content(promo_content);
 				promoVO.setPromo_photo(promo_photo);
 				promoVO.setPromo_state(promo_state);
+				promoVO.setEmp_no(emp_no);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -293,9 +294,12 @@ public class PromoServlet extends HttpServlet {
 
 				/*************************** 2.開始修改資料 *****************************************/
 				PromoService promoSvc = new PromoService();
-				promoVO = promoSvc.add(promo_from, promo_to, promo_name, promo_content, promo_photo, promo_state);
+				promoVO = promoSvc.add(promo_from, promo_to, promo_name, promo_content, promo_photo, promo_state,
+						emp_no);
 
-				/****************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				/******************************
+				 * 3.修改完成,準備轉交(Send the Success view)
+				 *************/
 				req.setAttribute("promoVO", promoVO);
 				String url = "/back/promo/listAllPromo.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後,轉交listAllPromo.jsp
@@ -310,5 +314,4 @@ public class PromoServlet extends HttpServlet {
 		} // 新增促銷結束
 
 	}
-
 }

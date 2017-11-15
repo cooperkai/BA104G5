@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.promo.model.*"%>
- 
+
 <%
 	PromoVO promoVO = (PromoVO) request.getAttribute("promoVO");
 	PromoService promoSvc = new PromoService();
@@ -40,6 +40,8 @@
 							<th>促銷照片</th>
 							<th>修改狀態</th>
 							<th>新增時間</th>
+							<th>員工編號</th>
+							<th>修改促銷內容</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -50,8 +52,8 @@
 								${(promoVO.promo_no==param.promo_no) ? 'bgcolor=#54FF9F' : ''}>
 								<td>${promoVO.promo_no}</td>
 								<td><fmt:formatDate value="${promoVO.promo_from}"
-										pattern="yyyy-MM-dd" />~<fmt:formatDate
-										value="${promoVO.promo_to}" pattern="yyyy-MM-dd" /></td>
+										pattern="MM-dd" />~ <br> <fmt:formatDate
+										value="${promoVO.promo_to}" pattern="MM-dd" /></td>
 								<td class="text_overflow">${promoVO.promo_name}</td>
 								<td class="text_overflow">${promoVO.promo_content}</td>
 								<td>
@@ -60,16 +62,30 @@
 											src="<%=request.getContextPath()%>/tool/showimage.do?action=promo_photo&promo_no=${promoVO.promo_no}" />
 									</div>
 								</td>
-
 								<td>
 									<div class="dropdown">${promoVO.promo_state}</div>
 								</td>
-								<td>${promoVO.promo_date}</td>
+								<td><fmt:formatDate value="${promoVO.promo_date}"
+										pattern="MM-dd" /></td>
+								<td>${promoVO.emp_no}</td>
+								<td>
+									<form METHOD="post" ACTION="promo.do">
+										<input class="btn btn_cooper modal_jump cooper_ann_href"
+											type="submit" value="修改促銷資訊"> <input type="hidden"
+											name="promo_no" value="${promoVO.promo_no}"> <input
+											type="hidden" name="requestURL"
+											value="<%=request.getServletPath()%>">
+										<!--送出本網頁的路徑給Controller-->
+										<input type="hidden" name="whichPage" value="<%=whichPage%>">
+										<!--送出當前是第幾頁給Controller-->
+										<input type="hidden" name="action" value="getOne_For_Update">
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				<%@include file="/page/page2.file"%>
+
 
 				<table class="table_main">
 					<tr>
@@ -90,10 +106,20 @@
 										<option value="${promoVO.promo_no}">${promoVO.promo_no}
 									</c:forEach>
 								</select> <input type="hidden" name="action" value="getOne_For_Display">
+								<input type="hidden" name="requestURL"
+									value="<%=request.getServletPath()%>"> <input
+									type="hidden" name="whichPage" value="<%=whichPage%>">
 								<input type="submit" value="送出">
 							</FORM>
 						</td>
 					</tr>
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12">
+								<%@include file="/page/page2.file"%>
+							</div>
+						</div>
+					</div>
 					<tr>
 						<td>
 							<%-- 錯誤表列 --%> <c:if test="${not empty errorMsgs}">
@@ -122,15 +148,15 @@
 					<h4 class="modal-title">新增促銷活動</h4>
 				</div>
 				<div class="modal-body">
-					<form role="form" METHOD="post" ACTION="/back/promo/promo.do"
-						name="promo">
-						
+					<form role="form" METHOD="post" ACTION="promo.do"
+						enctype="multipart/form-data" name="promo">
+
 						<div class="form-group div0">
-							<label for="promo_photo">促銷照片</label> 
-							<input type="file"	name="promo_photo" onchange="readURL(this);"> 
-							<img name="promo_photo" id="imgpreview" alt="preview image" />
+							<label for="promo_photo">促銷照片預覽</label> <input type="file"
+								name="promo_photo" onchange="readURL(this);"> <img
+								name="promo_photo" id="imgpreview" alt="照片預覽" />
 						</div>
-						
+
 						<label for="promo_period">促銷時間</label>
 						<div class="col-sm-12">
 							<div class="form-group">
@@ -167,10 +193,14 @@
 									${(promoVO.promo_state=='未上架')? 'selected': ''}>未上架</option>
 							</select>
 						</div>
+						<div class="form-group">
+							<label for="empno_no">員工編號</label><input type="text"
+								class="form-control" name="emp_no"
+								value="<%=(promoVO == null) ? "EM00000002" : promoVO.getEmp_no()%>" />
+						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">離開</button>
-
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn_cooper" value="送出新增">送出新增</button>
 						</div>

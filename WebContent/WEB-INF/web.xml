@@ -100,7 +100,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PromoServlet</servlet-name>
-		<url-pattern>/back/promo/promoservlet.do</url-pattern>
+		<url-pattern>/back/promo/promo.do</url-pattern>
 	</servlet-mapping>
 
 </web-app>

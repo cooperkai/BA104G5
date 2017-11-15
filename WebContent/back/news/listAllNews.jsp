@@ -44,7 +44,7 @@
 							<th>新聞照片</th>
 							<th>新增時間</th>
 							<th>員工編號</th>
-							<th>修改新聞狀態</th>
+							<th>修改新聞內容</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -91,7 +91,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<%@include file="/page/page2.file"%>
 				<table class="table_main">
 					<tr>
 						<td>
@@ -127,6 +126,13 @@
 							</FORM>
 						</td>
 					</tr>
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12">
+								<%@include file="/page/page2.file"%>
+							</div>
+						</div>
+					</div>
 					<tr>
 						<td>
 							<%-- 錯誤表列 --%> <c:if test="${not empty errorMsgs}">
@@ -196,7 +202,9 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="file" name="news_photo">
+						<label for="news_photo">照片預覽</label>
+							<input type="file" name="news_photo" onchange="readURL(this);">
+							<img name="news_photo" id="imgpreview" alt="照片預覽" />
 						</div>
 						<div class="form-group">
 							<label for="empno_no">員工編號</label><input type="text"

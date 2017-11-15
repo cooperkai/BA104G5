@@ -72,7 +72,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<%@include file="/page/page2.file"%>
 				<table>
 					<tr>
 						<td>
@@ -108,6 +107,13 @@
 							</FORM>
 						</td>
 					</tr>
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12">
+								<%@include file="/page/page2.file"%>
+							</div>
+						</div>
+					</div>
 					<tr>
 						<td>
 							<%-- 錯誤表列 --%> <c:if test="${not empty errorMsgs}">
