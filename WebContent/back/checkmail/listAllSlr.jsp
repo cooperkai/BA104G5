@@ -1,24 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.realtor.model.*"%>
+<%@ page import="com.slr.model.*"%>
 
 <%
 
-RealtorService realtorSvc = new RealtorService();
-List<RealtorVO> list = realtorSvc.getAll();
+SlrService slrSvc = new SlrService();
+List<SlrVO> list = slrSvc.getAllSlr();
 pageContext.setAttribute("list", list);
 
 %>
-
-<jsp:useBean id="reSvc" scope="page" class="com.realestate.model.RealEstateService"/>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>Insert title here</title>
+<title>所有廠商狀態</title>
 
 <style>
   table#table-1 {
@@ -70,37 +68,37 @@ pageContext.setAttribute("list", list);
 
 <table>
 	<tr>
-		<th>房仲編號</th>
-		<th>房仲姓名</th>
-		<th>房仲ID</th>
-		<th>房仲狀態</th>
-		<th colspan="2">修改房仲狀態</th>
-		
+		<th>廠商編號</th>
+		<th>廠商名稱</th>
+		<th>廠商ID</th>
+		<th>廠商狀態</th>
+		<th colspan="2">修改廠商狀態</th>
+		 
 	</tr>
 	<%@ include file="/page/page1.file" %> 
-	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr align='center' valign='middle' ${(realtorVO.rtr_no==param.rtr_no) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
-			<td>${realtorVO.rtr_no}</td>
-			<td>${realtorVO.rtr_name}</td>
-			<td>${realtorVO.rtr_id}</td>
-			<td>${realtorVO.rtr_state}</td>
+	<c:forEach var="slrVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+		<tr align='center' valign='middle' ${(slrVO.slr_no==param.slr_no) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
+			<td>${slrVO.slr_no}</td>
+			<td>${slrVO.slr_name}</td>
+			<td>${slrVO.slr_id}</td>
+			<td>${slrVO.slr_state}</td>
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back/checkmail/checkmail.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="通過"> 
-			     <input type="hidden" name="rtr_no"      value="${realtorVO.rtr_no}">
+			     <input type="hidden" name="slr_no"      value="${slrVO.slr_no}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
-			     <input type="hidden" name="action"	    value="onRtr">
+			     <input type="hidden" name="action"	    value="onSlr">
 			  </FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back/checkmail/checkmail.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="停權"> 
-			     <input type="hidden" name="rtr_no"      value="${realtorVO.rtr_no}">
+			     <input type="hidden" name="slr_no"      value="${slrVO.slr_no}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
-			     <input type="hidden" name="action"	    value="offRtr">
+			     <input type="hidden" name="action"	    value="offSlr">
 			  </FORM>
 			</td>
 		</tr>

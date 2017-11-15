@@ -22,8 +22,8 @@ import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Realtor;
 public class RealtorJDBCDAO implements RealtorDAO_interface {
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
 	private static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String userid = "cooperkai";
-	private static final String password = "cooperkai";
+	private static final String userid = "BA104G5";
+	private static final String password = "ba104g5";
 
 	private static final String INSERT_STMT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO) "
 			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -869,11 +869,11 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		// System.out.println("===============================================");
 
 		// 修改房仲狀態
-		// RealtorVO vo5 = new RealtorVO();
-		// vo5.setRtr_state("OFF");
-		// vo5.setRtr_no("RT00000002");
-		// dao.changeRealtorState(vo5);
-		// System.out.println("===============================================");
+		 RealtorVO vo5 = new RealtorVO();
+		 vo5.setRtr_state("ON");
+		 vo5.setRtr_no("RT00000002");
+		 dao.changeRealtorState(vo5);
+		 System.out.println("===============================================");
 
 		// 找單一房仲透過名字
 		// RealtorVO vo6 = dao.findByName("張三豐");
@@ -919,22 +919,21 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		// }
 
 		// 查詢房仲ByKeyword
-		String keyword = "森";
-
-		List<RealtorVO> list2 = dao.findByKeyword(keyword);
-		for (RealtorVO arealtor : list2) {
-			System.out.println(arealtor.getRtr_no());
-			System.out.println(arealtor.getRtr_id());
-			System.out.println(arealtor.getRtr_psw());
-			System.out.println(arealtor.getRtr_name());
-			System.out.println(arealtor.getRtr_photo());
-			System.out.println(arealtor.getRtr_area());
-			System.out.println(arealtor.getRtr_intro());
-			System.out.println(arealtor.getRtr_idno());
-			System.out.println(arealtor.getRe_no());
-			System.out.println(arealtor.getRtr_state());
-			System.out.println();
-		} // 查詢房仲ByKeyword結束
+//		String keyword = "森";
+//		List<RealtorVO> list2 = dao.findByKeyword(keyword);
+//		for (RealtorVO arealtor : list2) {
+//			System.out.println(arealtor.getRtr_no());
+//			System.out.println(arealtor.getRtr_id());
+//			System.out.println(arealtor.getRtr_psw());
+//			System.out.println(arealtor.getRtr_name());
+//			System.out.println(arealtor.getRtr_photo());
+//			System.out.println(arealtor.getRtr_area());
+//			System.out.println(arealtor.getRtr_intro());
+//			System.out.println(arealtor.getRtr_idno());
+//			System.out.println(arealtor.getRe_no());
+//			System.out.println(arealtor.getRtr_state());
+//			System.out.println();
+//		} // 查詢房仲ByKeyword結束
 
 	}// 測試結束
 

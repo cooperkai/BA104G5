@@ -14,14 +14,16 @@ public interface RealtorDAO_interface {
 	
 	public RealtorVO findById(String rtr_id);//找房仲ID
 	public void changePassword(RealtorVO realtorVO);//更換密碼
-	public void changeRealtorState(RealtorVO realtorVO);//更換房仲狀態
-	public RealtorVO findByName(String rtr_name);//找房仲名稱
-	public List<RealtorVO> getIdList();//列出所有房仲ID(email)
+	
+	
 //	public List<RealtorVO> getNameList();//列出所有房仲姓名
 //	public List<RealtorVO> getAreaList();//列出所有房仲所屬地區
+
+	public RealtorVO findByName(String rtr_name);//找房仲名稱
+	public List<RealtorVO> getIdList();//列出所有房仲ID(email)
 	public List<RealtorVO> getAll(Map<String, String[]> map);//萬用複合查詢(傳入參數型態Map)(回傳 List)
 	public List<RealtorVO> findByKeyword(String keyword);//複合查詢ByKeyword
-	
+	public void changeRealtorState(RealtorVO realtorVO);//更換房仲狀態
 	
  
 }

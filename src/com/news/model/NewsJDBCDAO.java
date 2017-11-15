@@ -15,8 +15,8 @@ import java.util.List;
 public class NewsJDBCDAO implements NewsDAO_interface {
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
 	private static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String userid = "cooperkai";
-	private static final String password = "cooperkai";
+	private static final String userid = "BA104G5";
+	private static final String password = "ba104g5";
 
 	private static final String INSERT_STMT = 
 			"INSERT INTO News (News_No, NType_No, News_Title, News_Content, News_Photo, News_State, EMP_NO) VALUES('NS'||LPAD(TO_CHAR(seq_news.NEXTVAL), 8, '0'), ?, ?, ?, ?, ?, ?)";

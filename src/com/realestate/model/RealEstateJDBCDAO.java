@@ -16,8 +16,8 @@ public class RealEstateJDBCDAO implements RealEstateDAO_interface {
 
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
 	private static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String userid = "cooperkai";
-	private static final String password = "cooperkai";
+	private static final String userid = "BA104G5";
+	private static final String password = "ba104g5";
 
 	private static final String INSERT_STMT = "INSERT INTO RealEstate (RE_No, RE_Name) VALUES('RE'||(LPAD(to_char(RE_SEQ.NEXTVAL),8,'0')), ?)";
 	private static final String GET_ONE_STMT = "SELECT RE_No, RE_Name FROM RealEstate WHERE RE_No = ?";

@@ -16,8 +16,8 @@ public class NewsTypeJDBCDAO implements NewsTypeDAO_interface {
 
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
 	private static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String userid = "cooperkai";
-	private static final String password = "cooperkai";
+	private static final String userid = "BA104G5";
+	private static final String password = "ba104g5";
 
 	private static final String INSERT_STMT = "INSERT INTO News_Type (NType_No, News_Type) VALUES(?, ?)";
 	private static final String GET_ONE_STMT = "SELECT NType_No, News_Type FROM News_Type WHERE NType_No = ?";

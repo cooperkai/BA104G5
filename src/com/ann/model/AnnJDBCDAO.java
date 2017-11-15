@@ -13,8 +13,8 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
 	private static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String userid = "cooperkai";
-	private static final String password = "cooperkai";
+	private static final String userid = "BA104G5";
+	private static final String password = "ba104g5";
 
 	private static final String INSERT_STMT = "INSERT INTO ANN (ANN_No, ANN_Title, ANN_Content, ANN_State, EMP_NO) VALUES(seq_ann.NEXTVAL, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE ANN SET ANN_Title=?, ANN_Content=?, ANN_State=?, EMP_NO=? WHERE ANN_No = ?";
