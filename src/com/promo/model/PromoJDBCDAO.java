@@ -347,17 +347,18 @@ public class PromoJDBCDAO implements PromoDAO_interface {
 //		dao.insert(vo);
 
 		// 修改
-		 PromoVO vo2 = new PromoVO();
-		 vo2.setPromo_from(java.sql.Date.valueOf("2017-12-18"));
-		 vo2.setPromo_to(java.sql.Date.valueOf("2017-12-25"));
-		 vo2.setPromo_name("aaaaaaaaaaaa");
-		 vo2.setPromo_content("ffffff");
-		 byte[] pic = getPictureByteArray("WebContent/images/promophoto/promo001.jpg");
-		 vo2.setPromo_photo(pic);
-		 vo2.setPromo_state("已上架");
-		 vo2.setPromo_no("PRO0005004");
-		 vo2.setEmp_no("EM00000001");
-		 dao.update(vo2);
+		// PromoVO vo2 = new PromoVO();
+		// vo2.setPromo_from(java.sql.Date.valueOf("2017-12-18"));
+		// vo2.setPromo_to(java.sql.Date.valueOf("2017-12-25"));
+		// vo2.setPromo_name("aaaaaaaaaaaa");
+		// vo2.setPromo_content("ffffff");
+		// byte[] pic =
+		// getPictureByteArray("WebContent/images/promophoto/promo001.jpg");
+		// vo2.setPromo_photo(pic);
+		// vo2.setPromo_state("已上架");
+		// vo2.setPromo_no("PRO0005004");
+		// vo2.setEmp_no("EM00000001");
+		// dao.update(vo2);
 
 		// 查單一
 		// PromoVO vo3 = dao.findByPrimaryKey("PRO0005001");
@@ -401,19 +402,19 @@ public class PromoJDBCDAO implements PromoDAO_interface {
 //		}
 
 		// 專門塞促銷資訊照片，內容
-//		for (int i = 0; i < 5; i++) {
-//			FileInputStream in = new FileInputStream("WebContent/images/promophoto/promo00" + i + ".jpg");
-//			String reader = getLongString("WebContent/txt/promo_txt/promo" + i + ".txt");
-//			String promo_no = "PRO000500" + i;
-//			byte[] promopic = new byte[in.available()];
-//			in.read(promopic);
-//			PromoVO vo5 = new PromoVO();
-//			vo5.setPromo_photo(promopic);
-//			vo5.setPromo_content(reader);
-//			vo5.setPromo_no(promo_no);
-//			dao.updatePhoto(vo5);
-//			in.close();
-//		}
+		for (int i = 0; i < 5; i++) {
+			FileInputStream in = new FileInputStream("WebContent/images/promophoto/promo00" + i + ".jpg");
+			String reader = getLongString("WebContent/txt/promo_txt/promo" + i + ".txt");
+			String promo_no = "PRO000500" + i;
+			byte[] promopic = new byte[in.available()];
+			in.read(promopic);
+			PromoVO vo5 = new PromoVO();
+			vo5.setPromo_photo(promopic);
+			vo5.setPromo_content(reader);
+			vo5.setPromo_no(promo_no);
+			dao.updatePhoto(vo5);
+			in.close();
+		}
 	}
 
 	// 上傳照片的方法

@@ -312,6 +312,7 @@ public class PromoServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		} // 新增促銷結束
-
+		
+		
 	}
 }

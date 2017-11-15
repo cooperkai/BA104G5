@@ -7,8 +7,13 @@
 <%
 	PromoVO promoVO = (PromoVO) request.getAttribute("promoVO");
 	PromoService promoSvc = new PromoService();
+	
 	List<PromoVO> list = promoSvc.getAll();
 	pageContext.setAttribute("list", list);
+	
+	//照著期限排序
+	List<PromoVO> listTime = promoSvc.getAllByTime();
+	pageContext.setAttribute("listTime", listTime);
 %>
 
 
@@ -46,8 +51,8 @@
 					</thead>
 					<tbody>
 						<%@include file="/page/page1.file"%>
-						<c:forEach var="promoVO" items="${list}" begin="<%=pageIndex%>"
-							end="<%=pageIndex+rowsPerPage-1%>">
+						<c:forEach var="promoVO" items="${listTime}"
+							begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 							<tr class="col_name"
 								${(promoVO.promo_no==param.promo_no) ? 'bgcolor=#54FF9F' : ''}>
 								<td>${promoVO.promo_no}</td>
@@ -85,8 +90,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-
-
 				<table class="table_main">
 					<tr>
 						<td>
