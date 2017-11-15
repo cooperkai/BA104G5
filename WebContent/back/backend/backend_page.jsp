@@ -119,9 +119,11 @@ response.setDateHeader("Expires", 0);
 									href='<%=request.getContextPath()%>/back/checkmail/RtrMailCheck.jsp'
 									class='cooper_ann_href'>¼f®Ö©Ð¥òµù¥U</a>
 							</div>
-							<div class="panel-body panelbody"><a
+							<div class="panel-body panelbody">
+								<a
 									href='<%=request.getContextPath()%>/back/checkmail/SlrMailCheck.jsp'
-									class='cooper_ann_href'>¼f®Ö¼t°Óµù¥U</a></div>
+									class='cooper_ann_href'>¼f®Ö¼t°Óµù¥U</a>
+							</div>
 						</div>
 						<!-- </div> -->
 						<!-- °Ï¶ô3 -->

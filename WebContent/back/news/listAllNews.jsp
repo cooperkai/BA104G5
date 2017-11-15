@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.news.model.*"%> 
+<%@ page import="com.news.model.*"%>
 
 <%-- 採用 EL 的寫法取值 --%>
 
@@ -13,9 +13,9 @@
 %>
 
 <%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
 %>
 <!-- 為了new NewsTypeService用 -04系列 -->
 <jsp:useBean id="newstypeSvc" scope="page"
@@ -56,7 +56,9 @@ response.setDateHeader("Expires", 0);
 						<%@include file="/page/page1.file"%>
 						<c:forEach var="newsVO" items="${list}" begin="<%=pageIndex%>"
 							end="<%=pageIndex+rowsPerPage-1%>">
-							<tr class="col_name" ${(newsVO.news_no==param.news_no) ? 'bgcolor=#54FF9F' : ''}><!--將修改的那一筆加入對比色而已-->
+							<tr class="col_name"
+								${(newsVO.news_no==param.news_no) ? 'bgcolor=#54FF9F' : ''}>
+								<!--將修改的那一筆加入對比色而已-->
 								<td>${newsVO.news_no}</td>
 								<!-- 舊版的寫法 -->
 								<%-- <td>${newsVO.ntype_no}</td> --%>
@@ -65,7 +67,8 @@ response.setDateHeader("Expires", 0);
 								<%-- <td>${newstypeSvc.getOne(newsVO.ntype_no).news_type}</td> --%>
 
 								<td>${newsVO.ntype_no}<br>
-									[${newstypeSvc.getOne(newsVO.ntype_no).news_type}]</td>
+									[${newstypeSvc.getOne(newsVO.ntype_no).news_type}]
+								</td>
 
 								<td class="text_overflow">${newsVO.news_title}</td>
 								<td class="text_overflow">${newsVO.news_content}</td>
@@ -84,11 +87,16 @@ response.setDateHeader("Expires", 0);
 								<td>${newsVO.news_date}</td>
 								<td>${newsVO.emp_no}</td>
 								<td>
-									<form METHOD="post" ACTION="<%=request.getContextPath()%>/back/news/news.do">
-										<input class="btn btn_cooper modal_jump cooper_ann_href" type="submit" value="修改新聞公告"> 
-										<input type="hidden" name="news_no" value="${newsVO.news_no}">
-										<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-										<input type="hidden" name="whichPage" value="<%=whichPage%>"><!--送出當前是第幾頁給Controller-->
+									<form METHOD="post"
+										ACTION="<%=request.getContextPath()%>/back/news/news.do">
+										<input class="btn btn_cooper modal_jump cooper_ann_href"
+											type="submit" value="修改新聞公告"> <input type="hidden"
+											name="news_no" value="${newsVO.news_no}"> <input
+											type="hidden" name="requestURL"
+											value="<%=request.getServletPath()%>">
+										<!--送出本網頁的路徑給Controller-->
+										<input type="hidden" name="whichPage" value="<%=whichPage%>">
+										<!--送出當前是第幾頁給Controller-->
 										<input type="hidden" name="action" value="getOne_For_Update">
 									</form>
 								</td>
@@ -121,13 +129,15 @@ response.setDateHeader("Expires", 0);
 					</tr>
 					<tr>
 						<td>
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back/newstype/newstype.do">
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/back/newstype/newstype.do">
 								<b>選擇新聞種類:</b> <select size="1" name="ntype_no">
 									<c:forEach var="newstypeVO" items="${newstypeSvc.getAll()}">
 										<option value="${newstypeVO.ntype_no}">${newstypeVO.ntype_no}-&nbsp;[${newstypeVO.news_type}]</option>
 									</c:forEach>
-								</select> <input type="hidden" name="action" value="listNews_ByNtype_No_B">
-								<input type="submit" value="送出">
+								</select> <input type="hidden" name="action"
+									value="listNews_ByNtype_No_B"> <input type="submit"
+									value="送出">
 							</FORM>
 						</td>
 					</tr>
@@ -151,12 +161,16 @@ response.setDateHeader("Expires", 0);
 						</td>
 					</tr>
 				</table>
-				
-				<%if (request.getAttribute("listNews_ByNtype_No") != null){%>
-		<jsp:include page="/back/newstype/listNews_ByNtype_No.jsp" />
-	<%} %>
-				
-				
+
+				<%
+					if (request.getAttribute("listNews_ByNtype_No") != null) {
+				%>
+				<jsp:include page="/back/newstype/listNews_ByNtype_No.jsp" />
+				<%
+					}
+				%>
+
+
 			</div>
 		</div>
 	</div>
@@ -207,9 +221,9 @@ response.setDateHeader("Expires", 0);
 							</select>
 						</div>
 						<div class="form-group">
-						<label for="news_photo">照片預覽</label>
-							<input type="file" name="news_photo" onchange="readURL(this);">
-							<img name="news_photo" id="imgpreview" alt="照片預覽" />
+							<label for="news_photo">照片預覽</label> <input type="file"
+								name="news_photo" onchange="readURL(this);"> <img
+								name="news_photo" id="imgpreview" alt="照片預覽" />
 						</div>
 						<div class="form-group">
 							<label for="empno_no">員工編號</label><input type="text"
