@@ -34,7 +34,7 @@ public class SlrService {
 	
 	public SlrVO changeSlrState(String slr_state, String slr_no) {
 		SlrVO slrVO = new SlrVO();
-		slrVO.setSlr_intro(slr_state);
+		slrVO.setSlr_state(slr_state);
 		slrVO.setSlr_no(slr_no);
 		dao.changeSlrState(slrVO);
 		return slrVO;

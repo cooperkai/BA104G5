@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.realtor.model.RealtorService;
 import com.slr.model.SlrService;
+import com.tool.controller.RtrMailOn;
 
 @SuppressWarnings("serial")
 public class CheckMailServlet extends HttpServlet {
@@ -38,10 +39,23 @@ public class CheckMailServlet extends HttpServlet {
 				/*********************** 接收請求參數 *************************/
 				String rtr_no = req.getParameter("rtr_no");
 				String rtr_state = "ON";
+				String rtr_name = req.getParameter("rtr_name");
+
+//				String rtr_id = req.getParameter("rtr_id");
 				/*********************** 開始update資料 **********************/
 
 				RealtorService realtorSvc = new RealtorService();
 				realtorSvc.changeRealtorState(rtr_state, rtr_no);
+
+				
+				// 寄信通知
+				String rtr_id = "eatkaikai@gmail.com";
+				String msg = "非常感謝你加入本網站[ 房仲 ]會員，已經為你開啟使用本網站服務的權利了，請一定Ipad溫開水!" 
+						+ "\r\n" + "請不用懷疑，馬上點開下面網址: "
+						+ "http://localhost:8081/BA104G5/front/realtor/realtor_login.jsp";
+				RtrMailOn rtrMail = new RtrMailOn();
+				rtrMail.sendMail(rtr_name, rtr_id, msg);
+
 				/*********************** 新增完成,準備轉交 ********************/
 
 				String url = requestURL;
@@ -65,11 +79,6 @@ public class CheckMailServlet extends HttpServlet {
 			String requestURL = req.getParameter("requestURL");
 
 			try {
-				
-			Enumeration names = req.getParameterNames();
-			while(names.hasMoreElements()){
-				System.out.println(names.nextElement());
-			}
 				/*********************** 接收請求參數 *************************/
 				String rtr_no = req.getParameter("rtr_no");
 				String rtr_state = "OFF";
@@ -80,7 +89,6 @@ public class CheckMailServlet extends HttpServlet {
 				/*********************** 新增完成,準備轉交 ********************/
 
 				String url = requestURL;
-System.out.println(url);
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -103,10 +111,6 @@ System.out.println(url);
 
 			try {
 
-				Enumeration names = req.getParameterNames();
-				while(names.hasMoreElements()){
-					System.out.println(names.nextElement());
-				}
 				/*********************** 接收請求參數 *************************/
 				String slr_no = req.getParameter("slr_no");
 				String slr_state = "ON";
@@ -137,11 +141,6 @@ System.out.println(url);
 			String requestURL = req.getParameter("requestURL");
 
 			try {
-				
-				Enumeration names = req.getParameterNames();
-				while(names.hasMoreElements()){
-					System.out.println(names.nextElement());
-				}
 				/*********************** 接收請求參數 *************************/
 				String slr_no = req.getParameter("slr_no");
 				String slr_state = "OFF";

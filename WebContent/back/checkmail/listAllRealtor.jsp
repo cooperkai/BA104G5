@@ -87,6 +87,9 @@ pageContext.setAttribute("list", list);
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back/checkmail/checkmail.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="通過"> 
 			     <input type="hidden" name="rtr_no"      value="${realtorVO.rtr_no}">
+			     <input type="hidden" name="rtr_id"      value="${realtorVO.rtr_id}">
+			     <input type="hidden" name="rtr_name"      value="${realtorVO.rtr_name}">
+			     <input type="hidden" name="rtr_no"      value="${realtorVO.rtr_no}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
 			     <input type="hidden" name="action"	    value="onRtr">
@@ -96,6 +99,7 @@ pageContext.setAttribute("list", list);
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back/checkmail/checkmail.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="停權"> 
 			     <input type="hidden" name="rtr_no"      value="${realtorVO.rtr_no}">
+			     <input type="hidden" name="rtr_id"      value="${realtorVO.rtr_id}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
 			     <input type="hidden" name="action"	    value="offRtr">
