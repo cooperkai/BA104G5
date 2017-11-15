@@ -403,7 +403,7 @@ public class RealtorServlet extends HttpServlet {
 			Integer whichPage = 0;
 			try {
 				Integer.valueOf(req.getParameter("whichPage"));
-			} catch (Exception e) {
+			} catch (Exception e) { 
 				whichPage = 1;
 			}
 
@@ -421,6 +421,13 @@ public class RealtorServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 			successView.forward(req, res);
 		} // 房仲查詢關鍵字結束
+		
+		
+		//FB登入
+		if("FBLogin".equals(action)){
+			String name = req.getParameter("name");
+		}
+		
 
 	}
 }

@@ -23,5 +23,5 @@ public interface RealtorDAO_interface {
 	public List<RealtorVO> findByKeyword(String keyword);//複合查詢ByKeyword
 	
 	
-
+ 
 }

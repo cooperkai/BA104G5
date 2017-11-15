@@ -109,7 +109,7 @@ public class RealtorService {
 	public List<RealtorVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
 	}
-
+ 
 	// 關鍵字查詢
 	public List<RealtorVO> findByKeyword(String keyword) {
 		return dao.findByKeyword(keyword);
