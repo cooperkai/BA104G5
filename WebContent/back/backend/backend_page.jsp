@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
- 
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -23,7 +23,8 @@
 <!-- 後端首頁主要_css&photo -->
 <link rel="shortcut icon"
 	href="<%=request.getContextPath()%>/images/Houselogo1.png">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/back/css/main.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/back/css/main.css">
 <!-- 後端首頁主要_css&photo -->
 
 <!-- cooperkai_css -->
@@ -44,7 +45,9 @@
 	<nav class="navbar navbar-fixed-top main">
 	<div class="container-fluid">
 		<div class="navbar-header col-xs-12 col-sm-3">
-			<a class="navbar-brand " href="<%=request.getContextPath() %>/back/backend/select_page_home.jsp"><img class="navshadow"
+			<a class="navbar-brand "
+				href="<%=request.getContextPath()%>/back/backend/select_page_home.jsp"><img
+				class="navshadow"
 				src="<%=request.getContextPath()%>/images/For House logo.png"
 				width="120px"></a>
 		</div>
@@ -106,8 +109,14 @@
 						</div>
 						<div id="bbb" class="panel-collapse collapse" role="tabpanel"
 							aria-labelledby="panel2">
-							<div class="panel-body panelbody">審核房仲註冊</div>
-							<div class="panel-body panelbody">審核廠商註冊</div>
+							<div class="panel-body panelbody">
+								<a
+									href='<%=request.getContextPath()%>/back/checkmail/RtrMailCheck.jsp'
+									class='cooper_ann_href'>審核房仲註冊</a>
+							</div>
+							<div class="panel-body panelbody"><a
+									href='<%=request.getContextPath()%>/back/checkmail/SlrMailCheck.jsp'
+									class='cooper_ann_href'>審核廠商註冊</a></div>
 						</div>
 						<!-- </div> -->
 						<!-- 區塊3 -->
@@ -155,7 +164,8 @@
 						<div id="eee" class="panel-collapse collapse" role="tabpanel"
 							aria-labelledby="panel2">
 							<div class="panel-body panelbody house_table">
-								<a href='<%=request.getContextPath()%>/back/news/listAllNews.jsp'
+								<a
+									href='<%=request.getContextPath()%>/back/news/listAllNews.jsp'
 									class='cooper_ann_href'>管理房市最新消息</a>
 							</div>
 							<div class="panel-body panelbody ann_table">
@@ -163,10 +173,12 @@
 									class='cooper_ann_href'>管理系統公告</a>
 							</div>
 							<div class="panel-body panelbody promo_table">
-							<a href='<%=request.getContextPath()%>/back/promo/listAllPromo.jsp'
-									class='cooper_ann_href'>管理促銷資訊</a></div>
+								<a
+									href='<%=request.getContextPath()%>/back/promo/listAllPromo.jsp'
+									class='cooper_ann_href'>管理促銷資訊</a>
+							</div>
 						</div>
-						<!-- </div> --> 
+						<!-- </div> -->
 						<!-- <div class="panel panel-primary"> -->
 						<div class="panel-heading paneltitle row" role="tab" id="panel2">
 							<h4 class="panel-title">

@@ -34,7 +34,7 @@ public class SlrMailOn {
 			});
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(username));
+			message.setFrom(new InternetAddress("ba104g5@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(slr_id));
 			message.setSubject("ForHouse系統通知");
 			message.setText("Dear: " + slr_name + msg);
