@@ -50,7 +50,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%@include file="/page/page1.file"%>
+						<%@include file="/page/pagepromo.file"%>
 						<c:forEach var="promoVO" items="${listTime}"
 							begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 							<tr class="col_name"
