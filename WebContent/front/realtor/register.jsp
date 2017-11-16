@@ -6,9 +6,9 @@
 	RealtorVO realtorVOreg = (RealtorVO) request.getAttribute("realtorVOreg");
 %>
 <%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -128,7 +128,8 @@ response.setDateHeader("Expires", 0);
 							<div class="col-sm-9">
 								<jsp:useBean id="realestateSvc" scope="page"
 									class="com.realestate.model.RealEstateService" />
-								<select class="selectpicker show-tick form-control" size="1" name="re_no">
+								<select class="selectpicker show-tick form-control" size="1"
+									name="re_no">
 									<option name="default_item">選擇服務公司</option>
 									<c:forEach var="realestateVO" items="${realestateSvc.all}">
 										<option value="${realestateVO.re_no}"
@@ -195,12 +196,25 @@ response.setDateHeader("Expires", 0);
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2"></label>
-							<div class="col-sm-9">
-								<button type="submit" class="btn btn-warning btn-lg savebutton">加入</button>
-								<div class="col-sm-offset-11 col-sm-1 magicdiv">
+							<div class="col-sm-12 col-sm-2"></div>
+							<div class="col-sm-12 col-sm-2"></div>
+							<div class="col-sm-4">
+								<button type="submit" class="btn btn-primary btn-lg"
+									style="width: 250px;" title="房仲註冊">加入註冊</button>
+							</div>
+							<div class="col-sm-4">
+								<a
+									href="<%=request.getContextPath()%>/front/realtor/realtor_login.jsp"
+									title="登入房仲"><button type="button"
+										class="btn btn-success btn-lg">已有帳號? 登入</button></a>
+							</div>
+						</div>
+						<div class="magicdiv">
+							<div class="row">
+								<div class="col-sm-10"></div>
+								<div class="col-sm-2" style="margin: 0;">
 									<button type="button" class="btn btn-default btn-xs"
-										id="magicBtn1">貼</button>
+										id="magicBtn1">快貼</button>
 								</div>
 							</div>
 						</div>

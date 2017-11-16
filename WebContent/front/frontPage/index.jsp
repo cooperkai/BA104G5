@@ -5,18 +5,24 @@
   MemVO memVO = (MemVO) session.getAttribute("memVO");
 %>
  
-<html>
+<%
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
+%> 
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
 <head>
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/houselogo1.png" />
     <title>For House</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/front/css_front/main.css">
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
     <!-- 神奇小按鈕的script 開始-->
     <script>
@@ -60,7 +66,7 @@
 				<div>
 					<div class="form-group"> </div>
 				    <div class="joinbtn">
-				        <a class="btn btn-info btn-lg btn-block" href="" role="button"><h3>我  是  房  仲</h3></a>
+				        <a class="btn btn-info btn-lg btn-block" href="<%=request.getContextPath()%>/front/realtor/register.jsp" role="button"><h3>我  是  房  仲</h3></a>
 				    </div>
 				    <div class="form-group"> </div>
 				    <div class="joinbtn">

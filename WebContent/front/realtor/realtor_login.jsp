@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
 %>
 
 <head>
@@ -65,8 +65,9 @@ body {
 	<div class="container text-center" id="outter">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
-				<a href="realtor_center.jsp"><img
-					src="images/For House logo.png" width="120px"></a>
+				<a href="<%=request.getContextPath()%>/front/frontPage/index.jsp"><img
+					src="images/For House logo.png" alt="回ForHouse首頁"
+					title="回ForHouse首頁" width="120px"></a>
 			</div>
 		</div>
 	</div>
@@ -99,22 +100,27 @@ body {
 						</div>
 						<div class="form-group margin-top" id="loginBtn">
 							<div class="col-sm-12 col-sm-3"></div>
-							<div class="col-sm-12 col-sm-3"></div>
 							<div class="col-sm-12 col-sm-3">
 								<a class="btn btn-lg btn-danger"
-									href="<%=request.getContextPath()%>/front/reltor/frontPage.jsp"
-									role="button">取消</a>
+									href="<%=request.getContextPath()%>/front/frontPage/index.jsp"
+									title="回ForHouse首頁" role="button">取消</a>
+							</div>
+							<div class="col-sm-12 col-sm-3">
+								<a class="btn btn-lg btn-danger"
+									href="<%=request.getContextPath()%>/front/frontPage/index.jsp"
+									title="忘記密碼" role="button">忘記密碼</a>
 							</div>
 							<div class="col-sm-12 col-sm-3">
 								<input type="submit" value="登入"
-									class="btn btn-primary btn-lg btn-block btn_rtr_cooper">
-								<input type="hidden" name="action" value="realtorLogin">
+									class="btn btn-primary btn-lg btn-block btn_rtr_cooper"
+									title="登入房仲"> <input type="hidden" name="action"
+									value="realtorLogin">
 							</div>
 						</div>
 						<div class="form-group margin-top" id="loginBtn">
 							<div class="row">
-								<div class=" col-sm-12 col-sm-10"></div>
-								<div class="col-sm-12 col-sm-2" style="margin: 0;">
+								<div class="col-sm-10"></div>
+								<div class="col-sm-2" style="margin: 0;">
 									<input type="button" class="btn btn-default btn-xs" value="快貼"
 										id="magicBtn1">
 								</div>
