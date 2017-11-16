@@ -114,4 +114,6 @@ public class RealtorService {
 	public List<RealtorVO> findByKeyword(String keyword) {
 		return dao.findByKeyword(keyword);
 	}
+	
+	
 }

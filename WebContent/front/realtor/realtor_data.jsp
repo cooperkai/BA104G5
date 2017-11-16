@@ -163,7 +163,7 @@ response.setDateHeader("Expires", 0);
 				<div class="navigation">
 					<h3>誰正在找房</h3>
 					<ul>
-						<li><a href="#"><i
+						<li><a href="http://localhost:8081/BA104G5/front/realtor/realtor.do?action=memOpen&SEARCH_STATE=ON"><i
 								class="glyphicon glyphicon-question-sign">&nbsp;XXX</i></a></li>
 					</ul>
 					<ul>

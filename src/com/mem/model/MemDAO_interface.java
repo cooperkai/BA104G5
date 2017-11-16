@@ -1,6 +1,7 @@
 package com.mem.model;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MemDAO_interface {
 	public void insert(MemVO memVO);
@@ -11,4 +12,9 @@ public interface MemDAO_interface {
     public MemVO findById(String mem_id);
     public List<MemVO> getAll();
     public List<MemVO> getIdList();
+    
+    //專門找開放找房狀態的會員BY阿蓋
+    public List<MemVO> getOpenList();
+    //專門找開放找房狀態的會員BY阿蓋Map
+    public List<MemVO> getOpenMap(Map<String, String[]> map);
 }

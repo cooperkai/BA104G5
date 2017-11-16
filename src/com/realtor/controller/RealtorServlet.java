@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.mem.model.MemService;
+import com.mem.model.MemVO;
 import com.realestate.model.RealEstateService;
 import com.realestate.model.RealEstateVO;
 import com.realtor.model.RealtorService;
@@ -403,7 +405,7 @@ public class RealtorServlet extends HttpServlet {
 			Integer whichPage = 0;
 			try {
 				Integer.valueOf(req.getParameter("whichPage"));
-			} catch (Exception e) { 
+			} catch (Exception e) {
 				whichPage = 1;
 			}
 
@@ -413,7 +415,6 @@ public class RealtorServlet extends HttpServlet {
 				req.setAttribute("警告", "查無資料， 請重新查詢");
 			}
 
-
 			req.setAttribute("list", list);
 			req.setAttribute("keyword", keyword);
 			req.setAttribute("action", action);
@@ -421,13 +422,55 @@ public class RealtorServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/realtor_search.jsp");
 			successView.forward(req, res);
 		} // 房仲查詢關鍵字結束
-		
-		
-		//FB登入
-		if("FBLogin".equals(action)){
+
+		// FB登入
+		if ("FBLogin".equals(action)) {
 			String name = req.getParameter("name");
 		}
+
 		
+		// 房仲查找會員找房狀態Map
+		if ("memOpen".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				System.out.println("房仲查找會員找房狀態Map");
+
+				/***************************
+				 * 1.將輸入資料轉為Map
+				 **********************************/
+				// 採用Map<String,String[]> getParameterMap()的方法
+				// 注意:an immutable java.util.Map
+				// Map<String, String[]> map = req.getParameterMap();
+				HttpSession session = req.getSession();
+				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");
+				if (req.getParameter("whichPage") == null) {
+					HashMap<String, String[]> map1 = (HashMap<String, String[]>) req.getParameterMap();
+					HashMap<String, String[]> map2 = new HashMap<String, String[]>();
+					map2 = (HashMap<String, String[]>) map1.clone();
+					session.setAttribute("map", map2);
+					map = (HashMap<String, String[]>) req.getParameterMap();
+				}
+				/***************************
+				 * 2.開始複合查詢
+				 ***************************************/
+				MemService memSvc = new MemService();
+				List<MemVO> list = memSvc.getOpenMap(map);
+				/**************************** 查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("list", list);
+				// 資料庫取出的list物件,存入request
+				RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/memOpen.jsp");
+				successView.forward(req, res);
+
+				/**************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/memOpen.jsp");
+				failureView.forward(req, res);
+			}
+		}// 房仲查找會員找房狀態Map結束
 
 	}
 }

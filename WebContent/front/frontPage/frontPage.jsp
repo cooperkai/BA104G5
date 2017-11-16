@@ -147,7 +147,8 @@
 				<div class="logo text-center">
 					<a href="#"><img
 						src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
-						class="w3ls-mobile rtr_photo" alt="<%=realtorVO.getRtr_name()%>個人照片" data-pin-nopin="true"
+						class="w3ls-mobile rtr_photo"
+						alt="<%=realtorVO.getRtr_name()%>個人照片" data-pin-nopin="true"
 						style="width: 50%; height: 40%;" title="房仲中心"> </a>
 				</div>
 				<div class="navigation">
@@ -174,14 +175,10 @@
 					</ul>
 				</div>
 				<div class="navigation">
-					<h3>誰正在找房</h3>
+					<h3>誰在找房</h3>
 					<ul>
-						<li><a href="#"><i
-								class="glyphicon glyphicon-question-sign">&nbsp;XXX</i></a></li>
-					</ul>
-					<ul>
-						<li><a href="#"><i
-								class="glyphicon glyphicon-question-sign">&nbsp;XXX</i></a></li>
+						<li><a href="http://localhost:8081/BA104G5/front/realtor/realtor.do?action=memOpen&SEARCH_STATE=ON"><i
+								class="glyphicon glyphicon-question-sign">&nbsp;搜尋當前會員</i></a></li>
 					</ul>
 				</div>
 				<div class="navigation">
@@ -193,9 +190,6 @@
 			</div>
 			<!-- 左邊bar結束 ========================================================-->
 
-	<!-- 房仲左邊功能列結束 ================================================================-->
-
-
-
+			<!-- 房仲左邊功能列結束 ================================================================-->
 </body>
 </html>

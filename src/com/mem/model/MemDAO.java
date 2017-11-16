@@ -1,16 +1,20 @@
 package com.mem.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import jdbc.util.CompositeQuery.MemOpenQuery;
 
 public class MemDAO implements MemDAO_interface {
 
@@ -24,41 +28,43 @@ public class MemDAO implements MemDAO_interface {
 			e.printStackTrace();
 		}
 	}
-		
-	private static final String INSERT_STMT = 
-			"INSERT INTO Member (mem_no,mem_id,mem_psw,mem_name,mem_addr,search_state,lock_state) "
+
+	private static final String INSERT_STMT = "INSERT INTO Member (mem_no,mem_id,mem_psw,mem_name,mem_addr,search_state,lock_state) "
 			+ "VALUES ('MB'||(LPAD(to_char(MEM_SEQ.NEXTVAL),8,'0')),?,?,?,?,?,?)";
-	//一般的 GET 時不抓密碼
-	private static final String GET_ALL_STMT =
-			"SELECT mem_no,mem_id,mem_name,mem_addr,search_state,lock_state FROM Member order by mem_no";
-	private static final String GET_ONE_STMT =
-			"SELECT mem_no,mem_id,mem_psw,mem_name,mem_addr,search_state,lock_state FROM Member WHERE mem_no=?";
-	private static final String GET_ONE_BY_ID =
-			"SELECT mem_no,mem_id,mem_psw,mem_name,mem_addr,search_state,lock_state FROM Member WHERE mem_id=?";
+	// 一般的 GET 時不抓密碼
+	private static final String GET_ALL_STMT = "SELECT mem_no,mem_id,mem_name,mem_addr,search_state,lock_state FROM Member order by mem_no";
+	private static final String GET_ONE_STMT = "SELECT mem_no,mem_id,mem_psw,mem_name,mem_addr,search_state,lock_state FROM Member WHERE mem_no=?";
+	private static final String GET_ONE_BY_ID = "SELECT mem_no,mem_id,mem_psw,mem_name,mem_addr,search_state,lock_state FROM Member WHERE mem_id=?";
 	private static final String GET_ID_LIST = "SELECT mem_id FROM Member";
 	// 不 DELETE 會員帳號，只將 LOCK_STATE 更新成 OFF
 	private static final String UPDATE = "UPDATE Member SET mem_name=?, mem_addr=?, search_state=? where mem_no=?";
 	private static final String LOCK = "UPDATE Member SET lock_state=? where mem_no=?";
-	private static final String CHANGE_PASSWORD = "UPDATE Member SET mem_psw=? where mem_no=?";	
-	
+	private static final String CHANGE_PASSWORD = "UPDATE Member SET mem_psw=? where mem_no=?";
+
+	// 找會員開放找房狀態 阿蓋List
+	private static final String OPEN_LIST = "SELECT * FROM MEMBER WHERE SEARCH_STATE = 'ON' ORDER BY MEM_NO";
+	// 找會員開放找房狀態 阿蓋Map
+	private static final String OPEN_MAP = "SELECT * FROM MEMBER WHERE SEARCH_STATE = 'ON' ORDER BY MEM_NO";
+
 	@Override
 	public void insert(MemVO memVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			
+
 			pstmt.setString(1, memVO.getMem_id().toLowerCase());
 			pstmt.setString(2, memVO.getMem_psw());
 			pstmt.setString(3, memVO.getMem_name());
 			pstmt.setString(4, memVO.getMem_addr());
 			pstmt.setString(5, memVO.getSearch_state());
-			pstmt.setString(6, "OFF"); // 此為 lock_state，新加入為 OFF，通過 e-mail 驗證才會改為 On
-			
+			pstmt.setString(6, "OFF"); // 此為 lock_state，新加入為 OFF，通過 e-mail
+										// 驗證才會改為 On
+
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured.(insert出問題了) " + se.getMessage());
 		} finally {
@@ -83,7 +89,7 @@ public class MemDAO implements MemDAO_interface {
 	public void update(MemVO memVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
@@ -91,10 +97,10 @@ public class MemDAO implements MemDAO_interface {
 			pstmt.setString(1, memVO.getMem_name());
 			pstmt.setString(2, memVO.getMem_addr());
 			pstmt.setString(3, memVO.getSearch_state());
-			pstmt.setString(4, memVO.getMem_no()); //where的條件
-			
+			pstmt.setString(4, memVO.getMem_no()); // where的條件
+
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured.(update) " + se.getMessage());
 		} finally {
@@ -119,16 +125,16 @@ public class MemDAO implements MemDAO_interface {
 	public void changeLockState(MemVO memVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(LOCK);
 
 			pstmt.setString(1, memVO.getLock_state());
-			pstmt.setString(2, memVO.getMem_no()); //where的條件
-			
+			pstmt.setString(2, memVO.getMem_no()); // where的條件
+
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured.(changeLockState) " + se.getMessage());
 		} finally {
@@ -153,16 +159,16 @@ public class MemDAO implements MemDAO_interface {
 	public void changePassword(MemVO memVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(CHANGE_PASSWORD);
 
 			pstmt.setString(1, memVO.getMem_psw());
-			pstmt.setString(2, memVO.getMem_no()); //where的條件
-			
+			pstmt.setString(2, memVO.getMem_no()); // where的條件
+
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured.(changePassword) " + se.getMessage());
 		} finally {
@@ -182,7 +188,7 @@ public class MemDAO implements MemDAO_interface {
 			}
 		}
 	}
-	
+
 	@Override
 	public MemVO findByPrimaryKey(String mem_no) {
 		MemVO memVO = null;
@@ -210,8 +216,7 @@ public class MemDAO implements MemDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured.(findByPrimaryKey) "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured.(findByPrimaryKey) " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -238,7 +243,7 @@ public class MemDAO implements MemDAO_interface {
 		}
 		return memVO;
 	}
-	
+
 	@Override
 	public MemVO findById(String mem_id) {
 		MemVO memVO = null;
@@ -266,8 +271,7 @@ public class MemDAO implements MemDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured.(findByPrimaryKey) "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured.(findByPrimaryKey) " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -321,8 +325,7 @@ public class MemDAO implements MemDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured.(getAll) "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured.(getAll) " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -365,14 +368,14 @@ public class MemDAO implements MemDAO_interface {
 
 			while (rs.next()) {
 				memVO = new MemVO();
-				memVO.setMem_id(rs.getString("mem_id"));;
+				memVO.setMem_id(rs.getString("mem_id"));
+				;
 				list.add(memVO);
 			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured.(getIdList) "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured.(getIdList) " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -399,4 +402,113 @@ public class MemDAO implements MemDAO_interface {
 		}
 		return list;
 	}
+
+	// 會員是開放找房狀態List
+	@Override
+	public List<MemVO> getOpenList() {
+		List<MemVO> list = new ArrayList<MemVO>();
+		MemVO memVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(OPEN_LIST);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				memVO = new MemVO();
+				memVO.setMem_no(rs.getString("mem_no"));
+				memVO.setMem_id(rs.getString("mem_id"));
+				memVO.setMem_name(rs.getString("mem_name"));
+				memVO.setMem_addr(rs.getString("mem_addr"));
+				memVO.setSearch_state(rs.getString("search_state"));
+				memVO.setLock_state(rs.getString("lock_state"));
+				list.add(memVO);
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured.(getAll) " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}// 會員是開放找房狀態List結束
+
+	// 會員開放找房狀態 阿蓋Map
+	@Override
+	public List<MemVO> getOpenMap(Map<String, String[]> map) {
+		List<MemVO> list = new ArrayList<MemVO>();
+		MemVO memVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			String finalSQL = "SELECT * FROM MEMBER " + MemOpenQuery.get_WhereCondition(map) + "ORDER BY MEM_NO";
+
+			pstmt = con.prepareStatement(finalSQL);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				memVO = new MemVO();
+				memVO.setMem_name(rs.getString("mem_name"));
+				memVO.setMem_addr(rs.getString("mem_addr"));
+				list.add(memVO);
+			}
+
+			System.out.println("●●finalSQL = " + finalSQL);
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured.(getAll) " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}// 會員開放找房狀態 阿蓋Map結束
 }

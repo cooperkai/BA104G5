@@ -4,122 +4,56 @@
 <%
   MemVO memVO = (MemVO) session.getAttribute("memVO");
 %>
-<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/houselogo1.png" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="<%=request.getContextPath()%>/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <style type="text/css">
-    body {
-        font-family: Arial, Verdana, Helvetica, "LiHei Pro Medium", 微軟正黑體, sans-serif;
-    }
-    
-    .headerBar{
-    	width: 95em;
-    }
-    
-    .imgbox {
-        position: relative;
-        z-index: -1;
-        height: 20em;
-        width: 20em;
-    }
+<link rel="shortcut icon" href="images/houselogo1.png" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Custom Theme files -->
+<link href="<%=request.getContextPath()%>/front/realtor/css/style.css"
+	rel="stylesheet" type="text/css" media="all" />
+<!-- Custom Theme files -->
 
-    .ina:hover {
-        opacity: 0.85;
-    }
+<!-- navbar.css -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front/realtor/css/main.css">
+<!-- navbar.css -->
 
-    .imgbox img {
-        position: relative;
-        z-index: -10;
-        max-height: 100%;
-        box-shadow: 1px 1px 1px #bdbdbd;
-    }
+<!-- cooperkai.css -->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front/realtor/css/realtor_cooper.css">
+<!-- cooperkai.css -->
 
-    .textbox {
-        position: absolute;
-        top: 0;
-        z-index: 11;
-        padding-top: 10em;
-        width: 90%;
-        height: 100%;
-        text-align: center;
-    }
+<!-- 必備Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<!-- Latest compiled and minified CSS -->
 
-    .textbackground {
-        background-color: #ffd600;
-        height: 3em;
-        box-shadow: 1px 1px 1px grey;
-        opacity: 0.8;
-    }
 
-    .textinline {
-        /* height: 3em;*/
-        position: relative;
-        z-index: 5;
-        opacity: 1;
-        margin-top: -0.5em;
-        line-height: 2;
-    }
+<script src="https://code.jquery.com/jquery.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    .searchSRS {
-        margin-top: 8em;
-    }
+<!-- 必備Latest compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
 
-    .furnitureAd {
-        margin-top: 8em;
-    }
+<!-- 阿逵的 -->
+<script src="<%=request.getContextPath()%>/front/realtor/js/main.js"></script>
+<!-- 阿逵的 -->
 
-    .furnitureAd>img {
-        max-height: 100%;
-        max-width: 100%;
-    }
+<!-- realtor_cooperkai.js -->
+<script
+	src="<%=request.getContextPath()%>/front/realtor/js/realtor_cooper.js"></script>
+<!-- realtor_cooperkai.js -->
 
-    .news {
-        margin-top: 8em;
-    }
-
-    .redNote {
-        position: relative;
-        z-index: 3;
-        height: 2em;
-        width: 6em;
-        margin-left: 9.7em;
-        margin-right: 10em;
-        background-color: red;
-    }
-
-    .newss {
-        position: relative;
-        z-index: 1;
-        margin-top: -2.5em;
-        background-color: #fff9c4;
-    }
-
-    .newss h3 {
-        padding-top: 1.5em;
-    }
-
-    ul {
-        list-style-type: none;
-    }
-
-    .textfix {
-        margin-left: -15px;
-    }
-    .textfix ul{
-        padding-bottom: 2em;
-    }
-    
-    </style>
-
+<title>For House</title>
 </head>
 
 <body>

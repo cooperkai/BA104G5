@@ -4,8 +4,6 @@
 <%@ page import="com.realtor.model.*"%>
 <%@ page import="com.realestate.model.*"%>
 
-<%-- <jsp:useBean id="realtorSvc" scope="page" --%>
-<%-- 	class="com.realtor.model.RealtorService" /> --%>
 <jsp:useBean id="realestateSvc" scope="page"
 	class="com.realestate.model.RealEstateService" />
 
@@ -63,8 +61,6 @@
 </head>
 <body>
 
-
-
 	<!-- 背景圖================================================================================= -->
 	<div class="container-fluid backgroundpng">
 		<img class="row" src="images/fixed_bg.png">
@@ -108,22 +104,6 @@
 
 	<!-- 阿蓋的搜尋房仲 ============================================================================================-->
 
-	<!--Search Bar-->
-	<div class="container container_size">
-		<div class="row">
-			<div class="col-xs-12 col-sm-10 col-sm-offset-1 search_size">
-				<form method="post"
-					action="<%=request.getContextPath()%>/front/realtor/realtor.do">
-					<div class="">
-						<input type="text" name="keyword" value="" placeholder="請輸入關鍵字">
-						<input type="hidden" name="action" value="findBykeyword">
-						<input type="submit" value="搜尋">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<br>
 
 
 	<!-- 搜尋按鈕===============================================================================================-->
@@ -275,32 +255,16 @@
 
 
 	<script type="text/javascript">
-$(document).ready(function(){
-	 $('#rtr_area option').click(function(){
-		 $('#form1').submit();
-	 })
-	 $('#re_no option').click(function(){
-		 $('#form1').submit();
-	})
-})
-</script>
+		// 		$(document).ready(function() {
+		// 			$('#rtr_area option').click(function() {
+		// 				$('#form1').submit();
+		// 			})
+		// 			$('#re_no option').click(function() {
+		// 				$('#form1').submit();
+		// 			})
+		// 		})
+	</script>
 
 
-	<script> 
-// $(document).ready(function(){
-// 	$('#rtr_area').change(function(){
-// 		console.log($('#rtr_area').find(":selected").text());
-<%-- 		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB&RTR_AREA="+$('#rtr_area').find(":selected").text(); --%>
-// 		});
-// });
-</script>
-	<script>
-// $(document).ready(function(){
-// 	$('#re_no').change(function(){
-// 		console.log($('#re_no').find(":selected").val());
-<%-- 		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB&RE_NO="+$('#re_no').find(":selected").val(); --%>
-// 		});
-// });
-</script>
 </body>
 </html>
