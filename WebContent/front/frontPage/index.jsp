@@ -73,10 +73,10 @@
 				        <a class="btn btn-info btn-lg btn-block" href="seller/register.jsp" role="button"><h3>我  是  廠  商</h3></a>
 				    </div>
 				</div>
-			</div>
+			</div> 
 		</div>
 	</div>
-	<!-- 燈箱內容  結束-->
+	<!-- 燈箱內容  結束--> 
     
     <div id="myCarousel" class="carousel slide " data-ride="carousel">
         <!-- Indicators -->
@@ -186,7 +186,7 @@
                 </a>
             </div>
             <div class="col-xs-12 col-sm-4 ina">
-                <a href="#">
+                <a href="<%=request.getContextPath()%>/front/realtor/realtor_search.jsp">
                     <div class="imgbox">
                         <img src="<%=request.getContextPath()%>/images/realtor.jpeg">
                         <div class="text-center textbox">
@@ -195,7 +195,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> 
             <div class="col-xs-12 col-sm-4 ina">
                 <a href="#">
                     <div class="imgbox">

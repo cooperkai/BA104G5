@@ -10,9 +10,12 @@
 <%
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 	RealtorVO realtorVO2 = (RealtorVO) request.getAttribute("realtorVO");
-	if (realtorVO == null) { // 如為 null, 代表此user未登入過 , 才做以下工作
-		session.setAttribute("location", request.getRequestURI()); //*工作1 : 同時記下目前位置 , 以便於login.jsp登入成功後 , 能夠直接導至此網頁(須配合LoginHandler.java)
-		response.sendRedirect("realtor_login.jsp"); //*工作2 : 請該user去登入網頁(login.jsp) , 進行登入
+	// 如為 null, 代表此user未登入過 , 才做以下工作.
+	//*工作1 : 同時記下目前位置 , 以便於login.jsp登入成功後 , 能夠直接導至此網頁
+	//*工作2 : 請該user去登入網頁(login.jsp) , 進行登入
+	if (realtorVO == null) {
+		session.setAttribute("location", request.getRequestURI());
+		response.sendRedirect("realtor_login.jsp");
 		return;
 	}
 %>
@@ -22,9 +25,9 @@
 	response.setDateHeader("Expires", 0);
 %>
 
-房仲前端
+<!-- 房仲前端 -->
 <jsp:include page="/front/frontPage/frontPage.jsp" flush="true" />
-
+<!-- 房仲前端 -->
 
 <!-- 右邊房仲相關資料區include資料用 =====================================-->
 <div class="col-sm-12 col-sm-8 form_realtor">
@@ -95,7 +98,6 @@
 </div>
 </div>
 <!-- 不可刪掉的div -->
-
 
 
 <!-- footer -->

@@ -147,8 +147,7 @@
 				<div class="logo text-center">
 					<a href="#"><img
 						src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
-						class="w3ls-mobile rtr_photo"
-						alt="<%=realtorVO.getRtr_name()%>個人照片" data-pin-nopin="true"
+						class="w3ls-mobile rtr_photo" alt="<%=realtorVO.getRtr_name()%>個人照片" data-pin-nopin="true"
 						style="width: 50%; height: 40%;" title="房仲中心"> </a>
 				</div>
 				<div class="navigation">

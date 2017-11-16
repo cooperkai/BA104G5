@@ -133,12 +133,12 @@
                     <li><a href="#" data-toggle="tooltipNews" data-placement="bottom" >最新消息</a></li>
                     <li><a href="#">常見問題</a></li>
                     <li><a href="#">看房去</a></li>
-                    <li><a href="#">找房仲</a></li>
+                    <li><a href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB">找房仲</a></li>
                     <li><a href="#">安家商城</a></li>
                     <c:if test="${memVO==null}"> <!-- 判斷如果會員登入了就不顯示 "加入我們" -->
                     	<li><a href="<%=request.getContextPath()%>/index.jsp#joinUs" data-toggle="modal">加入我們</a></li>
                     </c:if>
-                </ul>
+                </ul> 
             </div>
             <div class="col-xs-12 col-sm-2">
                 <ul class="nav navbar-nav logina">
