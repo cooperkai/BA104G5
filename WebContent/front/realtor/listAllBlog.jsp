@@ -5,7 +5,6 @@
 <%@ page import="com.article.model.*"%>
 
 
-
 <%
 	ArticleService articleSvc = new ArticleService();
 	List<ArticleVO> list = articleSvc.getAll();
@@ -13,7 +12,6 @@
 	pageContext.setAttribute("list", list);
 	pageContext.setAttribute("artTime", artTime);
 %>
-
 
 <%
 	response.setHeader("Cache-Control", "no-store");

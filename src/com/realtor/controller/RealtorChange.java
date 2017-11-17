@@ -267,7 +267,7 @@ public class RealtorChange extends HttpServlet {
 				}
 
 				/*************************** 全部沒問題才開始包裝資料、更新db ****************************/
-				realtorSvc.update(rtr_no, rtr_name, rtr_photo, rtr_intro);
+				realtorSvc.update(rtr_no, rtr_name, rtr_photo, rtr_intro, realtorVO.getRtr_psw());
 				realtorVO.setRtr_no(rtr_no);
 				realtorVO.setRtr_name(rtr_name);
 				realtorVO.setRtr_intro(rtr_intro);

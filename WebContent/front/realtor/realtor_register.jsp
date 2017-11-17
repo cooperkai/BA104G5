@@ -60,9 +60,9 @@
 
 	<div class="container ctext-center" id="outter2">
 		<div class="row">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h2 class="panel-title text-center">基本資料</h2>
+			<div class="panel panel-primary" style="border-color:#f26649;">
+				<div class="panel-heading" style="background-color:#f26649; border-color:#f26649;">
+					<h2 class="panel-title text-center rtr_label_cooper">註冊 基本資料</h2>
 				</div>
 				<div class="panel-body">
 
@@ -199,7 +199,7 @@
 							<div class="col-sm-12 col-sm-2"></div>
 							<div class="col-sm-12 col-sm-2"></div>
 							<div class="col-sm-4">
-								<button type="submit" class="btn btn-primary btn-lg"
+								<button type="submit" class="btn btn-primary btn-lg btn_rtr_cooper"
 									style="width: 250px;" title="房仲註冊">加入註冊</button>
 							</div>
 							<div class="col-sm-4">

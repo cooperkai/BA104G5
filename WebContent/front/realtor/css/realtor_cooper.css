@@ -236,8 +236,31 @@ footer {
 }
 /* realtor_search.jsp 房仲搜尋顯示結束 */
 
+/* realtor_login.jsp, realtor_forgot房仲登入、忘記密碼 */
+#loginDiv {
+	width: 40em;
+}
+
+#outter {
+	margin-top: 4em;
+}
+
+.loginform {
+	margin-top: 10px;
+}
+
+#loginBtn {
+	margin-top: 20px;
+}
+/* 房仲登入、忘記密碼結束 */
+
+
+
 /* memOpen.jsp搜尋會員開放找房 */
 .memOpen {
 	margin-top: 1em;
 }
 /* memOpen.jsp搜尋會員開放找房結束 */
+
+
+

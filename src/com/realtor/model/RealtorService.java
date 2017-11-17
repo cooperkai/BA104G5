@@ -41,13 +41,14 @@ public class RealtorService {
 	// }
 
 	// 修改照片、簡介、照片
-	public RealtorVO update(String rtr_no, String rtr_name, byte[] rtr_photo, String rtr_intro) {
+	public RealtorVO update(String rtr_no, String rtr_name, byte[] rtr_photo, String rtr_intro, String rtr_psw) {
 
 		RealtorVO realtorVO = new RealtorVO();
 		realtorVO.setRtr_no(rtr_no);
 		realtorVO.setRtr_name(rtr_name);
 		realtorVO.setRtr_photo(rtr_photo);
 		realtorVO.setRtr_intro(rtr_intro);
+		realtorVO.setRtr_psw(rtr_psw);
 		dao.update(realtorVO);
 		return realtorVO;
 	}
@@ -109,11 +110,10 @@ public class RealtorService {
 	public List<RealtorVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
 	}
- 
+
 	// 關鍵字查詢
 	public List<RealtorVO> findByKeyword(String keyword) {
 		return dao.findByKeyword(keyword);
 	}
-	
-	
+
 }

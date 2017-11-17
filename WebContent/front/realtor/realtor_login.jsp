@@ -87,6 +87,7 @@ body {
 						method="post">
 						<div class="form-group">
 							<div class="col-sm-12">
+							
 								<input type="email" class="form-control" id="loginid"
 									name="rtr_id" placeholder="帳號 (請輸入e-mail)">
 							</div>
@@ -106,7 +107,7 @@ body {
 							</div>
 							<div class="col-sm-12 col-sm-3">
 								<a class="btn btn-lg btn-danger"
-									href="<%=request.getContextPath()%>/front/frontPage/index.jsp"
+									href="<%=request.getContextPath()%>/front/realtor/realtor_forgot.jsp"
 									title="忘記密碼" role="button">忘記密碼</a>
 							</div>
 							<div class="col-sm-12 col-sm-3">

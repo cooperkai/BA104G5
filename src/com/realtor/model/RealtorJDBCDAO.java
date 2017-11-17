@@ -30,7 +30,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 	// private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_ID=?,
 	// RTR_NAME=?, RTR_PHOTO=?, RTR_AREA=?, RTR_INTRO=? WHERE RTR_NO =
 	// ?";//預留給之後可能要改服務地區，還有emailID帳號
-	private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_NAME=?, RTR_PHOTO=?, RTR_INTRO=? WHERE RTR_NO = ?";// 修改姓名、照片、簡介用
+	private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_NAME=?, RTR_PHOTO=?, RTR_PSW=?, RTR_INTRO=? WHERE RTR_NO = ?";// 修改姓名、照片、簡介用
 	private static final String GET_ONE_STMT = "SELECT RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, RTR_STATE FROM Realtor WHERE RTR_NO = ?";
 	private static final String GET_ALL_STMT = "SELECT RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, RTR_STATE FROM Realtor ORDER BY RTR_NO";
 	private static final String UPDATE_FOR_PHOTO = "UPDATE Realtor SET RTR_PHOTO=?, RTR_INTRO=? WHERE RTR_NO=?";
@@ -156,8 +156,9 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 
 			pstmt.setString(1, realtorVO.getRtr_name());
 			pstmt.setBytes(2, realtorVO.getRtr_photo());
-			pstmt.setString(3, realtorVO.getRtr_intro());
-			pstmt.setString(4, realtorVO.getRtr_no());
+			pstmt.setString(3, realtorVO.getRtr_psw());
+			pstmt.setString(4, realtorVO.getRtr_intro());
+			pstmt.setString(5, realtorVO.getRtr_no());
 
 			pstmt.executeUpdate();
 			con.commit();

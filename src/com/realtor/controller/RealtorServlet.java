@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ import com.realestate.model.RealEstateService;
 import com.realestate.model.RealEstateVO;
 import com.realtor.model.RealtorService;
 import com.realtor.model.RealtorVO;
+import com.tool.controller.FPwMailService;
 
 @SuppressWarnings("serial")
 public class RealtorServlet extends HttpServlet {
@@ -428,7 +430,6 @@ public class RealtorServlet extends HttpServlet {
 			String name = req.getParameter("name");
 		}
 
-		
 		// 房仲查找會員找房狀態Map
 		if ("memOpen".equals(action)) {
 
@@ -458,7 +459,9 @@ public class RealtorServlet extends HttpServlet {
 				 ***************************************/
 				MemService memSvc = new MemService();
 				List<MemVO> list = memSvc.getOpenMap(map);
-				/**************************** 查詢完成,準備轉交(Send the Success view) ************/
+				/****************************
+				 * 查詢完成,準備轉交(Send the Success view)
+				 ************/
 				req.setAttribute("list", list);
 				// 資料庫取出的list物件,存入request
 				RequestDispatcher successView = req.getRequestDispatcher("/front/realtor/memOpen.jsp");
@@ -470,7 +473,53 @@ public class RealtorServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/memOpen.jsp");
 				failureView.forward(req, res);
 			}
-		}// 房仲查找會員找房狀態Map結束
+		} // 房仲查找會員找房狀態Map結束
+
+		// 房仲忘記密碼
+		if ("rtrForgot".equals(action)) {
+
+			Enumeration names = req.getParameterNames();
+			while (names.hasMoreElements()) {
+				System.out.println(names.nextElement());
+			}
+
+			String rtr_id = req.getParameter("rtr_id");
+			String rtr_name = req.getParameter("rtr_name");
+
+			RealtorService realtorSvc = new RealtorService();
+			List<RealtorVO> list = realtorSvc.getAll();
+			for (RealtorVO rtrVO : list) {
+				if ((rtrVO.getRtr_id()).equals(rtr_id) && (rtrVO.getRtr_name()).equals(rtr_name)) {
+					String pw = "";
+					int a = 0;
+					for (int i = 0; i < 4; i++) {
+						a = (int) Math.floor(Math.random() * 10);
+						pw += a + "";
+					}
+					RealtorService rtrSvc1 = new RealtorService();
+					rtrSvc1.update(rtrVO.getRtr_no(), rtrVO.getRtr_name(), rtrVO.getRtr_photo(), rtrVO.getRtr_intro(), pw);
+
+					System.out.println(pw);
+					System.out.println((rtrVO.getRtr_id()).equals(rtr_id));
+					System.out.println((rtrVO.getRtr_name()).equals(rtr_name));
+
+					FPwMailService ms = new FPwMailService();
+					try {
+						ms.sendPassword(rtrVO.getRtr_name(), pw, "eatkaikai@gmail.com");
+					} catch (MessagingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					String url = "/front/realtor/realtor_login.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
+					return;
+				}
+			}
+			res.sendRedirect(req.getContextPath() + "/front/realtor/realtor_forgot.jsp");
+			return;
+		} // 房仲忘記密碼結束
 
 	}
 }

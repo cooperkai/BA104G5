@@ -14,8 +14,7 @@
 	//*工作1 : 同時記下目前位置 , 以便於login.jsp登入成功後 , 能夠直接導至此網頁
 	//*工作2 : 請該user去登入網頁(login.jsp) , 進行登入
 	if (realtorVO == null) {
-		session.setAttribute("location", request.getRequestURI());
-		response.sendRedirect("rrealtor_register.jsp"); //*工作2 : 請該user去房仲註冊網頁
+		response.sendRedirect("realtor_register.jsp"); //*工作2 : 請該user去房仲註冊網頁
 		return;
 	}
 %>
