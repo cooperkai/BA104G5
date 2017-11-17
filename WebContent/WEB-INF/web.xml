@@ -12,8 +12,6 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
-	<!-- photo -->
 	<servlet>
 		<servlet-name>ShowImage</servlet-name>
 		<servlet-class>com.tool.controller.ShowImage</servlet-class>
@@ -22,8 +20,6 @@
 		<servlet-name>ShowImage</servlet-name>
 		<url-pattern>/tool/showimage.do</url-pattern>
 	</servlet-mapping>
-	
-	<!-- ann -->
 	<servlet>
 		<servlet-name>AnnServlet</servlet-name>
 		<servlet-class>com.ann.controller.AnnServlet</servlet-class>
@@ -32,8 +28,6 @@
 		<servlet-name>AnnServlet</servlet-name>
 		<url-pattern>/back/ann/ann.do</url-pattern>
 	</servlet-mapping>
-	
-	<!-- news -->
 	<servlet>
 		<servlet-name>NewsServlet</servlet-name>
 		<servlet-class>com.news.controller.NewsServlet</servlet-class>
@@ -42,8 +36,6 @@
 		<servlet-name>NewsServlet</servlet-name>
 		<url-pattern>/back/news/news.do</url-pattern>
 	</servlet-mapping>
-	
-	<!-- newstype -->
 	<servlet>
 		<servlet-name>NewsTypeServlet</servlet-name>
 		<servlet-class>com.newstype.controller.NewsTypeServlet</servlet-class>
@@ -52,8 +44,6 @@
 		<servlet-name>NewsTypeServlet</servlet-name>
 		<url-pattern>/back/newstype/newstype.do</url-pattern>
 	</servlet-mapping>
-	
-	<!-- realtor -->
 	<servlet>
 		<servlet-name>RealtorServlet</servlet-name>
 		<servlet-class>com.realtor.controller.RealtorServlet</servlet-class>
@@ -62,8 +52,6 @@
 		<servlet-name>RealtorServlet</servlet-name>
 		<url-pattern>/front/realtor/realtor.do</url-pattern>
 	</servlet-mapping>
-	
-	<!-- realtorLogout -->
 	<servlet>
 		<servlet-name>RealtorLogout</servlet-name>
 		<servlet-class>com.realtor.controller.RealtorLogout</servlet-class>
@@ -72,8 +60,6 @@
 		<servlet-name>RealtorLogout</servlet-name>
 		<url-pattern>/front/realtor/realtorlogout.do</url-pattern>
 	</servlet-mapping>
-	
-	<!-- realtorChange -->
 	<servlet>
 		<servlet-name>RealtorChange</servlet-name>
 		<servlet-class>com.realtor.controller.RealtorChange</servlet-class>
@@ -82,8 +68,6 @@
 		<servlet-name>RealtorChange</servlet-name>
 		<url-pattern>/front/realtor/realtorchange.do</url-pattern>
 	</servlet-mapping>
-	
-	<!-- realestate -->
 	<servlet>
 		<servlet-name>RealEstateServlet</servlet-name>
 		<servlet-class>com.realestate.controller.RealEstateServlet</servlet-class>
@@ -92,8 +76,6 @@
 		<servlet-name>RealEstateServlet</servlet-name>
 		<url-pattern>/front/realestate/realestate.do</url-pattern>
 	</servlet-mapping>
-	
-	<!-- promo -->
 	<servlet>
 		<servlet-name>PromoServlet</servlet-name>
 		<servlet-class>com.promo.controller.PromoServlet</servlet-class>
@@ -102,8 +84,6 @@
 		<servlet-name>PromoServlet</servlet-name>
 		<url-pattern>/back/promo/promo.do</url-pattern>
 	</servlet-mapping>
-	
-	<!-- checkmail -->
 	<servlet>
 		<servlet-name>CheckMailServlet</servlet-name>
 		<servlet-class>com.checkmail.controller.CheckMailServlet</servlet-class>
@@ -112,4 +92,14 @@
 		<servlet-name>CheckMailServlet</servlet-name>
 		<url-pattern>/back/checkmail/checkmail.do</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ArticleServlet</servlet-name>
+		<servlet-class>com.article.controller.ArticleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ArticleServlet</servlet-name>
+		<url-pattern>/front/checkmail/article.do</url-pattern>
+	</servlet-mapping>
+
 </web-app>
