@@ -12,10 +12,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>歡迎登入</title>
-<link rel="shortcut icon" href="images/houselogo1.png" />
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/houselogo1.png" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/main.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -66,7 +65,7 @@ body {
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
 				<a href="<%=request.getContextPath()%>/front/frontPage/index.jsp"><img
-					src="images/For House logo.png" alt="回ForHouse首頁"
+					src="<%=request.getContextPath()%>/images/For House logo.png" alt="回ForHouse首頁"
 					title="回ForHouse首頁" width="120px"></a>
 			</div>
 		</div>

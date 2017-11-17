@@ -51,8 +51,8 @@
 	<div class="container text-center" id="outter">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
-				<a href="sellercenter.jsp"><img src="images/For House logo.png"
-					width="120px"></a>
+				<a href="<%=request.getContextPath()%>/front/frontPage/index.jsp"><img src="<%=request.getContextPath()%>/images/For House logo.png"
+					width="120px" alt="回到ForHouse首頁" title="回到ForHouse首頁"></a>
 				<h3>房仲註冊系統</h3>
 			</div>
 		</div>

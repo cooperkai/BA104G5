@@ -7,7 +7,7 @@
 <jsp:useBean id="realestateSvc" scope="page" class="com.realestate.model.RealEstateService" />
 
 <%
-response.setHeader("Cache-Control", "no-store");
+response.setHeader("Cache-Control", "no-store"); 
 response.setHeader("Pragma", "no-cache");
 response.setDateHeader("Expires", 0);
 %>

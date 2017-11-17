@@ -120,7 +120,7 @@ public class RealtorChange extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!regErrors.isEmpty()) {
 					req.setAttribute("realtorVOreg", realtorVOreg); // 含有輸入格式錯誤的slrVOreg物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/register.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_register.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -131,14 +131,14 @@ public class RealtorChange extends HttpServlet {
 				/****************************
 				 * 3.修改完成,準備轉交(Send the Success view)
 				 *************/
-				String url = "/front/realtor/success.jsp";
+				String url = "/front/realtor/realtor_success.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交success.jsp
 				successView.forward(req, res);	
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				// errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/register.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_register.jsp");
 				failureView.forward(req, res);
 			}
 		}// 來自房仲註冊的請求結束

@@ -4,11 +4,8 @@
 <%@ page import="com.realtor.model.*"%>
 <%@ page import="com.realestate.model.*"%>
 
-<%-- <jsp:useBean id="realtorSvc" scope="page" --%>
-<%-- 	class="com.realtor.model.RealtorService" /> --%>
 <jsp:useBean id="realestateSvc" scope="page"
 	class="com.realestate.model.RealEstateService" />
-
 
 <jsp:useBean id="list" scope="request" type="java.util.List<RealtorVO>" />
 
@@ -34,7 +31,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>For House</title>
-<link rel="shortcut icon" href="images/houselogo1.png" />
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/houselogo1.png" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/main.css">
@@ -67,51 +64,18 @@
 
 	<!-- 背景圖================================================================================= -->
 	<div class="container-fluid backgroundpng">
-		<img class="row" src="images/fixed_bg.png">
+		<img class="row" src="<%=request.getContextPath()%>/images/fixed_bg.png">
 	</div>
 
-
-
-	<!-- navnar======================================================================================= -->
-	<div class="main">
-		<nav class="navbar navbar-fixed-top">
-			<div class="container">
-				<div class="navbar-header col-xs-12 col-sm-2">
-					<a class="navbar-brand " href="#"><img class="navshadow"
-						src="images/For House logo.png" width="120px"></a>
-				</div>
-				<div class="col-xs-12 col-sm-8 ">
-					<ul class="nav navbar-nav activebar">
-						<li><a href="#" data-toggle="tooltipNews"
-							data-placement="bottom">最新消息</a></li>
-						<li><a href="#">常見問題</a></li>
-						<li><a href="#">看房去</a></li>
-						<li><a
-							href="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB">找房仲</a></li>
-						<li><a href="#">安家商城</a></li>
-						<li><a href="#">加入我們</a></li>
-					</ul>
-				</div>
-				<div class="col-xs-12 col-sm-2">
-					<ul class="nav navbar-nav logina">
-						<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-								註冊</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-								登入</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
-
-
-
+	<nav class="navbar navbar-fixed-top">
+		<jsp:include page="/front/frontPage/navbar.jsp" />
+	</nav>
 	<!-- 阿蓋的搜尋房仲 ============================================================================================-->
 
 	<!--Search Bar-->
-	<div class="container container_size">
+	<div class="container btn-block container_size" style="margin-top: 12em;">
 		<div class="row">
-			<div class="col-xs-12 col-sm-10 col-sm-offset-1 search_size">
+			<div class="col-xs-12 col-sm-12 btn_padding">
 				<form method="post"
 					action="<%=request.getContextPath()%>/front/realtor/realtor.do">
 					<div class="">
@@ -123,6 +87,7 @@
 			</div>
 		</div>
 	</div>
+
 	<br>
 
 
@@ -239,7 +204,6 @@
 		</div>
 	</div>
 	<!-- end阿蓋的搜尋房仲 =========================================================================================-->
-
 
 
 
