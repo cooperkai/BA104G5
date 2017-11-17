@@ -2,13 +2,14 @@ package com.article.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ArticleVO implements Serializable {
 
 	private String article_no;
 	private String rtr_no;
 	private String article_body;
-	private Date post_date;
+	private Timestamp post_date;
 	private Date update_date;
 	private String article_state;
 
@@ -36,11 +37,11 @@ public class ArticleVO implements Serializable {
 		this.article_body = article_body;
 	}
 
-	public Date getPost_date() {
+	public Timestamp getPost_date() {
 		return post_date;
 	}
 
-	public void setPost_date(Date post_date) {
+	public void setPost_date(Timestamp post_date) {
 		this.post_date = post_date;
 	}
 
