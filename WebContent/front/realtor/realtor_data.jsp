@@ -151,9 +151,9 @@ response.setDateHeader("Expires", 0);
 					</ul>
 				</div>
 				<div class="navigation">
-					<h3>瀏覽預約紀錄</h3>
+					<h3>管理粉絲頁文章</h3>
 					<ul>
-						<li><a href="#"><i class="glyphicon glyphicon-list-alt">&nbsp;追蹤清單</i></a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-thumbs-up">&nbsp;新增文章</i></a></li>
 					</ul>
 					<ul>
 						<li><a href="#"><i
