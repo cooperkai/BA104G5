@@ -18,13 +18,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<link rel="shortcut icon"
-	href="<%=request.getContextPath()%>/images/houselogo1.png" />
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/Houselogo1.png" />
 <title>For House</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front/css_front/main.css">
+	href="<%=request.getContextPath()%>/front/realtor/css/main.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -73,7 +72,7 @@
 					<div class="form-group"></div>
 					<div class="joinbtn">
 						<a class="btn btn-info btn-lg btn-block"
-							href="<%=request.getContextPath()%>/front/realtor/register.jsp"
+							href="<%=request.getContextPath()%>/front/realtor/realtor_register.jsp"
 							role="button"><h3>我 是 房 仲</h3></a>
 					</div>
 					<div class="form-group"></div>

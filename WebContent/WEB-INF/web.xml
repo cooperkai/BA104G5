@@ -99,7 +99,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ArticleServlet</servlet-name>
-		<url-pattern>/front/checkmail/article.do</url-pattern>
+		<url-pattern>/front/article/article.do</url-pattern>
 	</servlet-mapping>
 
 </web-app>
