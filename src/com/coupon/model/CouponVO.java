@@ -5,7 +5,6 @@ import java.sql.Date;
 
 public class CouponVO implements Serializable {
 
-	private String cp_no;
 	private Date cp_from;
 	private Date cp_to;
 	private String cp_content;
@@ -15,14 +14,7 @@ public class CouponVO implements Serializable {
 	private Date cp_date;
 	private String mem_no;
 	private String pro_no;
-
-	public String getCp_no() {
-		return cp_no;
-	}
-
-	public void setCp_no(String cp_no) {
-		this.cp_no = cp_no;
-	}
+	private String cp_no;
 
 	public Date getCp_from() {
 		return cp_from;
@@ -94,6 +86,14 @@ public class CouponVO implements Serializable {
 
 	public void setPro_no(String pro_no) {
 		this.pro_no = pro_no;
+	}
+
+	public String getCp_no() {
+		return cp_no;
+	}
+
+	public void setCp_no(String cp_no) {
+		this.cp_no = cp_no;
 	}
 
 }
