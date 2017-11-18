@@ -58,7 +58,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%@include file="/page/page1.file"%>
+						<%@include file="/page/pagecoupon.file"%>
 						<c:forEach var="couponVO" items="${list}" begin="<%=pageIndex%>"
 							end="<%=pageIndex+rowsPerPage-1%>">
 							<tr class="col_name"
@@ -114,7 +114,6 @@
 									</c:forEach>
 								</select> 
 								<input type="hidden" name="action" value="getOne_For_Display">
-								
 								<input type="submit" value="送出">
 							</FORM>
 						</td>
