@@ -146,7 +146,7 @@
 			<!-- 左邊bar =================================================================================-->
 			<div class="col-sm-12 col-sm-2 side-bar cooper_side_bar">
 				<div class="logo text-center">
-					<a href="#"><img
+					<a href="<%=request.getContextPath()%>/front/realtor/realtor_center.jsp"><img
 						src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
 						class="w3ls-mobile rtr_photo"
 						alt="<%=realtorVO.getRtr_name()%>個人照片" data-pin-nopin="true"

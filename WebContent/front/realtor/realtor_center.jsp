@@ -76,7 +76,7 @@
 	<div class="form-group">
 		<label for="ann_content">簡介</label>
 		<textarea rows="10" class="form-control intro_cooper" name="rtr_intro"
-			placeholder="簡介"><%=realtorVO.getRtr_intro()%></textarea>
+			placeholder="簡介" readonly style="cursor:no-drop;"><%=realtorVO.getRtr_intro()%></textarea>
 	</div>
 	<div class="modal-footer">
 		<form METHOD="post" ACTION="realtorchange.do">

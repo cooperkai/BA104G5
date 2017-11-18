@@ -36,8 +36,6 @@ public class FPwMailService {
 			message.setText("Dear： " + rtr_name + " ，這是您的新密碼:" + rtr_psw);
 
 			Transport.send(message);
-			System.out.println("Done");
-			Transport.send(message);
 			System.out.println("傳送成功!");
 		} catch (MessagingException e) {
 			System.out.println("傳送失敗!");

@@ -37,7 +37,7 @@ public class RealtorFindByKeyWord {
 			whereCondition.append(")");
 
 			if (i != conditionList.size() - 1) {
-				whereCondition.append(" or ");
+				whereCondition.append(" and ");
 			}
 		}
 		return whereCondition.toString();
@@ -48,9 +48,13 @@ public class RealtorFindByKeyWord {
 		if (condition.contains(" 區 ")) {
 			wordForOracle = " RTR_AREA like '%" + condition + "%'";
 		} else if (condition.contains(" 信 ") || condition.contains(" 永 ") || condition.contains(" 東 ")) {
-			condition = condition.replaceAll("","").trim();
+			condition = condition.replaceAll("", "").trim();
 			wordForOracle = " RTR_INTRO like '%" + condition + "%'";
-		}  else {
+		} else if (condition.contains(" 永慶 ") || condition.contains(" 東森 ") || condition.contains(" 信義 ")) {
+			condition = condition.replaceAll("", "").trim();
+			wordForOracle = " RTR_AREA like '%" + condition + "%'";
+
+		} else {
 			condition = condition.trim();
 			wordForOracle = "RTR_NAME like '%" + condition + "%' or RTR_AREA like '%" + condition
 					+ "%' or RTR_INTRO like '%" + condition + "%' ";

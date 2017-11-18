@@ -18,7 +18,9 @@
 	response.setDateHeader("Expires", 0);
 %>
 
-
+<!-- 房仲前端 -->
+<jsp:include page="/front/frontPage/frontPage.jsp" flush="true" />
+<!-- 房仲前端 -->
 <!-- 右邊房仲相關資料區include資料用 =====================================-->
 <div class="col-sm-12 col-sm-8 form_realtor">
 	<!-- 房仲資料已下 ====================================================-->
