@@ -92,7 +92,6 @@
 		<servlet-name>CheckMailServlet</servlet-name>
 		<url-pattern>/back/checkmail/checkmail.do</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>ArticleServlet</servlet-name>
 		<servlet-class>com.article.controller.ArticleServlet</servlet-class>
@@ -101,5 +100,15 @@
 		<servlet-name>ArticleServlet</servlet-name>
 		<url-pattern>/front/article/article.do</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CouponServlet</servlet-name>
+		<servlet-class>com.coupon.controller.CouponServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CouponServlet</servlet-name>
+		<url-pattern>/back/coupon/coupon.do</url-pattern>
+	</servlet-mapping>
+
 
 </web-app>

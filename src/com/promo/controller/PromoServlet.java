@@ -20,6 +20,7 @@ import com.news.model.NewsVO;
 import com.promo.model.PromoService;
 import com.promo.model.PromoVO;
 
+@SuppressWarnings("serial")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 50 * 50 * 1024 * 1024)
 public class PromoServlet extends HttpServlet {
 
@@ -134,7 +135,7 @@ public class PromoServlet extends HttpServlet {
 
 			Enumeration<String> allname = req.getParameterNames();
 			while (allname.hasMoreElements()) {
-				System.out.println("news_全部的值: " + allname.nextElement());
+				System.out.println("promo_全部的值: " + allname.nextElement());
 			}
 
 			try {

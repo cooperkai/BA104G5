@@ -67,8 +67,7 @@ response.setDateHeader("Expires", 0);
 								<td class="text_overflow">${promoVO.promo_content}</td>
 								<td>
 									<div class="" style="height: 145.8px; width: 194px;">
-										<img style="height: 145.8px; width: 194px;"
-											src="<%=request.getContextPath()%>/tool/showimage.do?action=promo_photo&promo_no=${promoVO.promo_no}" />
+										<img style="height: 145.8px; width: 194px;" src="<%=request.getContextPath()%>/tool/showimage.do?action=promo_photo&promo_no=${promoVO.promo_no}">
 									</div>
 								</td>
 								<td>
@@ -170,11 +169,11 @@ response.setDateHeader("Expires", 0);
 								<div class="row date_size">
 									<div class="col-xs-12 col-sm-6">
 										From <input type="text" class="form-control"
-											id="promo_period_from" name="promo_from" placeholder="新增促銷時間">
+											id="promo_period_from" name="promo_from" placeholder="開始時間">
 									</div>
 									<div class="col-xs-12 col-sm-6">
 										to <input type="text" class="form-control"
-											id="promo_period_to" name="promo_to" placeholder="新增促銷時間">
+											id="promo_period_to" name="promo_to" placeholder="結束時間">
 									</div>
 								</div>
 							</div>
@@ -189,7 +188,7 @@ response.setDateHeader("Expires", 0);
 							<textarea rows="10" class="form-control" name="promo_content"><%=(promoVO == null) ? "請輸入促銷內容" : promoVO.getPromo_content()%></textarea>
 						</div>
 						<div class="form-group dropdown">
-							<label for="ann_content">修改狀態</label> <select name="promo_state"
+							<label for="promo_content">修改狀態</label> <select name="promo_state"
 								class="form-control btn_cooper" id="sel1">
 								<option name="default_item2" value="">請選擇</option>
 								<option class="onitem" value="已上架"

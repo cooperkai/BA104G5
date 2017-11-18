@@ -3,6 +3,7 @@ package com.coupon.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+@SuppressWarnings("serial")
 public class CouponVO implements Serializable {
 
 	private String cp_no;
