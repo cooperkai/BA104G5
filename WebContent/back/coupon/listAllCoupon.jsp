@@ -114,7 +114,7 @@
 									</c:forEach>
 								</select> 
 								<input type="hidden" name="action" value="getOne_For_Display">
-								<input type="hidden" name="whichPage" value="<%=whichPage%>">
+								
 								<input type="submit" value="送出">
 							</FORM>
 						</td>

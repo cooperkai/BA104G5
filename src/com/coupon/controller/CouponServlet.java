@@ -43,9 +43,7 @@ public class CouponServlet extends HttpServlet {
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 **********************/
 				String cp_no = req.getParameter("cp_no");
-				if (cp_no == null || (cp_no.trim()).length() == 0) {
-					errorMsgs.add("請輸入促銷編號編號");
-				}
+			
 				// Send the use back to the form, if there were errors
 				// send the ErrorPage view.
 				if (!errorMsgs.isEmpty()) {
@@ -57,9 +55,7 @@ public class CouponServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 *****************************************/
 				CouponService couponSvc = new CouponService();
 				CouponVO couponVO = couponSvc.getOne(cp_no);
-				if (couponVO == null) {
-					errorMsgs.add("查無資料");
-				}
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/back/coupon/listAllCoupon.jsp");
