@@ -50,10 +50,10 @@
 							<th>新增時間</th>
 							<th>員工編號</th>
 							<th>修改新聞內容</th>
-						</tr>
+						</tr> 
 					</thead>
 					<tbody>
-						<%@include file="/page/page1.file"%>
+						<%@include file="page_news/pagenews.file"%>
 						<c:forEach var="newsVO" items="${list}" begin="<%=pageIndex%>"
 							end="<%=pageIndex+rowsPerPage-1%>">
 							<tr class="col_name"
@@ -144,7 +144,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-12">
-								<%@include file="/page/page2.file"%>
+								<%@include file="page_news/pagenews2.file"%>
 							</div>
 						</div>
 					</div>

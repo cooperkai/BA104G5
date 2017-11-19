@@ -91,7 +91,7 @@ th, td {
 			<th colspan="2">修改文章</th>
 
 		</tr>
-		<%@ include file="/page/page1.file"%>
+		<%@ include file="page1.file"%>
 		<c:forEach var="articleVO" items="${list}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
 			<tr align='center' valign='middle'>
@@ -129,7 +129,7 @@ th, td {
 			</tr>
 		</c:forEach>
 	</table>
-	<%@include file="/page/page2.file"%>
+	<%@include file="page2.file"%>
 		
 	<hr><br><br>
 	

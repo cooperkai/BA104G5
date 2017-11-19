@@ -159,7 +159,7 @@ response.setDateHeader("Expires", 0);
 							<!-- /Right part -->
 							<!-- Left part -->
 							<div class="col-md-8 blog-main">
-								<%@include file="/page/pageNewsFront.file"%>
+								<%@include file="page_front_news/pageNewsFront.file"%>
 								<c:forEach var="newsVO" items="${list}" begin="<%=pageIndex%>"
 									end="<%=pageIndex+rowsPerPage-1%>">
 									<div class="post-detail sep-bottom-lg">
@@ -210,7 +210,7 @@ response.setDateHeader("Expires", 0);
 
 
 								<div class="nav-links mar-top-md">
-									<%@include file="/page/pageNewsFront2.file"%>
+									<%@include file="page_front_news/pageNewsFront2.file"%>
 
 								</div>
 								<!-- Related Posts -->

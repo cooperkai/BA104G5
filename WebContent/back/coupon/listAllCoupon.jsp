@@ -58,7 +58,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%@include file="/page/pagecoupon.file"%>
+						<%@include file="page_coupon/pagecoupon.file"%>
 						<c:forEach var="couponVO" items="${list}" begin="<%=pageIndex%>"
 							end="<%=pageIndex+rowsPerPage-1%>">
 							<tr class="col_name"
@@ -121,7 +121,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-12">
-								<%@include file="/page/pagecoupon2.file"%>
+								<%@include file="page_coupon/pagecoupon2.file"%>
 							</div>
 						</div>
 					</div>

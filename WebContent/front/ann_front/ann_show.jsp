@@ -52,7 +52,7 @@ response.setDateHeader("Expires", 0);
         <nav class="navbar navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header col-xs-12 col-sm-2">
-                    <a class="navbar-brand " href="#"><img class="navshadow" src="images/For House logo.png" width="120px"></a>
+                    <a class="navbar-brand " href="#"><img class="navshadow" src="http://localhost:8081/BA104G5/images/For House logo.png" width="120px"></a>
                 </div>
                 <div class="col-xs-12 col-sm-8" style="color: white; background-color: white;">
                     <ul class="nav navbar-nav activebar" style="color: white; background-color: white;">
@@ -149,7 +149,7 @@ response.setDateHeader("Expires", 0);
                             <div class="col-md-8 blog-main">
                                 <div class="post-detail sep-bottom-lg">
                                     <figure class="no-margin">
-                                        <img src="images/LK002.jpg" class="img-responsive">
+                                        <img src="http://localhost:8081/BA104G5/images/nopic.jpg" class="img-responsive">
                                     </figure>
                                     <div class="post-detail-body sep-xs">
                                         <p>(圖:房市景氣谷底已過，近來不少建商出手獵地，帶動標售市場轉趨熱絡，民眾購屋信心也明顯揚升。)</p>
@@ -162,7 +162,7 @@ response.setDateHeader("Expires", 0);
                                             <br> 央北重劃區 指標建商插旗
                                         </p>
                                         <p>
-                                            <img src="images/flag.jpg" class="alignleft" width="200px" height="133px"> 新店的央北重劃區是大台北最受矚目的新興重劃區，屬於「閃耀五星計畫」之一，鄰近捷運新店線小碧潭站、及興建中的環狀線十四張站，未來可與安坑線轉乘，又有環河快速道路、中安大橋等，交通頗為便捷，新店高中、陽光運動公園等公共設施，也為生活機能加分不少。
+                                              	新店的央北重劃區是大台北最受矚目的新興重劃區，屬於「閃耀五星計畫」之一，鄰近捷運新店線小碧潭站、及興建中的環狀線十四張站，未來可與安坑線轉乘，又有環河快速道路、中安大橋等，交通頗為便捷，新店高中、陽光運動公園等公共設施，也為生活機能加分不少。
                                             <br> 此次標售，新北市共釋出七筆土地，有六筆成功標脫，總金額約57.6億元，平均溢價11%。最熱門的一筆，是斯馨段129地號因鄰近捷運小碧潭站、又是角地，吸引六方人馬競逐，最後由黃姓自然人以6.9億元、溢價約27%標下，每坪標脫單價約167.9萬元。
                                             <br> 上市公司欣陸投控旗下大陸建設，也以7.15億元取得520.8坪土地，老牌建商茂德機構旗下和碩開發，則以6.96億元標得555.4坪土地。專家分析，指標建商都接連出手，顯然是嗅到市場即將回溫。
                                         </p>

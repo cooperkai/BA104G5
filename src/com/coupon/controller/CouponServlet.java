@@ -94,7 +94,7 @@ public class CouponServlet extends HttpServlet {
 
 				Enumeration<String> allname = req.getParameterNames();
 				while (allname.hasMoreElements()) {
-					System.out.println("coupon_全部的值: " + allname.nextElement());
+					System.out.println("getOneForUpdate_coupon_全部的值: " + allname.nextElement());
 				}
 
 				/*************************** 1.接收請求參數 ****************************************/
@@ -108,14 +108,14 @@ public class CouponServlet extends HttpServlet {
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
 				req.setAttribute("couponVO", couponVO);
-				String url = "/back/promo/update_coupon_input.jsp";
+				String url = "/back/coupon/update_coupon_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+				RequestDispatcher failureView = req.getRequestDispatcher("/back/coupon/update_coupon_input.jsp");
 				failureView.forward(req, res);
 			}
 		} // 查單一修改結束

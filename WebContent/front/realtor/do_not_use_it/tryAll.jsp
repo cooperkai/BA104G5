@@ -81,7 +81,7 @@ response.setDateHeader("Expires", 0);
 		<th colspan="2">修改房仲狀態</th>
 		
 	</tr>
-	<%@ include file="/page/page1.file" %> 
+	<%@ include file="page1.file" %>
 	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<tr align='center' valign='middle' ${(realtorVO.rtr_no==param.rtr_no) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
 			<td>${realtorVO.rtr_no}</td>
@@ -110,7 +110,7 @@ response.setDateHeader("Expires", 0);
 		</tr>
 	</c:forEach>
 </table>
-<%@include file="/page/page2.file"%>
+<%@include file="page2.file"%>
 
 <br>本網頁的路徑:<br><b>
    <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br>

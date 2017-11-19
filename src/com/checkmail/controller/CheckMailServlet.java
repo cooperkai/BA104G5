@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.realtor.model.RealtorService;
 import com.slr.model.SlrService;
 import com.tool.controller.RtrMailOn;
+import com.tool.controller.SlrMailOn;
 
 @SuppressWarnings("serial")
 public class CheckMailServlet extends HttpServlet {
@@ -41,17 +42,15 @@ public class CheckMailServlet extends HttpServlet {
 				String rtr_state = "ON";
 				String rtr_name = req.getParameter("rtr_name");
 
-//				String rtr_id = req.getParameter("rtr_id");
+				// String rtr_id = req.getParameter("rtr_id");
 				/*********************** 開始update資料 **********************/
 
 				RealtorService realtorSvc = new RealtorService();
 				realtorSvc.changeRealtorState(rtr_state, rtr_no);
 
-				
 				// 寄信通知
-				String rtr_id = "d0788107@gmail.com";
-				String msg = "非常感謝你加入本網站[ 房仲 ]會員，已經為你開啟使用本網站服務的權利了，請一定Ipad溫開水!" 
-						+ "\r\n" + "請不用懷疑，馬上點開下面網址: "
+				String rtr_id = "eatkaikai@gmail.com";
+				String msg = "非常感謝你加入本網站[ 房仲 ]會員，已經為你開啟使用本網站服務的權利了，請一定Ipad溫開水!" + "\r\n" + "請不用懷疑，馬上點開下面網址: "
 						+ "http://localhost:8081/BA104G5/front/realtor/realtor_login.jsp";
 				RtrMailOn rtrMail = new RtrMailOn();
 				rtrMail.sendMail(rtr_name, rtr_id, msg);
@@ -114,10 +113,19 @@ public class CheckMailServlet extends HttpServlet {
 				/*********************** 接收請求參數 *************************/
 				String slr_no = req.getParameter("slr_no");
 				String slr_state = "ON";
-				/*********************** 開始update資料 **********************/
+				String slr_name = req.getParameter("slr_name");
 
+				
+				/*********************** 開始update資料 **********************/
 				SlrService slrSvc = new SlrService();
 				slrSvc.changeSlrState(slr_state, slr_no);
+
+				// 寄信通知
+				String slr_id = "eatkaikai@gmail.com";
+				String msg = "非常感謝你加入本網站[ 廠商 ]會員，已經為你開啟使用本網站服務的權利了，請一定Ipad溫開水!" + "\r\n" + "請不用懷疑，馬上點開下面網址: "
+						+ "http://localhost:8081/BA104G5/front/realtor/realtor_login.jsp";//記得換成廠商的登入畫面
+				SlrMailOn slrMail = new SlrMailOn();
+				slrMail.sendMail(slr_name, slr_id, msg);
 
 				/*********************** 新增完成,準備轉交 ********************/
 				String url = requestURL;

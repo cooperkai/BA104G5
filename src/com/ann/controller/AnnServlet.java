@@ -30,9 +30,9 @@ public class AnnServlet extends HttpServlet {
 		if ("getOne_For_Display".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+
 			String requestURL = req.getParameter("requestURL");// 送出查詢的來源網頁路徑
-			
+
 			System.out.println(requestURL);
 
 			try {
@@ -81,18 +81,10 @@ public class AnnServlet extends HttpServlet {
 				/*****************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
-				
-				if(requestURL.equals("/front/news_frontpage_cooper/news_front.jsp")){
-					req.setAttribute("annVO", annVO);
-				}else{
-					req.setAttribute("annVO", annVO); // 資料庫取出的annVO物件,存入req
-				}
-				
-			
-//				if(requestURL.equals("/front/news_frontpage_cooper/news_front.jsp"))
-				
-//				String url = "/back/ann/listOneAnn.jsp";
-				String url = requestURL;
+
+				req.setAttribute("annVO", annVO);
+
+				String url = "/back/ann/listOneAnn.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 

@@ -54,7 +54,7 @@ response.setDateHeader("Expires", 0);
 						</tr>
 					</thead>
 					<tbody>
-						<%@include file="/page/pagepromo.file"%>
+						<%@include file="page_promo/pagepromo.file"%>
 						<c:forEach var="promoVO" items="${listTime}"
 							begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 							<tr class="col_name"
@@ -122,7 +122,7 @@ response.setDateHeader("Expires", 0);
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-12">
-								<%@include file="/page/page2.file"%>
+								<%@include file="page_promo/page2.file"%>
 							</div>
 						</div>
 					</div>

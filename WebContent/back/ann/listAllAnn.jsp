@@ -11,14 +11,14 @@
 	pageContext.setAttribute("list", list);
 %>
 <%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
 %>
 <!-- 後端include -->
 <jsp:include page="/back/backend/backend_page.jsp" flush="true" />
 <!-- 後端include -->
- 
+
 <!-- 一定要留住的<div> ================================================================================== -->
 <div class="col-xs-12 col-sm-10 maincontext">
 	<!-- 一定要留住的<div> ================================================================================== -->
@@ -46,7 +46,7 @@ response.setDateHeader("Expires", 0);
 						</tr>
 					</thead>
 					<tbody>
-						<%@include file="/page/page1.file"%>
+						<%@include file="page_ann/pageann.file"%>
 						<c:forEach var="annVO" items="${list}" begin="<%=pageIndex%>"
 							end="<%=pageIndex+rowsPerPage-1%>">
 							<tr class="col_name">
@@ -114,7 +114,7 @@ response.setDateHeader("Expires", 0);
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-12">
-								<%@include file="/page/page2.file"%>
+								<%@include file="page_ann/pageann2.file"%>
 							</div>
 						</div>
 					</div>
@@ -250,9 +250,9 @@ response.setDateHeader("Expires", 0);
 	<!-- 結束修改系統公告 ================================================================================== -->
 
 
-<!-- 以上是你可以放的內容 ================================================================================== -->
+	<!-- 以上是你可以放的內容 ================================================================================== -->
 
-<!-- 一定要留住的</div> ================================================================================== -->
+	<!-- 一定要留住的</div> ================================================================================== -->
 </div>
 <!-- 一定要留住的</div> ================================================================================== -->
 

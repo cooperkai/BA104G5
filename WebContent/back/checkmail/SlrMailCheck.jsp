@@ -43,7 +43,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%@ include file="/page/page1.file"%>
+						<%@ include file="page_checkmail/page1.file"%>
 						<c:forEach var="slrVO" items="${list}" begin="<%=pageIndex%>"
 							end="<%=pageIndex+rowsPerPage-1%>">
 							<tr align='center' valign='middle'
@@ -92,7 +92,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<%@include file="/page/page2.file"%>
+				<%@include file="page_checkmail/page2.file"%>
 			</div>
 		</div>
 		<%-- 錯誤表列 --%>

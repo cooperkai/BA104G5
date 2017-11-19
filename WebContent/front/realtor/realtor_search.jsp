@@ -127,7 +127,7 @@
 
 
 	<!-- 搜尋房仲顯示的畫面================================================================================ -->
-	<%@ include file="/page/pagesearch.file"%>
+	<%@ include file="page_front_realtor/pagesearch.file"%>
 	<!-- 共有幾位房仲 -->
 	<div class="container container_size totatl_estate">
 		<div class="row">
@@ -199,7 +199,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<%@include file="/page/pageByCompositeQuery2.file"%>
+				<%@include file="page_front_realtor/pageByCompositeQuery2.file"%>
 			</div>
 		</div>
 	</div>

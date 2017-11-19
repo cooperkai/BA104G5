@@ -79,7 +79,7 @@ response.setDateHeader("Expires", 0);
 		<th>服務公司</th>
 		<th>修改</th>
 	</tr>
-	<%@ include file="/page/pageByCompositeQuery.file" %> 
+	<%@ include file="pageByCompositeQuery.file" %> 
 	<c:forEach var="realtorVO" items="${listRealtor_ByCompositeQuery}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<tr align='center' valign='middle' ${(realtorVO.rtr_no==param.rtr_no) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
 			<td>${realtorVO.rtr_no}</td>
@@ -103,7 +103,7 @@ response.setDateHeader("Expires", 0);
 		</tr>
 	</c:forEach>
 </table>
-<%@include file="/page/pageByCompositeQuery2.file"%>
+<%@include file="pageByCompositeQuery2.file"%>
 
 <br>本網頁的路徑:<br><b>
    <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br>

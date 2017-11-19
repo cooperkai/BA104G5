@@ -46,7 +46,7 @@ response.setDateHeader("Expires", 0);
 					</tr>
 				</thead>
 				<tbody>
-					<%@ include file="/page/pagenewstype.file"%>
+					<%@ include file="page_newstype/pagenewstype.file"%>
 					<c:forEach var="newsVO" items="${listNews_ByNtype_No}"
 						begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 						<tr class="col_name">
@@ -83,7 +83,7 @@ response.setDateHeader("Expires", 0);
 						</tr>
 					</c:forEach>
 				</tbody>
-				<%@ include file="/page/pagenewstype2.file"%>
+				<%@ include file="page_newstype/pagenewstype2.file"%>
 			</table>
 			<table>
 				<tr>

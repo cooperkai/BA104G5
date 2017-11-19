@@ -154,7 +154,6 @@ public class CouponDAO implements CouponDAO_interface {
 				couponvo.setMem_no(rs.getString("MEM_No"));
 				couponvo.setPromo_no(rs.getString("PROMO_No"));
 			}
-			System.out.println("News_findByPrimaryKey");
 
 		} catch (SQLException se) {
 			se.printStackTrace();

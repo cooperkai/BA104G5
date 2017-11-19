@@ -24,7 +24,7 @@ response.setDateHeader("Expires", 0);
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>For House</title>
-<link rel="shortcut icon" href="images/houselogo1.png" />
+<link rel="shortcut icon" href="http://localhost:8081/BA104G5/images/Houselogo1.png" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -415,7 +415,7 @@ response.setDateHeader("Expires", 0);
 
 
 							<!-- 系統公告================================================================================================= -->
-<%-- 							<%@include file="/page/pageann.file"%> --%>
+<%-- 							<%@include file="page_front_news/pageann.file"%> --%>
 <%-- 							<c:forEach var="annVO" items="${annlist}" begin="<%=pageIndex%>" --%>
 <%-- 								end="<%=pageIndex+rowsPerPage-1%>"> --%>
 <!-- 								<li class="blog-post wow fadeInUp" data-wow-duration="1s" -->
@@ -477,7 +477,7 @@ response.setDateHeader("Expires", 0);
 
 							<!-- 結束系統公告================================================================================================= -->
 						</ul>
-<%-- 						<%@include file="/page/pageann2.file"%> --%>
+<%-- 						<%@include file="page_front_news/pageann2.file"%> --%>
 						<!-- .navigation -->
 
 
