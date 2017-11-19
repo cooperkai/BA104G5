@@ -12,7 +12,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>歡迎登入</title>
-<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/houselogo1.png" />
+<link rel="shortcut icon"
+	href="<%=request.getContextPath()%>/images/houselogo1.png" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -65,8 +66,8 @@ body {
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
 				<a href="<%=request.getContextPath()%>/front/frontPage/index.jsp"><img
-					src="<%=request.getContextPath()%>/images/For House logo.png" alt="回ForHouse首頁"
-					title="回ForHouse首頁" width="120px"></a>
+					src="<%=request.getContextPath()%>/images/For House logo.png"
+					alt="回ForHouse首頁" title="回ForHouse首頁" width="120px"></a>
 			</div>
 		</div>
 	</div>
@@ -87,7 +88,7 @@ body {
 						method="post">
 						<div class="form-group">
 							<div class="col-sm-12">
-							
+
 								<input type="email" class="form-control" id="loginid"
 									name="rtr_id" placeholder="帳號 (請輸入e-mail)">
 							</div>
@@ -99,16 +100,20 @@ body {
 							</div>
 						</div>
 						<div class="form-group margin-top" id="loginBtn">
-							<div class="col-sm-12 col-sm-3"></div>
 							<div class="col-sm-12 col-sm-3">
 								<a class="btn btn-lg btn-danger"
 									href="<%=request.getContextPath()%>/front/frontPage/index.jsp"
 									title="回ForHouse首頁" role="button">取消</a>
 							</div>
 							<div class="col-sm-12 col-sm-3">
-								<a class="btn btn-lg btn-danger"
+								<a class="btn btn-lg btn-info"
 									href="<%=request.getContextPath()%>/front/realtor/realtor_forgot.jsp"
 									title="忘記密碼" role="button">忘記密碼</a>
+							</div>
+							<div class="col-sm-12 col-sm-3">
+								<a class="btn btn-lg btn-primary"
+									href="<%=request.getContextPath()%>/front/realtor/realtor_register.jsp"
+									title="註冊房仲" role="button">註冊房仲</a>
 							</div>
 							<div class="col-sm-12 col-sm-3">
 								<input type="submit" value="登入"
