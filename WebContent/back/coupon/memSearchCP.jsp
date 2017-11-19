@@ -4,10 +4,12 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.coupon.model.*"%>
 <%@ page import="com.promo.model.*"%>
+<%@ page import="com.mem.model.*"%>
 
 <jsp:useBean id="promoSvc" scope="page"
 	class="com.promo.model.PromoService" />
-
+<jsp:useBean id="memSvc" scope="page"
+	class="com.mem.model.MemService"/>
 
 <%
 	CouponVO couponVO = (CouponVO) request.getAttribute("couponVO");

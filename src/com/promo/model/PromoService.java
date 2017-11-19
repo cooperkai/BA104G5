@@ -1,6 +1,9 @@
 package com.promo.model;
 
 import java.util.List;
+import java.util.Set;
+
+import com.coupon.model.CouponVO;
 
 public class PromoService {
 
@@ -9,7 +12,7 @@ public class PromoService {
 	public PromoService() {
 		dao = new PromoDAO();
 	}
- 
+
 	// 新增
 	public PromoVO add(java.sql.Date promo_from, java.sql.Date promo_to, String promo_name, String promo_content,
 			byte[] promo_photo, String promo_state, String emp_no) {
@@ -50,10 +53,15 @@ public class PromoService {
 	public List<PromoVO> getAll() {
 		return dao.getAll();
 	}
-	
+
 	// 查期限排序
-	public List<PromoVO> getAllByTime(){
+	public List<PromoVO> getAllByTime() {
 		return dao.getAllByTime();
+	}
+
+	// 查詢促銷資訊對應的優惠卷
+	public Set<CouponVO> getCPsByPromono(String promo_no) {
+		return dao.getCPsByPromono(promo_no);
 	}
 
 }

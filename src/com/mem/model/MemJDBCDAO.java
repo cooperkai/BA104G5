@@ -6,9 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+
+import com.coupon.model.CouponVO;
 
 import jdbc.util.CompositeQuery.MemOpenQuery;
 
@@ -34,6 +38,12 @@ public class MemJDBCDAO implements MemDAO_interface {
 	private static final String OPEN_LIST = "SELECT * FROM MEMBER WHERE SEARCH_STATE = 'ON' ORDER BY MEM_NO";
 	// 找會員開放找房狀態 阿蓋Map
 	private static final String OPEN_MAP = "SELECT * FROM MEMBER WHERE SEARCH_STATE = 'ON' ORDER BY MEM_NO";
+	// 專門找會員擁有的優惠卷BY阿蓋
+	private static final String GET_CPs = "SELECT CP_No, to_char(CP_From, 'yyyy-mm-dd')CP_From, to_char(CP_To, 'yyyy-mm-dd')CP_To, CP_Content, CP_discount, PDO_No, CP_State, to_char(CP_Date, 'yyyy-mm-dd')CP_Date, Mem_No, Promo_No FROM Coupon WHERE Mem_No=? ORDER BY CP_To DESC";
+	//沒有用到的
+	//private static final String GET_CPs = "select c.cp_no, c.cp_from, c.cp_to, c.cp_content, c.cp_discount, c.cp_state, m.mem_no, m.mem_name from coupon c, member m where c.mem_no = m.mem_no and mem_name=? order by c.CP_TO";
+	
+	
 
 	@Override
 	public void insert(MemVO memVO) {
@@ -540,6 +550,67 @@ public class MemJDBCDAO implements MemDAO_interface {
 		return list;
 	}// 會員開放找房狀態 阿蓋Map結束
 
+	// 專門找會員擁有的優惠卷BY阿蓋
+	@Override
+	public Set<CouponVO> getCPByMemno(String mem_no) {
+		Set<CouponVO> set = new LinkedHashSet<CouponVO>();
+		CouponVO couponvo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_CPs);
+			pstmt.setString(1, mem_no);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				couponvo = new CouponVO();
+				couponvo.setCp_no(rs.getString("CP_No"));
+				couponvo.setCp_from(rs.getDate("CP_From"));
+				couponvo.setCp_to(rs.getDate("CP_To"));
+				couponvo.setCp_content(rs.getString("CP_Content"));
+				couponvo.setCp_state(rs.getString("CP_State"));
+				couponvo.setCp_discount(rs.getString("CP_Discount"));
+				couponvo.setCp_date(rs.getDate("CP_Date"));
+				couponvo.setPdo_no(rs.getString("PDO_No"));
+				couponvo.setMem_no(rs.getString("MEM_No"));
+				couponvo.setPromo_no(rs.getString("PROMO_No"));
+				set.add(couponvo);
+			}
+
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException re) {
+					re.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}// 專門找會員擁有的優惠卷BY阿蓋結束
+
 	public static void main(String args[]) {
 
 		MemJDBCDAO dao = new MemJDBCDAO();
@@ -547,12 +618,12 @@ public class MemJDBCDAO implements MemDAO_interface {
 		MemVO memVO1 = new MemVO();
 
 		// 註冊新會員
-//		 memVO1.setMem_id("bbbf@gmail.com");
-//		 memVO1.setMem_psw("123456");
-//		 memVO1.setMem_name("趙子龍");
-//		 memVO1.setMem_addr("中壢區中大路資策會大樓300號");
-//		 memVO1.setSearch_state("OFF");
-//		 dao.insert(memVO1);
+		// memVO1.setMem_id("bbbf@gmail.com");
+		// memVO1.setMem_psw("123456");
+		// memVO1.setMem_name("趙子龍");
+		// memVO1.setMem_addr("中壢區中大路資策會大樓300號");
+		// memVO1.setSearch_state("OFF");
+		// dao.insert(memVO1);
 
 		// 會員 update 資料
 		// memVO1.setMem_name("趙子龍");
@@ -613,20 +684,32 @@ public class MemJDBCDAO implements MemDAO_interface {
 		// System.out.println(idList.getMem_id());
 		// }
 
-		// 查找會員是開放找房狀態List
-//		List<MemVO> list2 = dao.getOpenList();
-//		for (MemVO openList : list2) {
+		// 查找會員是開放找房狀態List阿蓋
+		// List<MemVO> list2 = dao.getOpenList();
+		// for (MemVO openList : list2) {
+		// System.out.println(openList.getMem_name());
+		// System.out.println(openList.getMem_addr());
+		// }
+
+		// 查找會員是開放找房狀態List阿蓋
+//		Map<String, String[]> map = new TreeMap<String, String[]>();
+//		map.put("MEM_ADDR", new String[] { "萬里" });
+//		List<MemVO> list = dao.getOpenMap(map);
+//		for (MemVO openList : list) {
 //			System.out.println(openList.getMem_name());
 //			System.out.println(openList.getMem_addr());
+//			System.out.println();
 //		}
-		 
-		// 查找會員是開放找房狀態List
-		Map<String, String[]> map = new TreeMap<String, String[]>();
-		map.put("MEM_ADDR", new String[] { "萬里" });
-		List<MemVO> list = dao.getOpenMap(map);
-		for (MemVO openList : list) {
-			System.out.println(openList.getMem_name());
-			System.out.println(openList.getMem_addr());
+
+		// 專門找會員擁有的優惠卷BY阿蓋
+		Set<CouponVO> set = dao.getCPByMemno("MB00000002");
+		for (CouponVO acoupon : set) {
+			System.out.println(acoupon.getCp_from());
+			System.out.println(acoupon.getCp_to());
+			System.out.println(acoupon.getCp_discount());
+			System.out.println(acoupon.getCp_state());
+			System.out.println(acoupon.getMem_no());
+			System.out.println(acoupon.getPromo_no());
 			System.out.println();
 		}
 

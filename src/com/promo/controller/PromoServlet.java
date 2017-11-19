@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.coupon.model.CouponVO;
 import com.news.model.NewsService;
 import com.news.model.NewsVO;
 import com.promo.model.PromoService;
@@ -140,7 +142,6 @@ public class PromoServlet extends HttpServlet {
 
 			try {
 
-				System.out.println("promo_update_try_in");
 				/*****************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 *****************/
@@ -238,7 +239,6 @@ public class PromoServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
 
-				System.out.println("promo_insert_try_in");
 				/********************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 *****************/
@@ -313,7 +313,36 @@ public class PromoServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		} // 新增促銷結束
-		
-		
+
+		// 查詢促銷資訊對應的優惠卷
+		if ("listCP".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				Enumeration<String> allname = req.getParameterNames();
+				while (allname.hasMoreElements()) {
+					System.out.println("listCP_全部的值: " + allname.nextElement());
+				}
+				/*************************** 1.接收請求參數 ****************************************/
+				String promo_no = req.getParameter("promo_no");
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				PromoService promoSvc = new PromoService();
+				Set<CouponVO> set = promoSvc.getCPsByPromono(promo_no);
+				/****************************** 3.查詢完成,準備轉交(Send the Success view)***********/
+				req.setAttribute("listCP", set);
+
+				String url = "/back/coupon/listAllCoupon";
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+		}
+
+		// 查詢促銷資訊對應的優惠卷結束
 	}
 }

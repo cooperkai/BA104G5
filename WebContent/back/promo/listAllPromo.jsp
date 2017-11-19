@@ -7,18 +7,18 @@
 <%
 	PromoVO promoVO = (PromoVO) request.getAttribute("promoVO");
 	PromoService promoSvc = new PromoService();
-	
+
 	List<PromoVO> list = promoSvc.getAll();
 	pageContext.setAttribute("list", list);
-	
+
 	//照著期限排序
 	List<PromoVO> listTime = promoSvc.getAllByTime();
 	pageContext.setAttribute("listTime", listTime);
 %>
 <%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
 %>
 
 <!-- 後端include -->
@@ -49,7 +49,7 @@ response.setDateHeader("Expires", 0);
 							<th>促銷照片</th>
 							<th>修改狀態</th>
 							<th>新增時間</th>
-							<th>員工編號</th>
+							<th>產生優惠卷</th>
 							<th>修改促銷內容</th>
 						</tr>
 					</thead>
@@ -67,7 +67,8 @@ response.setDateHeader("Expires", 0);
 								<td class="text_overflow">${promoVO.promo_content}</td>
 								<td>
 									<div class="" style="height: 145.8px; width: 194px;">
-										<img style="height: 145.8px; width: 194px;" src="<%=request.getContextPath()%>/tool/showimage.do?action=promo_photo&promo_no=${promoVO.promo_no}">
+										<img style="height: 145.8px; width: 194px;"
+											src="<%=request.getContextPath()%>/tool/showimage.do?action=promo_photo&promo_no=${promoVO.promo_no}">
 									</div>
 								</td>
 								<td>
@@ -75,7 +76,9 @@ response.setDateHeader("Expires", 0);
 								</td>
 								<td><fmt:formatDate value="${promoVO.promo_date}"
 										pattern="MM-dd" /></td>
-								<td>${promoVO.emp_no}</td>
+								<td><input
+									class="btn btn_cooper modal_jump cooper_ann_href" type="submit"
+									value="產生優惠卷"></td>
 								<td>
 									<form METHOD="post" ACTION="promo.do">
 										<input class="btn btn_cooper modal_jump cooper_ann_href"
@@ -188,8 +191,8 @@ response.setDateHeader("Expires", 0);
 							<textarea rows="10" class="form-control" name="promo_content"><%=(promoVO == null) ? "請輸入促銷內容" : promoVO.getPromo_content()%></textarea>
 						</div>
 						<div class="form-group dropdown">
-							<label for="promo_content">修改狀態</label> <select name="promo_state"
-								class="form-control btn_cooper" id="sel1">
+							<label for="promo_content">修改狀態</label> <select
+								name="promo_state" class="form-control btn_cooper" id="sel1">
 								<option name="default_item2" value="">請選擇</option>
 								<option class="onitem" value="已上架"
 									${(promoVO.promo_state=='已上架')? 'selected': ''}>已上架</option>

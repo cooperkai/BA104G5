@@ -1,16 +1,21 @@
 package com.promo.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import com.coupon.model.CouponVO;
 
 public class PromoDAO implements PromoDAO_interface {
 
@@ -28,8 +33,12 @@ public class PromoDAO implements PromoDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE Promo SET Promo_From=?, Promo_To=?, Promo_Name=?, Promo_Content=?, Promo_Photo=?, Promo_State=?, EMP_NO=? WHERE Promo_No = ?";
 	private static final String GET_ONE_STMT = "SELECT Promo_No, to_char(Promo_From, 'yyyy-mm-dd')Promo_From, to_char(Promo_To, 'yyyy-mm-dd')Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State, to_char(Promo_Date, 'yyyy-mm-dd')Promo_Date, EMP_NO FROM Promo WHERE Promo_No = ?";
 	private static final String GET_ALL_STMT = "SELECT Promo_No, to_char(Promo_From, 'yyyy-mm-dd')Promo_From, to_char(Promo_To, 'yyyy-mm-dd')Promo_To, Promo_Name, Promo_Content, Promo_Photo, Promo_State, to_char(Promo_Date, 'yyyy-mm-dd')Promo_Date, EMP_NO FROM Promo ORDER BY Promo_No";
-	private static final String GET_ALL_BY_TIME = "SELECT * FROM Promo ORDER BY Promo_To DESC";// 查詢全部照著期限To
-	private static final String UPDATE_FOR_PHOTO = "UPDATE Promo SET Promo_Photo=?, Promo_Content=? WHERE Promo_No=?";// 專門上傳照片，內容
+	// 查詢全部照著期限To
+	private static final String GET_ALL_BY_TIME = "SELECT * FROM Promo ORDER BY Promo_To DESC";
+	// 專門上傳照片，內容
+	private static final String UPDATE_FOR_PHOTO = "UPDATE Promo SET Promo_Photo=?, Promo_Content=? WHERE Promo_No=?";
+	// 查詢促銷資訊對應的優惠卷
+	private static final String GET_CPs = "SELECT CP_No, to_char(CP_From, 'yyyy-mm-dd')CP_From, to_char(CP_To, 'yyyy-mm-dd')CP_To, CP_Content, CP_discount, PDO_No, CP_State, to_char(CP_Date, 'yyyy-mm-dd')CP_Date, MEM_No, Promo_No FROM Coupon WHERE Promo_No=? ORDER BY CP_No";
 
 	// 新增
 	@Override
@@ -246,8 +255,8 @@ public class PromoDAO implements PromoDAO_interface {
 				promovo.setPromo_photo(rs.getBytes("Promo_Photo"));
 				promovo.setPromo_state(rs.getString("Promo_State"));
 				promovo.setPromo_date(rs.getDate("Promo_Date"));
-				promovo.setPromo_state(rs.getString("Emp_no"));
 				promovo.setPromo_no(rs.getString("Promo_No"));
+				promovo.setEmp_no(rs.getString("EMP_No"));
 				promoList.add(promovo);
 			}
 
@@ -313,4 +322,62 @@ public class PromoDAO implements PromoDAO_interface {
 			}
 		}
 	}// 專門上傳照片，內容結束
+
+	// 查詢促銷資訊對應的優惠卷
+	@Override
+	public Set<CouponVO> getCPsByPromono(String promo_no) {
+		Set<CouponVO> set = new LinkedHashSet<CouponVO>();
+		CouponVO couponvo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_CPs);
+			pstmt.setString(1, promo_no);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				couponvo = new CouponVO();
+				couponvo.setCp_no(rs.getString("CP_No"));
+				couponvo.setCp_from(rs.getDate("CP_From"));
+				couponvo.setCp_to(rs.getDate("CP_To"));
+				couponvo.setCp_content(rs.getString("CP_Content"));
+				couponvo.setCp_state(rs.getString("CP_State"));
+				couponvo.setCp_discount(rs.getString("CP_Discount"));
+				couponvo.setCp_date(rs.getDate("CP_Date"));
+				couponvo.setPdo_no(rs.getString("PDO_No"));
+				couponvo.setMem_no(rs.getString("MEM_No"));
+				couponvo.setPromo_no(rs.getString("PROMO_No"));
+				set.add(couponvo);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException re) {
+					re.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}// 查詢促銷資訊對應的優惠卷結束
 }

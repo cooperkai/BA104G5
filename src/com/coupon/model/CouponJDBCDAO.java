@@ -378,7 +378,6 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 			System.out.println(acp.getPromo_no());
 			System.out.println(acp.getCp_date());
 			System.out.println();
-			System.out.println();
 		}
 	}// 測試結束
 

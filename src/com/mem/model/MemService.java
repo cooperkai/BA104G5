@@ -2,6 +2,9 @@ package com.mem.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import com.coupon.model.CouponVO;
 
 public class MemService {
 	private MemDAO_interface dao;
@@ -67,14 +70,19 @@ public class MemService {
 		return dao.getIdList();
 	}
 
-	// 會員找房狀態open list
+	// 會員找房狀態open list阿蓋
 	public List<MemVO> getOpenList() {
 		return dao.getOpenList();
 	}
 
-	// 會員找房狀態open map
+	// 會員找房狀態open map阿蓋
 	public List<MemVO> getOpenMap(Map<String, String[]> map) {
 		return dao.getOpenMap(map);
+	}
+
+	// 查詢促銷資訊對應的優惠卷阿蓋
+	public Set<CouponVO> getCPByMemno(String mem_no) {
+		return dao.getCPByMemno(mem_no);
 	}
 
 }

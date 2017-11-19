@@ -6,13 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import com.coupon.model.CouponVO;
 
 import jdbc.util.CompositeQuery.MemOpenQuery;
 
@@ -45,6 +49,8 @@ public class MemDAO implements MemDAO_interface {
 	private static final String OPEN_LIST = "SELECT * FROM MEMBER WHERE SEARCH_STATE = 'ON' ORDER BY MEM_NO";
 	// 找會員開放找房狀態 阿蓋Map
 	private static final String OPEN_MAP = "SELECT * FROM MEMBER WHERE SEARCH_STATE = 'ON' ORDER BY MEM_NO";
+	// 專門找會員擁有的優惠卷BY阿蓋
+	private static final String GET_CPs = "SELECT CP_No, to_char(CP_From, 'yyyy-mm-dd')CP_From, to_char(CP_To, 'yyyy-mm-dd')CP_To, CP_Content, CP_discount, PDO_No, CP_State, to_char(CP_Date, 'yyyy-mm-dd')CP_Date, Mem_No, Promo_No FROM Coupon WHERE Mem_No=? ORDER BY CP_To DESC";
 
 	@Override
 	public void insert(MemVO memVO) {
@@ -511,4 +517,63 @@ public class MemDAO implements MemDAO_interface {
 		}
 		return list;
 	}// 會員開放找房狀態 阿蓋Map結束
+
+	// 專門找會員擁有的優惠卷BY阿蓋
+	@Override
+	public Set<CouponVO> getCPByMemno(String mem_no) {
+		Set<CouponVO> set = new LinkedHashSet<CouponVO>();
+		CouponVO couponvo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_CPs);
+			pstmt.setString(1, mem_no);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				couponvo = new CouponVO();
+				couponvo.setCp_no(rs.getString("CP_No"));
+				couponvo.setCp_from(rs.getDate("CP_From"));
+				couponvo.setCp_to(rs.getDate("CP_To"));
+				couponvo.setCp_content(rs.getString("CP_Content"));
+				couponvo.setCp_state(rs.getString("CP_State"));
+				couponvo.setCp_discount(rs.getString("CP_Discount"));
+				couponvo.setCp_date(rs.getDate("CP_Date"));
+				couponvo.setPdo_no(rs.getString("PDO_No"));
+				couponvo.setMem_no(rs.getString("MEM_No"));
+				couponvo.setPromo_no(rs.getString("PROMO_No"));
+				set.add(couponvo);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException re) {
+					re.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}// 專門找會員擁有的優惠卷BY阿蓋結束
+
 }

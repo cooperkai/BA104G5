@@ -2,6 +2,9 @@ package com.mem.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import com.coupon.model.CouponVO;
 
 public interface MemDAO_interface {
 	public void insert(MemVO memVO);
@@ -17,4 +20,6 @@ public interface MemDAO_interface {
     public List<MemVO> getOpenList();
     //專門找開放找房狀態的會員BY阿蓋Map
     public List<MemVO> getOpenMap(Map<String, String[]> map);
+    //專門找會員擁有的優惠卷BY阿蓋
+    public Set<CouponVO> getCPByMemno(String mem_no);
 }
