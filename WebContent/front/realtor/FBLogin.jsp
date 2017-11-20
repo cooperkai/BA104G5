@@ -57,9 +57,6 @@
 // 		FB.api('/me',function(response) {
 // 			console.log('Successful login for: '+ response.name);
 // 			document.getElementById('status').innerHTML = 'Thanks for logging in, '	+ response.name+ response.email  +response.id+'!';});
-// 		FB.api('/me/picture?type=large', function(response) {
-// 			document.getElementById('status1').innerHTML = response.data.url;
-// 		});
 // 	}
 
 
@@ -76,8 +73,11 @@
 						  } 
 					  }
 				  }
-			  
-			  
+		//讀照片必備	  
+		FB.api('/me/picture?type=large', function(response) {
+			document.getElementById('status1').innerHTML = response.data.url;
+		});
+			  //取得使用者資訊，還可以取很多個
 			  FB.api('/me', 'GET', {"fields":"id,name,email"},function(response) {
 				name = response.name;
 				  email = response.email;

@@ -25,8 +25,8 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 	private static final String userid = "BA104G5";
 	private static final String password = "ba104g5";
 
-	private static final String INSERT_STMT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO) "
-			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, Rtr_State) "
+			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?, 'OFF')";
 	// private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_ID=?,
 	// RTR_NAME=?, RTR_PHOTO=?, RTR_AREA=?, RTR_INTRO=? WHERE RTR_NO =
 	// ?";//預留給之後可能要改服務地區，還有emailID帳號
@@ -747,34 +747,34 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		RealtorJDBCDAO dao = new RealtorJDBCDAO();
 
 		// 專門塞房仲照片以及簡介
-		for (int i = 1; i <= 12; i++) {
-			if (i <= 9) {
-				FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor" + i + ".jpg");
-				String reader = getLongString("WebContent/txt/realtor_txt/realtor" + i + ".txt");
-				String rtr_no = "RT0000000" + i;
-				byte[] realtorpic = new byte[in.available()];
-				in.read(realtorpic);
-				RealtorVO vo4 = new RealtorVO();
-				vo4.setRtr_photo(realtorpic);
-				vo4.setRtr_intro(reader);
-				vo4.setRtr_no(rtr_no);
-				dao.updatePhoto(vo4);
-				in.close();
-			} else {
-				FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor" + i + ".jpg");
-				String reader = getLongString("WebContent/txt/realtor_txt/realtor" + i + ".txt");
-				String rtr_no = "RT000000" + i;
-				byte[] realtorpic = new byte[in.available()];
-				in.read(realtorpic);
-				RealtorVO vo4 = new RealtorVO();
-				vo4.setRtr_photo(realtorpic);
-				vo4.setRtr_intro(reader);
-				vo4.setRtr_no(rtr_no);
-				dao.updatePhoto(vo4);
-				in.close();
-			}
-		}
-		System.out.println("-----------------------------------------------------------------------------------");
+//		for (int i = 1; i <= 12; i++) {
+//			if (i <= 9) {
+//				FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor" + i + ".jpg");
+//				String reader = getLongString("WebContent/txt/realtor_txt/realtor" + i + ".txt");
+//				String rtr_no = "RT0000000" + i;
+//				byte[] realtorpic = new byte[in.available()];
+//				in.read(realtorpic);
+//				RealtorVO vo4 = new RealtorVO();
+//				vo4.setRtr_photo(realtorpic);
+//				vo4.setRtr_intro(reader);
+//				vo4.setRtr_no(rtr_no);
+//				dao.updatePhoto(vo4);
+//				in.close();
+//			} else {
+//				FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor" + i + ".jpg");
+//				String reader = getLongString("WebContent/txt/realtor_txt/realtor" + i + ".txt");
+//				String rtr_no = "RT000000" + i;
+//				byte[] realtorpic = new byte[in.available()];
+//				in.read(realtorpic);
+//				RealtorVO vo4 = new RealtorVO();
+//				vo4.setRtr_photo(realtorpic);
+//				vo4.setRtr_intro(reader);
+//				vo4.setRtr_no(rtr_no);
+//				dao.updatePhoto(vo4);
+//				in.close();
+//			}
+//		}
+//		System.out.println("-----------------------------------------------------------------------------------");
 
 		FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor1.jpg");
 		byte[] realtorpic = new byte[in.available()];
@@ -782,32 +782,32 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		in.close();
 
 		// 新增
-		 RealtorVO vo = new RealtorVO();
-		 vo.setRtr_id("u9813019@yuntech.edu.tw");
-		 vo.setRtr_psw("e124217388");
-		 vo.setRtr_name("Cooper Kai");
-		 vo.setRtr_photo(realtorpic);
-		 vo.setRtr_area("中正區");
-		 vo.setRtr_intro("大家好!!");
-		 vo.setRtr_idno("E124217388");
-		 vo.setRe_no("RE00000002");
-		 dao.insert(vo);
-		 System.out.println("===============================================");
+//		 RealtorVO vo = new RealtorVO();
+//		 vo.setRtr_id("u9813019@yuntech.edu.tw");
+//		 vo.setRtr_psw("e124217388");
+//		 vo.setRtr_name("Cooper Kai");
+//		 vo.setRtr_photo(realtorpic);
+//		 vo.setRtr_area("中正區");
+//		 vo.setRtr_intro("大家好!!");
+//		 vo.setRtr_idno("E124217388");
+//		 vo.setRe_no("RE00000002");
+//		 dao.insert(vo);
+//		 System.out.println("===============================================");
 
 		// 修改
-		// RealtorVO vo2 = new RealtorVO();
-		// vo2.setRtr_id("BA104G5@gmail.com");
-		// vo2.setRtr_psw("cccccccccccccc");
-		// vo2.setRtr_name("ccccccc");
-		// vo2.setRtr_photo(realtorpic);
-		// vo2.setRtr_area("中正區");
-		// vo2.setRtr_intro("大家好!!");
-		// vo2.setRtr_idno("A147845895");
-		// vo2.setRe_no("RE00000001");
-		// vo2.setRtr_state("ON");
-		// vo2.setRtr_no("RT00000013");
-		// dao.update(vo2);
-		// System.out.println("===============================================");
+		 RealtorVO vo2 = new RealtorVO();
+		 vo2.setRtr_id("BA104G5@gmail.com");
+		 vo2.setRtr_psw("cccccccccccccc");
+		 vo2.setRtr_name("ccccccc");
+		 vo2.setRtr_photo(realtorpic);
+		 vo2.setRtr_area("中正區");
+		 vo2.setRtr_intro("大家好!!");
+		 vo2.setRtr_idno("A147845895");
+		 vo2.setRe_no("RE00000001");
+		 vo2.setRtr_state("ON");
+		 vo2.setRtr_no("RT00000013");
+		 dao.update(vo2);
+		 System.out.println("===============================================");
 
 		// 修改姓名，照片，簡介
 		// RealtorVO vo2 = new RealtorVO();

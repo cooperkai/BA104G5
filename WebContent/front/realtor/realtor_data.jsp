@@ -70,7 +70,7 @@
 			<div class="modal-footer">
 				<input type="hidden" name="action" value="realtor_Change_data">
 				<input type="hidden" name="rtr_no" value="${realtorVO.rtr_no}">
-				<button type="submit" class="btn" value="送出修改">確認修改資料</button>
+				<button type="submit" class="btn" title="送出修改" value="送出修改">確認修改資料</button>
 			</div>
 
 		</div>

@@ -81,7 +81,7 @@
 					<div class="">
 						<input type="text" name="keyword" value="" placeholder="請輸入關鍵字">
 						<input type="hidden" name="action" value="findBykeyword">
-						<input type="submit" value="搜尋">
+						<input type="submit" title="搜尋房仲" value="搜尋">
 					</div>
 				</form>
 			</div>
@@ -183,7 +183,7 @@
 									</button>
 								</div>
 								<div class="row forward_estate">
-									<button class="button"
+									<button class="button" title="聊天"
 										style="vertical-align: middle; background-color: red;">
 										<span class="forward_word">聊天or伴遊</span>
 									</button>

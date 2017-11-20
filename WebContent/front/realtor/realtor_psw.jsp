@@ -56,7 +56,7 @@
 		</div>
 		<div class="modal-footer">
 			<input type="hidden" name="action" value="realtor_Change_Psw">
-			<button type="submit" class="btn btn-danger" value="送出修改">修改密碼</button>
+			<button type="submit" class="btn btn-danger" title="送出修改" value="送出修改">修改密碼</button>
 			<div style="float: left;">
 				<c:if test="${not empty pswErrors}">
 					<font style="color: red">請修正以下錯誤:</font>
