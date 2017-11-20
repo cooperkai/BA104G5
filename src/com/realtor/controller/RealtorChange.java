@@ -56,39 +56,53 @@ public class RealtorChange extends HttpServlet {
 				String rtr_idno = req.getParameter("rtr_idno");
 				String default_item = req.getParameter("default_item");
 				String aggrement = null;
+System.out.println(default_item);
+System.out.println(rtr_area);
+System.out.println(re_no);
+				//判斷服務地區
+				if(rtr_area == null || rtr_area.trim().length()==0 || rtr_area==default_item){
+					regErrors.add("請選擇服務地區!");
+				}
 				
-				//檢查房仲名是否為空
-				if ( (rtr_name.trim()).length()==0 ) {
+				//判斷房仲公司
+				if(re_no == null || re_no.trim().length()==0 || re_no==default_item){
+					regErrors.add("請選擇服務公司!");
+				}
+
+				// 檢查房仲名是否為空
+				if ((rtr_name.trim()).length() == 0) {
 					regErrors.add("姓名不可為空!");
 				}
 
-				//檢查帳號是否已存在
-				if((rtr_id.trim()).length()==0) {
+				// 檢查帳號是否已存在
+				if ((rtr_id.trim()).length() == 0) {
 					regErrors.add("帳號不可為空");
 				} else {
 					for (RealtorVO idList : list) {
-						if( rtr_id.equals((idList.getRtr_id())) ) {
+						if (rtr_id.equals((idList.getRtr_id()))) {
 							regErrors.add("此帳號已存在!");
 						}
 					}
 				}
-				
-				//檢查密碼是否為空
-				if (rtr_psw.length()==0 || rtr_psw2.length()==0) {
+
+				// 檢查密碼是否為空
+				if (rtr_psw.length() == 0 || rtr_psw2.length() == 0) {
 					regErrors.add("密碼不可為空!");
+					return;
 				}
-				
-				//檢查兩次密碼是否相同
-				if ( !rtr_psw.equals(rtr_psw2) ) {
+
+				// 檢查兩次密碼是否相同
+				if (!rtr_psw.equals(rtr_psw2)) {
 					regErrors.add("兩次輸入的密碼不同!");
+					return;
 				}
-				
-				//檢查簡介是否為空
-				if ( (rtr_intro.trim()).length()==0 ) {
+
+				// 檢查簡介是否為空
+				if ((rtr_intro.trim()).length() == 0) {
 					regErrors.add("簡介不可為空!");
+					return;
 				}
-				
-				
+
 				// 檢查是否同意 "服務條款 & 隱私權政策"
 				try {
 					(req.getParameter("aggrement")).equals("on");
@@ -97,14 +111,17 @@ public class RealtorChange extends HttpServlet {
 					regErrors.add("需同意 '服務條款 & 隱私權政策' 才能註冊!");
 					aggrement = "";
 				}
-				
+
 				byte[] rtr_photo = null;
 				Part photo = req.getPart("rtr_photo");
 				InputStream in = photo.getInputStream();
+				if ((in.available()) == 0) {
+					regErrors.add("請選擇一張照片上傳");
+				}
 				rtr_photo = new byte[in.available()];
 				in.read(rtr_photo);
 				in.close();
-				
+
 				RealtorVO realtorVOreg = new RealtorVO();
 
 				realtorVOreg.setRtr_id(rtr_id);
@@ -115,7 +132,6 @@ public class RealtorChange extends HttpServlet {
 				realtorVOreg.setRtr_idno(rtr_idno);
 				realtorVOreg.setRe_no(re_no);
 				realtorVOreg.setAggrement(aggrement);
-
 
 				// Send the use back to the form, if there were errors
 				if (!regErrors.isEmpty()) {
@@ -133,7 +149,7 @@ public class RealtorChange extends HttpServlet {
 				 *************/
 				String url = "/front/realtor/realtor_success.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交success.jsp
-				successView.forward(req, res);	
+				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
@@ -141,12 +157,9 @@ public class RealtorChange extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_register.jsp");
 				failureView.forward(req, res);
 			}
-		}// 來自房仲註冊的請求結束
-		
-		
-		
-		
-		//得到該房重要被修改的房仲編號
+		} // 來自房仲註冊的請求結束
+
+		// 得到該房重要被修改的房仲編號
 		if ("getOne_For_Update".equals(action)) { // 來自realtor_center.jsp
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -161,12 +174,13 @@ public class RealtorChange extends HttpServlet {
 				RealtorVO realtorVO = realtorSvc.getOne(rtr_no);
 				if (realtorVO == null) {
 					errorMsgs.add("查無此房仲");
+					return;
 				}
 
 				/*******************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
-				
+
 				HttpSession session = req.getSession();
 				session.setAttribute("realtorVO", realtorVO);
 				String url = "/front/realtor/realtor_data.jsp";
@@ -179,11 +193,8 @@ public class RealtorChange extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_center.jsp");
 				failureView.forward(req, res);
 			}
-		}//得到該房重要被修改的房仲編號結束
-		
-		
-		
-		
+		} // 得到該房重要被修改的房仲編號結束
+
 		// 來自房仲中心修改個人資料請求
 		System.out.println(action);
 		if ("realtor_Change_data".equals(action)) {
@@ -211,11 +222,13 @@ public class RealtorChange extends HttpServlet {
 				if (rtr_name == null || rtr_name.length() == 0) {
 					dataErrors.add("姓名不可為空!");
 					nameErr = "姓名不可為空!";
+					return;
 				}
 				String rtr_intro = req.getParameter("rtr_intro").trim();
 				if (rtr_intro.length() == 0) {
 					dataErrors.add("簡介不可為空 !");
 					introErr = "簡介不可為空 !";
+					return;
 				}
 
 				byte[] rtr_photo = null;
@@ -236,15 +249,15 @@ public class RealtorChange extends HttpServlet {
 							e.printStackTrace();
 						}
 						rtr_photo = buffer.toByteArray();
-//						System.out.println("進來照片:" + photo);
-//						InputStream in = photo.getInputStream();
-//						rtr_photo = new byte[in.available()];
-//						in.read(rtr_photo);
-//						in.close();
+						// System.out.println("進來照片:" + photo);
+						// InputStream in = photo.getInputStream();
+						// rtr_photo = new byte[in.available()];
+						// in.read(rtr_photo);
+						// in.close();
 					} else {
 						System.out.println("沒有照片");
 						rtr_photo = realtorVO.getRtr_photo();
-						
+
 					}
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();

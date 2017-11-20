@@ -50,7 +50,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RealtorServlet</servlet-name>
-		<url-pattern>/front/realtor/realtor.do</url-pattern>
+		<url-pattern>/front/realtor/realtor</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>RealtorLogout</servlet-name>

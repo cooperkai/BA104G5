@@ -130,10 +130,10 @@
 									class="com.realestate.model.RealEstateService" />
 								<select class="selectpicker show-tick form-control" size="1"
 									name="re_no">
-									<option name="default_item">選擇服務公司</option>
+									<option name="default_item" value="">選擇服務公司</option>
 									<c:forEach var="realestateVO" items="${realestateSvc.all}">
 										<option value="${realestateVO.re_no}"
-											${(realtorVO.re_no==realestateVO.re_no)? 'selected':'' }>${realestateVO.re_name}</option>
+											${(realtorVO.re_no==realestateVO.re_no)? '':'${realestateVO.re_name}'}>${realestateVO.re_name}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -144,9 +144,9 @@
 
 								<select class="selectpicker show-tick form-control"
 									name="rtr_area">
-									<option name="default_item">選擇服務地區</option>
+									<option name="default_item" value="">選擇服務地區</option>
 									<option
-										value="<%=(realtorVOreg == null) ? "" : realtorVOreg.getRtr_area()%>"></option>
+										value="<%=(realtorVOreg == null) ? "": "realtorVOreg.getRtr_area()"%>"></option>
 									<option>北投區</option>
 									<option>中正區</option>
 									<option>士林區</option>

@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.realtor.model.*"%>
+
 
 <%
 	response.setHeader("Cache-Control", "no-store");
@@ -49,45 +51,62 @@
 						<label class="control-label rtr_label_cooper">忘記密碼</label>
 					</h4>
 				</div>
-				<%-- 錯誤表列 --%>
-				<div class="panel-body">
-					<c:if test="${not empty loginError}">
-						<font style="color: red">${loginError}</font>
-					</c:if>
-					<form class="form-horizontal loginform" action="<%=request.getContextPath()%>/front/realtor/realtor.do"
-						method="post">
-						<div class="form-group">
-							<label for="rtr_id" class="col-sm-2 control-label">輸入帳號</label>
-							<div class="col-sm-10">
-								<input type="email" class="form-control" id="rtr_id"
-									name="rtr_id" placeholder="帳號(請輸入e-mail)">
-							</div>
+
+				<form class="form-horizontal loginform"
+					action="<%=request.getContextPath()%>/front/realtor/realtor.do"
+					method="post">
+					<div class="form-group">
+						<div class="container-fluid">
+							<%-- 錯誤表列 --%>
+							<c:if test="${not empty errorMsgs}">
+								<div class="row">
+									<div class="col-sm-3">
+										<font style="color: red">請修正以下錯誤</font>
+									</div>
+									<div class="col-sm-4">
+										<ul style="padding: 0;">
+											<c:forEach var="message" items="${errorMsgs}">
+												<li style="color: red" style="padding:0;">${message}</li>
+											</c:forEach>
+										</ul>
+									</div>
+								</div>
+							</c:if>
 						</div>
-						<div class="form-group">
-							<label for="rtr_name" class="col-sm-2 control-label">輸入姓名</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="rtr_name"
-									name="rtr_name" placeholder="輸入姓名">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="rtr_id" class="col-sm-2 control-label">輸入帳號</label>
+						<div class="col-sm-9">
+							<input type="email" class="form-control" id="rtr_id"
+								name="rtr_id" placeholder="帳號(請輸入e-mail)">
 						</div>
-						<div class="form-group margin-top" id="loginBtn">
-							<div class="col-sm-12 col-sm-3"></div>
-							<div class="col-sm-12 col-sm-3"></div>
-							<div class="col-sm-12 col-sm-3">
-								<a class="btn btn-lg btn-danger"
-									href="<%=request.getContextPath()%>/front/frontPage/index.jsp"
-									title="回ForHouse首頁" role="button">取消</a>
-							</div>
-							<div class="col-sm-12 col-sm-3">
-								<input type="submit" value="救回密碼" class="btn btn-primary btn-lg btn-block btn_rtr_cooper"
-									title="救回密碼"> 
-								<input type="hidden" name="action" value="rtrForgot">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="rtr_name" class="col-sm-2 control-label">輸入姓名</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="rtr_name"
+								name="rtr_name" placeholder="輸入姓名">
 						</div>
-					</form>
-				</div>
+					</div>
+					<div class="form-group margin-top" id="loginBtn">
+						<div class="col-sm-12 col-sm-2"></div>
+						<div class="col-sm-12 col-sm-3"></div>
+						<div class="col-sm-12 col-sm-3">
+							<a class="btn btn-lg btn-danger"
+								href="<%=request.getContextPath()%>/front/frontPage/index.jsp"
+								title="回ForHouse首頁" role="button">取消</a>
+						</div>
+						<div class="col-sm-12 col-sm-3">
+							<input type="submit" value="救回密碼"
+								class="btn btn-primary btn-lg btn-block btn_rtr_cooper"
+								title="救回密碼"> <input type="hidden" name="action"
+								value="rtrForgot">
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
+	</div>
 	</div>
 
 </body>

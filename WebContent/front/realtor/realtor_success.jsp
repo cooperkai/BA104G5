@@ -68,6 +68,9 @@ body {
 						<p>
 							<a href="<%=request.getContextPath()%>/front/realtor/realtor_center.jsp"><button>進入房仲會員中心</button></a>
 						</p>
+						<p>
+							<a href="<%=request.getContextPath()%>/front/frontPage/index.jsp"><button>進入ForHouse首頁</button></a>
+						</p>
 					</h4>
 				</div>
 			</div>

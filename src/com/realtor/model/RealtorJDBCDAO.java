@@ -782,17 +782,17 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		in.close();
 
 		// 新增
-		// RealtorVO vo = new RealtorVO();
-		// vo.setRtr_id("realtor015@gmail.com");
-		// vo.setRtr_psw("123456");
-		// vo.setRtr_name("房仲一");
-		// vo.setRtr_photo(realtorpic);
-		// vo.setRtr_area("中正區");
-		// vo.setRtr_intro("大家好!!");
-		// vo.setRtr_idno("A147845895");
-		// vo.setRe_no("RE00000002");
-		// dao.insert(vo);
-		// System.out.println("===============================================");
+		 RealtorVO vo = new RealtorVO();
+		 vo.setRtr_id("u9813019@yuntech.edu.tw");
+		 vo.setRtr_psw("e124217388");
+		 vo.setRtr_name("Cooper Kai");
+		 vo.setRtr_photo(realtorpic);
+		 vo.setRtr_area("中正區");
+		 vo.setRtr_intro("大家好!!");
+		 vo.setRtr_idno("E124217388");
+		 vo.setRe_no("RE00000002");
+		 dao.insert(vo);
+		 System.out.println("===============================================");
 
 		// 修改
 		// RealtorVO vo2 = new RealtorVO();

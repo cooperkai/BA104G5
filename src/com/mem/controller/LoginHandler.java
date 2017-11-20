@@ -46,7 +46,7 @@ public class LoginHandler extends HttpServlet {
 		
 	    if (errorMsgs.length()>0) {
 			req.setAttribute("errorMsgs", errorMsgs); // 將errorMsgs存入req
-			RequestDispatcher failureView = req.getRequestDispatcher("/login.jsp");
+			RequestDispatcher failureView = req.getRequestDispatcher("/front/member/login.jsp");
 			failureView.forward(req, res);
 			return;
 		}
@@ -63,6 +63,6 @@ public class LoginHandler extends HttpServlet {
 	         }
 	       }catch (Exception ignored) { }
 
-	      res.sendRedirect(req.getContextPath()+"/index.jsp");  //*工作3: (-->如無來源網頁:則重導至index.jsp)
+	      res.sendRedirect(req.getContextPath()+"/front/member/index.jsp");  //*工作3: (-->如無來源網頁:則重導至index.jsp)
 	 } //doPost
 }
