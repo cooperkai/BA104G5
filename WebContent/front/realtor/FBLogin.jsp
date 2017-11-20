@@ -13,11 +13,11 @@
 	<form action="<%=request.getContextPath()%>/front/realtor/realtor"
 		method="post">
 		<div id="fb-root"></div>
-		
+
 		<script>
 	function statusChangeCallback(response) {
-		console.log('statusChangeCallback');
-		console.log(response);
+		alert('statusChangeCallback');
+		alert(response);
 		if (response.status === 'connected') {
 			fblogin();
 		} else if (response.status === 'not_authorized') {
@@ -52,15 +52,15 @@
 	     fjs.parentNode.insertBefore(js, fjs);
 	   }(document, 'script', 'facebook-jssdk'));
 
-	function testAPI() {
-		console.log('Welcome!  Fetching your information.... ');
-		FB.api('/me',function(response) {
-			console.log('Successful login for: '+ response.name);
-			document.getElementById('status').innerHTML = 'Thanks for logging in, '	+ response.name+ response.email  +response.id+'!';});
-		FB.api('/me/picture?type=large', function(response) {
-			document.getElementById('status1').innerHTML = response.data.url;
-		});
-	}
+// 	function testAPI() {
+// 		console.log('Welcome!  Fetching your information.... ');
+// 		FB.api('/me',function(response) {
+// 			console.log('Successful login for: '+ response.name);
+// 			document.getElementById('status').innerHTML = 'Thanks for logging in, '	+ response.name+ response.email  +response.id+'!';});
+// 		FB.api('/me/picture?type=large', function(response) {
+// 			document.getElementById('status1').innerHTML = response.data.url;
+// 		});
+// 	}
 
 
 		function fblogin(){
@@ -77,22 +77,22 @@
 					  }
 				  }
 			  
-			  FB.api('/me',function(response) {
-				  name=response.name;
-				  email=response.email;
-				  fbid=response.id;
-			  });
+			  
+			  FB.api('/me', 'GET', {"fields":"id,name,email"},function(response) {
+				name = response.name;
+				  email = response.email;
+				 fbid = response.id;
+			  
+			  
+			
 			  //建立好Get連接與送出請求
-				var url="<%=request.getContextPath()%>/front/realtor/realtor?action=FBLogin&name=" + name + "&email=baby8018600@yahoo.com.tw&id="+fbid;
-				xhr.open("Get", url, true);
-				xhr.send(null);
-	}
-</script>
-		
-		
-		
-		
-		
+				var url="<%=request.getContextPath()%>/front/realtor/realtor?action=FBLogin&name="+name+"&email="+email+"&id="+fbid;
+									xhr.open("Get", url, true);
+									xhr.send(null);
+								});
+			}
+		</script>
+
 		<fb:login-button scope="public_profile,email"
 			onlogin="checkLoginState();" data-size="large">
 		</fb:login-button>
