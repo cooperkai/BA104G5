@@ -2,6 +2,9 @@ package com.realtor.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import com.article.model.ArticleVO;
 
 public class RealtorService {
 	private RealtorDAO_interface dao;
@@ -131,6 +134,11 @@ public class RealtorService {
 		realtorVO.setRe_no(re_no);
 		dao.FBInsert(realtorVO);
 		return realtorVO;
+	}
+	
+	// 找房仲文章
+	public Set<ArticleVO> getArtByRtrNo(String rtr_no) {
+		return dao.getArtByRtrNo(rtr_no);
 	}
 
 }

@@ -4,8 +4,6 @@
 <%@ page import="com.realtor.model.*"%>
 <%@ page import="com.article.model.*"%>
 
-
-
 <%
 	RealtorService realtorSvc = new RealtorService();
 	List<RealtorVO> list = realtorSvc.getAll();
@@ -21,8 +19,6 @@
 	pageContext.setAttribute("articleVO", articleVO);
 %>
 
-
-
 <%
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
@@ -34,11 +30,9 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- 為了下拉式選單的css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 <title>員工資料新增 - addEmp.jsp</title>
 
 </head>
@@ -55,8 +49,7 @@
 
 <div class="container">
 	<div class="row">
-		<div
-			class="panel panel-default col-sm-6 col-sm-offset-3 top-margin-sm dia-msg">
+		<div class="panel panel-default col-sm-6 col-sm-offset-3 top-margin-sm dia-msg">
 			<div class="panel-heading form-group">
 				<h4>文章新增</h4>
 				<h4 style="float:right;">
@@ -68,7 +61,7 @@
 				ACTION="<%=request.getContextPath()%>/front/article/article.do"
 				name="form1">
 				<div class="form-group">
-				<img src="https://api.fnkr.net/testimg/80x80" style="float:left"><label  for="rtr_no">房仲名稱</label>
+				<img src="https://api.fnkr.net/testimg/80x80" style="float:left" class="form-group"><label  for="rtr_no">房仲名稱</label>
 					<input type="TEXT" name="rtr_no" size="45" class="form-control"
 						value="<%=(articleVO == null) ? "編號" : articleVO.getRtr_no()%>" />
 				</div>
@@ -109,10 +102,9 @@
 
 
 <script src="https://code.jquery.com/jquery.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- 為了下拉式選單的js -->
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
 
 </html>

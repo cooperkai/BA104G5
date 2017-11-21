@@ -9,7 +9,7 @@
 
 <%
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
-session.setAttribute("realtorVO",realtorVO);
+	session.setAttribute("realtorVO",realtorVO);
 	RealtorVO realtorVO2 = (RealtorVO) request.getAttribute("realtorVO");
 	// 如為 null, 代表此user未登入過 , 才做以下工作.
 	//*工作1 : 同時記下目前位置 , 以便於login.jsp登入成功後 , 能夠直接導至此網頁
