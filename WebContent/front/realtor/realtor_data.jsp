@@ -64,8 +64,7 @@
 				<label for="ann_content">簡介</label>
 				<textarea rows="10" class="form-control" name="rtr_intro"><%=(realtorVOtmp == null) ? realtorVO.getRtr_intro()
 					: ((realtorVOtmp.getRtr_intro().length() > 0) ? realtorVOtmp.getRtr_intro()
-							: realtorVO.getRtr_intro())%>
-						</textarea>
+							: realtorVO.getRtr_intro())%></textarea>
 			</div>
 			<div class="modal-footer">
 				<input type="hidden" name="action" value="realtor_Change_data">

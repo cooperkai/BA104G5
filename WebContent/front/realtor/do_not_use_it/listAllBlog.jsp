@@ -80,7 +80,7 @@ th, td {
 		</ul>
 	</c:if>
 
-
+<%--
 	<table>
 		<tr>
 			<th>房仲文章編號</th>
@@ -91,7 +91,7 @@ th, td {
 			<th colspan="2">修改文章</th>
 
 		</tr>
-		<%@ include file="page1.file"%>
+		<%@ include file="page1.file"
 		<c:forEach var="articleVO" items="${list}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
 			<tr align='center' valign='middle'>
@@ -130,11 +130,11 @@ th, td {
 		</c:forEach>
 	</table>
 	<%@include file="page2.file"%>
-		
+--%>
 	<hr><br><br>
 	
 	
-<%--	
+	
 	<table>
 		<tr>
 			<th>房仲文章編號</th>
@@ -184,7 +184,7 @@ th, td {
 		</c:forEach>
 	</table>
 	<%@include file="pageart2.file"%>
---%>
+
 	
 	
 	

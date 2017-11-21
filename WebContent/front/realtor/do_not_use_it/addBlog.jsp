@@ -18,6 +18,7 @@
 	pageContext.setAttribute("artlist", artlist);
 
 	ArticleVO articleVO = (ArticleVO) request.getAttribute("articleVO");
+	pageContext.setAttribute("articleVO", articleVO);
 %>
 
 
@@ -33,99 +34,68 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 <title>員工資料新增 - addEmp.jsp</title>
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-}
-
-table, th, td {
-	border: 0px solid #CCCCFF;
-}
-
-th, td {
-	padding: 1px;
-}
-</style>
-
 </head>
-<body bgcolor='white'>
 
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>文章新增</h3>
-			</td>
-			<td>
-				<h4>
-					<a
-						href="<%=request.getContextPath()%>/front/realtor/listAllBlog.jsp"><img
-						src="images/tomcat.png" width="100" height="100" border="0">回房仲文章列表</a>
+<%-- 錯誤表列 --%>
+<c:if test="${not empty errorMsgs}">
+	<font style="color: red">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color: red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+
+<div class="container">
+	<div class="row">
+		<div
+			class="panel panel-default col-sm-6 col-sm-offset-3 top-margin-sm dia-msg">
+			<div class="panel-heading form-group">
+				<h4>文章新增</h4>
+				<h4 style="float:right;">
+					<a href="<%=request.getContextPath()%>/front/realtor/do_not_use_it/listAllBlog.jsp">回房仲文章列表</a>
 				</h4>
-			</td>
-		</tr>
-	</table>
+			</div>
+		
+			<FORM METHOD="post"
+				ACTION="<%=request.getContextPath()%>/front/article/article.do"
+				name="form1">
+				<div class="form-group">
+				<img src="https://api.fnkr.net/testimg/80x80" style="float:left"><label  for="rtr_no">房仲名稱</label>
+					<input type="TEXT" name="rtr_no" size="45" class="form-control"
+						value="<%=(articleVO == null) ? "編號" : articleVO.getRtr_no()%>" />
+				</div>
+				<div class="form-group">
+					文章內容
+					<textarea rows="10" class="form-control" name="article_body"><%=(articleVO == null) ? "文章內容" : articleVO.getArticle_body()%></textarea>
+				</div>
+				<div class="form-group">
+					<label for="article_state">是否開放</label> <select
+						class="selectpicker show-tick form-control" name="article_state">
+						<option name="default_item" value="">選擇是否開放</option>
+						<option value="ON"
+							${(articleVO.ARTICLE_STATE == 'ON') ? 'selected' : ''}>ON</option>
+						<option value="OFF"
+							${(articleVO.ARTICLE_STATE == 'OFF') ? 'selected' : ''}>OFF</option>
+					</select>
+				</div>
 
-	<h3>資料新增:</h3>
-
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-
-	<FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/front/article/article.do"
-		name="form1">
-		<table>
-			<tr>
-				<td>房仲編號</td>
-				<td><input type="TEXT" name="rtr_no" size="45" class="form-control"
-					value="<%=(articleVO == null) ? "編號" : articleVO.getRtr_no()%>" /></td>
-			</tr>
-			<tr>
-				<td>文章內容</td>
-				<td><textarea rows="10" class="form-control"
-						name="article_body"><%=(articleVO == null) ? "文章內容" : articleVO.getArticle_body()%>
-						</textarea></td>
-			</tr>
-			<tr>
-				<td>是否開放</td>
-				<td><input type="TEXT" name="article_state" size="45"
-					value="<%=(articleVO == null) ? "OFF" : articleVO.getArticle_state()%>" /></td>
-			</tr>
-		</table>
-		<br> <input type="hidden" name="action" value="insert"> <input
-			type="hidden" name="post_date" value=""> <input type="submit"
-			value="送出新增">
-	</FORM>
+				<div class="panel-footer form-group">
+					<input type="hidden" name="action" value="insert"> <input
+						type="hidden" name="post_date" value=""> <input
+						type="submit" value="送出新增">
+				</div>
+			</FORM>
+		</div>
+	</div>
+</div>
 </body>
 
 <%
@@ -136,5 +106,13 @@ th, td {
 		post_date = new java.sql.Timestamp(System.currentTimeMillis());
 	}
 %>
+
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
 
 </html>
