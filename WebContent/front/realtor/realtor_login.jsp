@@ -137,7 +137,7 @@ body {
 </script>
 
 
-</head>
+</head> 
 <body>
 	<div class="container text-center" id="outter">
 		<div class="row">

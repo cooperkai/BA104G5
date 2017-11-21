@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.realtor.model.*"%>
 <%
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
+	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 %>
 
 
@@ -32,7 +34,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-2">
 		<ul class="nav navbar-nav logina">
-			<c:if test="${memVO==null}">
+			<c:if test="${memVO==null && realtorVO == null}">
 				<li><a href='<%=request.getContextPath()%>/register.jsp'><span
 						class='glyphicon glyphicon-edit'></span> 註冊</a></li>
 				<li><a href='<%=request.getContextPath()%>/login.jsp'><span
@@ -41,8 +43,14 @@
 			<c:if test="${memVO!=null}">
 				<li><a href='<%=request.getContextPath()%>/member/memdata.jsp'><span
 						class='glyphicon glyphicon-user'>.<%=memVO.getMem_name()%></span></a></li>
-
 				<li><a href='<%=request.getContextPath()%>/logout.do'><span
+						class='glyphicon glyphicon-log-out'></span>.登出</a></li>
+			</c:if>
+			<c:if test="${realtorVO!=null}">
+				<li><a
+					href='<%=request.getContextPath()%>/front/realtor/realtor_center.jsp'><span
+						class='glyphicon glyphicon-user'>.<%=realtorVO.getRtr_name()%></span></a></li>
+				<li><a href='<%=request.getContextPath()%>/front/realtor/realtorlogout.do'><span
 						class='glyphicon glyphicon-log-out'></span>.登出</a></li>
 			</c:if>
 		</ul>

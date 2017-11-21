@@ -347,7 +347,8 @@ public class RealtorServlet extends HttpServlet {
 
 			HttpSession session = req.getSession(); // 檢查到這表示帳號密碼沒問題
 			session.setAttribute("realtorVO", realtorVO); // 在session內做已經登入過的標識
-			res.sendRedirect("realtor_center.jsp"); // 重導至會員中心
+			RequestDispatcher successView = req.getRequestDispatcher("realtor_center.jsp");
+			successView.forward(req, res);// 重導至會員中心
 		} // 來自房仲登入的請求結束
 
 		// 房仲複合查詢
@@ -566,7 +567,6 @@ public class RealtorServlet extends HttpServlet {
 					//轉交至房仲會員中心
 					String url = req.getContextPath()+"/front/realtor/realtor.do?action=realtorLogin&rtr_id="+email+"&rtr_psw="+id+"";
 					out.println("<META HTTP-EQUIV='Refresh' content='1;URL=" + url + "'>");
-					System.out.println(url);
 					return;
 				}
 			}

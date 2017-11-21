@@ -145,7 +145,7 @@ th, td {
 			<th colspan="2">修改文章</th>
 
 		</tr>
-		<%@ include file="/page/pageart.file"%>
+		<%@ include file="pageart.file"%>
 		<c:forEach var="articleVO" items="${artTime}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
 			<tr align='center' valign='middle'>
@@ -183,7 +183,7 @@ th, td {
 			</tr>
 		</c:forEach>
 	</table>
-	<%@include file="/page/pageart2.file"%>
+	<%@include file="pageart2.file"%>
 --%>
 	
 	
