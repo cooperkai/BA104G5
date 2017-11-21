@@ -9,7 +9,9 @@ public class GetURLPic {
 		URL urllink = null;
 		InputStream in = null;
 		try {
+			
 			urllink = new URL(url);
+			System.out.println(urllink);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

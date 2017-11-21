@@ -563,6 +563,7 @@ public class RealtorServlet extends HttpServlet {
 			for (RealtorVO realtorvo : list) {
 				if ((realtorvo.getRtr_id().trim().equals(email)) && realtorvo.getRtr_psw().trim().equals(id)) {
 					session.setAttribute("realtorvo", realtorvo);
+					//轉交至房仲會員中心
 					String url = req.getContextPath()+"/front/realtor/realtor.do?action=realtorLogin&rtr_id="+email+"&rtr_psw="+id+"";
 					out.println("<META HTTP-EQUIV='Refresh' content='1;URL=" + url + "'>");
 					System.out.println(url);
@@ -570,7 +571,7 @@ public class RealtorServlet extends HttpServlet {
 				}
 			}
 			
-			//沒有走這
+			//沒有登入過走這
 			String picUrl = "https://graph.facebook.com/" + id + "/picture?type=large";
 			// InputStream fin=GetURLPic.GetPic(picUrl);
 			InputStream fin = GetURLPic.GetPic(picUrl);

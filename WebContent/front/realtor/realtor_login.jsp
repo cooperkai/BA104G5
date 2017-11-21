@@ -63,7 +63,7 @@ body {
 <script>
 	function statusChangeCallback(response) {
 		alert('感謝你使用FaceBook登入系統，但還是請您等候房仲會員確認信!');
-		alert(response);
+// 		alert(response);
 		if (response.status === 'connected') {
 			fblogin();
 		} else if (response.status === 'not_authorized') {
@@ -83,9 +83,9 @@ body {
 
 	window.fbAsyncInit = function() {
 	    FB.init({
-	      appId      : '193615331198785',
+	      appId      : '193615331198785',//有期限限制，請再自行去FB登記使用
 	      xfbml      : true,
-	      version    : 'v2.11'
+	      version    : 'v2.11'//版本
 	    });
 	    FB.AppEvents.logPageView();
 	  };
@@ -109,8 +109,6 @@ body {
 		});
 	}
 
-		
-
 		function fblogin(){
 			  //===實作(填入程式碼)
 			  var xhr=new XMLHttpRequest();
@@ -124,7 +122,7 @@ body {
 						  }  
 					  }
 				  }
-			  //取得使用者資訊，還可以取很多個
+			  //取得使用者資訊，還可以取很多個，但要該名使用者同意
 			  FB.api('/me', 'GET', {"fields":"id,name,email"},function(response) {
 				  name = response.name;
 				  email = response.email;
@@ -164,7 +162,7 @@ body {
 						<font style="color: red">${loginError}</font>
 					</c:if>
 					<form class="form-horizontal loginform" action="realtor.do"
-						method="get">
+						method="post">
 						<div class="form-group">
 							<div class="col-sm-12">
 
@@ -178,7 +176,7 @@ body {
 									name="rtr_psw" placeholder="密碼">
 							</div>
 						</div>
-						<!-- FB -->
+						<!-- FB缺一不可 -->
 						<div class="form-group">
 							<div id="fb-root">
 								<div id="IdShowPanel">

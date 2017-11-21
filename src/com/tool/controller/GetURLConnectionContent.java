@@ -18,7 +18,7 @@ class GetURLConnectionContent {
 		URL urllink = null;
 		try {
 			urllink = new URL(url); // 建立URL物件url
-			System.out.println(urllink);
+			System.out.println("長的: " + urllink);
 		} catch (MalformedURLException e) {
 			System.out.println("Malformed URL error!");
 		}
@@ -35,6 +35,6 @@ class GetURLConnectionContent {
 	}
 	
 	public static void main(String args[]){
-		GetURLConnectionContent.GetPic("http://graph.facebook.com/193615331198785/picture?type=large");
+		GetURLConnectionContent.GetPic("http://graph.facebook.com/1687066994645133/picture?type=large");
 	}
 }
