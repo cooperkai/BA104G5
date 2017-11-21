@@ -2,6 +2,9 @@ package com.realtor.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import com.article.model.ArticleVO;
 
 
 public interface RealtorDAO_interface {
@@ -25,6 +28,7 @@ public interface RealtorDAO_interface {
 	public List<RealtorVO> findByKeyword(String keyword);//複合查詢ByKeyword
 	public void changeRealtorState(RealtorVO realtorVO);//更換房仲狀態
 	public void FBInsert(RealtorVO realtorVO);//房仲FB登入的特別insert
+	public Set<ArticleVO> getArtByRtrNo(String rtr_no);// 找房仲文章
 	
  
 }

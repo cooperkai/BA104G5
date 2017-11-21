@@ -6,13 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import com.article.model.ArticleVO;
 
 import jdbc.util.CompositeQuery.RealtorFindByKeyWord;
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Realtor;
@@ -51,6 +55,14 @@ public class RealtorDAO implements RealtorDAO_interface {
 	// 房仲FB登入的特別insert
 	private static final String FB_INSERT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, Rtr_State) "
 			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?, 'ON')";
+
+	// 找房仲文章
+	private static final String GET_ART_BY_RTRNO = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State FROM Article WHERE Rtr_No=? ORDER BY Post_date DESC";
+	// 找房仲文章沒用到
+	// private static final String GET_ART_BY_RTRNO = "SELECT Article_No,
+	// Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date,
+	// Update_date, Article_State FROM Article WHERE Rtr_no='RT00000005' ORDER
+	// BY POST_DATE DESC";
 
 	// 新增
 	@Override
@@ -756,4 +768,55 @@ public class RealtorDAO implements RealtorDAO_interface {
 			}
 		}
 	}// 房仲FB登入的特別insert結束
+
+	// 找房仲文章
+	@Override
+	public Set<ArticleVO> getArtByRtrNo(String rtr_no) {
+
+		Set<ArticleVO> set = new LinkedHashSet<ArticleVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArticleVO articlevo = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ART_BY_RTRNO);
+
+			pstmt.setString(1, rtr_no);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				articlevo = new ArticleVO();
+				articlevo.setArticle_no(rs.getString("Article_no"));
+				articlevo.setRtr_no(rs.getString("Rtr_no"));
+				articlevo.setPost_date(rs.getTimestamp("Post_date"));
+				articlevo.setArticle_body(rs.getString("Article_body"));
+				articlevo.setArticle_state(rs.getString("Article_State"));
+				articlevo.setUpdate_date(rs.getDate("Update_Date"));
+				set.add(articlevo);
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}// 找房仲文章結束
+
 }
