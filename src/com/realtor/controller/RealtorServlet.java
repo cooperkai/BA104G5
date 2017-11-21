@@ -556,18 +556,21 @@ public class RealtorServlet extends HttpServlet {
 			String id = req.getParameter("id");
 			HttpSession session = req.getSession();
 			PrintWriter out = res.getWriter();
-
+			
+			//判斷是否用FB登入過
 			RealtorService realtorSvc = new RealtorService();
 			List<RealtorVO> list = realtorSvc.getAll();
 			for (RealtorVO realtorvo : list) {
 				if ((realtorvo.getRtr_id().trim().equals(email)) && realtorvo.getRtr_psw().trim().equals(id)) {
 					session.setAttribute("realtorvo", realtorvo);
-					String url = (String) session.getAttribute("location");
+					String url = req.getContextPath()+"/front/realtor/realtor.do?action=realtorLogin&rtr_id="+email+"&rtr_psw="+id+"";
 					out.println("<META HTTP-EQUIV='Refresh' content='1;URL=" + url + "'>");
+					System.out.println(url);
 					return;
 				}
 			}
-
+			
+			//沒有走這
 			String picUrl = "https://graph.facebook.com/" + id + "/picture?type=large";
 			// InputStream fin=GetURLPic.GetPic(picUrl);
 			InputStream fin = GetURLPic.GetPic(picUrl);
@@ -583,7 +586,8 @@ public class RealtorServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			byte[] data = buffer.toByteArray();
-			realtorSvc.add(email, id, name2, data, rtr_area, rtr_intro, rtr_idno, re_no);
+//			realtorSvc.add(email, id, name2, data, rtr_area, rtr_intro, rtr_idno, re_no);
+			realtorSvc.FBAdd(email, id, name2, data, rtr_area, rtr_intro, rtr_idno, re_no);
 			System.out.println(email);
 			System.out.println(id);
 			System.out.println(name2);

@@ -24,6 +24,7 @@ public interface RealtorDAO_interface {
 	public List<RealtorVO> getAll(Map<String, String[]> map);//萬用複合查詢(傳入參數型態Map)(回傳 List)
 	public List<RealtorVO> findByKeyword(String keyword);//複合查詢ByKeyword
 	public void changeRealtorState(RealtorVO realtorVO);//更換房仲狀態
+	public void FBInsert(RealtorVO realtorVO);//房仲FB登入的特別insert
 	
  
 }

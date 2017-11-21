@@ -60,6 +60,85 @@ body {
 <!-- cooperkai.css -->
 
 
+<script>
+	function statusChangeCallback(response) {
+		alert('感謝你使用FaceBook登入系統，但還是請您等候房仲會員確認信!');
+		alert(response);
+		if (response.status === 'connected') {
+			fblogin();
+		} else if (response.status === 'not_authorized') {
+			document.getElementById('status').innerHTML = 'Please log '
+					+ 'into this app.';
+		} else {
+			document.getElementById('status').innerHTML = 'Please log '
+					+ 'into Facebook.';
+		}
+	}
+	function checkLoginState() {
+		FB.getLoginStatus(function(response) {
+			statusChangeCallback(response);
+		});
+	}
+
+
+	window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '193615331198785',
+	      xfbml      : true,
+	      version    : 'v2.11'
+	    });
+	    FB.AppEvents.logPageView();
+	  };
+
+	  (function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "https://connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+
+	function testAPI() {
+		console.log('Welcome!  Fetching your information.... ');
+		FB.api('/me',function(response) {
+			console.log('Successful login for: '+ response.name);
+			document.getElementById('status').innerHTML = 'Thanks for logging in, '	+ response.name+ response.email  +response.id+'!';});
+		//讀照片必備	  
+		FB.api('/me/picture?type=large', function(response) {
+			document.getElementById('status1').innerHTML = response.data.url;
+		});
+	}
+
+		
+
+		function fblogin(){
+			  //===實作(填入程式碼)
+			  var xhr=new XMLHttpRequest();
+			  xhr.onreadystatechange=function(){
+				  if(xhr.readyState==4){
+					  if(xhr.status==200){
+						  document.getElementById("IdShowPanel").innerHTML=xhr.responseText;
+					  } 
+					  else{
+						  alert(xhr.status);
+						  }  
+					  }
+				  }
+			  //取得使用者資訊，還可以取很多個
+			  FB.api('/me', 'GET', {"fields":"id,name,email"},function(response) {
+				  name = response.name;
+				  email = response.email;
+				  fbid = response.id;
+			
+			      //建立好Get連接與送出請求
+				  var url="<%=request.getContextPath()%>/front/realtor/realtor.do?action=FBLogin&name=" + name + "&email=" + email + "&id=" + fbid;
+							xhr.open("Get", url, true);
+							xhr.send(null);
+			 });
+	}
+</script>
+
+
 </head>
 <body>
 	<div class="container text-center" id="outter">
@@ -84,8 +163,8 @@ body {
 					<c:if test="${not empty loginError}">
 						<font style="color: red">${loginError}</font>
 					</c:if>
-					<form class="form-horizontal loginform" action="realtor"
-						method="post">
+					<form class="form-horizontal loginform" action="realtor.do"
+						method="get">
 						<div class="form-group">
 							<div class="col-sm-12">
 
@@ -99,6 +178,24 @@ body {
 									name="rtr_psw" placeholder="密碼">
 							</div>
 						</div>
+						<!-- FB -->
+						<div class="form-group">
+							<div id="fb-root">
+								<div id="IdShowPanel">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-3"></div>
+								<div class="col-sm-3"></div>
+								<div class="col-sm-1"></div>
+									<div id="status" class="2" style="margin: 0;">
+										<fb:login-button scope="public_profile,email"
+											onlogin="checkLoginState();" data-size="large">
+										</fb:login-button>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
 						<div class="form-group margin-top" id="loginBtn">
 							<div class="col-sm-12 col-sm-3">
 								<a class="btn btn-lg btn-danger"

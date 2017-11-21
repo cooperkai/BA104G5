@@ -38,11 +38,19 @@ public class RealtorDAO implements RealtorDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, RTR_STATE FROM Realtor ORDER BY RTR_NO";
 	private static final String UPDATE_FOR_PHOTO = "UPDATE Realtor SET RTR_PHOTO=?, RTR_INTRO=? WHERE RTR_NO=?";
 
-	private static final String GET_ONE_BY_ID = "SELECT RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, RTR_STATE FROM Realtor WHERE RTR_ID = ?";
+	// 找房仲ID
+	private static final String GET_ONE_BY_ID = "SELECT RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, RTR_STATE FROM Realtor WHERE RTR_ID = ? ORDER BY RTR_ID";
+	// 更換密碼
 	private static final String CHANGE_PASSWORD = "UPDATE Realtor SET RTR_PSW=? WHERE RTR_NO= ?";
+	// 更換房仲狀態
 	private static final String SET_RTR_STATE = "UPDATE Realtor SET RTR_STATE=? WHERE RTR_NO= ?";
+	// 找房仲名稱
 	private static final String GET_ONE_BY_NAME = "SELECT RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, RTR_STATE FROM Realtor WHERE RTR_NAME = ? ORDER BY RTR_NO";
+	// 列出所有房仲ID(email)
 	private static final String GET_ID_LIST = "SELECT RTR_ID FROM Realtor";
+	// 房仲FB登入的特別insert
+	private static final String FB_INSERT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, Rtr_State) "
+			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?, 'ON')";
 
 	// 新增
 	@Override
@@ -654,7 +662,8 @@ public class RealtorDAO implements RealtorDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			String finalSQL = "select * from Realtor " + RealtorFindByKeyWord.getKeyWordSQL(keyword) + " ORDER BY RTR_NO";
+			String finalSQL = "select * from Realtor " + RealtorFindByKeyWord.getKeyWordSQL(keyword)
+					+ " ORDER BY RTR_NO";
 			pstmt = con.prepareStatement(finalSQL);
 
 			rs = pstmt.executeQuery();
@@ -703,4 +712,48 @@ public class RealtorDAO implements RealtorDAO_interface {
 		return list;
 	} // 房仲萬用複合查詢結束 ByKeyword
 
+	// 房仲FB登入的特別insert
+	@Override
+	public void FBInsert(RealtorVO realtorVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FB_INSERT);
+
+			con.setAutoCommit(false);
+
+			pstmt.setString(1, realtorVO.getRtr_id());
+			pstmt.setString(2, realtorVO.getRtr_psw());
+			pstmt.setString(3, realtorVO.getRtr_name());
+			pstmt.setBytes(4, realtorVO.getRtr_photo());
+			pstmt.setString(5, realtorVO.getRtr_area());
+			pstmt.setString(6, realtorVO.getRtr_intro());
+			pstmt.setString(7, realtorVO.getRtr_idno());
+			pstmt.setString(8, realtorVO.getRe_no());
+
+			pstmt.executeUpdate();
+			con.commit();
+			con.setAutoCommit(true);
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}// 房仲FB登入的特別insert結束
 }
