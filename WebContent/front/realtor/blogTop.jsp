@@ -71,7 +71,7 @@
 					<!-- 標籤面板：標籤區 -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation" class="active">
-							<a href="<%=request.getContextPath()%>/front/realtor/allBlog_test.jsp" role="tab"">最新文章</a>
+							<a href="<%=request.getContextPath()%>/front/realtor/allBlog.jsp" role="tab" id="top">最新文章</a>
 						</li>
 						<li role="presentation">
 							<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp" role="tab">房仲文章</a>

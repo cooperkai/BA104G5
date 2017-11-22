@@ -51,8 +51,7 @@
 						<div class="panel-heading form-group">
 							<h4>文章</h4>
 							<h4 style="float: right;">
-								<a
-									href="<%=request.getContextPath()%>/front/realtor/do_not_use_it/listAllBlog.jsp">回房仲文章列表</a>
+								<a href="#top">回房仲文章列表</a>
 							</h4>
 						</div>
 						<FORM METHOD="post"
@@ -94,8 +93,14 @@
 			</div>
 		</c:forEach>
 	</div>
-</div>
 
+<div class="container" style="margin-top: 1em;">
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<%@ include file="page_front_realtor/pageart2.file"%>
+				</div>
+			</div>
+		</div>
 
 
 

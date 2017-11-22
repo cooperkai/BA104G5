@@ -72,6 +72,12 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label for="article_no">文章編號</label>
+								<div>
+									<h5 name="article_no" class="">${articleVO.article_no}</h5>
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="article_body">文章內容</label>
 								<textarea rows="3" class="form-control" readonly
 									style="cursor: no-drop;" name="article_body">${articleVO.article_body}</textarea>
@@ -98,8 +104,13 @@
 			</div>
 		</c:forEach>
 	</div>
-</div>
-
+<div class="container" style="margin-top: 1em;">
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<%@ include file="page_front_realtor/pageart2.file"%>
+				</div>
+			</div>
+		</div>
 
 
 
