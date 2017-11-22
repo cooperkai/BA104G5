@@ -1,10 +1,9 @@
-@CHARSET "UTF-8";
 
 #cooper_footer {
 	margin-top: 10em;
 }
 
-/* æ›´æ”¹æˆ¿ä»²ç™»å…¥æŒ‰éˆ•é¡è‰²cooperkai */
+/* §ó§ï©Ğ¥òµn¤J«ö¶sÃC¦âcooperkai */
 .btn_rtr_cooper:hover {
 	background-color: #f26649;
 }
@@ -20,7 +19,7 @@
 .rtr_label_cooper:hover {
 	font-size: 80px;
 }
-/* çµæŸæ›´æ”¹æˆ¿ä»²ç™»å…¥æŒ‰éˆ•é¡è‰²cooperkai */
+/* µ²§ô§ó§ï©Ğ¥òµn¤J«ö¶sÃC¦âcooperkai */
 .cooper_side_bar {
 	min-height: 0;
 	background-color: rgb(23, 101, 160);
@@ -38,13 +37,13 @@
 	background-color: white;
 }
 
-/* æ§åˆ¶ä¸Šæ–¹ç™»å‡ºå…¥æ¨£å¼ */
+/* ±±¨î¤W¤èµn¥X¤J¼Ë¦¡ */
 #cooper_log_right_top {
 	margin-top: 0.5%;
 	padding: 10px 11px;
 }
 
-/* è¡¨å–®æ¨£å¼ */
+/* ªí³æ¼Ë¦¡ */
 .form_realtor {
 	border: 1px solid #909090;
 	box-shadow: 0 2px 10px #000005;
@@ -53,23 +52,23 @@
 	background-color: white;
 }
 
-/* æˆ¿ä»²ä¿®æ”¹ç…§ç‰‡é è¦½ */
+/* ©Ğ¥ò­×§ï·Ó¤ù¹wÄı */
 #imgpreview, .rtr_photo {
 	width: 50%;
 	height: 291.2px;
 }
 
-/* ä¸‹æ‹‰é¡è‰² */
+/* ¤U©ÔÃC¦â */
 .selectpicker {
 	background-color: #f26649;
 }
 
-/* å½ˆçª—id å¸³è™Ÿé¡è‰² */
+/* ¼uµ¡id ±b¸¹ÃC¦â */
 #update_color {
 	color: red;
 }
 
-/* æˆ¿ä»²è¨»å†Šç”¨æ¨£å¼ */
+/* ©Ğ¥òµù¥U¥Î¼Ë¦¡ */
 #outter {
 	margin-top: 4em;
 }
@@ -90,28 +89,28 @@
 	margin-top: 8px;
 }
 
-/* realtor_search.jsp æˆ¿ä»²æœå°‹é¡¯ç¤º */
-/*é™åˆ¶containerå¤§å°*/
+/* realtor_search.jsp ©Ğ¥ò·j´MÅã¥Ü */
+/*­­¨îcontainer¤j¤p*/
 .container_size {
 	width: 64.3em;
 }
 
-/*æŒ‰éˆ•æ”¾å¤§*/
+/*«ö¶s©ñ¤j*/
 .bigger {
 	font-size: 1.5em;
 }
 
-/*æŒ‰éˆ•æ§åˆ¶*/
+/*«ö¶s±±¨î*/
 .btn_padding {
 	padding: 0.5em;
 }
 
-/*ä¸‹æ‹‰å¼é¸å–®æŒ‰éˆ•çš„å®¹å™¨*/
+/*¤U©Ô¦¡¿ï³æ«ö¶sªº®e¾¹*/
 .btn-group {
 	margin-left: 5px;
 }
 
-/*ä¸‹æ‹‰å¼æŒ‰éˆ•è·³å‡ºçš„æ¸…å–®*/
+/*¤U©Ô¦¡«ö¶s¸õ¥Xªº²M³æ*/
 .dropdown-item {
 	font-weight: bolder;
 	font-family: Microsoft JhengHei;
@@ -119,13 +118,13 @@
 	align-content: center;
 }
 
-/*å…±æœ‰å¹¾ä½æˆ¿ä»²*/
+/*¦@¦³´X¦ì©Ğ¥ò*/
 .totatl_estate {
 	margin-bottom: 1em;
 	padding: 0;
 }
 
-/*æˆ¿ä»²è³‡è¨Š*/
+/*©Ğ¥ò¸ê°T*/
 .info_estate {
 	font-size: large;
 	font-weight: bold;
@@ -134,7 +133,7 @@
 	line-height: 2.5em;
 }
 
-/*æˆ¿ä»²é¡¯ç¤ºå¤–æ¡†*/
+/*©Ğ¥òÅã¥Ü¥~®Ø*/
 .div_sm_12 {
 	margin-left: 0;
 	border: 1px solid #000000;
@@ -143,18 +142,18 @@
 	background-color: #e6ffff;
 }
 
-/*æˆ¿ä»²ç°¡ä»‹*/
+/*©Ğ¥òÂ²¤¶*/
 .intro_estate {
 	font-weight: bold;
 	font-family: Microsoft JhengHei;
 }
 
-/*æˆ¿ä»²ç°¡ä»‹å…§æ–‡*/
+/*©Ğ¥òÂ²¤¶¤º¤å*/
 .intro_content {
 	font-family: Microsoft JhengHei;
 }
 
-/*åŠ å…¥æœ€æ„›*/
+/*¥[¤J³Ì·R*/
 .heart_main {
 	color: #9D9D9D;
 }
@@ -173,9 +172,9 @@
 	color: red;
 	font-size: x-large;
 }
-/*åŠ å…¥æœ€æ„›çµæŸ*/
+/*¥[¤J³Ì·Rµ²§ô*/
 
-/*å‰å¾€æˆ¿ä»²*/
+/*«e©¹©Ğ¥ò*/
 .forward_estate {
 	padding: 0;
 }
@@ -225,7 +224,7 @@
 	right: 0;
 }
 
-/*å‰å¾€æˆ¿ä»²çµæŸ*/
+/*«e©¹©Ğ¥òµ²§ô*/
 footer {
 	margin-top: 5em;
 	font-weight: 700;
@@ -234,9 +233,9 @@ footer {
 	width: 100%;
 	padding: 25px;
 }
-/* realtor_search.jsp æˆ¿ä»²æœå°‹é¡¯ç¤ºçµæŸ */
+/* realtor_search.jsp ©Ğ¥ò·j´MÅã¥Üµ²§ô */
 
-/* realtor_login.jsp, realtor_forgotæˆ¿ä»²ç™»å…¥ã€å¿˜è¨˜å¯†ç¢¼ */
+/* realtor_login.jsp, realtor_forgot©Ğ¥òµn¤J¡B§Ñ°O±K½X */
 #loginDiv {
 	width: 40em;
 }
@@ -252,10 +251,10 @@ footer {
 #loginBtn {
 	margin-top: 20px;
 }
-/* æˆ¿ä»²ç™»å…¥ã€å¿˜è¨˜å¯†ç¢¼çµæŸ */
+/* ©Ğ¥òµn¤J¡B§Ñ°O±K½Xµ²§ô */
 
-/* memOpen.jspæœå°‹æœƒå“¡é–‹æ”¾æ‰¾æˆ¿ */
+/* memOpen.jsp·j´M·|­û¶}©ñ§ä©Ğ */
 .memOpen {
 	margin-top: 1em;
 }
-/* memOpen.jspæœå°‹æœƒå“¡é–‹æ”¾æ‰¾æˆ¿çµæŸ */
+/* memOpen.jsp·j´M·|­û¶}©ñ§ä©Ğµ²§ô */

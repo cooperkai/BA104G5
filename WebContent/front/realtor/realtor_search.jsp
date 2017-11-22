@@ -156,8 +156,7 @@
 					<div class="col-xs-12 col-sm-3">
 						<ul class="list-unstyled info_estate">
 							<li>房仲姓名 ${realtorVO.rtr_name}</li>
-							<li>房仲公司
-								${realestateSvc.getOne(realtorVO.re_no).getRe_name()}</li>
+							<li>房仲公司	${realestateSvc.getOne(realtorVO.re_no).getRe_name()}</li>
 							<li>服務地區 ${realtorVO.rtr_area}</li>
 						</ul>
 					</div>

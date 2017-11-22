@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.article.model.ArticleService;
+import com.article.model.ArticleVO;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
 import com.realestate.model.RealEstateService;
@@ -610,7 +612,9 @@ public class RealtorServlet extends HttpServlet {
 			out.println("<META HTTP-EQUIV='Refresh' content='1;URL=" + req.getContextPath()+"/front/realtor/realtor_login.jsp" + "'>");
 			return;
 
-		}
+		}// 房仲FB登入結束
+		
+		
 
 	}
 }
