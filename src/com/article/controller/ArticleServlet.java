@@ -181,12 +181,16 @@ public class ArticleServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
+
+			String requestURL = req.getParameter("requestURL");
 			try {
 
 				Enumeration<String> allname = req.getParameterNames();
 				while (allname.hasMoreElements()) {
 					System.out.println("article_全部的值: " + allname.nextElement());
 				}
+				
+				System.out.println(requestURL);
 				/********************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 *****************/
@@ -223,15 +227,16 @@ public class ArticleServlet extends HttpServlet {
 				/******************************
 				 * 3.修改完成,準備轉交(Send the Success view)
 				 *************/
-				req.setAttribute("articleVO", articleVO);
-				String url = "/front/realtor/listAllBlog.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後,轉交listAllPromo.jsp
-				successView.forward(req, res);
+				
+					req.setAttribute("articleVO", articleVO);
+					String url = requestURL;
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後,轉交listAllPromo.jsp
+					successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/listAllBlog.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
 		} // 新增文章結束

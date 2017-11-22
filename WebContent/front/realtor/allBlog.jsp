@@ -43,11 +43,10 @@
 
 
 		<!-- 右邊房仲文章資料 =====================================-->
-		<c:forEach var="articleVO" items="${list}">
+		<c:forEach var="articleVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			<div class="container">
 				<div class="row">
-					<div
-						class="panel panel-default col-sm-12  col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default col-sm-12  col-sm-8 col-sm-offset-2">
 						<div class="panel-heading form-group">
 							<h4>文章</h4>
 							<h4 style="float: right;">

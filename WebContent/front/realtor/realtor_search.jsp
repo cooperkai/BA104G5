@@ -38,10 +38,7 @@
 
 <!-- 阿蓋的css -->
 <!-- 多加的 -->
-<link rel='stylesheet prefetch'
-	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front/realtor/css/realtor_cooper.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front/realtor/css/realtor_cooper.css">
 <!-- end阿蓋的css -->
 
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -51,8 +48,7 @@
 
 
 <!-- realtor_cooperkai.js -->
-<script
-	src="<%=request.getContextPath()%>/front/realtor/js/realtor_cooper.js"></script>
+<script	src="<%=request.getContextPath()%>/front/realtor/js/realtor_cooper.js"></script>
 <script src="https://use.fontawesome.com/add3377d0a.js"></script>
 <!-- realtor_cooperkai.js -->
 
@@ -147,10 +143,8 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
 					<div class="col-xs-12 col-sm-3">
-						<img
-							src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
-							alt="${realtorVO.rtr_name}個人照片"
-							style="width: 180px; height: 200px;">
+						<img src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
+							alt="${realtorVO.rtr_name}個人照片" style="width: 180px; height: 200px;">
 					</div>
 
 					<div class="col-xs-12 col-sm-3">
@@ -171,14 +165,14 @@
 							<div class="container-fluid">
 								<div class="row">
 									<div class="heart_size">
-										<a class="heart_main" href="#"> <i class="fa fa-heart"
-											aria-hidden="true">加入最愛</i>
+										<a class="heart_main" href="#"> 
+											<i class="glyphicon glyphicon-heart" aria-hidden="true">加入最愛</i>
 										</a>
 									</div>
 								</div>
 								<div class="row forward_estate">
 									<button class="button" style="vertical-align: middle">
-										<span class="forward_word">查看詳請</span>
+										<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp?Rtr_no=${realtorVO.rtr_no}"><span class="forward_word">查看詳請</span></a>
 									</button>
 								</div>
 								<div class="row forward_estate">

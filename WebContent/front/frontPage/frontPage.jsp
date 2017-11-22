@@ -168,7 +168,7 @@
 				<div class="navigation">
 					<h3>管理粉絲頁文章</h3>
 					<ul>
-						<li><a href="<%=request.getContextPath()%>/front/realtor/realtorArticle.jsp"><i class="glyphicon glyphicon-thumbs-up">&nbsp;新增文章</i></a></li>
+						<li><a href="<%=request.getContextPath()%>/front/realtor/addBlog.jsp"><i class="glyphicon glyphicon-thumbs-up">&nbsp;新增文章</i></a></li>
 					</ul>
 				</div>
 				<div class="navigation">
