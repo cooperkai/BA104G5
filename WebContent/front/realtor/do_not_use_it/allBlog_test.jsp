@@ -86,7 +86,7 @@
 					</div>
 					<div class="form-group">
 						<label for="article_body">文章內容</label>
-						<textarea rows="8" class="form-control" name="article_body">${articleVO.article_body}</textarea>
+						<textarea rows="3" class="form-control" readonly style="cursor:no-drop;" name="article_body">${articleVO.article_body}</textarea>
 					</div>
 					<div class="form-group">
 						<label for="post_date">發佈日期</label>
