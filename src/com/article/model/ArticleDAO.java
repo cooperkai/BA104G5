@@ -27,8 +27,10 @@ public class ArticleDAO implements ArticleDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE Article SET Rtr_No=?, Article_body=?, Post_date=?, Article_State=? WHERE Article_No = ?";
 	private static final String GET_ONE_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State FROM Article WHERE Article_No = ?";
 	private static final String GET_ALL_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State FROM Article ORDER BY Article_No";
-
-	private static final String GET_ALL_BY_TIME = "SELECT * FROM Article ORDER BY Post_Date DESC";// 查詢發布時間排序
+	// 查詢發布時間排序
+	private static final String GET_ALL_BY_TIME = "SELECT * FROM Article ORDER BY Post_Date DESC";
+	// 增加留言用
+	private static final String UPDATE_COMM = "UPDATE Article SET Article_Comm = Article_Comm ||' '|| ? WHERE Article_No =? ";
 
 	// 新增
 	@Override
@@ -259,4 +261,46 @@ public class ArticleDAO implements ArticleDAO_interface {
 		}
 		return list;
 	}// 發布時間結束
+
+	// 增加留言用
+	@Override
+	public void updateComm(ArticleVO articleVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_COMM);
+
+			con.setAutoCommit(false);
+
+			pstmt.setString(1, articleVO.getArticle_comm());
+			pstmt.setString(2, articleVO.getArticle_no());
+
+			pstmt.executeUpdate();
+			con.commit();
+			con.setAutoCommit(true);
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}// 增加留言用結束
+
 }

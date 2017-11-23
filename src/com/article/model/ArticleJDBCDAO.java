@@ -17,10 +17,13 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO Article (Article_No, Rtr_No, Article_body, Post_date, Article_State) VALUES('ART'||LPAD(TO_CHAR(SEQ_ART.NEXTVAL), 7, '0'), ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE Article SET Rtr_No=?, Article_body=?, Post_date=?, Article_State=? WHERE Article_No = ?";
-	private static final String GET_ONE_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State FROM Article WHERE Article_No = ?";
-	private static final String GET_ALL_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State FROM Article ORDER BY Article_No";
+	private static final String GET_ONE_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State, Article_Comm FROM Article WHERE Article_No = ?";
+	private static final String GET_ALL_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State, Article_Comm FROM Article ORDER BY Article_No";
 
-	private static final String GET_ALL_BY_TIME = "SELECT * FROM Article ORDER BY Post_Date DESC";// 查詢發布時間排序
+	// 查詢發布時間排序
+	private static final String GET_ALL_BY_TIME = "SELECT * FROM Article ORDER BY Post_Date DESC";
+	// 增加留言用
+	private static final String UPDATE_COMM = "UPDATE Article SET Article_Comm = Article_Comm ||' '|| ? WHERE Article_No =? ";
 
 	// 新增
 	@Override
@@ -267,6 +270,50 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 		return list;
 	}// 發布時間結束
 
+	// 增加留言用
+	@Override
+	public void updateComm(ArticleVO articleVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, password);
+			pstmt = con.prepareStatement(UPDATE_COMM);
+
+			con.setAutoCommit(false);
+
+			pstmt.setString(1, articleVO.getArticle_comm());
+			pstmt.setString(2, articleVO.getArticle_no());
+
+			pstmt.executeUpdate();
+			con.commit();
+			con.setAutoCommit(true);
+
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}// 增加留言用結束
+
 	public static void main(String[] args) throws IOException {
 		ArticleJDBCDAO dao = new ArticleJDBCDAO();
 
@@ -309,16 +356,22 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 		// }
 
 		// 查全部依時間排序
-//		List<ArticleVO> list2 = dao.getAllByTime();
-//		for (ArticleVO art : list2) {
-//			System.out.println(art.getArticle_no());
-//			System.out.println(art.getRtr_no());
-//			System.out.println(art.getArticle_body());
-//			System.out.println(art.getPost_date());
-//			System.out.println(art.getPost_date());
-//			System.out.println(art.getArticle_state());
-//			System.out.println();
-//		}
+		// List<ArticleVO> list2 = dao.getAllByTime();
+		// for (ArticleVO art : list2) {
+		// System.out.println(art.getArticle_no());
+		// System.out.println(art.getRtr_no());
+		// System.out.println(art.getArticle_body());
+		// System.out.println(art.getPost_date());
+		// System.out.println(art.getPost_date());
+		// System.out.println(art.getArticle_state());
+		// System.out.println();
+		// }
+		
+		// 增加留言用
+		ArticleVO vo4 = new ArticleVO();
+		vo4.setArticle_comm(" 我愛妳");
+		vo4.setArticle_no("ART0008000");
+		dao.updateComm(vo4);
 	}
 
 }

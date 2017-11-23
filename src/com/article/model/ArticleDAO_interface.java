@@ -12,5 +12,8 @@ public interface ArticleDAO_interface {
 	
 	//查詢發布時間做排序
 	public List<ArticleVO> getAllByTime();
+	
+	//新增留言
+	public void updateComm(ArticleVO articleVO);
 
 }

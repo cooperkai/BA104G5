@@ -12,6 +12,7 @@ public class ArticleVO implements Serializable {
 	private Timestamp post_date;
 	private Date update_date;
 	private String article_state;
+	private String article_comm;
 
 	public String getArticle_no() {
 		return article_no;
@@ -59,6 +60,14 @@ public class ArticleVO implements Serializable {
 
 	public void setArticle_state(String article_state) {
 		this.article_state = article_state;
+	}
+
+	public String getArticle_comm() {
+		return article_comm;
+	}
+
+	public void setArticle_comm(String article_comm) {
+		this.article_comm = article_comm;
 	}
 
 }

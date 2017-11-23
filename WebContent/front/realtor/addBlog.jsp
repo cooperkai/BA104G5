@@ -58,7 +58,7 @@
 				name="form1">
 				<div class="form-group">
 					<label for="article_body">文章內容</label>
-					<textarea rows="10" class="form-control" name="article_body"><%=(articleVO == null) ? "文章內容" : articleVO.getArticle_body()%></textarea>
+					<textarea rows="10" class="form-control" name="article_body" required autofocus><%=(articleVO == null) ? "文章內容" : articleVO.getArticle_body()%></textarea>
 				</div>
 				<div class="form-group">
 					<label for="article_state">是否開放</label> <select

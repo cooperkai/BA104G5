@@ -49,4 +49,12 @@ public class ArticleService {
 	public List<ArticleVO> getAllByTime() {
 		return dao.getAllByTime();
 	}
+
+	// 新增留言
+	public void updateComm(String article_no, String article_comm) {
+		ArticleVO articleVO = new ArticleVO();
+		articleVO.setArticle_no(article_no);
+		articleVO.setArticle_comm(article_comm);
+		dao.updateComm(articleVO);
+	}
 }

@@ -11,8 +11,8 @@
 <%
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 	RealtorService realtorSvc = new RealtorService();
-
-	String No = realtorVO.getRtr_no();
+	String No = request.getParameter("Rtr_no");
+ 	
 	Set<ArticleVO> list = realtorSvc.getArtByRtrNo(No);
 	pageContext.setAttribute("list", list);
 

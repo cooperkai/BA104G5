@@ -189,7 +189,7 @@ public class ArticleServlet extends HttpServlet {
 				while (allname.hasMoreElements()) {
 					System.out.println("article_全部的值: " + allname.nextElement());
 				}
-				
+
 				System.out.println(requestURL);
 				/********************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
@@ -227,11 +227,11 @@ public class ArticleServlet extends HttpServlet {
 				/******************************
 				 * 3.修改完成,準備轉交(Send the Success view)
 				 *************/
-				
-					req.setAttribute("articleVO", articleVO);
-					String url = requestURL;
-					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後,轉交listAllPromo.jsp
-					successView.forward(req, res);
+
+				req.setAttribute("articleVO", articleVO);
+				String url = requestURL;
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後,轉交listAllPromo.jsp
+				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
@@ -242,6 +242,72 @@ public class ArticleServlet extends HttpServlet {
 		} // 新增文章結束
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// 更新房仲粉絲頁
+		if ("update".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			String requestURL = req.getParameter("requestURL");// 送出修改的來源網頁路徑
+			System.out.println("article_update: " + requestURL);
+
+			try {
+
+				Enumeration<String> allname = req.getParameterNames();
+				while (allname.hasMoreElements()) {
+					System.out.println("article_全部的值: " + allname.nextElement());
+				}
+				/*****************************
+				 * 1.接收請求參數 - 輸入格式的錯誤處理
+				 *****************/
+				String article_no = req.getParameter("article_no");
+				String rtr_no = req.getParameter("rtr_no");
+
+				String article_body = req.getParameter("article_body");
+				if (article_body == null || article_body.trim().length() == 0) {
+					errorMsgs.add("文章內容請記得輸入");
+				}
+
+				String article_state = req.getParameter("article_state").trim();
+				String default_item = req.getParameter("default_item"); // 判斷狀態的選擇
+				if (article_state == null || article_state.trim().length() == 0 || article_state == default_item) {
+					errorMsgs.add("請選擇狀態");
+				}
+
+				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
+				Timestamp post_date = nowTime;
+				System.out.println(post_date);
+
+				ArticleVO articleVO = new ArticleVO();
+				articleVO.setArticle_no(article_no);
+				articleVO.setRtr_no(rtr_no);
+				articleVO.setArticle_body(article_body);
+				articleVO.setPost_date(post_date);
+				articleVO.setArticle_state(article_state);
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("articleVO", articleVO);
+					RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+					failureView.forward(req, res);
+					return; // 程式中斷
+				}
+
+				/*************************** 2.開始修改資料 *****************************************/
+				ArticleService articleSvc = new ArticleService();
+				articleVO = articleSvc.update(article_no, rtr_no, article_body, post_date, article_state);
+
+				/*****************************
+				 * 3.修改完成,準備轉交(Send the Success view)
+				 *************/
+				String url = requestURL;
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
+				successView.forward(req, res);
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				// errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+				failureView.forward(req, res);
+			}
+		} // 更新房仲粉絲頁結束
 
 	}
 }
