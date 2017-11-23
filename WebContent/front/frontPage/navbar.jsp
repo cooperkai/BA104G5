@@ -35,15 +35,15 @@
 	<div class="col-xs-12 col-sm-2">
 		<ul class="nav navbar-nav logina">
 			<c:if test="${memVO==null && realtorVO == null}">
-				<li><a href='<%=request.getContextPath()%>/register.jsp'><span
+				<li><a href='<%=request.getContextPath()%>/realtor/member/register.jsp'><span
 						class='glyphicon glyphicon-edit'></span> 註冊</a></li>
-				<li><a href='<%=request.getContextPath()%>/login.jsp'><span
+				<li><a href='<%=request.getContextPath()%>/front/member/login.jsp'><span
 						class='glyphicon glyphicon-log-in'></span> 登入</a></li>
 			</c:if>
 			<c:if test="${memVO!=null}">
-				<li><a href='<%=request.getContextPath()%>/member/memdata.jsp'><span
+				<li><a href='<%=request.getContextPath()%>/realtor/member/memdata.jsp'><span
 						class='glyphicon glyphicon-user'>.<%=memVO.getMem_name()%></span></a></li>
-				<li><a href='<%=request.getContextPath()%>/logout.do'><span
+				<li><a href='<%=request.getContextPath()%>logout.do'><span
 						class='glyphicon glyphicon-log-out'></span>.登出</a></li>
 			</c:if>
 			<c:if test="${realtorVO!=null}">

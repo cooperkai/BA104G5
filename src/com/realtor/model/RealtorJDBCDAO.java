@@ -54,7 +54,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?, 'ON')";
 
 	// 找房仲文章
-	private static final String GET_ART_BY_RTRNO = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State FROM Article WHERE Rtr_No=? ORDER BY Post_date DESC";
+	private static final String GET_ART_BY_RTRNO = "SELECT a.Article_No, a.Rtr_No, a.Article_body, to_char(a.Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, a.Update_date, a.Article_State, r.rtr_photo, r.rtr_area, r.rtr_name FROM Article a, Realtor r WHERE r.Rtr_No=? ORDER BY Post_date DESC";
 	// 找房仲文章沒用到
 	// private static final String GET_ART_BY_RTRNO = "SELECT Article_No,
 	// Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date,
@@ -820,6 +820,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArticleVO articlevo = null;
+		RealtorVO realtorvo = null;
 
 		try {
 			Class.forName(driver);
@@ -831,13 +832,18 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 
 			while (rs.next()) {
 				articlevo = new ArticleVO();
+				realtorvo = new RealtorVO();
 				articlevo.setArticle_no(rs.getString("Article_no"));
 				articlevo.setRtr_no(rs.getString("Rtr_no"));
 				articlevo.setPost_date(rs.getTimestamp("Post_date"));
 				articlevo.setArticle_body(rs.getString("Article_body"));
 				articlevo.setArticle_state(rs.getString("Article_State"));
 				articlevo.setUpdate_date(rs.getDate("Update_Date"));
+				realtorvo.setRtr_area(rs.getString("Rtr_area"));
+				realtorvo.setRtr_name(rs.getString("Rtr_name"));
+				realtorvo.setRtr_photo(rs.getBytes("Rtr_photo"));
 				set.add(articlevo);
+//				set.add(realtorvo);
 			}
 
 		} catch (ClassNotFoundException ce) {
@@ -868,40 +874,40 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		RealtorJDBCDAO dao = new RealtorJDBCDAO();
 
 		// 專門塞房仲照片以及簡介
-		 for (int i = 1; i <= 12; i++) {
-		 if (i <= 9) {
-		 FileInputStream in = new
-		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
-		 ".jpg");
-		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
-		 i + ".txt");
-		 String rtr_no = "RT0000000" + i;
-		 byte[] realtorpic = new byte[in.available()];
-		 in.read(realtorpic);
-		 RealtorVO vo4 = new RealtorVO();
-		 vo4.setRtr_photo(realtorpic);
-		 vo4.setRtr_intro(reader);
-		 vo4.setRtr_no(rtr_no);
-		 dao.updatePhoto(vo4);
-		 in.close();
-		 } else {
-		 FileInputStream in = new
-		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
-		 ".jpg");
-		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
-		 i + ".txt");
-		 String rtr_no = "RT000000" + i;
-		 byte[] realtorpic = new byte[in.available()];
-		 in.read(realtorpic);
-		 RealtorVO vo4 = new RealtorVO();
-		 vo4.setRtr_photo(realtorpic);
-		 vo4.setRtr_intro(reader);
-		 vo4.setRtr_no(rtr_no);
-		 dao.updatePhoto(vo4);
-		 in.close();
-		 }
-		 }
-		 System.out.println("-----------------------------------------------------------------------------------");
+//		 for (int i = 1; i <= 12; i++) {
+//		 if (i <= 9) {
+//		 FileInputStream in = new
+//		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
+//		 ".jpg");
+//		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
+//		 i + ".txt");
+//		 String rtr_no = "RT0000000" + i;
+//		 byte[] realtorpic = new byte[in.available()];
+//		 in.read(realtorpic);
+//		 RealtorVO vo4 = new RealtorVO();
+//		 vo4.setRtr_photo(realtorpic);
+//		 vo4.setRtr_intro(reader);
+//		 vo4.setRtr_no(rtr_no);
+//		 dao.updatePhoto(vo4);
+//		 in.close();
+//		 } else {
+//		 FileInputStream in = new
+//		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
+//		 ".jpg");
+//		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
+//		 i + ".txt");
+//		 String rtr_no = "RT000000" + i;
+//		 byte[] realtorpic = new byte[in.available()];
+//		 in.read(realtorpic);
+//		 RealtorVO vo4 = new RealtorVO();
+//		 vo4.setRtr_photo(realtorpic);
+//		 vo4.setRtr_intro(reader);
+//		 vo4.setRtr_no(rtr_no);
+//		 dao.updatePhoto(vo4);
+//		 in.close();
+//		 }
+//		 }
+//		 System.out.println("-----------------------------------------------------------------------------------");
 
 		FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor1.jpg");
 		byte[] realtorpic = new byte[in.available()];
@@ -1072,6 +1078,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 			System.out.println(art.getPost_date());
 			System.out.println(art.getPost_date());
 			System.out.println(art.getArticle_state());
+//			System.out.println(art.get);
 		}
 
 	}// 測試結束

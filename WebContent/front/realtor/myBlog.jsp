@@ -12,13 +12,22 @@
 	class="com.article.model.ArticleService" />
 
 <%
-	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
-	RealtorService realtorSvc = new RealtorService();
-	//String No = request.getParameter("Rtr_no");
-	String No = realtorVO.getRtr_no();
+	Set<ArticleVO> list = null;
+	if((RealtorVO) session.getAttribute("realtorVO")!= null){
+		RealtorService realtorSvc = new RealtorService();
+		RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
+		String No = realtorVO.getRtr_no();
+		list = realtorSvc.getArtByRtrNo(No);
+		pageContext.setAttribute("list", list);
+	}
+	
+	if((RealtorVO) session.getAttribute("realtorVO") ==null){
+		RealtorService realtorSvc = new RealtorService();
+		String No = request.getParameter("Rtr_no");
+		list = realtorSvc.getArtByRtrNo(No);
+		pageContext.setAttribute("list", list);
+	}
 
-	Set<ArticleVO> list = realtorSvc.getArtByRtrNo(No);
-	pageContext.setAttribute("list", list);
 
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
