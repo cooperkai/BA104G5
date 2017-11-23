@@ -1,18 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.realtor.model.*"%>
 <%@ page import="com.realestate.model.*"%>
 <%@ page import="com.article.model.*"%>
 
-<jsp:useBean id="realestateSvc" scope="page" class="com.realestate.model.RealEstateService"/>
-<jsp:useBean id="articleSvc" scope="page" class="com.article.model.ArticleService"/>
+<jsp:useBean id="realestateSvc" scope="page"
+	class="com.realestate.model.RealEstateService" />
+<jsp:useBean id="articleSvc" scope="page"
+	class="com.article.model.ArticleService" />
 
 <%
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 	RealtorService realtorSvc = new RealtorService();
-	String No = request.getParameter("Rtr_no");
- 	
+	//String No = request.getParameter("Rtr_no");
+	String No = realtorVO.getRtr_no();
+
 	Set<ArticleVO> list = realtorSvc.getArtByRtrNo(No);
 	pageContext.setAttribute("list", list);
 
@@ -44,21 +48,21 @@
 		</div>
 	</div>
 
-<!-- 房仲簡介本體 -->
+	<!-- 房仲簡介本體 -->
 	<div class="container">
 		<div class="row">
 			<div class="panel panel-default col-sm-12  col-sm-8 col-sm-offset-2">
 				<div class="panel-heading form-group">
 					<h4>房仲簡介</h4>
 					<div>
-						<img src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}" style="width:100%;">
+						<img
+							src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
+							style="width: 100%;">
 					</div>
-					
-					<h4 style="float: right;">
-						<a href="<%=request.getContextPath()%>/front/realtor/do_not_use_it/listAllBlog.jsp">回房仲文章列表</a>
-					</h4>
 				</div>
-				<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/front/article/article.do"	name="form1">
+				<FORM METHOD="post"
+					ACTION="<%=request.getContextPath()%>/front/article/article.do"
+					name="form1">
 					<div class="form-group">
 						<label for="rtr_name">房仲名稱</label>
 						<div>
@@ -79,18 +83,17 @@
 					</div>
 					<div class="form-group">
 						<label for="rtr_intro">簡介</label>
-						<textarea class="form-control" rows="7" readonly style="cursor: no-drop;" name="rtr_intro">${realtorVO.getRtr_intro()}</textarea>
+						<textarea class="form-control" rows="7" readonly
+							style="cursor: no-drop;" name="rtr_intro">${realtorVO.getRtr_intro()}</textarea>
 					</div>
 					<div class="input-group" style="margin-bottom: 10px;">
-						<span class="input-group-btn">
-						
-						</span>
+						<span class="input-group-btn"> </span>
 					</div>
 				</FORM>
 			</div>
 		</div>
 	</div>
-<!-- 房仲簡介本體 -->
+	<!-- 房仲簡介本體 -->
 
 	<!-- 自身文章資料 =====================================-->
 	<c:forEach var="articleVO" items="${list}" begin="<%=pageIndex%>"
@@ -100,9 +103,6 @@
 				<div class="panel panel-default col-sm-12  col-sm-8 col-sm-offset-2">
 					<div class="panel-heading form-group">
 						<h4>文章</h4>
-						<h4 style="float:right;">
-							<a href="<%=request.getContextPath()%>/front/realtor/do_not_use_it/listAllBlog.jsp">回房仲文章列表</a>
-						</h4>
 					</div>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/front/article/article.do"
@@ -111,7 +111,9 @@
 							<label for="rtr_name">房仲名稱</label>
 							<div>
 								<h5>${realtorVO.rtr_name}</h5>
-								<img src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}" style="width: 80px; height: 80px;">
+								<img
+									src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
+									style="width: 80px; height: 80px;">
 							</div>
 						</div>
 						<div class="form-group">
@@ -126,14 +128,14 @@
 							</div>
 						</div>
 
-						<div class="input-group" style="margin-bottom: 10px;">
-							<textarea class="form-control" name=""></textarea>
-							<span class="input-group-btn">
-								<button class="btn btn-primary" type="submit" style="padding: 16px;">留言</button> 
-								<input type="hidden" name="action" value="insert"> 
-								<input type="hidden" name="post_date" value="">
-							</span>
-						</div>
+						<!-- <div class="input-group" style="margin-bottom: 10px;"> -->
+						<!-- <textarea class="form-control" name=""></textarea> -->
+						<!-- <span class="input-group-btn"> -->
+						<!-- <button class="btn btn-primary" type="submit" style="padding: 16px;">留言</button>  -->
+						<!-- <input type="hidden" name="action" value="insert">  -->
+						<!-- <input type="hidden" name="post_date" value=""> -->
+						<!-- </span> -->
+						<!-- </div> -->
 					</FORM>
 				</div>
 			</div>

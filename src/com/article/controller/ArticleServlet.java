@@ -308,6 +308,11 @@ public class ArticleServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		} // 更新房仲粉絲頁結束
-
+		
+		
+		//新增留言
+		if("Comm".equals(action)){
+			
+		}
 	}
 }

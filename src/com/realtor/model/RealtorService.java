@@ -140,5 +140,5 @@ public class RealtorService {
 	public Set<ArticleVO> getArtByRtrNo(String rtr_no) {
 		return dao.getArtByRtrNo(rtr_no);
 	}
-
+	
 }

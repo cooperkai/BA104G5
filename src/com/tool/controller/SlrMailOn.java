@@ -42,9 +42,19 @@ public class SlrMailOn {
 			// 文字部份，注意 img src 部份要用 cid:接下面附檔的header
 			MimeBodyPart textPart = new MimeBodyPart();
 			StringBuffer html = new StringBuffer();
-			html.append("<h2>這是第一行</h2><br>");
-			html.append("<h3>這是第二行，下面會是圖</h3><br>");
+			html.append("<html><head>");
+			html.append("<title>For House 會員註冊通知</title></head><body>");
+			html.append("<div class='container' style='margin-top: 5em;'>");
+			html.append("<div class='row'>");
+			html.append("<div class=col-sm-6 col-sm-offset-3>");
+			html.append("<table><thead><h3>For House 歡迎你加入[廠商]會員</h3></thead><br><tbody>");
+			html.append("<tr><h4>親愛的" + slr_name + "會員您好:</h4></tr><br>");
+			html.append("<tr><h4>非常感謝您加入本網站!</h4></tr><br>");
+			html.append("<tr><h4>已經為您開啟使用本網站服務的權利了，請一定Ipad溫開水!</h4></tr><br></tbody></table>");
+			html.append("</div></div></div></body></html>");
+			html.append("<div class='col-sm-6 col-sm-offset-3'>");
 			html.append("<img src='cid:image'style='width:300px; height:300px;'/><br>");
+			html.append("</div>");
 			textPart.setContent(html.toString(), "text/html; charset=UTF-8");
 
 			// 圖檔部份，注意 html 用 cid:image，則header要設<image>
@@ -64,6 +74,7 @@ public class SlrMailOn {
 
 			message.setContent(email);
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(slr_id));// 收件者
+			message.setSubject("ForHouse系統通知");
 			transport.connect();
 			transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
 			transport.close();
