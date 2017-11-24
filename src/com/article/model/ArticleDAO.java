@@ -95,10 +95,12 @@ public class ArticleDAO implements ArticleDAO_interface {
 			pstmt.setTimestamp(3, articleVO.getPost_date());
 			pstmt.setString(4, articleVO.getArticle_state());
 			pstmt.setString(5, articleVO.getArticle_no());
+			System.out.println("有進DAO");
 
 			pstmt.executeUpdate();
 			con.commit();
 			con.setAutoCommit(true);
+			System.out.println("沒有錯阿");
 
 		} catch (SQLException se) {
 			se.printStackTrace();

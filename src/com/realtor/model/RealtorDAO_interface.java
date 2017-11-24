@@ -30,5 +30,4 @@ public interface RealtorDAO_interface {
 	public void FBInsert(RealtorVO realtorVO);//房仲FB登入的特別insert
 	public Set<ArticleVO> getArtByRtrNo(String rtr_no);// 找房仲文章
 	
- 
 }

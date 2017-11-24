@@ -84,6 +84,8 @@ public class ArticleServlet extends HttpServlet {
 
 			String requestURL = req.getParameter("requestURL");
 			System.out.println("getOne_For_Update: " + requestURL);
+			
+	
 
 			try {
 				System.out.println("article_getOne_For_Update_try_in");
@@ -115,6 +117,10 @@ public class ArticleServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
+			String img = req.getParameter("img");
+			System.out.println(img);
+			
+			
 			try {
 
 				Enumeration<String> allname = req.getParameterNames();
@@ -136,10 +142,15 @@ public class ArticleServlet extends HttpServlet {
 				if (article_state == null || article_state.trim().length() == 0) {
 					errorMsgs.add("請選擇狀態");
 				}
-
+				System.out.println("--------------------");				
+				System.out.println(article_no);
+				System.out.println(rtr_no);
+				System.out.println(article_body);
+				System.out.println(article_state);				
+				System.out.println("--------------------");
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 				Timestamp post_date = nowTime;
-				System.out.println(post_date);
+//				System.out.println(post_date);
 
 				ArticleVO articleVO = new ArticleVO();
 				articleVO.setArticle_no(article_no);
@@ -147,7 +158,7 @@ public class ArticleServlet extends HttpServlet {
 				articleVO.setArticle_body(article_body);
 				articleVO.setPost_date(post_date);
 				articleVO.setArticle_state(article_state);
-				System.out.println(rtr_no);
+//				System.out.println(rtr_no);
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("articleVO", articleVO);
@@ -168,9 +179,10 @@ public class ArticleServlet extends HttpServlet {
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				// errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/allBlog.jsp");
-				failureView.forward(req, res);
+				throw new RuntimeException("AAAA");
+				
+//				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/allBlog.jsp");
+//				failureView.forward(req, res);
 			}
 		} // 更新房仲粉絲頁結束
 

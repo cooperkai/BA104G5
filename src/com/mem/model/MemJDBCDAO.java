@@ -709,7 +709,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 			System.out.println(acoupon.getCp_discount());
 			System.out.println(acoupon.getCp_state());
 			System.out.println(acoupon.getMem_no());
-			System.out.println(acoupon.getPromo_no());
+//			System.out.println(acoupon.getPromo_no());
 			System.out.println();
 		}
 
