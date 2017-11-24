@@ -57,4 +57,9 @@ public class ArticleService {
 		articleVO.setArticle_comm(article_comm);
 		dao.updateComm(articleVO);
 	}
+
+	// 刪除
+	public void delete(String article_no) {
+		dao.delete(article_no);
+	}
 }

@@ -172,7 +172,7 @@
 								</div>
 								<div class="row forward_estate">
 									<button class="button" style="vertical-align: middle">
-										<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp?Rtr_no=${realtorVO.rtr_no}"><span class="forward_word">查看詳請</span></a>
+										<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp?action=getOne_For_Display&Rtr_no=${realtorVO.rtr_no}"><span class="forward_word">查看詳請</span></a>
 									</button>
 								</div>
 								<div class="row forward_estate">

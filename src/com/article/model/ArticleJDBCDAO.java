@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 	private static final String GET_ALL_BY_TIME = "SELECT * FROM Article ORDER BY Post_Date DESC";
 	// 增加留言用
 	private static final String UPDATE_COMM = "UPDATE Article SET Article_Comm = Article_Comm ||' '|| ? WHERE Article_No =? ";
+	// 刪除留言
+	private static final String DELETE = "DELETE Article WHERE Article_no=?";
 
 	// 新增
 	@Override
@@ -314,6 +317,42 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 		}
 	}// 增加留言用結束
 
+	// 刪除
+	@Override
+	public void delete(String article_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, password);
+			pstmt = con.prepareStatement(DELETE);
+			pstmt.setString(1, article_no);
+
+			pstmt.executeUpdate();
+
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+	}// 刪除結束
+
 	public static void main(String[] args) throws IOException {
 		ArticleJDBCDAO dao = new ArticleJDBCDAO();
 
@@ -326,13 +365,13 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 		// dao.insert(vo);
 
 		// 修改
-		// ArticleVO vo2 = new ArticleVO();
-		// vo2.setRtr_no("RT00000002");
-		// vo2.setArticle_body("t");
-		// vo2.setPost_date(java.sql.Timestamp.valueOf("2002-01-01 15:06:01"));
-		// vo2.setArticle_state("ON");
-		// vo2.setArticle_no("ART0008000");
-		// dao.update(vo2);
+		ArticleVO vo2 = new ArticleVO();
+		vo2.setRtr_no("RT00000002");
+		vo2.setArticle_body("t");
+		vo2.setPost_date(new Timestamp(System.currentTimeMillis()));
+		vo2.setArticle_state("ON");
+		vo2.setArticle_no("ART0008000");
+		dao.update(vo2);
 
 		// 查單一
 		// ArticleVO vo3 = dao.findByPrimaryKey("ART0008001");
@@ -366,12 +405,15 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 		// System.out.println(art.getArticle_state());
 		// System.out.println();
 		// }
-		
+
 		// 增加留言用
-		ArticleVO vo4 = new ArticleVO();
-		vo4.setArticle_comm(" 我愛妳");
-		vo4.setArticle_no("ART0008000");
-		dao.updateComm(vo4);
+		// ArticleVO vo4 = new ArticleVO();
+		// vo4.setArticle_comm(" 我愛妳");
+		// vo4.setArticle_no("ART0008000");
+		// dao.updateComm(vo4);
+
+		// 刪除
+		dao.delete("ART0008001");
 	}
 
 }

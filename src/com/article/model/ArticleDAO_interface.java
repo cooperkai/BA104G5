@@ -15,5 +15,8 @@ public interface ArticleDAO_interface {
 	
 	//新增留言
 	public void updateComm(ArticleVO articleVO);
+	
+	//刪除文章
+	public void delete(String article_no);
 
 }

@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +43,7 @@ public class ArticleServlet extends HttpServlet {
 				}
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/listAllBlog.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/myBlog.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -54,7 +56,7 @@ public class ArticleServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/listAllBlog.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/myBlog.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -63,14 +65,14 @@ public class ArticleServlet extends HttpServlet {
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
 				req.setAttribute("articleVO", articleVO);
-				String url = "/front/realtor/listOneBlog.jsp";
+				String url = "/front/realtor/myBlog.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/listAllBlog.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/myBlog.jsp");
 				failureView.forward(req, res);
 			}
 		} // 查單一結束
@@ -113,9 +115,6 @@ public class ArticleServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			String requestURL = req.getParameter("requestURL");// 送出修改的來源網頁路徑
-			System.out.println("article_update: " + requestURL);
-
 			try {
 
 				Enumeration<String> allname = req.getParameterNames();
@@ -134,8 +133,7 @@ public class ArticleServlet extends HttpServlet {
 				}
 
 				String article_state = req.getParameter("article_state").trim();
-				String default_item = req.getParameter("default_item"); // 判斷狀態的選擇
-				if (article_state == null || article_state.trim().length() == 0 || article_state == default_item) {
+				if (article_state == null || article_state.trim().length() == 0) {
 					errorMsgs.add("請選擇狀態");
 				}
 
@@ -149,10 +147,11 @@ public class ArticleServlet extends HttpServlet {
 				articleVO.setArticle_body(article_body);
 				articleVO.setPost_date(post_date);
 				articleVO.setArticle_state(article_state);
+				System.out.println(rtr_no);
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("articleVO", articleVO);
-					RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+					RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/allBlog.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -164,13 +163,13 @@ public class ArticleServlet extends HttpServlet {
 				/*****************************
 				 * 3.修改完成,準備轉交(Send the Success view)
 				 *************/
-				String url = requestURL;
+				String url = "/front/realtor/allBlog.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				// errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/allBlog.jsp");
 				failureView.forward(req, res);
 			}
 		} // 更新房仲粉絲頁結束
@@ -242,77 +241,28 @@ public class ArticleServlet extends HttpServlet {
 		} // 新增文章結束
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
-		// 更新房仲粉絲頁
-		if ("update".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
 
-			String requestURL = req.getParameter("requestURL");// 送出修改的來源網頁路徑
-			System.out.println("article_update: " + requestURL);
+		// 新增留言
+		if ("Comm".equals(action)) {
 
+		}
+
+		// 刪除
+		if ("delete".equals(action)) {
 			try {
-
-				Enumeration<String> allname = req.getParameterNames();
-				while (allname.hasMoreElements()) {
-					System.out.println("article_全部的值: " + allname.nextElement());
-				}
-				/*****************************
-				 * 1.接收請求參數 - 輸入格式的錯誤處理
-				 *****************/
 				String article_no = req.getParameter("article_no");
-				String rtr_no = req.getParameter("rtr_no");
 
-				String article_body = req.getParameter("article_body");
-				if (article_body == null || article_body.trim().length() == 0) {
-					errorMsgs.add("文章內容請記得輸入");
-				}
-
-				String article_state = req.getParameter("article_state").trim();
-				String default_item = req.getParameter("default_item"); // 判斷狀態的選擇
-				if (article_state == null || article_state.trim().length() == 0 || article_state == default_item) {
-					errorMsgs.add("請選擇狀態");
-				}
-
-				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
-				Timestamp post_date = nowTime;
-				System.out.println(post_date);
-
-				ArticleVO articleVO = new ArticleVO();
-				articleVO.setArticle_no(article_no);
-				articleVO.setRtr_no(rtr_no);
-				articleVO.setArticle_body(article_body);
-				articleVO.setPost_date(post_date);
-				articleVO.setArticle_state(article_state);
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("articleVO", articleVO);
-					RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
-					failureView.forward(req, res);
-					return; // 程式中斷
-				}
-
-				/*************************** 2.開始修改資料 *****************************************/
 				ArticleService articleSvc = new ArticleService();
-				articleVO = articleSvc.update(article_no, rtr_no, article_body, post_date, article_state);
+				articleSvc.delete(article_no);
 
-				/*****************************
-				 * 3.修改完成,準備轉交(Send the Success view)
-				 *************/
-				String url = requestURL;
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
+				String url = "/front/realtor/allBlog.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				// errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+				System.out.println("目前網路不穩定:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/allBlog.jsp");
 				failureView.forward(req, res);
 			}
-		} // 更新房仲粉絲頁結束
-		
-		
-		//新增留言
-		if("Comm".equals(action)){
-			
 		}
 	}
 }

@@ -13,21 +13,18 @@
 
 <%
 	Set<ArticleVO> list = null;
-	if((RealtorVO) session.getAttribute("realtorVO")!= null){
-		RealtorService realtorSvc = new RealtorService();
+	RealtorService realtorSvc = new RealtorService();
+	if ((RealtorVO) session.getAttribute("realtorVO") != null) {
 		RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 		String No = realtorVO.getRtr_no();
 		list = realtorSvc.getArtByRtrNo(No);
 		pageContext.setAttribute("list", list);
-	}
-	
-	if((RealtorVO) session.getAttribute("realtorVO") ==null){
-		RealtorService realtorSvc = new RealtorService();
+	} else {
 		String No = request.getParameter("Rtr_no");
 		list = realtorSvc.getArtByRtrNo(No);
 		pageContext.setAttribute("list", list);
+		out.print(No);
 	}
-
 
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");

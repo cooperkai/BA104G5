@@ -874,40 +874,40 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		RealtorJDBCDAO dao = new RealtorJDBCDAO();
 
 		// 專門塞房仲照片以及簡介
-//		 for (int i = 1; i <= 12; i++) {
-//		 if (i <= 9) {
-//		 FileInputStream in = new
-//		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
-//		 ".jpg");
-//		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
-//		 i + ".txt");
-//		 String rtr_no = "RT0000000" + i;
-//		 byte[] realtorpic = new byte[in.available()];
-//		 in.read(realtorpic);
-//		 RealtorVO vo4 = new RealtorVO();
-//		 vo4.setRtr_photo(realtorpic);
-//		 vo4.setRtr_intro(reader);
-//		 vo4.setRtr_no(rtr_no);
-//		 dao.updatePhoto(vo4);
-//		 in.close();
-//		 } else {
-//		 FileInputStream in = new
-//		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
-//		 ".jpg");
-//		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
-//		 i + ".txt");
-//		 String rtr_no = "RT000000" + i;
-//		 byte[] realtorpic = new byte[in.available()];
-//		 in.read(realtorpic);
-//		 RealtorVO vo4 = new RealtorVO();
-//		 vo4.setRtr_photo(realtorpic);
-//		 vo4.setRtr_intro(reader);
-//		 vo4.setRtr_no(rtr_no);
-//		 dao.updatePhoto(vo4);
-//		 in.close();
-//		 }
-//		 }
-//		 System.out.println("-----------------------------------------------------------------------------------");
+		 for (int i = 1; i <= 12; i++) {
+		 if (i <= 9) {
+		 FileInputStream in = new
+		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
+		 ".jpg");
+		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
+		 i + ".txt");
+		 String rtr_no = "RT0000000" + i;
+		 byte[] realtorpic = new byte[in.available()];
+		 in.read(realtorpic);
+		 RealtorVO vo4 = new RealtorVO();
+		 vo4.setRtr_photo(realtorpic);
+		 vo4.setRtr_intro(reader);
+		 vo4.setRtr_no(rtr_no);
+		 dao.updatePhoto(vo4);
+		 in.close();
+		 } else {
+		 FileInputStream in = new
+		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
+		 ".jpg");
+		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
+		 i + ".txt");
+		 String rtr_no = "RT000000" + i;
+		 byte[] realtorpic = new byte[in.available()];
+		 in.read(realtorpic);
+		 RealtorVO vo4 = new RealtorVO();
+		 vo4.setRtr_photo(realtorpic);
+		 vo4.setRtr_intro(reader);
+		 vo4.setRtr_no(rtr_no);
+		 dao.updatePhoto(vo4);
+		 in.close();
+		 }
+		 }
+		 System.out.println("-----------------------------------------------------------------------------------");
 
 		FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor1.jpg");
 		byte[] realtorpic = new byte[in.available()];

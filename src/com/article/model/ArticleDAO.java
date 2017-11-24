@@ -31,6 +31,8 @@ public class ArticleDAO implements ArticleDAO_interface {
 	private static final String GET_ALL_BY_TIME = "SELECT * FROM Article ORDER BY Post_Date DESC";
 	// 增加留言用
 	private static final String UPDATE_COMM = "UPDATE Article SET Article_Comm = Article_Comm ||' '|| ? WHERE Article_No =? ";
+	// 刪除留言
+	private static final String DELETE = "DELETE Article WHERE Article_no=?";
 
 	// 新增
 	@Override
@@ -302,5 +304,38 @@ public class ArticleDAO implements ArticleDAO_interface {
 			}
 		}
 	}// 增加留言用結束
+
+	// 刪除
+	@Override
+	public void delete(String article_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETE);
+			pstmt.setString(1, article_no);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+	}// 刪除結束
 
 }
