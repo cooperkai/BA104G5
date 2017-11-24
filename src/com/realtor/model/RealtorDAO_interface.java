@@ -10,13 +10,13 @@ import com.article.model.ArticleVO;
 public interface RealtorDAO_interface {
 
 	public void insert(RealtorVO realtorVO);
-	public void update(RealtorVO realtorVO);//目前更改簡介，照片，還有姓名，我寫了兩個方法，但其中一個現在沒有使用
+	public void update(RealtorVO realtorVO);//目前更改全部(為了FB)，我寫了兩個方法，但其中一個現在沒有使用
 	public RealtorVO findByPrimaryKey(String rtr_no);
 	public List<RealtorVO> getAll();
 	public void updatePhoto(RealtorVO realtorVO);// 專門塞房仲照片以及簡介
 	
 	public RealtorVO findById(String rtr_id);//找房仲ID
-	public void changePassword(RealtorVO realtorVO);//更換密碼
+	public void changePassword(RealtorVO realtorVO);//更換密碼 
 	
 	
 //	public List<RealtorVO> getNameList();//列出所有房仲姓名

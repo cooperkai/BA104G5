@@ -34,10 +34,9 @@ public class RealtorDAO implements RealtorDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, Rtr_State) "
 			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?, 'OFF')";
-	// private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_ID=?,
-	// RTR_NAME=?, RTR_PHOTO=?, RTR_AREA=?, RTR_INTRO=? WHERE RTR_NO =
-	// ?";//預留給之後可能要改服務地區，還有emailID帳號
-	private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_NAME=?, RTR_PHOTO=?, RTR_PSW=?, RTR_INTRO=? WHERE RTR_NO = ?";// 修改姓名、照片、簡介用
+	private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_NAME=?, RTR_PHOTO=?, RTR_AREA=?, RTR_INTRO=?, RTR_IDNO=?, RE_NO=?, RTR_PSW=? WHERE RTR_NO = ?";
+	// private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_NAME=?,
+	// RTR_PHOTO=?, RTR_PSW=?, RTR_INTRO=? WHERE RTR_NO = ?";// 修改姓名、照片、簡介用
 	private static final String GET_ONE_STMT = "SELECT RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, RTR_STATE FROM Realtor WHERE RTR_NO = ?";
 	private static final String GET_ALL_STMT = "SELECT RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, RTR_STATE FROM Realtor ORDER BY RTR_NO";
 	private static final String UPDATE_FOR_PHOTO = "UPDATE Realtor SET RTR_PHOTO=?, RTR_INTRO=? WHERE RTR_NO=?";
@@ -109,7 +108,51 @@ public class RealtorDAO implements RealtorDAO_interface {
 		}
 	}// 新增結束
 
-	// 修改
+	@Override
+	public void update(RealtorVO realtorVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STMT);
+
+			con.setAutoCommit(false);
+
+			pstmt.setString(1, realtorVO.getRtr_name());
+			pstmt.setBytes(2, realtorVO.getRtr_photo());
+			pstmt.setString(3, realtorVO.getRtr_area());
+			pstmt.setString(4, realtorVO.getRtr_intro());
+			pstmt.setString(5, realtorVO.getRtr_idno());
+			pstmt.setString(6, realtorVO.getRe_no());
+			pstmt.setString(7, realtorVO.getRtr_psw());
+			pstmt.setString(8, realtorVO.getRtr_no());
+
+			pstmt.executeUpdate();
+			con.commit();
+			con.setAutoCommit(true);
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}// 修改結束
+
+	// // 修改姓名，照片，簡介
 	// @Override
 	// public void update(RealtorVO realtorVO) {
 	// Connection con = null;
@@ -121,16 +164,11 @@ public class RealtorDAO implements RealtorDAO_interface {
 	//
 	// con.setAutoCommit(false);
 	//
-	// pstmt.setString(1, realtorVO.getRtr_id());
-	// pstmt.setString(2, realtorVO.getRtr_psw());
-	// pstmt.setString(3, realtorVO.getRtr_name());
-	// pstmt.setBytes(4, realtorVO.getRtr_photo());
-	// pstmt.setString(5, realtorVO.getRtr_area());
-	// pstmt.setString(6, realtorVO.getRtr_intro());
-	// pstmt.setString(7, realtorVO.getRtr_idno());
-	// pstmt.setString(8, realtorVO.getRe_no());
-	// pstmt.setString(9, realtorVO.getRtr_state());
-	// pstmt.setString(10, realtorVO.getRtr_no());
+	// pstmt.setString(1, realtorVO.getRtr_name());
+	// pstmt.setBytes(2, realtorVO.getRtr_photo());
+	// pstmt.setString(3, realtorVO.getRtr_psw());
+	// pstmt.setString(4, realtorVO.getRtr_intro());
+	// pstmt.setString(5, realtorVO.getRtr_no());
 	//
 	// pstmt.executeUpdate();
 	// con.commit();
@@ -155,49 +193,7 @@ public class RealtorDAO implements RealtorDAO_interface {
 	// }
 	// }
 	// }
-	// }// 修改結束
-
-	// 修改姓名，照片，簡介
-	@Override
-	public void update(RealtorVO realtorVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_STMT);
-
-			con.setAutoCommit(false);
-
-			pstmt.setString(1, realtorVO.getRtr_name());
-			pstmt.setBytes(2, realtorVO.getRtr_photo());
-			pstmt.setString(3, realtorVO.getRtr_psw());
-			pstmt.setString(4, realtorVO.getRtr_intro());
-			pstmt.setString(5, realtorVO.getRtr_no());
-
-			pstmt.executeUpdate();
-			con.commit();
-			con.setAutoCommit(true);
-
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-	}// 修改姓名，照片，簡介結束
+	// }// 修改姓名，照片，簡介結束
 
 	// 查單一rtr_no
 	@Override

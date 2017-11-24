@@ -4,14 +4,16 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.realtor.model.*"%>
 <%@ page import="com.article.model.*"%>
+<%@ page import="com.mem.model.*"%>
 
-<jsp:useBean id="articleSvc" scope="page"
-	class="com.article.model.ArticleService" />
+
 <jsp:useBean id="realtorSvc" scope="page"
 	class="com.realtor.model.RealtorService" />
 
 <%
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
+	MemVO memVO = (MemVO) session.getAttribute("memVO");
+	ArticleService articleSvc = new ArticleService();
 	List<ArticleVO> list = articleSvc.getAllByTime();
 	pageContext.setAttribute("list", list);
 
@@ -128,12 +130,13 @@
 							</h5>
 						</div>
 					</div>
+					
 					<div class="form-group">
-						<div>
-							<h5 class="">${articleVO.article_comm}
-							</h5>
+						<div class="col-sm-12">
+	                    	<p style="color:#191970;font-weight:bold;">${realtorSvc.getOne(articleVO.rtr_no).getRtr_name()}: ${articleVO.article_comm}</p>
 						</div>
 					</div>
+					<c:if test="${realtorVO != null}">
 					<form method="post" action="<%=request.getContextPath()%>/front/article/article.do">
 					<div class="input-group" style="margin-bottom: 10px;">
 						<textarea class="form-control" name="article_comm" value=""></textarea>
@@ -144,6 +147,7 @@
 						</span>
 					</div>
 					</form>
+					</c:if>
 				</div>
 			</div>
 		</div>

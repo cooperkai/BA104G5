@@ -52,18 +52,62 @@
 			<div class="form-group">
 				<label for="rtr_name">姓名</label>
 				<div>
-					<input type="text" class="form-control" name="rtr_name"
-						value="<%=(realtorVOtmp == null) ? realtorVO.getRtr_name()
-					: ((realtorVOtmp.getRtr_name().length() > 0) ? realtorVOtmp.getRtr_name()
-							: realtorVO.getRtr_name())%>">
+					<input type="text" class="form-control" name="rtr_name" 
+					value="<%=(realtorVOtmp == null) ? realtorVO.getRtr_name() : ((realtorVOtmp.getRtr_name().length() > 0) ? realtorVOtmp.getRtr_name() : realtorVO.getRtr_name())%>">
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label for="re_no" class="col-sm-2 control-label">服務公司</label>
+				<jsp:useBean id="realestateSvc" scope="page"
+					class="com.realestate.model.RealEstateService" />
+				<select class="selectpicker show-tick form-control" size="1"
+					name="re_no">
+					<option name="default_item" value="">選擇服務公司</option>
+					<c:forEach var="realestateVO" items="${realestateSvc.all}">
+						<option value="${realestateVO.re_no}"
+							${(realtorVO.re_no==realestateVO.re_no)? 'selected':''}>${realestateVO.re_name}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="rtr_area" class="col-sm-2 control-label">服務地區</label> <select
+					class="selectpicker show-tick form-control" name="rtr_area">
+					<option name="default_item" value="">選擇服務地區</option>
+					<option	value="${realtorVO.rtr_area}" ${(realtorVOtmp.rtr_area == null)? 'selected' : ''}>${realtorVO.rtr_area}</option>
+					<option>北投區</option>
+					<option>中正區</option>
+					<option>士林區</option>
+					<option>內湖區</option>
+					<option>大安區</option>
+					<option>信義區</option>
+					<option>萬華區</option>
+					<option>中山區</option>
+					<option>大同區</option>
+					<option>大安區</option>
+					<option>信義區</option>
+					<option>中正區</option>
+				</select>
+
+				<!-- <input type="text" class="form-control" id="rtr_area" -->
+				<!-- name="rtr_area" placeholder="服務地區" -->
+				<%-- value="<%=(realtorVOreg == null) ? "" : realtorVOreg.getRtr_area()%>"> --%>
+				<!-- </div> -->
+
+			</div>
+			<div class="form-group">
+				<label for="rtr_idno" class="col-sm-2 control-label">身分證</label> 
+				<input type="text" class="form-control" id="rtr_idno" name="rtr_idno" placeholder="身分證" 
+					value="<%=(realtorVO == null) ? "" : realtorVO.getRtr_idno()%>">
+			</div>
+
 			<div class="form-group">
 				<label for="ann_content">簡介</label>
 				<textarea rows="10" class="form-control" name="rtr_intro"><%=(realtorVOtmp == null) ? realtorVO.getRtr_intro()
 					: ((realtorVOtmp.getRtr_intro().length() > 0) ? realtorVOtmp.getRtr_intro()
 							: realtorVO.getRtr_intro())%></textarea>
 			</div>
+
 			<div class="modal-footer">
 				<input type="hidden" name="action" value="realtor_Change_data">
 				<input type="hidden" name="rtr_no" value="${realtorVO.rtr_no}">

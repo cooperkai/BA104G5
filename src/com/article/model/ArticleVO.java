@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+@SuppressWarnings("serial")
 public class ArticleVO implements Serializable {
 
 	private String article_no;

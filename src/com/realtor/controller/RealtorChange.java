@@ -19,6 +19,7 @@ import javax.servlet.http.Part;
 
 import com.realtor.model.RealtorService;
 import com.realtor.model.RealtorVO;
+import com.tool.controller.RealtorIDRex;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 50 * 50 * 1024 * 1024)
 public class RealtorChange extends HttpServlet {
@@ -101,6 +102,11 @@ System.out.println(re_no);
 				if ((rtr_intro.trim()).length() == 0) {
 					regErrors.add("簡介不可為空!");
 					return;
+				}
+				
+				//檢查IDNO
+				if(RealtorIDRex.isValidTWPID(rtr_idno) == false || rtr_idno.trim().length() == 0){
+					regErrors.add("身分證輸入錯誤，或中間不要留空");
 				}
 
 				// 檢查是否同意 "服務條款 & 隱私權政策"
@@ -217,14 +223,37 @@ System.out.println(re_no);
 				/***********************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 *************************/
-				String rtr_no = req.getParameter("rtr_no");
 				String rtr_name = req.getParameter("rtr_name").trim();
+				String rtr_area = req.getParameter("rtr_area");
+				String rtr_intro = req.getParameter("rtr_intro").trim();
+				String rtr_idno = req.getParameter("rtr_idno");
+				String re_no = req.getParameter("re_no");
+				String rtr_no = req.getParameter("rtr_no");
+				String default_item = req.getParameter("default_item");
+				
+				//判斷姓名
 				if (rtr_name == null || rtr_name.length() == 0) {
 					dataErrors.add("姓名不可為空!");
 					nameErr = "姓名不可為空!";
 					return;
 				}
-				String rtr_intro = req.getParameter("rtr_intro").trim();
+				
+				//判斷服務地區
+				if(rtr_area == null || rtr_area.trim().length()==0 || rtr_area==default_item){
+					dataErrors.add("請選擇服務地區!");
+				}
+				
+				//判斷身分證
+				if(RealtorIDRex.isValidTWPID(rtr_idno) == false){
+					dataErrors.add("身分證輸入錯誤，或中間不要留空");
+				}
+				
+				//判斷房仲公司
+				if(re_no == null || re_no.trim().length()==0 || re_no==default_item){
+					dataErrors.add("請選擇服務公司!");
+				}
+				
+				//判斷簡介
 				if (rtr_intro.length() == 0) {
 					dataErrors.add("簡介不可為空 !");
 					introErr = "簡介不可為空 !";
@@ -262,11 +291,19 @@ System.out.println(re_no);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
-
-				realtorVOtmp.setRtr_no(rtr_no);
+				
 				realtorVOtmp.setRtr_name(rtr_name);
-				realtorVOtmp.setRtr_intro(rtr_intro);
 				realtorVOtmp.setRtr_photo(rtr_photo);
+				realtorVOtmp.setRtr_area(rtr_area);
+				realtorVOtmp.setRtr_intro(rtr_intro);
+				realtorVOtmp.setRtr_idno(rtr_idno);
+				realtorVOtmp.setRe_no(re_no);
+				realtorVOtmp.setRtr_no(rtr_no);
+
+//				realtorVOtmp.setRtr_no(rtr_no);
+//				realtorVOtmp.setRtr_name(rtr_name);
+//				realtorVOtmp.setRtr_intro(rtr_intro);
+//				realtorVOtmp.setRtr_photo(rtr_photo);
 				if (!dataErrors.isEmpty()) {
 					req.getSession().setAttribute("realtorVO", realtorVO); // 含有輸入格式錯誤的relatorVO物件,也存入req
 					req.setAttribute("realtorVOtmp", realtorVOtmp);
@@ -280,11 +317,20 @@ System.out.println(re_no);
 				}
 
 				/*************************** 全部沒問題才開始包裝資料、更新db ****************************/
-				realtorSvc.update(rtr_no, rtr_name, rtr_photo, rtr_intro, realtorVO.getRtr_psw());
-				realtorVO.setRtr_no(rtr_no);
+//				realtorSvc.update(rtr_no, rtr_name, rtr_photo, rtr_intro, realtorVO.getRtr_psw());
+				realtorSvc.update(rtr_name, rtr_photo, rtr_area, rtr_intro, rtr_idno, re_no, realtorVO.getRtr_psw(), rtr_no);
+//				realtorVO.setRtr_no(rtr_no);
+//				realtorVO.setRtr_name(rtr_name);
+//				realtorVO.setRtr_intro(rtr_intro);
+//				realtorVO.setRtr_photo(rtr_photo);
 				realtorVO.setRtr_name(rtr_name);
-				realtorVO.setRtr_intro(rtr_intro);
 				realtorVO.setRtr_photo(rtr_photo);
+				realtorVO.setRtr_area(rtr_area);
+				realtorVO.setRtr_intro(rtr_intro);
+				realtorVO.setRtr_idno(rtr_idno);
+				realtorVO.setRe_no(re_no);
+				realtorVO.setRtr_no(rtr_no);
+				
 				req.getSession().setAttribute("realtorVO", realtorVO);
 
 				/****************************

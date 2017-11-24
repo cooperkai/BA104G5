@@ -84,7 +84,7 @@
 			<!-- <a href='#realtor_jump' data-toggle="modal" class="btn">修改資料</a> -->
 			<input type="hidden" name="action" value="getOne_For_Update">
 			<input type="hidden" name="rtr_no" value="${realtorVO.rtr_no}">
-			<input type="submit" class="btn" title="選擇修改資料" value="選擇修改資料">
+			<input type="submit" class="btn" title="編輯個人資料" value="編輯個人資料">
 		</form>
 	</div>
 </div>
