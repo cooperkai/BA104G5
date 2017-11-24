@@ -20,7 +20,8 @@
 		list = realtorSvc.getArtByRtrNo(No);
 		pageContext.setAttribute("list", list);
 	} else {
-		String No = request.getParameter("Rtr_no");
+		ArticleVO articleVO = (ArticleVO) request.getAttribute("articleVO");
+		String No = articleVO.getRtr_no();
 		list = realtorSvc.getArtByRtrNo(No);
 		pageContext.setAttribute("list", list);
 		out.print(No);

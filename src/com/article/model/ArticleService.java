@@ -36,8 +36,8 @@ public class ArticleService {
 	}
 
 	// 查單一
-	public ArticleVO getOne(String articles_no) {
-		return dao.findByPrimaryKey(articles_no);
+	public ArticleVO getOne(String rtr_no) {
+		return dao.findByPrimaryKey(rtr_no);
 	}
 
 	// 查全部

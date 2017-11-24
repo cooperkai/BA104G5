@@ -10,6 +10,7 @@
 	class="com.realtor.model.RealtorService" />
 
 <%
+	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 	List<ArticleVO> list = articleSvc.getAllByTime();
 	pageContext.setAttribute("list", list);
 
@@ -73,9 +74,11 @@
 						<li role="presentation" class="active">
 							<a href="<%=request.getContextPath()%>/front/realtor/allBlog.jsp" role="tab" id="top">最新文章</a>
 						</li>
-						<li role="presentation">
-							<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp" role="tab">房仲文章</a>
-						</li>
+						<c:if test="${realtorVO != null}">
+							<li role="presentation">
+								<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp" role="tab">房仲文章</a>
+							</li>
+						</c:if>
 					</ul>
 
 		

@@ -1,6 +1,7 @@
 package com.article.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Enumeration;
 import java.util.LinkedList;
@@ -13,6 +14,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 
 import com.article.model.ArticleService;
 import com.article.model.ArticleVO;
@@ -37,8 +40,8 @@ public class ArticleServlet extends HttpServlet {
 				/*****************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 **********************/
-				String article_no = req.getParameter("article_no");
-				if (article_no == null || (article_no.trim()).length() == 0) {
+				String rtr_no = req.getParameter("rtr_no");
+				if (rtr_no == null || (rtr_no.trim()).length() == 0) {
 					errorMsgs.add("請輸入房仲文章編號");
 				}
 
@@ -50,7 +53,7 @@ public class ArticleServlet extends HttpServlet {
 
 				/*************************** 2.開始查詢資料 *****************************************/
 				ArticleService articleSvc = new ArticleService();
-				ArticleVO articleVO = articleSvc.getOne(article_no);
+				ArticleVO articleVO = articleSvc.getOne(rtr_no);
 				if (articleVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -112,14 +115,14 @@ public class ArticleServlet extends HttpServlet {
 			}
 		} // 查單一修改結束
 
+		
 		// 更新房仲粉絲頁
 		if ("update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			String img = req.getParameter("img");
-			System.out.println(img);
-			
+//			System.out.println(img);
 			
 			try {
 
@@ -142,15 +145,9 @@ public class ArticleServlet extends HttpServlet {
 				if (article_state == null || article_state.trim().length() == 0) {
 					errorMsgs.add("請選擇狀態");
 				}
-				System.out.println("--------------------");				
-				System.out.println(article_no);
-				System.out.println(rtr_no);
-				System.out.println(article_body);
-				System.out.println(article_state);				
-				System.out.println("--------------------");
+
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 				Timestamp post_date = nowTime;
-//				System.out.println(post_date);
 
 				ArticleVO articleVO = new ArticleVO();
 				articleVO.setArticle_no(article_no);
@@ -158,7 +155,7 @@ public class ArticleServlet extends HttpServlet {
 				articleVO.setArticle_body(article_body);
 				articleVO.setPost_date(post_date);
 				articleVO.setArticle_state(article_state);
-//				System.out.println(rtr_no);
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("articleVO", articleVO);
@@ -174,15 +171,15 @@ public class ArticleServlet extends HttpServlet {
 				/*****************************
 				 * 3.修改完成,準備轉交(Send the Success view)
 				 *************/
+				req.setAttribute("img", img);
 				String url = "/front/realtor/allBlog.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				throw new RuntimeException("AAAA");
-				
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/allBlog.jsp");
-//				failureView.forward(req, res);
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/allBlog.jsp");
+				failureView.forward(req, res);
 			}
 		} // 更新房仲粉絲頁結束
 
@@ -262,18 +259,23 @@ public class ArticleServlet extends HttpServlet {
 		// 刪除
 		if ("delete".equals(action)) {
 			try {
+				
 				String article_no = req.getParameter("article_no");
 
 				ArticleService articleSvc = new ArticleService();
 				articleSvc.delete(article_no);
-
-				String url = "/front/realtor/allBlog.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
+				//沒用到
+//				PrintWriter out = res.getWriter();
+//				JSONObject obj = new JSONObject();
+//				String value = "45555555555555555555";
+//				
+//				obj.put("canPass", value);
+//				out.write(obj.toString());
+//				out.flush();
+//				out.close();
+//				
 			} catch (Exception e) {
 				System.out.println("目前網路不穩定:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/allBlog.jsp");
-				failureView.forward(req, res);
 			}
 		}
 	}

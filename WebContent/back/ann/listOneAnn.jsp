@@ -4,8 +4,7 @@
 
 <%
 	AnnVO annVO = (AnnVO) request.getAttribute("annVO"); //AnnServlet.java(Concroller), 存入req的annVO物件
-%>
-<%
+
 response.setHeader("Cache-Control", "no-store");
 response.setHeader("Pragma", "no-cache");
 response.setDateHeader("Expires", 0);

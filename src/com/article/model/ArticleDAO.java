@@ -1,6 +1,7 @@
 package com.article.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO Article (Article_No, Rtr_No, Article_body, Post_date, Article_State) VALUES('ART'||LPAD(TO_CHAR(SEQ_ART.NEXTVAL), 7, '0'), ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE Article SET Rtr_No=?, Article_body=?, Post_date=?, Article_State=? WHERE Article_No = ?";
-	private static final String GET_ONE_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State FROM Article WHERE Article_No = ?";
+	private static final String GET_ONE_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State, Article_Comm FROM Article WHERE Rtr_No = ?";
 	private static final String GET_ALL_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State FROM Article ORDER BY Article_No";
 	// 查詢發布時間排序
 	private static final String GET_ALL_BY_TIME = "SELECT * FROM Article ORDER BY Post_Date DESC";
@@ -95,12 +96,10 @@ public class ArticleDAO implements ArticleDAO_interface {
 			pstmt.setTimestamp(3, articleVO.getPost_date());
 			pstmt.setString(4, articleVO.getArticle_state());
 			pstmt.setString(5, articleVO.getArticle_no());
-			System.out.println("有進DAO");
 
 			pstmt.executeUpdate();
 			con.commit();
 			con.setAutoCommit(true);
-			System.out.println("沒有錯阿");
 
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -125,7 +124,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 
 	// 查單一
 	@Override
-	public ArticleVO findByPrimaryKey(String article_no) {
+	public ArticleVO findByPrimaryKey(String rtr_no) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -135,7 +134,7 @@ public class ArticleDAO implements ArticleDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setString(1, article_no);
+			pstmt.setString(1, rtr_no);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

@@ -18,7 +18,7 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO Article (Article_No, Rtr_No, Article_body, Post_date, Article_State) VALUES('ART'||LPAD(TO_CHAR(SEQ_ART.NEXTVAL), 7, '0'), ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE Article SET Rtr_No=?, Article_body=?, Post_date=?, Article_State=? WHERE Article_No = ?";
-	private static final String GET_ONE_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State, Article_Comm FROM Article WHERE Article_No = ?";
+	private static final String GET_ONE_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State, Article_Comm FROM Article WHERE Rtr_No = ?";
 	private static final String GET_ALL_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State, Article_Comm FROM Article ORDER BY Article_No";
 
 	// 查詢發布時間排序
@@ -123,7 +123,7 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 
 	// 查單一
 	@Override
-	public ArticleVO findByPrimaryKey(String article_no) {
+	public ArticleVO findByPrimaryKey(String rtr_no) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -134,7 +134,7 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 			con = DriverManager.getConnection(url, userid, password);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setString(1, article_no);
+			pstmt.setString(1, rtr_no);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -365,22 +365,22 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 		// dao.insert(vo);
 
 		// 修改
-		ArticleVO vo2 = new ArticleVO();
-		vo2.setRtr_no("RT00000002");
-		vo2.setArticle_body("t");
-		vo2.setPost_date(new Timestamp(System.currentTimeMillis()));
-		vo2.setArticle_state("ON");
-		vo2.setArticle_no("ART0008000");
-		dao.update(vo2);
+//		ArticleVO vo2 = new ArticleVO();
+//		vo2.setRtr_no("RT00000002");
+//		vo2.setArticle_body("t");
+//		vo2.setPost_date(new Timestamp(System.currentTimeMillis()));
+//		vo2.setArticle_state("ON");
+//		vo2.setArticle_no("ART0008000");
+//		dao.update(vo2);
 
 		// 查單一
-		// ArticleVO vo3 = dao.findByPrimaryKey("ART0008001");
-		// System.out.println(vo3.getRtr_no());
-		// System.out.println(vo3.getArticle_body());
-		// System.out.println(vo3.getPost_date());
-		// System.out.println(vo3.getPost_date());
-		// System.out.println(vo3.getArticle_state());
-		// System.out.println("====================================");
+		 ArticleVO vo3 = dao.findByPrimaryKey("RT00000001");
+		 System.out.println(vo3.getArticle_no());
+		 System.out.println(vo3.getArticle_body());
+		 System.out.println(vo3.getPost_date());
+		 System.out.println(vo3.getPost_date());
+		 System.out.println(vo3.getArticle_state());
+		 System.out.println("====================================");
 
 		// 查全部
 		// List<ArticleVO> list = dao.getAll();

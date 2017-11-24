@@ -45,8 +45,7 @@
 
 
 	<!-- 右邊房仲文章資料 =====================================-->
-	<c:forEach var="articleVO" items="${list}" begin="<%=pageIndex%>"
-		end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="articleVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s">
 		<div class="container">
 			<div class="row">
 				<div class="panel panel-default col-sm-12  col-sm-8 col-sm-offset-2">
@@ -68,21 +67,20 @@
 					<c:if test="${(realtorVO.rtr_no) == (articleVO.rtr_no) }"> 
 						<div class="form-group">
 							<label for="article_body">文章內容</label>
-							<textarea rows="3"  id="article_context"  class="form-control" style="cursor: no-drop;" name="article_body">${articleVO.article_body}</textarea>
-							<input type="button" value="修改文章" onclick="update()"> 
-							<input type="hidden" name="article_no" value="${articleVO.article_no}">
-							<input type="hidden" name="article_state" value="ON"> 
-							<input type="hidden" name="rtr_no" value="${articleVO.rtr_no}">
+							<textarea rows="3"  id="article_context"  class="form-control" style="cursor: text;" name="article_body">${articleVO.article_body}</textarea>
+							<input type="button" value="修改文章" onclick="update(this)"> 
+							
+							<!-- 圖片用 -->	
 							<input id="upload_img" type="file" name="upload_img"> 
 							<input type="hidden" id="show_base64" name="img" value="">
-							<img src="data:image/gif;base64,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">
+							<!-- 預覽圖片用 -->
+							<img src="<%= request.getAttribute("img")%>">
 						</div>
+						
+						<!-- ajax更新資料用 -->
 						<script type="text/javascript">
-						
-						
-						
+							//更新資料用
 							function update(e){
-							console.log($('#article_context').val());
 									$.ajax({
 										type:'post',
 										url: '<%=request.getContextPath()%>/front/article/article.do',
@@ -99,11 +97,12 @@
 											alert('修改文章失敗');
 										},
 										success: function(result){
-											alert('供黑雷阿');
+											alert(<%= request.getAttribute("img")%>);
+											alert('已修改完成');
 										}
 									});
 								}
-							
+							//base64圖片用
 							function InputLoadImageToBindImageElement(uploadElement, targetElement) {								 
 							    if (uploadElement.files && uploadElement.files[0]) {
 							        var reader = new FileReader();							 
@@ -116,34 +115,19 @@
 							
 							$("#upload_img").change(function () {
 						          InputLoadImageToBindImageElement(this, $('#show_base64'));
-						});
-							
-							
-							
-							
-						
+							});
 						</script>
 						
 						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-					<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/front/article/article.do"	name="form1">
+					
 						<div class="form-group">
-							<label for="article_body">文章內容</label>
-							<textarea rows="3" id="article_context2" class="form-control" style="cursor: no-drop;" name="article_body">${articleVO.article_body}</textarea>
-							<input type="button"  value="刪除文章"  onclick="toDataURL()"> 
-							<input type="hidden" name="action" value="delete"> 
-							<input type="hidden" name="article_no" value="${articleVO.article_no}">
+							<input type="button" value="刪除文章" id="${articleVO.article_no}" onclick="deleteArt(event);"> 
 						</div>
-					</FORM>
+
+					
+					
+					
+					
 					</c:if>
 					<div class="form-group">
 						<label for="post_date">發佈日期</label>
@@ -175,7 +159,29 @@
 </div>
 
 
-
+<!-- 刪除用 -->
+<script type="text/javascript">
+	function deleteArt(event){//一定要用event
+		$.ajax({
+			type:'post',
+			url: '<%=request.getContextPath()%>/front/article/article.do',
+			dataType: "json",
+			data: {
+				action: 'delete',
+				article_no: event.target.id //一定要用event
+			},
+			success: function(result){
+				alert("你知道有些事情，就像潑出去的水一樣收不回來嗎?");
+				alert("已經刪除囉，不能回到過去了^^");
+				//設置時間自動挑轉
+				setTimeout(function(){location.reload()}, 1000);
+			},
+			error: function(xhr){
+				alert('不能刪除喔');
+			}
+		});
+	}
+</script>
 
 
 
