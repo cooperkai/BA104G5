@@ -79,7 +79,8 @@
 					<div class="form-group">
 						<label for="post_date">房仲公司</label>
 						<div>
-							<h5 class="">${realestateSvc.getOne(realtorVO.re_no).getRe_name()}</h5>
+						
+							<h5 class="">${realestateSvc.getOne(rtr_no).getRe_name()}</h5>
 						</div>
 					</div>
 					<div class="form-group">

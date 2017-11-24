@@ -42,8 +42,6 @@
 		</div>
 	</div>
 
-
-
 	<!-- 右邊房仲文章資料 =====================================-->
 	<c:forEach var="articleVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s">
 		<div class="container">
@@ -97,7 +95,6 @@
 											alert('修改文章失敗');
 										},
 										success: function(result){
-											alert(<%= request.getAttribute("img")%>);
 											alert('已修改完成');
 										}
 									});
@@ -118,16 +115,9 @@
 							});
 						</script>
 						
-						
-					
 						<div class="form-group">
 							<input type="button" value="刪除文章" id="${articleVO.article_no}" onclick="deleteArt(event);"> 
 						</div>
-
-					
-					
-					
-					
 					</c:if>
 					<div class="form-group">
 						<label for="post_date">發佈日期</label>
@@ -138,12 +128,22 @@
 							</h5>
 						</div>
 					</div>
-					<!-- <div class="input-group" style="margin-bottom: 10px;"> -->
-					<!-- <textarea class="form-control" name=""></textarea> -->
-					<!-- <span class="input-group-btn"> -->
-					<!-- <button class="btn btn-primary" type="submit" style="padding: 16px;">留言</button>  -->
-					<!-- </span> -->
-					<!-- </div> -->
+					<div class="form-group">
+						<div>
+							<h5 class="">${articleVO.article_comm}
+							</h5>
+						</div>
+					</div>
+					<form method="post" action="<%=request.getContextPath()%>/front/article/article.do">
+					<div class="input-group" style="margin-bottom: 10px;">
+						<textarea class="form-control" name="article_comm" value=""></textarea>
+						<span class="input-group-btn">
+							<button class="btn btn-primary" type="submit" style="padding: 16px;">留言</button>
+							<input type="hidden" name="action" value="Comm"> 
+							<input type="hidden" name="article_no" value="${articleVO.article_no}"> 
+						</span>
+					</div>
+					</form>
 				</div>
 			</div>
 		</div>

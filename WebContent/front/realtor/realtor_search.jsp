@@ -172,7 +172,7 @@
 								</div>
 								<div class="row forward_estate">
 									<form method="post" action="<%=request.getContextPath()%>/front/article/article.do">
-									<button class="button" style="vertical-align: middle">
+										<button class="button" style="vertical-align: middle">
 										<input type="hidden" name="action" value="getOne_For_Display">
 										<input type="hidden" name="rtr_no" value="${realtorVO.rtr_no}">
 										<span class="forward_word">查看詳請</span>

@@ -87,8 +87,6 @@ public class ArticleServlet extends HttpServlet {
 
 			String requestURL = req.getParameter("requestURL");
 			System.out.println("getOne_For_Update: " + requestURL);
-			
-	
 
 			try {
 				System.out.println("article_getOne_For_Update_try_in");
@@ -115,15 +113,14 @@ public class ArticleServlet extends HttpServlet {
 			}
 		} // 查單一修改結束
 
-		
 		// 更新房仲粉絲頁
 		if ("update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			String img = req.getParameter("img");
-//			System.out.println(img);
-			
+			// System.out.println(img);
+
 			try {
 
 				Enumeration<String> allname = req.getParameterNames();
@@ -142,9 +139,6 @@ public class ArticleServlet extends HttpServlet {
 				}
 
 				String article_state = req.getParameter("article_state").trim();
-				if (article_state == null || article_state.trim().length() == 0) {
-					errorMsgs.add("請選擇狀態");
-				}
 
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 				Timestamp post_date = nowTime;
@@ -155,7 +149,7 @@ public class ArticleServlet extends HttpServlet {
 				articleVO.setArticle_body(article_body);
 				articleVO.setPost_date(post_date);
 				articleVO.setArticle_state(article_state);
-				
+
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("articleVO", articleVO);
@@ -253,27 +247,51 @@ public class ArticleServlet extends HttpServlet {
 
 		// 新增留言
 		if ("Comm".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				String article_no = req.getParameter("article_no");
+				String article_comm = req.getParameter("article_comm");
+
+				ArticleVO articleVO = new ArticleVO();
+				articleVO.setArticle_no(article_no);
+				articleVO.setArticle_comm(article_comm);
+
+				ArticleService articleSvc = new ArticleService();
+				articleVO = articleSvc.updateComm(article_no, article_comm);
+
+				String url = "/front/realtor/allBlog.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				errorMsgs.add("無法新增修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/allBlog.jsp");
+				failureView.forward(req, res);
+			}
 
 		}
 
 		// 刪除
 		if ("delete".equals(action)) {
 			try {
-				
+
 				String article_no = req.getParameter("article_no");
 
 				ArticleService articleSvc = new ArticleService();
 				articleSvc.delete(article_no);
-				//沒用到
-//				PrintWriter out = res.getWriter();
-//				JSONObject obj = new JSONObject();
-//				String value = "45555555555555555555";
-//				
-//				obj.put("canPass", value);
-//				out.write(obj.toString());
-//				out.flush();
-//				out.close();
-//				
+				// 沒用到
+				// PrintWriter out = res.getWriter();
+				// JSONObject obj = new JSONObject();
+				// String value = "45555555555555555555";
+				//
+				// obj.put("canPass", value);
+				// out.write(obj.toString());
+				// out.flush();
+				// out.close();
+				//
 			} catch (Exception e) {
 				System.out.println("目前網路不穩定:" + e.getMessage());
 			}

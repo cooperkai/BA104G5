@@ -51,11 +51,12 @@ public class ArticleService {
 	}
 
 	// 新增留言
-	public void updateComm(String article_no, String article_comm) {
+	public ArticleVO updateComm(String article_no, String article_comm) {
 		ArticleVO articleVO = new ArticleVO();
 		articleVO.setArticle_no(article_no);
 		articleVO.setArticle_comm(article_comm);
 		dao.updateComm(articleVO);
+		return articleVO;
 	}
 
 	// 刪除
