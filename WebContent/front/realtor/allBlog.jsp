@@ -68,7 +68,8 @@
 						<div class="form-group">
 							<label for="article_body">文章內容</label>
 							<textarea rows="3"  id="article_context"  class="form-control" style="cursor: text;" name="article_body">${articleVO.article_body}</textarea>
-							<input type="button" value="修改文章" onclick="update(this)"> 
+							<input type="button" value="修改文章" onclick="update(event, '${articleVO.article_no}', '${articleVO.rtr_no}')">
+							<input type="hidden" value="${articleVO.article_no}">
 							
 							<!-- 圖片用 -->	
 							<input id="upload_img" type="file" name="upload_img"> 
@@ -77,45 +78,7 @@
 							<img src="<%= request.getAttribute("img")%>">
 						</div>
 						
-						<!-- ajax更新資料用 -->
-						<script type="text/javascript">
-							//更新資料用
-							function update(e){
-									$.ajax({
-										type:'post',
-										url: '<%=request.getContextPath()%>/front/article/article.do',
-										data: {
-											action: 'update',
-											article_no: '${articleVO.article_no}',
-											article_state: 'ON',
-											rtr_no: '${articleVO.rtr_no}',
-											article_body:$('#article_context').val(),
-											img:$('#show_base64').val()
-										},
-										
-										error: function(xhr){
-											alert('修改文章失敗');
-										},
-										success: function(result){
-											alert('已修改完成');
-										}
-									});
-								}
-							//base64圖片用
-							function InputLoadImageToBindImageElement(uploadElement, targetElement) {								 
-							    if (uploadElement.files && uploadElement.files[0]) {
-							        var reader = new FileReader();							 
-							        reader.onload = function (e) {
-							            $(targetElement).val(e.target.result);
-							        }
-							        reader.readAsDataURL(uploadElement.files[0]);
-							    }	
-							}
-							
-							$("#upload_img").change(function () {
-						          InputLoadImageToBindImageElement(this, $('#show_base64'));
-							});
-						</script>
+						
 						
 						<div class="form-group">
 							<input type="button" value="刪除文章" id="${articleVO.article_no}" onclick="deleteArt(event);"> 
@@ -186,6 +149,49 @@
 		});
 	}
 </script>
+
+
+
+<!-- ajax更新資料用 -->
+						<script type="text/javascript">
+							//更新資料用
+							function update(event, artNo, rtrNo){
+									$.ajax({
+										type:'post',
+										url: '<%=request.getContextPath()%>/front/article/article.do',
+										data: {
+											action: 'update',
+											article_no: artNo,
+											article_state: 'ON',
+											rtr_no: rtrNo,
+											article_body:$('#article_context').val(),
+											img:$('#show_base64').val()
+										},
+										
+										error: function(xhr){
+											alert('修改文章失敗');
+										},
+										success: function(result){
+											alert('已修改完成');
+										}
+									});
+								}
+							//base64圖片用
+							function InputLoadImageToBindImageElement(uploadElement, targetElement) {								 
+							    if (uploadElement.files && uploadElement.files[0]) {
+							        var reader = new FileReader();							 
+							        reader.onload = function (e) {
+							            $(targetElement).val(e.target.result);
+							        }
+							        reader.readAsDataURL(uploadElement.files[0]);
+							    }	
+							}
+							
+							$("#upload_img").change(function () {
+						          InputLoadImageToBindImageElement(this, $('#show_base64'));
+							});
+						</script>
+
 
 
 
