@@ -1,8 +1,7 @@
 @CHARSET "UTF-8";
 
-.table_main { 
+.table_main {
 	border: 2px solid #A9A9A9;
-	font-family: Microsoft JhengHei;
 	font-weight: bold;
 }
 
@@ -31,7 +30,6 @@
 }
 
 .modal_jump {
-	font-family: Microsoft JhengHei;
 	font-weight: bold;
 }
 
@@ -92,13 +90,11 @@
 /* 專門為抓到要update的值設字的顏色 */
 .update_color {
 	color: red;
-	font-family: Microsoft JhengHei;
 	font-weight: bold;
 }
 
 .modal-body {
 	color: black;
-	font-family: Microsoft JhengHei;
 	font-weight: bold;
 }
 
@@ -114,12 +110,13 @@
 	color: black;
 }
 
-
 /* 促銷修改照片預覽 */
-#imgpreview, 
-.promo_photo,
-.mews_photo {
+#imgpreview, .promo_photo, .mews_photo {
 	width: 50%;
 	height: 291.2px;
 }
 
+/*關掉所有自動調整的功能*/
+textarea {
+	resize: none;
+}

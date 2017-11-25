@@ -55,8 +55,8 @@ public class RealtorDAO implements RealtorDAO_interface {
 	private static final String FB_INSERT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, Rtr_State) "
 			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?, 'ON')";
 
-	// 找房仲文章
-	private static final String GET_ART_BY_RTRNO = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State FROM Article WHERE Rtr_No=? ORDER BY Post_date DESC";
+	// 找房仲私人文章狀態OFF
+	private static final String GET_ART_BY_RTRNO = "SELECT a.Article_No, a.Rtr_No, a.Article_body, to_char(a.Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, a.Update_date, a.Article_State, r.rtr_photo, r.rtr_area, r.rtr_name, r.rtr_no FROM Article a, Realtor r WHERE r.Rtr_No=a.rtr_no and a.article_state='OFF' and r.RTR_NO=? ORDER BY Post_date DESC";
 	// 找房仲文章沒用到
 	// private static final String GET_ART_BY_RTRNO = "SELECT Article_No,
 	// Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date,

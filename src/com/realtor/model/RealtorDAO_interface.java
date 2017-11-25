@@ -28,6 +28,6 @@ public interface RealtorDAO_interface {
 	public List<RealtorVO> findByKeyword(String keyword);//複合查詢ByKeyword
 	public void changeRealtorState(RealtorVO realtorVO);//更換房仲狀態
 	public void FBInsert(RealtorVO realtorVO);//房仲FB登入的特別insert
-	public Set<ArticleVO> getArtByRtrNo(String rtr_no);// 找房仲文章
+	public Set<ArticleVO> getArtByRtrNo(String rtr_no);// 找房仲私人文章狀態OFF
 	
 }

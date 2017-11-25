@@ -165,10 +165,10 @@ public class ArticleServlet extends HttpServlet {
 				/*****************************
 				 * 3.修改完成,準備轉交(Send the Success view)
 				 *************/
-				req.setAttribute("img", img);
-				String url = "/front/realtor/allBlog.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
-				successView.forward(req, res);
+//				req.setAttribute("img", img);
+//				String url = "/front/realtor/allBlog.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
+//				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
@@ -283,15 +283,16 @@ public class ArticleServlet extends HttpServlet {
 				ArticleService articleSvc = new ArticleService();
 				articleSvc.delete(article_no);
 				// 沒用到
-				// PrintWriter out = res.getWriter();
-				// JSONObject obj = new JSONObject();
-				// String value = "45555555555555555555";
-				//
-				// obj.put("canPass", value);
-				// out.write(obj.toString());
-				// out.flush();
-				// out.close();
-				//
+				 PrintWriter out = res.getWriter();
+				 JSONObject obj = new JSONObject();
+				 String value = "45555555555555555555";
+				
+				 obj.put("canPass", value);
+				 out.write(obj.toString());
+				 out.flush();
+				 out.close();
+				
+				System.out.println("delete");
 			} catch (Exception e) {
 				System.out.println("目前網路不穩定:" + e.getMessage());
 			}

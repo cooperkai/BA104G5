@@ -6,26 +6,31 @@
 <%@ page import="com.realestate.model.*"%>
 <%@ page import="com.article.model.*"%>
 
-<jsp:useBean id="realestateSvc" scope="page"
-	class="com.realestate.model.RealEstateService" />
-<jsp:useBean id="articleSvc" scope="page"
-	class="com.article.model.ArticleService" />
+<jsp:useBean id="realestateSvc" scope="page" class="com.realestate.model.RealEstateService" />
+<jsp:useBean id="articleSvc" scope="page" class="com.article.model.ArticleService" />
 
 <%
-	Set<ArticleVO> list = null;
 	RealtorService realtorSvc = new RealtorService();
-	if ((RealtorVO) session.getAttribute("realtorVO") != null) {
-		RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
-		String No = realtorVO.getRtr_no();
-		list = realtorSvc.getArtByRtrNo(No);
-		pageContext.setAttribute("list", list);
-	} else {
-		ArticleVO articleVO = (ArticleVO) request.getAttribute("articleVO");
-		String No = articleVO.getRtr_no();
-		list = realtorSvc.getArtByRtrNo(No);
-		pageContext.setAttribute("list", list);
-		out.print(No);
-	}
+	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
+	
+	String No = realtorVO.getRtr_no();
+	Set<ArticleVO> list = null;
+	list = realtorSvc.getArtByRtrNo(No);
+	
+	pageContext.setAttribute("list", list);
+	
+// 	if ((RealtorVO) session.getAttribute("realtorVO") != null) {
+// 		RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
+// 		String No = realtorVO.getRtr_no();
+// 		list = realtorSvc.getArtByRtrNo(No);
+// 		pageContext.setAttribute("list", list);
+// 	} else {
+// 		ArticleVO articleVO = (ArticleVO) request.getAttribute("articleVO");
+// 		String No = articleVO.getRtr_no();
+// 		list = realtorSvc.getArtByRtrNo(No);
+// 		pageContext.setAttribute("list", list);
+// 		out.print(No);
+// 	}
 
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
@@ -126,8 +131,17 @@
 						</div>
 						<div class="form-group">
 							<label for="article_body">文章內容</label>
-							<textarea rows="3" class="form-control" readonly
-								style="cursor: no-drop;" name="article_body">${articleVO.article_body}</textarea>
+							<textarea rows="3"  id="article_context"  class="form-control" style="cursor: text;" name="article_body">${articleVO.article_body}</textarea>
+							<div class="form-group" id="update_btn">
+								<div class="form-group">
+									<label for="article_body">選擇公開與否?</label>
+									<input type="radio" name="state_check" value="ON">好，我願意
+									<input type="radio" name="state_check" value="OFF">才不給你看哩~
+								</div>
+								<input type="button" value="修改文章" onclick="update(event, '${articleVO.article_no}', '${articleVO.rtr_no}')">
+							</div>
+							<input type="hidden" value="${articleVO.article_no}">
+							<input type="button" value="刪除文章" id="${articleVO.article_no}" onclick="deleteArt(event);">
 						</div>
 						<div class="form-group">
 							<label for="post_date">發佈日期</label>
@@ -162,8 +176,85 @@
 </div>
 </div>
 
+<!-- 刪除用 -->
+<script type="text/javascript">
+	function deleteArt(event){//一定要用event
+		$.ajax({
+			type:'post',
+			url: '<%=request.getContextPath()%>/front/article/article.do',
+			
+			/*這邊如果傳這種型態過去
+			*controller一定要有東西接
+			*要不然會選擇走下面的error
+			*還是會執行，只是會被誤導....
+			*/
+			dataType: "json",
+			data: {
+				action: 'delete',
+				article_no: event.target.id //一定要用event
+			},
+			success: function(result){
+				alert("你知道有些事情，就像潑出去的水一樣收不回來嗎?");
+				alert("已經刪除囉，不能回到過去了^^");
+				//設置時間自動挑轉
+				setTimeout(function(){location.reload()}, 1000);
+			},
+			error: function(xhr){
+				alert('不能刪除喔');
+			}
+		});
+	}
+</script>
+ <!-- ajax更新資料用 -->
+    <script type="text/javascript">
+    //更新資料用
+    function update(event, artNo, rtrNo) {
+    	
+    	//選取checkbox裡面的值
+     	var state = $("input:checked").val();
+          
+    	$.ajax({
+            type: 'post',
+            url: '<%=request.getContextPath()%>/front/article/article.do',
+            data: {
+                action: 'update',
+                article_no: artNo,
+                article_state: state,
+                rtr_no: rtrNo,
+                article_body: $('#article_context').val(),
+                //img: $('#show_base64').val()
+            },
+            success: function(result) {
+                alert('已修改完成');
+              	//設置時間自動挑轉
+			// setTimeout(function(){location.reload()}, 1000);
+            },
+            error: function(xhr) {
+                alert('修改文章失敗');
+            }
+        });
+    }
+    //base64圖片用
+    function InputLoadImageToBindImageElement(uploadElement, targetElement) {
+        if (uploadElement.files && uploadElement.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $(targetElement).val(e.target.result);
+            }
+            reader.readAsDataURL(uploadElement.files[0]);
+        }
+    }
+
+    $("#upload_img").change(function() {
+        InputLoadImageToBindImageElement(this, $('#show_base64'));
+    });
+    </script>
+    
 
 
+
+<!-- 回到最上面    -->
+<div id="gotop">˄</div>
 
 
 

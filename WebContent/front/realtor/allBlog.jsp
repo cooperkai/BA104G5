@@ -13,6 +13,7 @@
 <%
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
+	
 	ArticleService articleSvc = new ArticleService();
 	List<ArticleVO> list = articleSvc.getAllByTime();
 	pageContext.setAttribute("list", list);
@@ -36,6 +37,7 @@
 			</c:forEach>
 		</ul>
 	</c:if>
+	
 	<div class="container" style="margin-top: 1em;">
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
@@ -51,9 +53,6 @@
 				<div class="panel panel-default col-sm-12  col-sm-8 col-sm-offset-2">
 					<div class="panel-heading form-group">
 						<h4>文章</h4>
-						<h4 style="float: right;">
-							<a href="#top">回房仲文章列表</a>
-						</h4>
 					</div>
 					<div class="form-group">
 						<label for="rtr_name">房仲名稱</label>
@@ -70,18 +69,13 @@
 							<textarea rows="3"  id="article_context"  class="form-control" style="cursor: text;" name="article_body">${articleVO.article_body}</textarea>
 							<input type="button" value="修改文章" onclick="update(event, '${articleVO.article_no}', '${articleVO.rtr_no}')">
 							<input type="hidden" value="${articleVO.article_no}">
-							
-							<!-- 圖片用 -->	
-							<input id="upload_img" type="file" name="upload_img"> 
-							<input type="hidden" id="show_base64" name="img" value="">
-							<!-- 預覽圖片用 -->
-							<img src="<%= request.getAttribute("img")%>">
-						</div>
-						
-						
-						
-						<div class="form-group">
 							<input type="button" value="刪除文章" id="${articleVO.article_no}" onclick="deleteArt(event);"> 
+							
+							<!-- 圖片用	 -->
+							<!-- <input id="upload_img" type="file" name="upload_img">  -->
+							<!-- <input type="hidden" id="show_base64" name="img" value=""> -->
+							<!-- 預覽圖片用 -->
+							<%-- <img src="<%= request.getAttribute("img")%>"> --%>
 						</div>
 					</c:if>
 					<div class="form-group">
@@ -93,7 +87,6 @@
 							</h5>
 						</div>
 					</div>
-					
 					<div class="form-group">
 						<div class="col-sm-12">
 	                    	<p style="color:#191970;font-weight:bold;">${realtorSvc.getOne(articleVO.rtr_no).getRtr_name()}: ${articleVO.article_comm}</p>
@@ -132,6 +125,12 @@
 		$.ajax({
 			type:'post',
 			url: '<%=request.getContextPath()%>/front/article/article.do',
+			
+			/*這邊如果傳這種型態過去
+			*controller一定要有東西接
+			*要不然會選擇走下面的error
+			*還是會執行，只是會被誤導....
+			*/
 			dataType: "json",
 			data: {
 				action: 'delete',
@@ -149,48 +148,49 @@
 		});
 	}
 </script>
+ <!-- ajax更新資料用 -->
+    <script type="text/javascript">
+    //更新資料用
+    function update(event, artNo, rtrNo) {
+        $.ajax({
+            type: 'post',
+            url: '<%=request.getContextPath()%>/front/article/article.do',
+            data: {
+                action: 'update',
+                article_no: artNo,
+                article_state: 'ON',
+                rtr_no: rtrNo,
+                article_body: $('#article_context').val(),
+                img: $('#show_base64').val()
+            },
+            success: function(result) {
+                alert('已修改完成');
+              	//設置時間自動挑轉
+                setTimeout(function(){location.reload()}, 1000);
+            },
+            error: function(xhr) {
+                alert('修改文章失敗');
+            }
+        });
+    }
+    //base64圖片用
+    function InputLoadImageToBindImageElement(uploadElement, targetElement) {
+        if (uploadElement.files && uploadElement.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $(targetElement).val(e.target.result);
+            }
+            reader.readAsDataURL(uploadElement.files[0]);
+        }
+    }
 
-
-
-<!-- ajax更新資料用 -->
-						<script type="text/javascript">
-							//更新資料用
-							function update(event, artNo, rtrNo){
-									$.ajax({
-										type:'post',
-										url: '<%=request.getContextPath()%>/front/article/article.do',
-										data: {
-											action: 'update',
-											article_no: artNo,
-											article_state: 'ON',
-											rtr_no: rtrNo,
-											article_body:$('#article_context').val(),
-											img:$('#show_base64').val()
-										},
-										
-										error: function(xhr){
-											alert('修改文章失敗');
-										},
-										success: function(result){
-											alert('已修改完成');
-										}
-									});
-								}
-							//base64圖片用
-							function InputLoadImageToBindImageElement(uploadElement, targetElement) {								 
-							    if (uploadElement.files && uploadElement.files[0]) {
-							        var reader = new FileReader();							 
-							        reader.onload = function (e) {
-							            $(targetElement).val(e.target.result);
-							        }
-							        reader.readAsDataURL(uploadElement.files[0]);
-							    }	
-							}
-							
-							$("#upload_img").change(function () {
-						          InputLoadImageToBindImageElement(this, $('#show_base64'));
-							});
-						</script>
+    $("#upload_img").change(function() {
+        InputLoadImageToBindImageElement(this, $('#show_base64'));
+    });
+    
+    </script>
+<!-- 回到最上面    -->
+<div id="gotop">˄</div>
 
 
 
@@ -199,10 +199,6 @@
 </div>
 </div>
 </div>
-
-
-
-
 
 
 <!-- footer -->

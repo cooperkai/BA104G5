@@ -8,13 +8,9 @@ $('#cooper_run2').cycle({
 	fx : 'scrollRight',
 	delay : -1000000
 });
-//文字廣告跑馬燈結束
+// 文字廣告跑馬燈結束
 
-
-
-
-
-//model，彈出來用的
+// model，彈出來用的
 function setBstModalMaxHeight(element) {
 	this.$element = $(element);
 	this.$modalContent = this.$element.find('.modal-content');

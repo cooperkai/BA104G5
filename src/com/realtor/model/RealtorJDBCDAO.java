@@ -51,8 +51,8 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 	private static final String FB_INSERT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, Rtr_State) "
 			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?, 'ON')";
 
-	// 找房仲文章
-	private static final String GET_ART_BY_RTRNO = "SELECT a.Article_No, a.Rtr_No, a.Article_body, to_char(a.Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, a.Update_date, a.Article_State, r.rtr_photo, r.rtr_area, r.rtr_name FROM Article a, Realtor r WHERE r.Rtr_No=? ORDER BY Post_date DESC";
+	// 找房仲私人文章狀態OFF
+	private static final String GET_ART_BY_RTRNO = "SELECT a.Article_No, a.Rtr_No, a.Article_body, to_char(a.Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, a.Update_date, a.Article_State, r.rtr_photo, r.rtr_area, r.rtr_name, r.rtr_no FROM Article a, Realtor r WHERE r.Rtr_No=a.rtr_no and a.article_state='OFF' and r.RTR_NO=? ORDER BY Post_date DESC";
 	// 找房仲文章沒用到
 	// private static final String GET_ART_BY_RTRNO = "SELECT Article_No,
 	// Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date,
@@ -805,7 +805,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		}
 	}// 房仲FB登入的特別insert結束
 
-	// 找房仲文章
+	// 找房仲私人文章狀態OFF
 	@Override
 	public Set<ArticleVO> getArtByRtrNo(String rtr_no) {
 
@@ -862,7 +862,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 			}
 		}
 		return set;
-	}// 找房仲文章結束
+	}// 找房仲私人文章狀態OFF結束
 
 	public static void main(String[] args) throws IOException {
 		RealtorJDBCDAO dao = new RealtorJDBCDAO();
@@ -940,17 +940,17 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 
 		
 		// 修改姓名，照片，簡介
-		 RealtorVO vo2 = new RealtorVO();
-		 vo2.setRtr_name("ccccccc");
-		 vo2.setRtr_photo(realtorpic);
-		 vo2.setRtr_area("中正區");
-		 vo2.setRtr_intro("大家好!!");
-		 vo2.setRtr_idno("E124217388");
-		 vo2.setRe_no("RE00000001");
-		 vo2.setRtr_psw("1111");
-		 vo2.setRtr_no("RT00000001");
-		 dao.update(vo2);
-		 System.out.println("===============================================");
+//		 RealtorVO vo2 = new RealtorVO();
+//		 vo2.setRtr_name("ccccccc");
+//		 vo2.setRtr_photo(realtorpic);
+//		 vo2.setRtr_area("中正區");
+//		 vo2.setRtr_intro("大家好!!");
+//		 vo2.setRtr_idno("E124217388");
+//		 vo2.setRe_no("RE00000001");
+//		 vo2.setRtr_psw("1111");
+//		 vo2.setRtr_no("RT00000001");
+//		 dao.update(vo2);
+//		 System.out.println("===============================================");
 
 		// 查單一
 		// RealtorVO vo3 = dao.findByPrimaryKey("RT00000002");
@@ -1070,17 +1070,17 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		// System.out.println();
 		// } // 查詢房仲ByKeyword結束
 
-		// 找房仲文章
-//		Set<ArticleVO> set = dao.getArtByRtrNo("RT00000005");
-//		for (ArticleVO art : set) {
-//			System.out.println(art.getArticle_no());
-//			System.out.println(art.getRtr_no());
-//			System.out.println(art.getArticle_body());
-//			System.out.println(art.getPost_date());
-//			System.out.println(art.getPost_date());
-//			System.out.println(art.getArticle_state());
+		// 找房仲私人文章狀態OFF
+		Set<ArticleVO> set = dao.getArtByRtrNo("RT00000005");
+		for (ArticleVO art : set) {
+			System.out.println(art.getArticle_no());
+			System.out.println(art.getRtr_no());
+			System.out.println(art.getArticle_body());
+			System.out.println(art.getPost_date());
+			System.out.println(art.getPost_date());
+			System.out.println(art.getArticle_state());
 //			System.out.println(art.get);
-//		}
+		}
 
 	}// 測試結束
 

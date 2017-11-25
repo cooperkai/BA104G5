@@ -23,25 +23,19 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>For House</title>
-<link rel="shortcut icon"
-	href="<%=request.getContextPath()%>/images/houselogo1.png" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front/realtor/css/main.css">
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/houselogo1.png" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front/realtor/css/main.css">
 
 <!-- 阿蓋的css -->
 <!-- 多加的 -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front/realtor/css/realtor_cooper.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front/realtor/css/realtor_cooper.css">
 <!-- end阿蓋的css -->
 
 <script src="https://code.jquery.com/jquery.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/front/realtor/js/main.js"></script>
 
 
@@ -76,7 +70,7 @@
 						</li>
 						<c:if test="${realtorVO != null}">
 							<li role="presentation">
-								<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp" role="tab">房仲文章</a>
+								<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp" role="tab">房仲私人文章</a>
 							</li>
 						</c:if>
 					</ul>

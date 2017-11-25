@@ -4,8 +4,7 @@
 <%@ page import="com.realtor.model.*"%>
 <%@ page import="com.realestate.model.*"%>
 
-<jsp:useBean id="realestateSvc" scope="page"
-	class="com.realestate.model.RealEstateService" />
+<jsp:useBean id="realestateSvc" scope="page" class="com.realestate.model.RealEstateService" />
 
 <jsp:useBean id="list" scope="request" type="java.util.List<RealtorVO>" />
 
@@ -69,54 +68,49 @@
 	<!-- 阿蓋的搜尋房仲 ============================================================================================-->
 
 	<!--Search Bar-->
-	<div class="container btn-block container_size" style="margin-top: 12em;">
+	<div class="container" style="margin-top: 12em;">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 btn_padding">
-				<form method="post"
-					action="<%=request.getContextPath()%>/front/realtor/realtor.do">
+			<div class="col-sm-1"></div>
+				<form method="post"	action="<%=request.getContextPath()%>/front/realtor/realtor.do">
 					<div class="">
 						<input type="text" name="keyword" value="" placeholder="請輸入關鍵字">
 						<input type="hidden" name="action" value="findBykeyword">
 						<input type="submit" title="搜尋房仲" value="搜尋">
 					</div>
 				</form>
-			</div>
+			<div class="col-sm-1"></div>
 		</div>
-	</div>
-
-	<br>
+	</div><br>
 
 
 	<!-- 搜尋按鈕===============================================================================================-->
 	<!-- 之後可改成用ul-li沒有點點的方法創造清單鈕 -->
-	<div class="container btn-block container_size">
+	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 btn_padding">
-				<div class="row">
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do"
-						id="form1">
-						<div class="btn-group">
-							<b>選擇地區:</b> <select size="1" name="RTR_AREA" id="rtr_area">
-								<option value="">搜尋服務地區</option>
-								<c:forEach var="realtorVO" items="${list2}">
-									<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area}</option>
-								</c:forEach>
-							</select>
-						</div>
-						<div class="btn-group">
-							<b>選擇服務公司:</b> <select name="RE_NO" id="re_no">
-								<option value="">搜尋服務公司</option>
+			<div class="col-sm-1"></div>
+				<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do" id="form1">
+					<div class="btn-group" style="margin:0;">
+						<b>選擇地區:</b> 
+						<select size="1" name="RTR_AREA" id="rtr_area">
+							<option value="">搜尋服務地區</option>
+							<c:forEach var="realtorVO" items="${list2}">
+								<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="btn-group" style="margin:0;">
+						<b>選擇服務公司:</b> 
+						<select name="RE_NO" id="re_no">
+							<option value="">搜尋服務公司</option>
 								<c:forEach var="realestateVO" items="${estatelist}">
 									<option value="${realestateVO.re_no}">${realestateVO.re_name}</option>
 								</c:forEach>
 							</select>
-						</div>
-						<input type="hidden" name="action" value="listQueryB"> <input
-							type="submit" value="送出">
-					</form>
-				</div>
-			</div>
+					</div>
+					<input type="hidden" name="action" value="listQueryB"> 
+					<input type="submit" value="送出">
+				</form>
+			<div class="col-sm-1"></div>	
 		</div>
 	</div>
 	<br>
@@ -125,21 +119,93 @@
 	<!-- 搜尋房仲顯示的畫面================================================================================ -->
 	<%@ include file="page_front_realtor/pagesearch.file"%>
 	<!-- 共有幾位房仲 -->
-	<div class="container container_size totatl_estate">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12">
+<div class="container">
+	<div class="row">
+		<div class="col-sm-1"></div>
 				<div class="vertical-horizontal">
 					<p>
 						共有<font color=red><%=rowNumber%></font>位房仲
 					</p>
 				</div>
-			</div>
-		</div>
+		<div class="col-sm-1"></div>
 	</div>
+</div>
+	<!-- 前往全房仲文章-->
+<div class="container">
+	<div class="row">
+		<div class="col-sm-1"></div>
+		<div class="row forward_estate">
+			<a href="<%=request.getContextPath()%>/front/realtor/allBlog.jsp">
+				<button class="button" style="vertical-align: middle; margin-left:0;" title="前往房仲文章分享">
+					<span class="forward_word">房仲愛恨情仇</span>
+				</button>
+			</a>	
+		</div>
+		<div class="col-sm-1"></div>
+	</div>
+</div>
 
 	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>"
 		end="<%=pageIndex+rowsPerPage-1%>">
-		<div class="container container_size">
+	<!-- 房仲簡介本體 -->
+	<div class="container">
+		<div class="row">
+		<div class="col-sm-1"></div>
+			<div class="panel panel-default col-sm-12  col-sm-10">
+				<div class="panel-heading form-group">
+					<h4>房仲簡介</h4>
+					<div>
+						<img
+							src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
+							alt="${realtorVO.rtr_name}個人照片" style="width: 100%;">
+					</div>
+				</div>
+				<FORM METHOD="post"
+					ACTION="<%=request.getContextPath()%>/front/article/article.do"
+					name="form1">
+					<div class="form-group">
+						<label for="rtr_name">房仲名稱</label>
+						<div>
+							<h5>${realtorVO.rtr_name}</h5>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="post_date">房仲公司</label>
+						<div>
+							<h5 class="">${realestateSvc.getOne(realtorVO.re_no).getRe_name()}</h5>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="post_date">服務地區</label>
+						<div>
+							<h5 class="">${realtorVO.rtr_area}</h5>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="heart_size">
+							<a class="heart_main" href="#"> 
+								<i class="glyphicon glyphicon-heart" aria-hidden="true">加入最愛</i>
+							</a>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="rtr_intro">簡介</label>
+						<textarea class="form-control" rows="7" readonly
+							style="cursor: no-drop;" name="rtr_intro">${realtorVO.getRtr_intro()}</textarea>
+					</div>
+					<div class="input-group" style="margin-bottom: 10px;">
+						<span class="input-group-btn"> </span>
+					</div>
+				</FORM>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-1"></div>
+	<!-- 房仲簡介本體 -->
+	
+	<!-- <div class="container container_size">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-sm-offset-1 div_sm_12">
 					<div class="col-xs-12 col-sm-3">
@@ -171,13 +237,18 @@
 									</div>
 								</div>
 								<div class="row forward_estate">
-									<form method="post" action="<%=request.getContextPath()%>/front/article/article.do">
-										<button class="button" style="vertical-align: middle">
-										<input type="hidden" name="action" value="getOne_For_Display">
-										<input type="hidden" name="rtr_no" value="${realtorVO.rtr_no}">
+								<%-- <form method="post" action="<%=request.getContextPath()%>/front/article/article.do"> --%>
+								<!-- <button class="button" style="vertical-align: middle"> -->
+								<!-- <input type="hidden" name="action" value="getOne_For_Display"> -->
+								<%-- <input type="hidden" name="rtr_no" value="${realtorVO.rtr_no}"> --%>
+								<!-- <span class="forward_word">查看詳請</span> -->
+								<!-- </button> -->
+								<!-- </form>
+								<a href="<%=request.getContextPath()%>/front/realtor/allBlog.jsp">
+									<button class="button" style="vertical-align: middle">
 										<span class="forward_word">查看詳請</span>
 									</button>
-									</form>
+								</a>
 								</div>
 								<div class="row forward_estate">
 									<button class="button" title="聊天"
@@ -191,8 +262,12 @@
 				</div>
 			</div>
 		</div>
-		<br>
+		<br> -->
+	
 	</c:forEach>
+	
+	
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
@@ -200,6 +275,9 @@
 			</div>
 		</div>
 	</div>
+	
+<!-- 回到最上面    -->
+<div id="gotop">˄</div>
 	<!-- end阿蓋的搜尋房仲 =========================================================================================-->
 
 
@@ -235,16 +313,18 @@
 	</footer>
 
 
-	<script type="text/javascript">
-$(document).ready(function(){
-	 $('#rtr_area option').click(function(){
-		 $('#form1').submit();
-	 })
-	 $('#re_no option').click(function(){
-		 $('#form1').submit();
-	})
-})
+<script type="text/javascript">
+// $(document).ready(function(){
+// 	 $('#rtr_area option').click(function(){
+// 		 $('#form1').submit();
+// 	 })
+// 	 $('#re_no option').click(function(){
+// 		 $('#form1').submit();
+// 	})
+// })
 </script>
+
+
 
 
 	<script> 

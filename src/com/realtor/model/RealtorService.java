@@ -32,7 +32,7 @@ public class RealtorService {
 
 	// 修改
 	public RealtorVO update(String rtr_name, byte[] rtr_photo, String rtr_area, String rtr_intro, String rtr_idno,
-			String re_no,  String rtr_psw, String rtr_no) {
+			String re_no, String rtr_psw, String rtr_no) {
 
 		RealtorVO realtorVO = new RealtorVO();
 		realtorVO.setRtr_name(rtr_name);
@@ -141,7 +141,7 @@ public class RealtorService {
 		return realtorVO;
 	}
 
-	// 找房仲文章
+	// 找房仲私人文章狀態OFF
 	public Set<ArticleVO> getArtByRtrNo(String rtr_no) {
 		return dao.getArtByRtrNo(rtr_no);
 	}

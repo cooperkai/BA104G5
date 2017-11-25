@@ -21,7 +21,7 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State, Article_Comm FROM Article ORDER BY Article_No";
 
 	// 查詢發布時間排序
-	private static final String GET_ALL_BY_TIME = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State, Article_Comm FROM Article ORDER BY Post_Date DESC";
+	private static final String GET_ALL_BY_TIME = "SELECT Article_No, Rtr_No, Article_body, to_char(Post_Date, 'yyyy-mm-dd hh:mi:ss')Post_Date, Update_date, Article_State, Article_Comm FROM Article WHERE Article_state='ON' ORDER BY Post_Date DESC";
 	// 增加留言用
 	private static final String UPDATE_COMM = "UPDATE Article SET Article_Comm = Article_Comm ||' '|| ? WHERE Article_No =? ";
 	// 刪除留言
@@ -397,12 +397,12 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 		// 查全部依時間排序
 		 List<ArticleVO> list2 = dao.getAllByTime();
 		 for (ArticleVO art : list2) {
-//		 System.out.println(art.getArticle_no());
-//		 System.out.println(art.getRtr_no());
-//		 System.out.println(art.getArticle_body());
-//		 System.out.println(art.getPost_date());
-//		 System.out.println(art.getPost_date());
-//		 System.out.println(art.getArticle_state());
+		 System.out.println(art.getArticle_no());
+		 System.out.println(art.getRtr_no());
+		 System.out.println(art.getArticle_body());
+		 System.out.println(art.getPost_date());
+		 System.out.println(art.getPost_date());
+		 System.out.println(art.getArticle_state());
 		 System.out.println(art.getArticle_comm());
 		 System.out.println();
 		 }
