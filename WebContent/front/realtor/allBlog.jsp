@@ -50,26 +50,27 @@
 	<c:forEach var="articleVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s">
 		<div class="container">
 			<div class="row">
-				<div class="panel panel-default col-sm-12  col-sm-8 col-sm-offset-2">
+				<div class="panel panel-default col-sm-12  col-sm-8 col-sm-offset-2 outpanel">
 					<div class="panel-heading form-group">
-						<h4>文章</h4>
+						<h4>心情抒發	</h4>
 					</div>
 					<div class="form-group">
-						<label for="rtr_name">房仲名稱</label>
-						<div>
-							<h5>${realtorSvc.getOne(articleVO.rtr_no).getRtr_name()}</h5>
 							<img
 								src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorSvc.getOne(articleVO.rtr_no).getRtr_no()}"
 								style="width: 80px; height: 80px;">
-						</div>
+							<h5>${realtorSvc.getOne(articleVO.rtr_no).getRtr_name()}</h5>
 					</div>
+					<div class="form-group">
+						<label for="article_body">文章內容</label>
+						<textarea rows="3"  id="article_context" class="form-control article_context" style="cursor: text;" name="article_body">${articleVO.article_body}</textarea>
+					
 					<c:if test="${(realtorVO.rtr_no) == (articleVO.rtr_no) }"> 
-						<div class="form-group">
-							<label for="article_body">文章內容</label>
-							<textarea rows="3"  id="article_context"  class="form-control" style="cursor: text;" name="article_body">${articleVO.article_body}</textarea>
-							<input type="button" value="修改文章" onclick="update(event, '${articleVO.article_no}', '${articleVO.rtr_no}')">
-							<input type="hidden" value="${articleVO.article_no}">
+						<div class="form-group changeArt">
+							<%-- <input type="button" value="修改文章" onclick="update(event, '${articleVO.article_no}', '${articleVO.rtr_no}')"> --%>
+							<input type="button" value="修改文章" class="updateArt">
 							<input type="button" value="刪除文章" id="${articleVO.article_no}" onclick="deleteArt(event);"> 
+							<input type="hidden" class="artNo" value="${articleVO.article_no}">
+							<input type="hidden" class="rtrNo" value="${articleVO.rtr_no}">
 							
 							<!-- 圖片用	 -->
 							<!-- <input id="upload_img" type="file" name="upload_img">  -->
@@ -78,6 +79,7 @@
 							<%-- <img src="<%= request.getAttribute("img")%>"> --%>
 						</div>
 					</c:if>
+					</div>
 					<div class="form-group">
 						<label for="post_date">發佈日期</label>
 						<div>
@@ -87,12 +89,12 @@
 							</h5>
 						</div>
 					</div>
-					<div class="form-group">
-						<div class="col-sm-12">
-	                    	<p style="color:#191970;font-weight:bold;">${realtorSvc.getOne(articleVO.rtr_no).getRtr_name()}: ${articleVO.article_comm}</p>
-						</div>
-					</div>
-					<c:if test="${realtorVO != null}">
+					<!-- <div class="form-group"> -->
+					<!-- <div class="col-sm-12"> -->
+					<%-- <p style="color:#191970;font-weight:bold;">${realtorSvc.getOne(articleVO.rtr_no).getRtr_name()}: ${articleVO.article_comm}</p> --%>
+					<!-- </div> -->
+					<!-- </div> -->
+					<!--<c:if test="${realtorVO != null}">
 					<form method="post" action="<%=request.getContextPath()%>/front/article/article.do">
 					<div class="input-group" style="margin-bottom: 10px;">
 						<textarea class="form-control" name="article_comm" value=""></textarea>
@@ -103,7 +105,7 @@
 						</span>
 					</div>
 					</form>
-					</c:if>
+					</c:if>-->
 				</div>
 			</div>
 		</div>
@@ -119,8 +121,8 @@
 </div>
 
 
-<!-- 刪除用 -->
 <script type="text/javascript">
+	//刪除用
 	function deleteArt(event){//一定要用event
 		$.ajax({
 			type:'post',
@@ -147,48 +149,76 @@
 			}
 		});
 	}
+	
+	//更新資料用
+    $(".updateArt").click(function(){
+    	/*先從該元素外層尋找父元素，再從父元素下去開找要使用的元素
+    	*記得都各給class的名字，方便尋找
+    	*/
+    	var article_no = $(this).closest(".changeArt").find(".artNo").val();
+    	var rtr_no = $(this).closest(".changeArt").find(".rtrNo").val();
+    	var article_body = $(this).closest(".outpanel").find(".article_context").val();
+    	
+    	$.ajax({
+	         type: 'post',
+	         url: '<%=request.getContextPath()%>/front/article/article.do',
+	         data: {
+	             action: 'update',
+	             article_no: article_no,
+	             article_state: 'ON',
+	             rtr_no: rtr_no,
+	             article_body: article_body
+	         },
+	         success: function(result) {
+	             alert('已修改完成');
+	           	//設置時間自動挑轉
+	             setTimeout(function(){location.reload()}, 1000);
+	         },
+	         error: function(xhr) {
+	             alert('修改文章失敗');
+	         }
+     	});
+	});
+	
 </script>
- <!-- ajax更新資料用 -->
-    <script type="text/javascript">
-    //更新資料用
-    function update(event, artNo, rtrNo) {
-        $.ajax({
-            type: 'post',
-            url: '<%=request.getContextPath()%>/front/article/article.do',
-            data: {
-                action: 'update',
-                article_no: artNo,
-                article_state: 'ON',
-                rtr_no: rtrNo,
-                article_body: $('#article_context').val(),
-                img: $('#show_base64').val()
-            },
-            success: function(result) {
-                alert('已修改完成');
-              	//設置時間自動挑轉
-                setTimeout(function(){location.reload()}, 1000);
-            },
-            error: function(xhr) {
-                alert('修改文章失敗');
-            }
-        });
-    }
-    //base64圖片用
-    function InputLoadImageToBindImageElement(uploadElement, targetElement) {
-        if (uploadElement.files && uploadElement.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $(targetElement).val(e.target.result);
-            }
-            reader.readAsDataURL(uploadElement.files[0]);
-        }
-    }
 
-    $("#upload_img").change(function() {
-        InputLoadImageToBindImageElement(this, $('#show_base64'));
-    });
-    
-    </script>
+<!-- 
+//     function update(event, artNo, rtrNo) {
+//         $.ajax({
+//             type: 'post',
+<%--             url: '<%=request.getContextPath()%>/front/article/article.do', --%>
+//             data: {
+//                 action: 'update',
+//                 article_no: artNo,
+//                 article_state: 'ON',
+//                 rtr_no: rtrNo,
+//                 article_body: event.target.artBody
+//             },
+//             success: function(result) {
+//                 alert('已修改完成');
+//               	//設置時間自動挑轉
+//                 setTimeout(function(){location.reload()}, 1000);
+//             },
+//             error: function(xhr) {
+//                 alert('修改文章失敗');
+//             }
+//         });
+//     }
+    //base64圖片用
+//     function InputLoadImageToBindImageElement(uploadElement, targetElement) {
+//         if (uploadElement.files && uploadElement.files[0]) {
+//             var reader = new FileReader();
+//             reader.onload = function(e) {
+//                 $(targetElement).val(e.target.result);
+//             }
+//             reader.readAsDataURL(uploadElement.files[0]);
+//         }
+//     }
+//     $("#upload_img").change(function() {
+//         InputLoadImageToBindImageElement(this, $('#show_base64'));
+//     });-->
+
+
 <!-- 回到最上面    -->
 <div id="gotop">˄</div>
 

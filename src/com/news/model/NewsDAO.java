@@ -70,7 +70,7 @@ public class NewsDAO implements NewsDAO_interface {
 				}
 			}
 		}
-	}
+	}// 新增結束
 
 	// 修改
 	@Override
@@ -115,7 +115,7 @@ public class NewsDAO implements NewsDAO_interface {
 				}
 			}
 		}
-	}
+	} // 修改結束
 
 	// 查單一
 	@Override
@@ -172,7 +172,7 @@ public class NewsDAO implements NewsDAO_interface {
 			}
 		}
 		return newsvo;
-	}
+	}// 查單一結束
 
 	// 查全部
 	@Override
@@ -227,7 +227,7 @@ public class NewsDAO implements NewsDAO_interface {
 			}
 		}
 		return newsList;
-	}
+	}// 查全部結束
 
 	// 搜尋條件依照發布時間
 	@Override

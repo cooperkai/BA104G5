@@ -9,13 +9,13 @@
 <%
 	NewsVO newsVO = (NewsVO) request.getAttribute("newsVO");
 	NewsService newsSvc = new NewsService();
+	
 	List<NewsVO> list = newsSvc.getAll();
 	pageContext.setAttribute("list", list);
 	
 	List<NewsVO> listTime = newsSvc.getAllByTime();
 	pageContext.setAttribute("listTime", listTime);
-%>
-<%
+
 response.setHeader("Cache-Control", "no-store");
 response.setHeader("Pragma", "no-cache");
 response.setDateHeader("Expires", 0);

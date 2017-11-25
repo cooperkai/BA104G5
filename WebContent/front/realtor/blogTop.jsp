@@ -70,7 +70,7 @@
 						</li>
 						<c:if test="${realtorVO != null}">
 							<li role="presentation">
-								<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp" role="tab">房仲私人文章</a>
+								<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp" role="tab">房仲怨天尤人區</a>
 							</li>
 						</c:if>
 					</ul>

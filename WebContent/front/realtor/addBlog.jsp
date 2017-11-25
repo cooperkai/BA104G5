@@ -49,7 +49,7 @@
 			<div class="panel-heading panel-default form-group">
 				<h4>文章新增</h4>
 				<h4 style="float:right;">
-					<a href="<%=request.getContextPath()%>/front/realtor/allBlog.jsp">房仲文章列表</a>
+					<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp">私人小天地</a>
 				</h4>
 			</div>
 		
