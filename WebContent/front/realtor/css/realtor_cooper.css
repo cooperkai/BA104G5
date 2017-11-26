@@ -55,8 +55,7 @@
 
 /* 房仲修改照片預覽 */
 #imgpreview, .rtr_photo {
-	width: 50%;
-	height: 291.2px;
+	 max-width: 350px;
 }
 
 /* 下拉顏色 */

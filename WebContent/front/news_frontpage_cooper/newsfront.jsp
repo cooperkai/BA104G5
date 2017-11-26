@@ -85,7 +85,7 @@
 				<div class=col-sm-3>
 					<div class="panel panel-primary">
 						<div class="panel-heading">最新發佈</div>
-							<c:forEach var="newsVO2" items="${listTime}"><form method="post" action="news.do">
+							<c:forEach var="newsVO2" items="${listTime}" varStatus="s">
 							<div class="panel-body">
 								<a href="#realtor_jump${s.index}" data-toggle="modal">${newsVO2.news_title} - ${newsVO2.news_date}</a>
 							</div>
@@ -98,7 +98,7 @@
 											<h4 class="modal-title">系統公告</h4>
 										</div>
 										<div class="form-group">
-											<img src="<%=request.getContextPath()%>/tool/showimage.do?action=news_photo&news_no=${newsVO.news_no}" class="img-thumbnail" style="width: 80%;">
+											<img src="<%=request.getContextPath()%>/tool/showimage.do?action=news_photo&news_no=${newsVO2.news_no}" class="img-thumbnail" style="width: 80%;">
 										</div>
 										<div class="modal-body">
 											<div class="form-group">
@@ -109,11 +109,9 @@
 												<label for="ann_content">新聞內容</label>
 												<h4>${newsVO2.news_content}</h4>
 											</div>
-											<div class="form-group">
-												<label for="ann_date">發佈時間</label>
-												<h4>${newsVO2.news_date}</h4>
+											<div class="form-group panel-footer">
+												<label for="post_date">新聞發布時間 - ${newsVO.news_date}</label>
 											</div>
-
 											<div class="modal-footer">
 												<button type="button" class="btn" value="確認"
 													data-dismiss="modal">確認</button>
@@ -144,11 +142,8 @@
 							<h5 class="">${newsVO.news_content}</h5>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="post_date">新聞發布時間</label>
-						<div>
-							<h5 class="">${newsVO.news_date}</h5>
-						</div>
+					<div class="form-group panel-footer">
+						<label for="post_date">新聞發布時間 - ${newsVO.news_date}</label>
 					</div>
 				</div>
 			</div>

@@ -87,7 +87,7 @@
 						<div class="panel-heading">最新發佈</div>
 						<c:forEach var="annVO2" items="${listTime}" varStatus="s">
 							<div class="panel-body">
-								<a href="#realtor_jump${s.index}" data-toggle="modal">${annVO2.ann_content} - ${annVO2.ann_date}</a>
+								<a href="#realtor_jump${s.index}" data-toggle="modal">${annVO2.ann_title} - ${annVO2.ann_date}</a>
 							</div>
 							<div class="modal fade" id="realtor_jump${s.index}">
 								<div class="modal-dialog">
@@ -106,11 +106,9 @@
 												<label for="ann_content">公告內容</label>
 												<h4>${annVO2.ann_content}</h4>
 											</div>
-											<div class="form-group">
-												<label for="ann_date">公告時間</label>
-												<h4>${annVO2.ann_date}</h4>
+											<div class="form-group panel-footer">
+												<label for="post_date">公告時間 - ${annVO2.ann_date}</label>
 											</div>
-
 											<div class="modal-footer">
 												<button type="button" class="btn" value="確認"
 													data-dismiss="modal">確認</button>
@@ -139,15 +137,12 @@
 							<h5 class="">${annVO.ann_content}</h5>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="post_date">系統公告時間</label>
-						<div>
-							<h5 class="">${annVO.ann_date}</h5>
-						</div>
+					<div class="form-group panel-footer">
+						<label for="post_date">公告時間 - ${annVO.ann_date}</label>
+					</div>
 					</div>
 				</div>
 			</div>
-		</div>
 	</c:forEach>
 
 

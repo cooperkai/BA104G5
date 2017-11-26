@@ -18,7 +18,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>房仲註冊系統</title>
-<link rel="shortcut icon" href="images/houselogo1.png" />
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/houselogo1.png" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -29,11 +29,10 @@
 	href="<%=request.getContextPath()%>/front/realtor/css/realtor_cooper.css">
 <!-- cooperkai.css -->
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front/realtor/css/bootstrap-select.min.css">
+
 <script src="https://code.jquery.com/jquery.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 <!-- realtor_cooperkai.js -->
@@ -42,8 +41,7 @@
 <!-- realtor_cooperkai.js -->
 
 <!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script	src="<%=request.getContextPath()%>/front/realtor/js/bootstrap-select.min.js"></script>
 
 </head>
 <body>
@@ -142,8 +140,7 @@
 							<label for="rtr_area" class="col-sm-2 control-label">服務地區</label>
 							<div class="col-sm-9">
 
-								<select class="selectpicker show-tick form-control"
-									name="rtr_area">
+								<select class="selectpicker show-tick form-control" name="rtr_area">
 									<option name="default_item" value="">選擇服務地區</option>
 									<option
 										value="<%=(realtorVOreg == null) ? "": "realtorVOreg.getRtr_area()"%>"></option>

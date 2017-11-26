@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.realtor.model.*"%>
 
@@ -10,9 +9,7 @@
 		response.sendRedirect("realtor_register.jsp"); //*工作2 : 請該user去房仲註冊網頁
 		return;
 	}
-%>
 
-<%
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
 	response.setDateHeader("Expires", 0);
@@ -24,13 +21,8 @@
 <!-- 右邊房仲相關資料區include資料用 =====================================-->
 <div class="col-sm-12 col-sm-8 form_realtor">
 	<!-- 房仲資料已下 ====================================================-->
-
-
 	<!-- 房仲修改個人資料用 =================================================-->
-
-
-	<form role="form" METHOD="post"
-		ACTION="<%=request.getContextPath()%>/front/realtor/realtorchange.do"
+	<form role="form" METHOD="post" ACTION="<%=request.getContextPath()%>/front/realtor/realtorchange.do"
 		enctype="multipart/form-data" name="realtor">
 		<div class="modal-header">
 			<h4 class="modal-title">修改個人資料</h4>
@@ -56,7 +48,6 @@
 					value="<%=(realtorVOtmp == null) ? realtorVO.getRtr_name() : ((realtorVOtmp.getRtr_name().length() > 0) ? realtorVOtmp.getRtr_name() : realtorVO.getRtr_name())%>">
 				</div>
 			</div>
-
 			<div class="form-group">
 				<label for="re_no" class="col-sm-2 control-label">服務公司</label>
 				<jsp:useBean id="realestateSvc" scope="page"
@@ -93,14 +84,12 @@
 				<!-- name="rtr_area" placeholder="服務地區" -->
 				<%-- value="<%=(realtorVOreg == null) ? "" : realtorVOreg.getRtr_area()%>"> --%>
 				<!-- </div> -->
-
 			</div>
 			<div class="form-group">
 				<label for="rtr_idno" class="col-sm-2 control-label">身分證</label> 
 				<input type="text" class="form-control" id="rtr_idno" name="rtr_idno" placeholder="身分證" 
 					value="<%=(realtorVO == null) ? "" : realtorVO.getRtr_idno()%>">
 			</div>
-
 			<div class="form-group">
 				<label for="ann_content">簡介</label>
 				<textarea rows="10" class="form-control" name="rtr_intro"><%=(realtorVOtmp == null) ? realtorVO.getRtr_intro()
@@ -116,10 +105,7 @@
 
 		</div>
 	</form>
-
-
 	<!-- 結束房仲彈窗修改個人資料用 =================================================-->
-
 </div>
 <!-- 右邊房仲相關資料區include資料用結束 =====================================-->
 

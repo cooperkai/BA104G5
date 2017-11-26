@@ -5,7 +5,6 @@
 <%@ page import="com.realestate.model.*"%>
 
 <jsp:useBean id="realestateSvc" scope="page" class="com.realestate.model.RealEstateService" />
-
 <jsp:useBean id="list" scope="request" type="java.util.List<RealtorVO>" />
 
 <%
@@ -29,18 +28,19 @@
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>For House</title>
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/houselogo1.png" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/main.css">
 
+<!-- 必備Latest compiled and minified CSS -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front/realtor/css/bootstrap-select.min.css">
+<!-- Latest compiled and minified CSS -->
 <!-- 阿蓋的css -->
 <!-- 多加的 -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front/realtor/css/realtor_cooper.css">
 <!-- end阿蓋的css -->
 
 <script src="https://code.jquery.com/jquery.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
 
 
@@ -48,6 +48,10 @@
 <script src="https://use.fontawesome.com/add3377d0a.js"></script>
 <script	src="<%=request.getContextPath()%>/front/realtor/js/realtor_cooper.js"></script>
 <!-- realtor_cooperkai.js -->
+
+<!-- 必備Latest compiled and minified JavaScript -->
+<script src="<%=request.getContextPath()%>/front/realtor/js/bootstrap-select.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
 
 
 </head>
@@ -70,11 +74,11 @@
 		<div class="row">
 			<div class="col-sm-1"></div>
 				<form method="post"	action="<%=request.getContextPath()%>/front/realtor/realtor.do">
-					<div class="">
-						<input type="text" name="keyword" value="" placeholder="請輸入關鍵字">
-						<input type="hidden" name="action" value="findBykeyword">
-						<input type="submit" title="搜尋房仲" value="搜尋">
+					<div class="col-xs-6 form-group" style="padding: 0;">
+						<input type="text" name="keyword" value="" class="form-control" placeholder="請輸入關鍵字">
 					</div>
+						<input type="submit" title="搜尋房仲" value="搜尋" style="height: 38.4px; width:50px;">
+						<input type="hidden" name="action" value="findBykeyword">
 				</form>
 			<div class="col-sm-1"></div>
 		</div>
@@ -87,31 +91,35 @@
 		<div class="row">
 			<div class="col-sm-1"></div>
 				<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do" id="form1">
-					<div class="btn-group" style="margin:0;">
-						<b>選擇地區:</b> 
-						<select size="1" name="RTR_AREA" id="rtr_area">
-							<option value="">搜尋服務地區</option>
-							<c:forEach var="realtorVO" items="${list2}">
-								<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<div class="btn-group" style="margin:0;">
-						<b>選擇服務公司:</b> 
-						<select name="RE_NO" id="re_no">
-							<option value="">搜尋服務公司</option>
-								<c:forEach var="realestateVO" items="${estatelist}">
-									<option value="${realestateVO.re_no}">${realestateVO.re_name}</option>
+					<div class="form-group" style="margin:0;">
+						<label for="rtr_area" class="col-sm-2 control-label" style="padding: 0; width: 100px;">選擇地區:</label>
+						<div class="col-sm-2">
+							<select class="selectpicker show-tick form-control" size="1" name="RTR_AREA" id="rtr_area" style=" padding-left: 0;">
+								<option value="">搜尋服務地區</option>
+								<c:forEach var="realtorVO" items="${list2}">
+									<option value="${realtorVO.rtr_area }">${realtorVO.rtr_area}</option>
 								</c:forEach>
 							</select>
+						</div>
 					</div>
+					<div class="form-group" style="margin:0;">
+						<label for="re_no" class="col-sm-2 control-label" style="padding: 0; width: 100px;">選擇服務公司:</label>
+						<div class="col-sm-2">
+							<select class="selectpicker show-tick form-control" name="RE_NO" id="re_no" style=" padding-left: 0;">
+								<option value="">搜尋服務公司</option>
+									<c:forEach var="realestateVO" items="${estatelist}">
+										<option value="${realestateVO.re_no}">${realestateVO.re_name}</option>
+									</c:forEach>
+							</select>
+						</div>
+					</div>
+					
 					<input type="hidden" name="action" value="listQueryB"> 
-					<input type="submit" value="送出">
+					<input type="submit" value="送出" style="height:34px;">
 				</form>
 			<div class="col-sm-1"></div>	
 		</div>
-	</div>
-	<br>
+	</div><br>
 
 
 	<!-- 搜尋房仲顯示的畫面================================================================================ -->
@@ -128,7 +136,7 @@
 		<div class="col-sm-1"></div>
 	</div>
 </div>
-	<!-- 前往全房仲文章-->
+<!-- 前往全房仲文章-->
 <div class="container">
 	<div class="row">
 		<div class="col-sm-1"></div>
@@ -143,8 +151,7 @@
 	</div>
 </div>
 
-	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>"
-		end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 	<!-- 房仲簡介本體 -->
 	<div class="container">
 		<div class="row">
@@ -162,21 +169,21 @@
 					ACTION="<%=request.getContextPath()%>/front/article/article.do"
 					name="form1">
 					<div class="form-group">
-						<label for="rtr_name">房仲名稱</label>
+						<label for="rtr_name"><font size="4" color="#4F4F4F">房仲名稱</font></label>
 						<div>
-							<h5>${realtorVO.rtr_name}</h5>
+							<h5><font size="5" color="#f26649">${realtorVO.rtr_name}</font></h5>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="post_date">房仲公司</label>
+						<label for="post_date"><font size="5" color="#4F4F4F">房仲公司</font></label>
 						<div>
-							<h5 class="">${realestateSvc.getOne(realtorVO.re_no).getRe_name()}</h5>
+							<h5 class=""><font size="5" color="#f26649">${realestateSvc.getOne(realtorVO.re_no).getRe_name()}</font></h5>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="post_date">服務地區</label>
+						<label for="post_date"><font size="5" color="#4F4F4F">服務地區</font></label>
 						<div>
-							<h5 class="">${realtorVO.rtr_area}</h5>
+							<h5 class=""><font size="5" color="#f26649">${realtorVO.rtr_area}</font></h5>
 						</div>
 					</div>
 					
@@ -188,14 +195,14 @@
 						</div>
 					</div>
 					
-					<div class="row forward_estate">
-						<button class="button" title="聊天" 	style="vertical-align: middle; background-color: red;">
+					<div class="form-group forward_estate">
+						<button class="button btn-success" title="聊天" 	style="vertical-align: middle; margin:0;">
 							<span class="forward_word">與我聊天</span>
 						</button>
 					</div>
 					
 					<div class="form-group">
-						<label for="rtr_intro">簡介</label>
+						<label for="rtr_intro"><font size="5" color="#4F4F4F">簡介</font></label>
 						<textarea class="form-control" rows="7" readonly
 							style="cursor: no-drop;" name="rtr_intro">${realtorVO.getRtr_intro()}</textarea>
 					</div>
@@ -267,11 +274,7 @@
 			</div>
 		</div>
 		<br> -->
-	
 	</c:forEach>
-	
-	
-	
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">

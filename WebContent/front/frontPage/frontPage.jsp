@@ -67,8 +67,7 @@
 <!-- 阿逵的 -->
 
 <!-- realtor_cooperkai.js -->
-<script
-	src="<%=request.getContextPath()%>/front/realtor/js/realtor_cooper.js"></script>
+<script	src="<%=request.getContextPath()%>/front/realtor/js/realtor_cooper.js"></script>
 <!-- realtor_cooperkai.js -->
 
 <title>For House</title>
