@@ -57,7 +57,7 @@
 					<div class="form-group">
 							<img
 								src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorSvc.getOne(articleVO.rtr_no).getRtr_no()}"
-								style="width: 80px; height: 80px;">
+								class="img-thumbnail" style="width: 80px; height: 80px;">
 							<h5>${realtorSvc.getOne(articleVO.rtr_no).getRtr_name()}</h5>
 					</div>
 					<div class="form-group">
@@ -221,7 +221,21 @@
 
 <!-- 回到最上面    -->
 <div id="gotop">˄</div>
-
+<script>
+//房仲文章回到上面用
+$(window).scroll(function() {
+	if ($(this).scrollTop() > 300) {
+		$('#gotop').fadeIn("fast");
+	} else {
+		$('#gotop').stop().fadeOut("fast");
+	}
+});
+$("#gotop").click(function() {
+	jQuery("html,body").animate({
+		scrollTop : 0
+	}, 1000);
+});
+</script>
 
 
 

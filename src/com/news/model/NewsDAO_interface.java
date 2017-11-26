@@ -9,7 +9,7 @@ public interface NewsDAO_interface {
 	public NewsVO findByPrimaryKey(String news_no);
 	public List<NewsVO> getAll();
 	
-	//依照新聞發布時間做排序
+	// 依照新增時間做排序(只取前三筆)
 	public List<NewsVO> getAllByTime();
 	 
 

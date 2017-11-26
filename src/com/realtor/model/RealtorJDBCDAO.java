@@ -826,17 +826,17 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 
 			while (rs.next()) {
 				articlevo = new ArticleVO();
-				realtorvo = new RealtorVO();
+//				realtorvo = new RealtorVO();
 				articlevo.setArticle_no(rs.getString("Article_no"));
 				articlevo.setRtr_no(rs.getString("Rtr_no"));
 				articlevo.setPost_date(rs.getTimestamp("Post_date"));
 				articlevo.setArticle_body(rs.getString("Article_body"));
 				articlevo.setArticle_state(rs.getString("Article_State"));
 				articlevo.setUpdate_date(rs.getDate("Update_Date"));
-				realtorvo.setRtr_area(rs.getString("Rtr_area"));
-				realtorvo.setRtr_name(rs.getString("Rtr_name"));
-				realtorvo.setRtr_photo(rs.getBytes("Rtr_photo"));
-				set.add(articlevo);
+//				realtorvo.setRtr_area(rs.getString("Rtr_area"));
+//				realtorvo.setRtr_name(rs.getString("Rtr_name"));
+//				realtorvo.setRtr_photo(rs.getBytes("Rtr_photo"));
+//				set.add(articlevo);
 //				set.add(realtorvo);
 			}
 

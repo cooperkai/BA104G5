@@ -44,4 +44,9 @@ public class AnnService {
 	public List<AnnVO> getAll() {
 		return dao.getAll();
 	}
+
+	// 查詢全部照時間排序
+	public List<AnnVO> getAllByTime() {
+		return dao.getAllByTime();
+	}
 }

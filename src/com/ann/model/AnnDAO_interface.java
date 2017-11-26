@@ -9,5 +9,8 @@ public interface AnnDAO_interface {
 	public void delete (Integer ann_no);
 	public AnnVO findByPrimaryKey(Integer ann_no);
 	public List<AnnVO> getAll();
+	
+	// 依照新增時間做排序(只取前三筆)
+	public List<AnnVO> getAllByTime();
 
 }

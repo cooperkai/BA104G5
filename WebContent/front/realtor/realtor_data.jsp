@@ -46,7 +46,7 @@
 			<div class="form-group div0">
 				<label for="rtr_photo">修改個人照片</label> <input type="file"
 					name="rtr_photo" onchange="readURL(this);"> <img
-					name="rtr_photo" id="imgpreview" alt="preview image" />
+					name="rtr_photo" id="imgpreview" class="img-thumbnail" alt="preview image" />
 			</div>
 
 			<div class="form-group">

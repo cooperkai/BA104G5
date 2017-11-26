@@ -96,18 +96,3 @@ $(document).ready(function() {
 		}
 	});
 });
-
-
-//房仲文章回到上面用
-$(window).scroll(function() {
-	if ($(this).scrollTop() > 300) {
-		$('#gotop').fadeIn("fast");
-	} else {
-		$('#gotop').stop().fadeOut("fast");
-	}
-});
-$("#gotop").click(function() {
-	jQuery("html,body").animate({
-		scrollTop : 0
-	}, 1000);
-});

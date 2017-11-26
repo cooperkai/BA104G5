@@ -21,9 +21,10 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO News (News_No, NType_No, News_Title, News_Content, News_Photo, News_State, EMP_NO) VALUES('NS'||LPAD(TO_CHAR(seq_news.NEXTVAL), 8, '0'), ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE News SET NType_No=?, News_Title=?, News_Content=?, News_Photo=?, News_State=?, EMP_NO=? WHERE News_No = ?";
 	private static final String GET_ONE_STMT = "SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News WHERE News_No = ?";
-	private static final String GET_ALL_STMT = "SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News ORDER BY News_No";
-
-	private static final String GET_ALL_BY_TIME = "SELECT * FROM News ORDER BY News_Date DESC";// 查詢全部照時間排序
+	private static final String GET_ALL_STMT = "SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News WHERE News_State='公告中' ORDER BY News_No";
+	
+	// 依照新增時間做排序(只取前三筆)
+	private static final String GET_ALL_BY_TIME = "SELECT * FROM (SELECT * FROM News ORDER BY News_Date DESC) WHERE rownum<=3 and News_State='公告中'";
 
 	// 新增
 	@Override
@@ -304,19 +305,19 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 		NewsJDBCDAO dao = new NewsJDBCDAO();
 
 		// 新增
-		// NewsVO vo = new NewsVO();
-		// for (int i = 0; i < 1; i++) {
-		// vo.setNtype_no("HN001");
-		// vo.setNews_title("jj");
-		// vo.setNews_content(" 我是<p>-***//**容我是房市內容! ");
-		// byte[] pic =
-		// getPictureByteArray("WebContent/images/newsphoto/HN001.jpg");
-		// vo.setNews_photo(pic);
-		// vo.setNews_state("公告中");
-		// vo.setEmp_no("EM00000002");
-		// dao.insert(vo);
-		// }
-		// System.out.println("---------------------------------");
+		 NewsVO vo = new NewsVO();
+		 for (int i = 0; i < 1; i++) {
+		 vo.setNtype_no("HN001");
+		 vo.setNews_title("jj");
+		 vo.setNews_content(" 我是<p>-***//**容我是房市內容! ");
+		 byte[] pic =
+		 getPictureByteArray("WebContent/images/newsphoto/HN001.jpg");
+		 vo.setNews_photo(pic);
+		 vo.setNews_state("公告中");
+		 vo.setEmp_no("EM00000002");
+		 dao.insert(vo);
+		 }
+		 System.out.println("---------------------------------");
 
 		// 修改
 		// NewsVO vo2 = new NewsVO();

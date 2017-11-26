@@ -24,16 +24,14 @@ public class AnnDAO implements AnnDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = 
-			"INSERT INTO ANN (ANN_No, ANN_Title, ANN_Content, ANN_State, EMP_No) VALUES(seq_ann.NEXTVAL, ?, ?, ?, ?)";
-	private static final String UPDATE_STMT = 
-			"UPDATE ANN SET ANN_Title=?, ANN_Content=?, ANN_State=?, EMP_No=? WHERE ANN_No = ?";
-	private static final String DELETE_STMT = 
-			"DELETE FROM ANN WHERE ANN_No= ?";
-	private static final String GET_ONE_STMT = 
-			"SELECT ANN_No, ANN_Title, ANN_Content, ANN_State, to_char(ANN_Date,'yyyy-mm-dd')ANN_Date, EMP_No FROM ANN WHERE ANN_No = ?";
-	private static final String GET_ALL_STMT = 
-			"SELECT ANN_No, ANN_Title, ANN_Content, ANN_State, to_char(ANN_Date,'yyyy-mm-dd')ANN_Date, EMP_No FROM ANN ORDER BY ANN_No";
+	private static final String INSERT_STMT = "INSERT INTO ANN (ANN_No, ANN_Title, ANN_Content, ANN_State, EMP_No) VALUES(seq_ann.NEXTVAL, ?, ?, ?, ?)";
+	private static final String UPDATE_STMT = "UPDATE ANN SET ANN_Title=?, ANN_Content=?, ANN_State=?, EMP_No=? WHERE ANN_No = ?";
+	private static final String DELETE_STMT = "DELETE FROM ANN WHERE ANN_No= ?";
+	private static final String GET_ONE_STMT = "SELECT ANN_No, ANN_Title, ANN_Content, ANN_State, to_char(ANN_Date,'yyyy-mm-dd')ANN_Date, EMP_No FROM ANN WHERE ANN_No = ?";
+	private static final String GET_ALL_STMT = "SELECT ANN_No, ANN_Title, ANN_Content, ANN_State, to_char(ANN_Date,'yyyy-mm-dd')ANN_Date, EMP_No FROM ANN ORDER BY Ann_Date DESC";
+
+	// 依照新增時間做排序(只取前三筆)
+	private static final String GET_ALL_BY_TIME = "SELECT * FROM (SELECT * FROM Ann ORDER BY Ann_Date DESC) WHERE rownum<=3";
 
 	// 新增
 	@Override
@@ -45,9 +43,9 @@ public class AnnDAO implements AnnDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			
+
 			con.setAutoCommit(false);
-			
+
 			pstmt.setString(1, annVO.getAnn_title());
 			pstmt.setString(2, annVO.getAnn_content());
 			pstmt.setString(3, annVO.getAnn_state());
@@ -59,8 +57,7 @@ public class AnnDAO implements AnnDAO_interface {
 			System.out.println("ANN_INSERT_STMT: " + rowCount + "筆");
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -89,7 +86,7 @@ public class AnnDAO implements AnnDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
-			
+
 			con.setAutoCommit(false);
 
 			pstmt.setString(1, annVO.getAnn_title());
@@ -104,8 +101,7 @@ public class AnnDAO implements AnnDAO_interface {
 			System.out.println("ANN_UPDATE_STMT: " + rowCount + "筆");
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -135,19 +131,18 @@ public class AnnDAO implements AnnDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_STMT);
-			
+
 			con.setAutoCommit(false);
-			
+
 			pstmt.setInt(1, ann_no);
-			
+
 			int rowCount = pstmt.executeUpdate();
 			con.commit();
 			con.setAutoCommit(true);
 			System.out.println("ANN_DELETE_STMT: " + rowCount + "筆");
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -195,8 +190,7 @@ public class AnnDAO implements AnnDAO_interface {
 			System.out.println("ANN_findByPrimaryKey");
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -255,8 +249,7 @@ public class AnnDAO implements AnnDAO_interface {
 			System.out.println("ANN_ANN_findAll: " + counts + "筆");
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -280,7 +273,65 @@ public class AnnDAO implements AnnDAO_interface {
 				}
 			}
 		}
-
 		return annList;
 	}
+
+	// 依照新增時間做排序(只取前三筆)
+	@Override
+	public List<AnnVO> getAllByTime() {
+		List<AnnVO> annList = new ArrayList<AnnVO>();
+		AnnVO annvo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int counts = 0;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_BY_TIME);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				annvo = new AnnVO();
+				annvo.setAnn_no(rs.getInt("ANN_No"));
+				annvo.setAnn_title(rs.getString("ANN_Title"));
+				annvo.setAnn_content(rs.getString("ANN_Content"));
+				annvo.setAnn_state(rs.getString("ANN_State"));
+				annvo.setAnn_date(rs.getDate("ANN_Date"));
+				annvo.setEmp_no(rs.getString("EMP_No"));
+				annList.add(annvo);
+				counts++;
+			}
+
+			System.out.println("ANN_ANN_findAll: " + counts + "筆");
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException re) {
+					re.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return annList;
+	}// 依照新增時間做排序(只取前三筆)結束
+
 }

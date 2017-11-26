@@ -87,7 +87,7 @@
 								<input type="file" name="rtr_photo" onchange="readURL(this);">
 							</div>
 							<div class="col-sm-6">
-								<img name="rtr_photo" id="imgpreview" alt="照片預覽">
+								<img name="rtr_photo" id="imgpreview" class="img-thumbnail" alt="照片預覽">
 							</div>
 						</div>
 

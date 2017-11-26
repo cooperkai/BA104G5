@@ -69,7 +69,7 @@
 					<div>
 						<img
 							src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
-							style="width: 100%;">
+							class="img-thumbnail" style="width: 100%;">
 					</div>
 				</div>
 				<FORM METHOD="post"
@@ -126,7 +126,7 @@
 								<h5>${realtorVO.rtr_name}</h5>
 								<img
 									src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
-									style="width: 80px; height: 80px;">
+									class="img-thumbnail" style="width: 80px; height: 80px;">
 							</div>
 						</div>
 						<div class="form-group">

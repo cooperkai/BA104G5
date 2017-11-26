@@ -27,7 +27,9 @@ public class NewsDAO implements NewsDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE News SET NType_No=?, News_Title=?, News_Content=?, News_Photo=?, News_State=?, EMP_NO=? WHERE News_No = ?";
 	private static final String GET_ONE_STMT = "SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News WHERE News_No = ?";
 	private static final String GET_ALL_STMT = "SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News ORDER BY News_No";
-	private static final String GET_ALL_BY_TIME = "SELECT * FROM News ORDER BY News_Date DESC";// 查詢全部照時間排序
+	
+	// 依照新增時間做排序(只取前三筆)
+	private static final String GET_ALL_BY_TIME = "SELECT * FROM (SELECT * FROM News ORDER BY News_Date DESC) WHERE rownum<=3";
 
 	// 新增
 	@Override
@@ -229,7 +231,7 @@ public class NewsDAO implements NewsDAO_interface {
 		return newsList;
 	}// 查全部結束
 
-	// 搜尋條件依照發布時間
+	// 依照新增時間做排序(只取前三筆)
 	@Override
 	public List<NewsVO> getAllByTime() {
 
@@ -283,5 +285,5 @@ public class NewsDAO implements NewsDAO_interface {
 			}
 		}
 		return newsList;
-	}// 搜尋條件依照發布時間結束
+	}// 依照新增時間做排序(只取前三筆)結束
 }

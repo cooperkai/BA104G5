@@ -47,8 +47,8 @@
 
 
 <!-- realtor_cooperkai.js -->
-<script	src="<%=request.getContextPath()%>/front/realtor/js/realtor_cooper.js"></script>
 <script src="https://use.fontawesome.com/add3377d0a.js"></script>
+<script	src="<%=request.getContextPath()%>/front/realtor/js/realtor_cooper.js"></script>
 <!-- realtor_cooperkai.js -->
 
 
@@ -157,7 +157,7 @@
 					<div>
 						<img
 							src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorVO.rtr_no}"
-							alt="${realtorVO.rtr_name}個人照片" style="width: 100%;">
+							alt="${realtorVO.rtr_name}個人照片" class="img-thumbnail" style="width: 100%;">
 					</div>
 				</div>
 				<FORM METHOD="post"
@@ -280,7 +280,21 @@
 <div id="gotop">˄</div>
 	<!-- end阿蓋的搜尋房仲 =========================================================================================-->
 
-
+<script>
+//房仲文章回到上面用
+$(window).scroll(function() {
+	if ($(this).scrollTop() > 300) {
+		$('#gotop').fadeIn("fast");
+	} else {
+		$('#gotop').stop().fadeOut("fast");
+	}
+});
+$("#gotop").click(function() {
+	jQuery("html,body").animate({
+		scrollTop : 0
+	}, 1000);
+});
+</script>
 
 
 	<!-- footer======================================================================================= -->
