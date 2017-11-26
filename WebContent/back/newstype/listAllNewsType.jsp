@@ -1,17 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.newstype.model.*"%>
- 
+
 <jsp:useBean id="newstypeSvc" scope="page"
 	class="com.newstype.model.NewsTypeService" />
 
 <%
 	NewsTypeVO newstypeVO = (NewsTypeVO) request.getAttribute("newstypeVO");
-%>
-<%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
+
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
 %>
 <!-- 後端include -->
 <jsp:include page="/back/backend/backend_page.jsp" flush="true" />
@@ -48,17 +47,8 @@ response.setDateHeader("Expires", 0);
 				<table>
 					<tr>
 						<td>
-							<h4>
-								<a
-									href="<%=request.getContextPath()%>/back/backend/select_page_home.jsp"><img
-									src="<%=request.getContextPath()%>/images/back1.gif"
-									width="100" height="32" border="0">回後端首頁</a>
-							</h4>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back/newstype/newstype.do">
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/back/newstype/newstype.do">
 								<b>選擇新聞種類編號:</b> <select size="1" name="ntype_no">
 									<c:forEach var="newstypeVO" items="${newstypeSvc.getAll()}">
 										<option value="${newstypeVO.ntype_no}">${newstypeVO.ntype_no}-&nbsp;[${newstypeVO.news_type}]
@@ -70,13 +60,15 @@ response.setDateHeader("Expires", 0);
 					</tr>
 					<tr>
 						<td>
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back/newstype/newstype.do">
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/back/newstype/newstype.do">
 								<b>選擇新聞種類:</b> <select size="1" name="ntype_no">
 									<c:forEach var="newstypeVO" items="${newstypeSvc.getAll()}">
 										<option value="${newstypeVO.ntype_no}">${newstypeVO.news_type}
 									</c:forEach>
-								</select> <input type="hidden" name="action" value="listNews_ByNtype_No_B">
-								<input type="submit" value="送出">
+								</select> <input type="hidden" name="action"
+									value="listNews_ByNtype_No_B"> <input type="submit"
+									value="送出">
 							</FORM>
 						</td>
 					</tr>
@@ -107,7 +99,8 @@ response.setDateHeader("Expires", 0);
 					<h4 class="modal-title">新增新聞種類</h4>
 				</div>
 				<div class="modal-body">
-					<form role="form" METHOD="post" ACTION="<%=request.getContextPath()%>/back/newstype/newstype.do"
+					<form role="form" METHOD="post"
+						ACTION="<%=request.getContextPath()%>/back/newstype/newstype.do"
 						enctype="multipart/form-data" name="house">
 
 						<div class="form-group">
@@ -137,11 +130,15 @@ response.setDateHeader("Expires", 0);
 		</div>
 	</div>
 	<!-- 結束新聞種類 ================================================================================== -->
-	
-	<%if (request.getAttribute("listNews_ByNtype_No") != null){%>
-		<jsp:include page="listNews_ByNtype_No.jsp" />
-	<%} %>
-	
+
+	<%
+		if (request.getAttribute("listNews_ByNtype_No") != null) {
+	%>
+	<jsp:include page="listNews_ByNtype_No.jsp" />
+	<%
+		}
+	%>
+
 
 	<!-- 以上是你可以放的內容 =========================================================================== -->
 

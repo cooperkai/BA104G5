@@ -79,16 +79,6 @@
 				<table>
 					<tr>
 						<td>
-							<h4>
-								<a
-									href="<%=request.getContextPath()%>/back/backend/select_page_home.jsp"><img
-									src="<%=request.getContextPath()%>/images/back1.gif"
-									width="100" height="32" border="0">回後端首頁</a>
-							</h4>
-						</td>
-					</tr>
-					<tr>
-						<td>
 							<FORM METHOD="post" ACTION="ann.do">
 								<b>選擇公告編號:</b> <select size="1" name="ann_no">
 									<c:forEach var="annVO" items="${list}">

@@ -9,9 +9,9 @@
 <jsp:useBean id="newstypeSvc" scope="page"
 	class="com.newstype.model.NewsTypeService" />
 <%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
 %>
 
 <!-- 以下是你可以放的內容 ================================================================================== -->

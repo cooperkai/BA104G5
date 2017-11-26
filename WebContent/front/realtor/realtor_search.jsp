@@ -13,9 +13,7 @@
 	pageContext.setAttribute("estatelist", estatelist);
 	List<RealtorVO> list2 = (List<RealtorVO>) request.getAttribute("list2");
 	pageContext.setAttribute("list2", list2);
-%>
 
-<%
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
 	response.setDateHeader("Expires", 0);
@@ -137,7 +135,7 @@
 		<div class="row forward_estate">
 			<a href="<%=request.getContextPath()%>/front/realtor/allBlog.jsp">
 				<button class="button" style="vertical-align: middle; margin-left:0;" title="前往房仲文章分享">
-					<span class="forward_word">房仲愛恨情仇</span>
+					<span class="forward_word">房仲文章賞析</span>
 				</button>
 			</a>	
 		</div>
@@ -185,9 +183,15 @@
 					<div class="form-group">
 						<div class="heart_size">
 							<a class="heart_main" href="#"> 
-								<i class="glyphicon glyphicon-heart" aria-hidden="true">加入最愛</i>
+								<i class="glyphicon glyphicon-heart" aria-hidden="true">追蹤房仲</i>
 							</a>
 						</div>
+					</div>
+					
+					<div class="row forward_estate">
+						<button class="button" title="聊天" 	style="vertical-align: middle; background-color: red;">
+							<span class="forward_word">與我聊天</span>
+						</button>
 					</div>
 					
 					<div class="form-group">
@@ -326,36 +330,5 @@ $("#gotop").click(function() {
 		</div>
 	</footer>
 
-
-<script type="text/javascript">
-// $(document).ready(function(){
-// 	 $('#rtr_area option').click(function(){
-// 		 $('#form1').submit();
-// 	 })
-// 	 $('#re_no option').click(function(){
-// 		 $('#form1').submit();
-// 	})
-// })
-</script>
-
-
-
-
-	<script> 
-// $(document).ready(function(){
-// 	$('#rtr_area').change(function(){
-// 		console.log($('#rtr_area').find(":selected").text());
-<%-- 		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB&RTR_AREA="+$('#rtr_area').find(":selected").text(); --%>
-// 		});
-// });
-</script>
-	<script>
-// $(document).ready(function(){
-// 	$('#re_no').change(function(){
-// 		console.log($('#re_no').find(":selected").val());
-<%-- 		window.location="<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB&RE_NO="+$('#re_no').find(":selected").val(); --%>
-// 		});
-// });
-</script>
 </body>
 </html>

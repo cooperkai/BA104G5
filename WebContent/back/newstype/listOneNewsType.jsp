@@ -12,11 +12,10 @@
 <%
 	NewsService newsSvc = new NewsService();
 	NewsVO newsVO = newsSvc.getOne(newstypeVO.getNtype_no());
-%>
-<%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
+
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
 %>
 
 <!-- 後端include -->

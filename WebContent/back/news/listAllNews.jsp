@@ -107,16 +107,6 @@
 				<table class="table_main">
 					<tr>
 						<td>
-							<h4>
-								<a
-									href="<%=request.getContextPath()%>/back/backend/select_page_home.jsp"><img
-									src="<%=request.getContextPath()%>/images/back1.gif"
-									width="100" height="32" border="0">回後端首頁</a>
-							</h4>
-						</td>
-					</tr>
-					<tr>
-						<td>
 							<FORM METHOD="post" ACTION="news.do">
 								<b>選擇新聞編號:</b> <select size="1" name="news_no">
 									<c:forEach var="newsVO" items="${list}">
