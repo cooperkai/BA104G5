@@ -199,204 +199,58 @@ response.setDateHeader("Expires", 0);
 	<!-- 結束寫死的介紹文======================================================================================= -->
 
 
-	<!-- BLOG BODY SECTION -->
-	<section class="pattern-3 no-padding-right">
-		<!-- .container -->
-		<div class="container">
-			<!-- .row -->
-			<div class="row">
-				<!-- .col-md-12 -->
-				<div class="col-md-12">
-					<!-- All blog posts -->
-					<div class="mar-top-lg">
-						<ul class="isotope-blog">
+	
 
-
-							<!-- 房市新聞 =============================================================================================-->
-							<!-- .blog-post -->
-							<div>
-								<li class="blog-post wow fadeInUp" data-wow-duration="1s"
-									data-wow-delay=".7s">
-									<p class="cat-links">
-										<a class="text-capitalize"><i
-											class="iline2-tag27 no-margin"></i>房市最新消息</a>
-									</p> <span class="blog-date"> 21 <small class="blog-month">jul</small>
-								</span>
-									<div class="blog-body">
-										<img src="assets/images/blog/post-1.jpg" alt="post 1"
-											class="img-responsive img-full" />
-										<h4 class="text-primary text-center text-uppercase">Work</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-											elit, sed do [...]</p>
-										<a class="btn btn-primary" href="blog-post.html" role="button"
-											title="continue reading"> Read more</a>
-									</div>
-								</li>
-								<!-- /.blog-post -->
-								<!-- .blog-post -->
-								<li class="blog-post wow fadeInUp" data-wow-duration="1s"
-									data-wow-delay=".7s">
-									<p class="cat-links">
-										<a class="text-capitalize"><i
-											class="iline2-tag27 no-margin"></i>房市最新消息</a>
-									</p> <span class="blog-date"> 21 <small class="blog-month">jul</small>
-								</span>
-									<div class="blog-body">
-										<!-- embed youtube 4:3 aspect ratio -->
-										<div class="embed-responsive embed-responsive-4by3">
-											<iframe src="https://www.youtube.com/embed/4m1EFMoRFvY"
-												allowfullscreen></iframe>
-										</div>
-										<h4 class="text-primary text-center text-uppercase">Youtube
-											embed</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-											elit, sed do [...]</p>
-										<a class="btn btn-primary" href="blog-post.html" role="button"
-											title="continue reading"> Read more</a>
-									</div>
-								</li>
-								<!-- /.blog-post -->
-								<!-- .blog-post -->
-								<li class="blog-post wow fadeInUp" data-wow-duration="1s"
-									data-wow-delay=".7s">
-									<p class="cat-links">
-										<a class="text-capitalize"><i
-											class="iline2-tag27 no-margin"></i>房市最新消息</a>
-									</p> <span class="blog-date"> 20 <small class="blog-month">jul</small>
-								</span>
-									<div class="blog-body">
-										<img src="assets/images/blog/post-2.jpg" alt="post 2"
-											class="img-responsive img-full" />
-										<h4 class="text-success text-center text-uppercase">Marketing
-											#1</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-											elit, sed do [...]</p>
-										<a class="btn btn-primary" href="blog-post.html" role="button">
-											Read more</a>
-									</div>
-								</li>
-							</div>
-							<!-- 房市新聞 ============================================================================================-->
-
-							<!-- 結束促銷資訊 =============================================================================================-->
-							<li class="blog-post wow fadeInUp" data-wow-duration="1s"
-								data-wow-delay=".7s">
-								<p class="cat-links">
-									<a class="text-capitalize"><i
-										class="iline2-tag27 no-margin"></i>促銷資訊</a>
-								</p> <span class="blog-date"> 19 <small class="blog-month">jul</small>
-							</span>
-								<div class="blog-body">
-									<img src="assets/images/blog/post-3.jpg" alt="post 3"
-										class="img-responsive img-full" />
-									<h4 class="text-primary text-center text-uppercase">Logo</h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit, sed do [...]</p>
-									<a class="btn btn-primary" href="blog-post.html" role="button"
-										title="continue reading"> Read more</a>
-								</div>
-							</li>
-							<!-- /.blog-post -->
-							<!-- .blog-post -->
-							<li class="blog-post wow fadeInUp" data-wow-duration="1s"
-								data-wow-delay=".7s">
-								<p class="cat-links">
-									<a class="text-capitalize"><i
-										class="iline2-tag27 no-margin"></i>促銷資訊</a>
-								</p> <span class="blog-date"> 18 <small class="blog-month">jul</small>
-							</span>
-								<div class="blog-body">
-									<img src="assets/images/blog/post-4.jpg" alt="post 4"
-										class="img-responsive img-full" />
-									<h4 class="text-primary text-center text-uppercase">Marketing
-										#2</h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit, sed do [...]</p>
-									<a class="btn btn-primary" href="blog-post.html" role="button"
-										title="continue reading"> Read more</a>
-								</div>
-							</li>
-							<!-- /.blog-post -->
-							<!-- .blog-post -->
-							<li class="blog-post wow fadeInUp" data-wow-duration="1s"
-								data-wow-delay=".7s">
-								<p class="cat-links">
-									<a class="text-capitalize"><i
-										class="iline2-tag27 no-margin"></i>促銷資訊</a>
-								</p> <span class="blog-date"> 18 <small class="blog-month">jul</small>
-							</span>
-								<div class="blog-body">
-									<blockquote>
-										<p>
-											<i class="icon-small iline1-light34 mar-top-sm"> Integer
-												in mauris eu nibh euismod gravida. Duis ac tellus et risus
-												vulputate vehicula. Donec lobortis risus a elit. Etiam
-												tempor. Ut ullamcorper, ligula eu tempor congue. </i>
-										</p>
-										<cite>- John Smith</cite>
-									</blockquote>
-								</div>
-							</li>
-							<!-- 結束促銷資訊 =============================================================================================-->
-
-                <li class="blog-post wow fadeInUp" data-wow-duration="1s">
-<div class="container">
-   
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active" style="background-color: red;"></li>
-                <li data-target="#myCarousel" data-slide-to="1" style="background-color: red;"></li>
-                <li data-target="#myCarousel" data-slide-to="2" style="background-color: red;"></li>
-            </ol>
-            
-            <!-- Wrapper for slides -->
-       <div class="carousel-inner"> 
-            <%for(int i=0;i<3;i++){%>
-                <%if(i==0){%>
-                    <div class="item active">
-                <%}else{%>
-                    
-                    <div class="item ">
-                    <%}%>
-                
-                <%for(int j=0;j<3;j++){%>
-                <div class="col-sm-4">
-                        <div class="card">
-                            <img class="img-fluid" src="http://fakeimg.pl/350x200/" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div style="text-align:center;">
-                                    <button class="btn btn-info">按我</button>
-                                </div>
-                            </div>
-                        </div>
-                
-                </div>
-                 <%  } %>
-                </div>
-          <%  } %>
-            </div>
-         </div> 
-         
-            
-            
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="color: red;">
-      <span class="glyphicon glyphicon-chevron-left" style="color: red;"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next" style="color: red;">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Next</span>
-    </a>
-    
-    
-    </div>
+	<div class="container">
+	   
+	        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+	            <!-- Indicators -->
+	            <ol class="carousel-indicators">
+	                <li data-target="#myCarousel" data-slide-to="0" class="active" style="background-color: red;"></li>
+	                <li data-target="#myCarousel" data-slide-to="1" style="background-color: red;"></li>
+	                <li data-target="#myCarousel" data-slide-to="2" style="background-color: red;"></li>
+	            </ol>
+	            
+	            <!-- Wrapper for slides -->
+	       <div class="carousel-inner"> 
+	            <%for(int i=0;i<3;i++){%>
+	                <%if(i==0){%>
+	                    <div class="item active">
+	                <%}else{%>
+	                    
+	                    <div class="item ">
+	                    <%}%>
+	                
+	                <%for(int j=0;j<3;j++){%>
+	                <div class="col-sm-4">
+	                        <div class="card">
+	                            <img class="img-fluid" src="http://fakeimg.pl/350x200/" alt="Card image cap">
+	                            <div class="card-body">
+	                                <h4 class="card-title">Card title</h4>
+	                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	                                <div style="text-align:center;">
+	                                    <button class="btn btn-info">按我</button>
+	                                </div>
+	                            </div>
+	                        </div>
+	                
+	                </div>
+	                 <%  } %>
+	                </div>
+	          <%  } %>
+	            </div>
+	         </div> 
+	            <!-- Left and right controls -->
+	            <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="color: red;">
+	      <span class="glyphicon glyphicon-chevron-left" style="color: red;"></span>
+	      <span class="sr-only">Previous</span>
+	    </a>
+	            <a class="right carousel-control" href="#myCarousel" data-slide="next" style="color: red;">
+	      <span class="glyphicon glyphicon-chevron-right"></span>
+	      <span class="sr-only">Next</span>
+	    </a>
+	    </div>
 </div>
-
-</li> 
 
 
 
@@ -447,59 +301,6 @@ response.setDateHeader("Expires", 0);
 <!-- 									</div> -->
 <!-- 								</li> -->
 <%-- 							</c:forEach> --%>
-
-							<!-- 彈出系統公告內容 -->
-							<div class="" style="display: none; margin-top: 50em;"
-								id="ann_jump">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title">系統公告</h4>
-										</div>
-										<div class="modal-body">
-											<form role="form" name="ann">
-												<div class="form-group">
-													<h4 class="text-primary text-center text-uppercase">${annVO.ann_title}</h4>
-												</div>
-												<div class="form-group">
-													<label for="ann_content">公告內容</label>
-													<textarea rows="10" class="form-control" name="ann_content">${annVO.ann_content}</textarea>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-info ann_leave">確認</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- 結束彈出系統公告內容 -->
-
-							<!-- 結束系統公告================================================================================================= -->
-						</ul>
-<%-- 						<%@include file="page_front_news/pageann2.file"%> --%>
-						<!-- .navigation -->
-
-
-
-						<!-- 				換頁 ==================================================================== -->
-						<!--                 <nav class="navigation paging-navigation"> -->
-						<!--                   <ul class="page-numbers pagination"> -->
-						<!--                     <li><span class="page-numbers pagination current">1</span></li> -->
-						<!--                     <li><a class="page-numbers pagination" href="#">2</a></li> -->
-						<!--                     <li><a class="page-numbers pagination" href="#">3</a></li> -->
-						<!--                     <li><a class="next page-numbers pagination" href="#">Next →</a></li> -->
-						<!--                   </ul> -->
-						<!--                 </nav>/.navigation -->
-					</div>
-					<!--               /All blog posts -->
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--       換頁 ==================================================================== -->
-
-
 
 
 	<!-- Back to top -->
@@ -553,11 +354,6 @@ response.setDateHeader("Expires", 0);
 	<script src="assets/js/libs/isotope.pkgd.min.js"></script>
 	<script src="assets/js/libs/ParallaxScrolling.js"></script>
 	<script src="assets/js/libs/jquery.mailchimp.js"></script>
-	<script src="assets/js/libs/wow.min.js"></script>
-	<script src="assets/js/libs/owl.carousel.js"></script>
-	<script src="assets/js/libs/jquery.fittext.js"></script>
-	<script src="assets/js/libs/jquery.lettering.js"></script>
-	<script src="assets/js/libs/jquery.textillate.js"></script>
 	<!-- Main JS -->
 	<script src="assets/js/main.js"></script>
 
@@ -571,23 +367,6 @@ response.setDateHeader("Expires", 0);
 	<script type="text/javascript" src="js/news_front_cooper.js"></script>
 	<!-- 做文字跑馬燈必備的cdn -->
 
-
-	<!-- 出現彈窗的系統公告資訊 -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".ann_btn").click(function() {
-				$("#ann_jump").toggle();
-			});
-		});
-	</script>
-	<!-- 關閉彈窗的系統公告資訊 -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".ann_leave").click(function() {
-				$("#ann_jump").hide();
-			});
-		});
-	</script>
 </body>
 
 </html>
