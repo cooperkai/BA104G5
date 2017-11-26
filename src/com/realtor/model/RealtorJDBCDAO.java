@@ -32,7 +32,8 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO Realtor(RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, Rtr_State) "
 			+ " VALUES('RT'||(LPAD(to_char(RTR_SEQ.NEXTVAL),8,'0')), ?, ?, ?, ?, ?, ?, ?, ?, 'OFF')";
 	private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_NAME=?, RTR_PHOTO=?, RTR_AREA=?, RTR_INTRO=?, RTR_IDNO=?, RE_NO=?, RTR_PSW=? WHERE RTR_NO = ?";
-	 //private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_NAME=?, RTR_PHOTO=?, RTR_PSW=?, RTR_INTRO=? WHERE RTR_NO = ?";// 修改姓名、照片、簡介用
+	// private static final String UPDATE_STMT = "UPDATE Realtor SET RTR_NAME=?,
+	// RTR_PHOTO=?, RTR_PSW=?, RTR_INTRO=? WHERE RTR_NO = ?";// 修改姓名、照片、簡介用
 	private static final String GET_ONE_STMT = "SELECT RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, RTR_STATE FROM Realtor WHERE RTR_NO = ?";
 	private static final String GET_ALL_STMT = "SELECT RTR_NO, RTR_ID, RTR_PSW, RTR_NAME, RTR_PHOTO, RTR_AREA, RTR_INTRO, RTR_IDNO, RE_NO, RTR_STATE FROM Realtor ORDER BY RTR_NO";
 	private static final String UPDATE_FOR_PHOTO = "UPDATE Realtor SET RTR_PHOTO=?, RTR_INTRO=? WHERE RTR_NO=?";
@@ -119,7 +120,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			con.setAutoCommit(false);
-			
+
 			pstmt.setString(1, realtorVO.getRtr_name());
 			pstmt.setBytes(2, realtorVO.getRtr_photo());
 			pstmt.setString(3, realtorVO.getRtr_area());
@@ -153,52 +154,54 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 				}
 			}
 		}
-	}//修改結束
+	}// 修改結束
 
 	// 修改姓名，照片，簡介
-//	@Override
-//	public void update(RealtorVO realtorVO) {
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//
-//		try {
-//			Class.forName(driver);
-//			con = DriverManager.getConnection(url, userid, password);
-//			pstmt = con.prepareStatement(UPDATE_STMT);
-//
-//			con.setAutoCommit(false);
-//
-//			pstmt.setString(1, realtorVO.getRtr_name());
-//			pstmt.setBytes(2, realtorVO.getRtr_photo());
-//			pstmt.setString(3, realtorVO.getRtr_psw());
-//			pstmt.setString(4, realtorVO.getRtr_intro());
-//			pstmt.setString(5, realtorVO.getRtr_no());
-//
-//			pstmt.executeUpdate();
-//			con.commit();
-//			con.setAutoCommit(true);
-//
-//		} catch (ClassNotFoundException ce) {
-//			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
-//		} catch (SQLException se) {
-//			throw new RuntimeException("A database error occured. " + se.getMessage());
-//		} finally {
-//			if (pstmt != null) {
-//				try {
-//					pstmt.close();
-//				} catch (SQLException se) {
-//					se.printStackTrace(System.err);
-//				}
-//			}
-//			if (con != null) {
-//				try {
-//					con.close();
-//				} catch (Exception e) {
-//					e.printStackTrace(System.err);
-//				}
-//			}
-//		}
-//	}
+	// @Override
+	// public void update(RealtorVO realtorVO) {
+	// Connection con = null;
+	// PreparedStatement pstmt = null;
+	//
+	// try {
+	// Class.forName(driver);
+	// con = DriverManager.getConnection(url, userid, password);
+	// pstmt = con.prepareStatement(UPDATE_STMT);
+	//
+	// con.setAutoCommit(false);
+	//
+	// pstmt.setString(1, realtorVO.getRtr_name());
+	// pstmt.setBytes(2, realtorVO.getRtr_photo());
+	// pstmt.setString(3, realtorVO.getRtr_psw());
+	// pstmt.setString(4, realtorVO.getRtr_intro());
+	// pstmt.setString(5, realtorVO.getRtr_no());
+	//
+	// pstmt.executeUpdate();
+	// con.commit();
+	// con.setAutoCommit(true);
+	//
+	// } catch (ClassNotFoundException ce) {
+	// throw new RuntimeException("Couldn't load database driver. " +
+	// ce.getMessage());
+	// } catch (SQLException se) {
+	// throw new RuntimeException("A database error occured. " +
+	// se.getMessage());
+	// } finally {
+	// if (pstmt != null) {
+	// try {
+	// pstmt.close();
+	// } catch (SQLException se) {
+	// se.printStackTrace(System.err);
+	// }
+	// }
+	// if (con != null) {
+	// try {
+	// con.close();
+	// } catch (Exception e) {
+	// e.printStackTrace(System.err);
+	// }
+	// }
+	// }
+	// }
 
 	// 查單一
 	@Override
@@ -826,18 +829,18 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 
 			while (rs.next()) {
 				articlevo = new ArticleVO();
-//				realtorvo = new RealtorVO();
+				// realtorvo = new RealtorVO();
 				articlevo.setArticle_no(rs.getString("Article_no"));
 				articlevo.setRtr_no(rs.getString("Rtr_no"));
 				articlevo.setPost_date(rs.getTimestamp("Post_date"));
 				articlevo.setArticle_body(rs.getString("Article_body"));
 				articlevo.setArticle_state(rs.getString("Article_State"));
 				articlevo.setUpdate_date(rs.getDate("Update_Date"));
-//				realtorvo.setRtr_area(rs.getString("Rtr_area"));
-//				realtorvo.setRtr_name(rs.getString("Rtr_name"));
-//				realtorvo.setRtr_photo(rs.getBytes("Rtr_photo"));
-//				set.add(articlevo);
-//				set.add(realtorvo);
+				// realtorvo.setRtr_area(rs.getString("Rtr_area"));
+				// realtorvo.setRtr_name(rs.getString("Rtr_name"));
+				// realtorvo.setRtr_photo(rs.getBytes("Rtr_photo"));
+				// set.add(articlevo);
+				// set.add(realtorvo);
 			}
 
 		} catch (ClassNotFoundException ce) {
@@ -868,40 +871,34 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		RealtorJDBCDAO dao = new RealtorJDBCDAO();
 
 		// 專門塞房仲照片以及簡介
-		 for (int i = 1; i <= 12; i++) {
-		 if (i <= 9) {
-		 FileInputStream in = new
-		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
-		 ".jpg");
-		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
-		 i + ".txt");
-		 String rtr_no = "RT0000000" + i;
-		 byte[] realtorpic = new byte[in.available()];
-		 in.read(realtorpic);
-		 RealtorVO vo4 = new RealtorVO();
-		 vo4.setRtr_photo(realtorpic);
-		 vo4.setRtr_intro(reader);
-		 vo4.setRtr_no(rtr_no);
-		 dao.updatePhoto(vo4);
-		 in.close();
-		 } else {
-		 FileInputStream in = new
-		 FileInputStream("WebContent/images/realtorphoto/realtor" + i +
-		 ".jpg");
-		 String reader = getLongString("WebContent/txt/realtor_txt/realtor" +
-		 i + ".txt");
-		 String rtr_no = "RT000000" + i;
-		 byte[] realtorpic = new byte[in.available()];
-		 in.read(realtorpic);
-		 RealtorVO vo4 = new RealtorVO();
-		 vo4.setRtr_photo(realtorpic);
-		 vo4.setRtr_intro(reader);
-		 vo4.setRtr_no(rtr_no);
-		 dao.updatePhoto(vo4);
-		 in.close();
-		 }
-		 }
-		 System.out.println("-----------------------------------------------------------------------------------");
+		for (int i = 1; i <= 12; i++) {
+			if (i <= 9) {
+				FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor" + i + ".jpg");
+				String reader = getLongString("WebContent/txt/realtor_txt/realtor" + i + ".txt");
+				String rtr_no = "RT0000000" + i;
+				byte[] realtorpic = new byte[in.available()];
+				in.read(realtorpic);
+				RealtorVO vo4 = new RealtorVO();
+				vo4.setRtr_photo(realtorpic);
+				vo4.setRtr_intro(reader);
+				vo4.setRtr_no(rtr_no);
+				dao.updatePhoto(vo4);
+				in.close();
+			} else {
+				FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor" + i + ".jpg");
+				String reader = getLongString("WebContent/txt/realtor_txt/realtor" + i + ".txt");
+				String rtr_no = "RT000000" + i;
+				byte[] realtorpic = new byte[in.available()];
+				in.read(realtorpic);
+				RealtorVO vo4 = new RealtorVO();
+				vo4.setRtr_photo(realtorpic);
+				vo4.setRtr_intro(reader);
+				vo4.setRtr_no(rtr_no);
+				dao.updatePhoto(vo4);
+				in.close();
+			}
+		}
+		System.out.println("-----------------------------------------------------------------------------------");
 
 		FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor1.jpg");
 		byte[] realtorpic = new byte[in.available()];
@@ -922,35 +919,32 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		// System.out.println("===============================================");
 
 		// 修改
-//		RealtorVO vo2 = new RealtorVO();
-//		vo2.setRtr_id("BA104G5@gmail.com");
-//		vo2.setRtr_psw("cccccccccccccc");
-//		vo2.setRtr_name("ccccccc");
-//		vo2.setRtr_photo(realtorpic);
-//		vo2.setRtr_area("中正區");
-//		vo2.setRtr_intro("大家好!!");
-//		vo2.setRtr_idno("A147845895");
-//		vo2.setRe_no("RE00000001");
-//		vo2.setRtr_state("ON");
-//		vo2.setRtr_no("RT00000013");
-//		dao.update(vo2);
-//		System.out.println("===============================================");
+		// RealtorVO vo2 = new RealtorVO();
+		// vo2.setRtr_id("BA104G5@gmail.com");
+		// vo2.setRtr_psw("cccccccccccccc");
+		// vo2.setRtr_name("ccccccc");
+		// vo2.setRtr_photo(realtorpic);
+		// vo2.setRtr_area("中正區");
+		// vo2.setRtr_intro("大家好!!");
+		// vo2.setRtr_idno("A147845895");
+		// vo2.setRe_no("RE00000001");
+		// vo2.setRtr_state("ON");
+		// vo2.setRtr_no("RT00000013");
+		// dao.update(vo2);
+		// System.out.println("===============================================");
 
-		
-
-		
 		// 修改姓名，照片，簡介
-//		 RealtorVO vo2 = new RealtorVO();
-//		 vo2.setRtr_name("ccccccc");
-//		 vo2.setRtr_photo(realtorpic);
-//		 vo2.setRtr_area("中正區");
-//		 vo2.setRtr_intro("大家好!!");
-//		 vo2.setRtr_idno("E124217388");
-//		 vo2.setRe_no("RE00000001");
-//		 vo2.setRtr_psw("1111");
-//		 vo2.setRtr_no("RT00000001");
-//		 dao.update(vo2);
-//		 System.out.println("===============================================");
+		// RealtorVO vo2 = new RealtorVO();
+		// vo2.setRtr_name("ccccccc");
+		// vo2.setRtr_photo(realtorpic);
+		// vo2.setRtr_area("中正區");
+		// vo2.setRtr_intro("大家好!!");
+		// vo2.setRtr_idno("E124217388");
+		// vo2.setRe_no("RE00000001");
+		// vo2.setRtr_psw("1111");
+		// vo2.setRtr_no("RT00000001");
+		// dao.update(vo2);
+		// System.out.println("===============================================");
 
 		// 查單一
 		// RealtorVO vo3 = dao.findByPrimaryKey("RT00000002");
@@ -1079,7 +1073,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 			System.out.println(art.getPost_date());
 			System.out.println(art.getPost_date());
 			System.out.println(art.getArticle_state());
-//			System.out.println(art.get);
+			// System.out.println(art.get);
 		}
 
 	}// 測試結束

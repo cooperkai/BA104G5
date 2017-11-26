@@ -43,10 +43,20 @@ public class NewsService {
 	public List<NewsVO> getAll() {
 		return dao.getAll();
 	}
-	
-	//查詢全部照時間排序
+
+	// 查詢全部照時間排序
 	public List<NewsVO> getAllByTime() {
 		return dao.getAllByTime();
 	}
-	
+
+	// 專門塞照片以及內容
+	public NewsVO updatePhoto(byte[] news_photo, String news_content, String news_no) {
+		NewsVO newsVO = new NewsVO();
+		newsVO.setNews_photo(news_photo);
+		newsVO.setNews_content(news_content);
+		newsVO.setNews_no(news_no);
+		dao.updatePhoto(newsVO);
+		return newsVO;
+	}
+
 }

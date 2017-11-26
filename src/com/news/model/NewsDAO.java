@@ -26,10 +26,12 @@ public class NewsDAO implements NewsDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO News (News_No, NType_No, News_Title, News_Content, News_Photo, News_State, EMP_NO) VALUES('NS'||LPAD(TO_CHAR(seq_news.NEXTVAL), 8, '0'), ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE News SET NType_No=?, News_Title=?, News_Content=?, News_Photo=?, News_State=?, EMP_NO=? WHERE News_No = ?";
 	private static final String GET_ONE_STMT = "SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News WHERE News_No = ?";
-	private static final String GET_ALL_STMT = "SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News ORDER BY News_No";
-	
+	private static final String GET_ALL_STMT = "SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News WHERE News_State='公告中' ORDER BY News_No";
+
 	// 依照新增時間做排序(只取前三筆)
-	private static final String GET_ALL_BY_TIME = "SELECT * FROM (SELECT * FROM News ORDER BY News_Date DESC) WHERE rownum<=3";
+	private static final String GET_ALL_BY_TIME = "SELECT * FROM (SELECT * FROM News ORDER BY News_Date DESC) WHERE rownum<=3 and News_State='公告中'";
+	// 專門塞照片內文用
+	private static final String UPDATE_FOR_PHOTO = "UPDATE News SET News_PHOTO=?, News_content=? WHERE News_NO=?";
 
 	// 新增
 	@Override
@@ -286,4 +288,44 @@ public class NewsDAO implements NewsDAO_interface {
 		}
 		return newsList;
 	}// 依照新增時間做排序(只取前三筆)結束
+
+	// 專門塞照片內文用
+	@Override
+	public void updatePhoto(NewsVO newsVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_FOR_PHOTO);
+
+			con.setAutoCommit(false);
+
+			pstmt.setBytes(1, newsVO.getNews_photo());
+			pstmt.setString(2, newsVO.getNews_content());
+			pstmt.setString(3, newsVO.getNews_no());
+
+			pstmt.executeUpdate();
+			con.commit();
+			con.setAutoCommit(true);
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}// 專門塞照片內文用結束
 }

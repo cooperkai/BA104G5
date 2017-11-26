@@ -11,6 +11,8 @@ public interface NewsDAO_interface {
 	
 	// 依照新增時間做排序(只取前三筆)
 	public List<NewsVO> getAllByTime();
+	//專門塞照片內文用
+	public void updatePhoto(NewsVO newsVO);
 	 
 
 }

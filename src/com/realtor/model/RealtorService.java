@@ -72,7 +72,7 @@ public class RealtorService {
 	// 專門塞房仲照片以及簡介
 	public RealtorVO updatePhoto(String rtr_no, byte[] rtr_photo, String rtr_intro) {
 		RealtorVO realtorVO = new RealtorVO();
-		realtorVO.setRtr_intro(rtr_intro);
+		realtorVO.setRtr_no(rtr_no);
 		realtorVO.setRtr_photo(rtr_photo);
 		realtorVO.setRtr_intro(rtr_intro);
 		dao.updatePhoto(realtorVO);

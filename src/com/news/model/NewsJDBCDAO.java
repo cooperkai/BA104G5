@@ -1,8 +1,10 @@
 package com.news.model;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.realtor.model.RealtorVO;
 
 public class NewsJDBCDAO implements NewsDAO_interface {
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
@@ -22,9 +26,12 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE News SET NType_No=?, News_Title=?, News_Content=?, News_Photo=?, News_State=?, EMP_NO=? WHERE News_No = ?";
 	private static final String GET_ONE_STMT = "SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News WHERE News_No = ?";
 	private static final String GET_ALL_STMT = "SELECT News_No, NType_No, News_Title, News_Content, News_Photo, News_State, to_char(News_Date, 'yyyy-mm-dd')News_Date, EMP_NO FROM News WHERE News_State='公告中' ORDER BY News_No";
-	
+
 	// 依照新增時間做排序(只取前三筆)
 	private static final String GET_ALL_BY_TIME = "SELECT * FROM (SELECT * FROM News ORDER BY News_Date DESC) WHERE rownum<=3 and News_State='公告中'";
+
+	// 專門塞照片內文用
+	private static final String UPDATE_FOR_PHOTO = "UPDATE News SET News_PHOTO=?, News_content=? WHERE News_NO=?";
 
 	// 新增
 	@Override
@@ -299,25 +306,82 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 		return newsList;
 	}// 搜尋條件依照發布時間結束
 
+	// 專門塞照片內文用
+	@Override
+	public void updatePhoto(NewsVO newsVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, password);
+			pstmt = con.prepareStatement(UPDATE_FOR_PHOTO);
+
+			con.setAutoCommit(false);
+
+			pstmt.setBytes(1, newsVO.getNews_photo());
+			pstmt.setString(2, newsVO.getNews_content());
+			pstmt.setString(3, newsVO.getNews_no());
+
+			pstmt.executeUpdate();
+			con.commit();
+			con.setAutoCommit(true);
+
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}// 專門塞照片內文用結束
+
 	// 測試
 	public static void main(String[] args) throws IOException {
 
 		NewsJDBCDAO dao = new NewsJDBCDAO();
 
-		// 新增
-		 NewsVO vo = new NewsVO();
-		 for (int i = 0; i < 1; i++) {
-		 vo.setNtype_no("HN001");
-		 vo.setNews_title("jj");
-		 vo.setNews_content(" 我是<p>-***//**容我是房市內容! ");
-		 byte[] pic =
-		 getPictureByteArray("WebContent/images/newsphoto/HN001.jpg");
-		 vo.setNews_photo(pic);
-		 vo.setNews_state("公告中");
-		 vo.setEmp_no("EM00000002");
-		 dao.insert(vo);
-		 }
-		 System.out.println("---------------------------------");
+		// 修改照片、內容
+		NewsVO vo = new NewsVO();
+		FileInputStream in = null;
+		String reader = null;
+		byte[] newspic = null;
+		String news_no = null;
+		for (int i = 1; i <= 12; i++) {
+			if (i <= 9) {
+				in = new FileInputStream("WebContent/images/newsphoto/news" + i + ".jpg");
+				reader = getLongString("WebContent/txt/news_txt/news" + i + ".txt");
+				news_no = "NS0000000" + i;
+				newspic = new byte[in.available()];
+				in.read(newspic);
+			} else {
+				in = new FileInputStream("WebContent/images/newsphoto/news" + i + ".jpg");
+				reader = getLongString("WebContent/txt/news_txt/news" + i + ".txt");
+				news_no = "NS000000" + i;
+				newspic = new byte[in.available()];
+				in.read(newspic);
+
+			}
+			vo.setNews_photo(newspic);
+			vo.setNews_content(reader);
+			vo.setNews_no(news_no);
+			dao.updatePhoto(vo);
+			in.close();
+		}
 
 		// 修改
 		// NewsVO vo2 = new NewsVO();
@@ -386,6 +450,20 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 		baos.close();
 		fis.close();
 		return baos.toByteArray();
+	}
+
+	// 使用String 上傳用
+	public static String getLongString(String path) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(path));
+		StringBuilder sb = new StringBuilder(); // StringBuffer is thread-safe!
+		String str;
+		while ((str = br.readLine()) != null) {
+			sb.append(str);
+			sb.append("\n");
+		}
+		br.close();
+
+		return sb.toString();
 	}
 
 }
