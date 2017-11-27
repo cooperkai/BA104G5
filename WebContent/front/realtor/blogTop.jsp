@@ -64,18 +64,14 @@
 			<div class="col-xs-12 col-sm-12">
 				<div role="tabpanel">
 					<!-- 標籤面板：標籤區 -->
-					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active">
+					<ul class="nav nav-tabs" role="tablist" id="showActive">
+						<li role="presentation" id="showActive2">
 							<a href="<%=request.getContextPath()%>/front/realtor/allBlog.jsp" role="tab" id="top">最新文章</a>
 						</li>
 						<c:if test="${realtorVO != null}">
-							<li role="presentation">
+							<li role="presentation" id="showActive3">
 								<a href="<%=request.getContextPath()%>/front/realtor/myBlog.jsp" role="tab">房仲怨天尤人區</a>
 							</li>
 						</c:if>
 					</ul>
 
-		
-
-
-	

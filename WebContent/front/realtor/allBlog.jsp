@@ -121,6 +121,14 @@
 </div>
 
 
+<c:if test="${(realtorVO == null) || (realtorVO != null)}"> 
+<script>
+	$("#showActive2").addClass("active");
+</script>
+</c:if>
+
+
+
 <script type="text/javascript">
 	//刪除用
 	function deleteArt(event){//一定要用event

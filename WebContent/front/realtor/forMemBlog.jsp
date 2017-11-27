@@ -176,15 +176,6 @@
 </div>
 </div>
 
-
-<c:if test="${realtorVO != null}"> 
-<script>
-	$("#showActive3").addClass("active");
-</script>
-</c:if>
-
-
-
 <!-- 刪除用 -->
 <script type="text/javascript">
 	function deleteArt(event){//一定要用event
@@ -260,12 +251,8 @@
     </script>
     
 
-
-
 <!-- 回到最上面    -->
 <div id="gotop">˄</div>
-
-
 
 <!-- footer -->
 <footer class="container-fluid" id="cooper_footer">
