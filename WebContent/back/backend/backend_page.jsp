@@ -27,16 +27,15 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/back/css/main.css">
 <!-- 後端首頁主要_css&photo -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
-<!-- cooperkai_css -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/back/css/backend_cooperkai.css" />
-<!-- cooperkai_css -->
 
 <!-- for jquery datepicker -->
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <!-- for jquery datepicker -->
+
+
 
 
 <title>系統公告所有資料</title>
