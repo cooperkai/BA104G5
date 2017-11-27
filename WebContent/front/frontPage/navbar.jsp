@@ -7,7 +7,6 @@
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 %>
 
-
 <!-- <nav class="navbar navbar-fixed-top"> -->
 <div class="container headerBar" id="headerBar">
 	<div class="navbar-header col-xs-11 col-sm-2">
