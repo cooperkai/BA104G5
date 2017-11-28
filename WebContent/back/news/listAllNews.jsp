@@ -45,7 +45,6 @@
 							<th>新聞內容</th>
 							<th>新聞狀態</th>
 							<th>新聞照片</th>
-							<th>新增時間</th>
 							<th>員工編號</th>
 							<th>修改新聞內容</th>
 						</tr> 
@@ -82,7 +81,6 @@
 										<img style="height: 145.8px; width: 194px;"
 											src="<%=request.getContextPath()%>/tool/showimage.do?action=news_photo&news_no=${newsVO.news_no}">
 									</div></td>
-								<td>${newsVO.news_date}</td>
 								<td>${newsVO.emp_no}</td>
 								<td>
 									<form METHOD="post"

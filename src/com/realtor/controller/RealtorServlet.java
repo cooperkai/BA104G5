@@ -56,7 +56,7 @@ public class RealtorServlet extends HttpServlet {
 					errorMsgs.add("請輸入房仲編號");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/realtor/listAllRealtor.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/forMemBlog.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -68,7 +68,7 @@ public class RealtorServlet extends HttpServlet {
 					errorMsgs.add("查無資料");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/realtor/listAllRealtor.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/forMemBlog.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -76,14 +76,14 @@ public class RealtorServlet extends HttpServlet {
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
 				req.setAttribute("realtorVO", realtorVO);// 從資料庫取的realtorVO物件，存入req
-				String url = "/realtor/listOneRealtor.jsp";
+				String url = "/front/realtor/forMemBlog.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/realtor/listAllRealtor.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/forMemBlog.jsp");
 				failureView.forward(req, res);
 			}
 		}

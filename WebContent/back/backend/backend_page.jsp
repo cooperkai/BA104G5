@@ -34,7 +34,10 @@
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <!-- for jquery datepicker -->
-
+<!-- cooperkai_css -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/back/css/backend_cooperkai.css" />
+<!-- cooperkai_css -->
 
 
 
@@ -53,7 +56,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-8 navbrand">
 			<h1>
-				<i>I don't know how , but I know HOUSE.</i>
+				<i style="color:green;">I don't know how , but I know HOUSE.</i>
 			</h1>
 		</div>
 		<div class="col-xs-12 col-sm-1">
@@ -73,9 +76,9 @@
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-8 text-center headbrand">
-					<h4>Welcome.</h4>
+					<h4 style="color:white;">Welcome.</h4>
 					<h4>
-						<b>後端員工姓名</b>
+						<b style="color:white;">後端員工姓名</b>
 					</h4>
 				</div>
 				<div class="panel-group" id="accordion2" role="tablist"
@@ -196,7 +199,7 @@
 							<div class="panel-body panelbody">審核廣告申請</div>
 							<div class="panel-body panelbody">刊登廣告</div>
 						</div>
-						<div class="panel-heading paneltitle row" role="tab" id="panel2">
+						<!--<div class="panel-heading paneltitle row" role="tab" id="panel2">
 							<h4 class="panel-title">
 								<span class="titletext"><b>管理常見問題</b></span> <a
 									class="titlebrand collapsed linka" href="#ggg"
@@ -208,7 +211,7 @@
 						<div id="ggg" class="panel-collapse collapse" role="tabpanel"
 							aria-labelledby="panel2">
 							<div class="panel-body panelbody">更新問題</div>
-						</div>
+						</div>-->
 						<!-- </div> -->
 						
 						

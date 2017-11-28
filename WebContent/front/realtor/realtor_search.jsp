@@ -165,9 +165,6 @@
 							alt="${realtorVO.rtr_name}個人照片" class="img-thumbnail" style="width: 100%;">
 					</div>
 				</div>
-				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/front/article/article.do"
-					name="form1">
 					<div class="form-group">
 						<label for="rtr_name"><font size="4" color="#4F4F4F">房仲名稱</font></label>
 						<div>
@@ -200,6 +197,17 @@
 							<span class="forward_word">與我聊天</span>
 						</button>
 					</div>
+				<FORM METHOD="post"
+					ACTION="<%=request.getContextPath()%>/front/realtor/realtor.do"
+					name="form1">
+					 
+								<button class="button" style="vertical-align: middle">
+								<input type="hidden" name="action" value="getOne_For_Display">
+								<input type="hidden" name="rtr_no" value="${realtorVO.rtr_no}">
+								<span class="forward_word">查看詳請</span>
+								</button>
+				</FORM>
+							
 					
 					<div class="form-group">
 						<label for="rtr_intro"><font size="5" color="#4F4F4F">簡介</font></label>
@@ -209,7 +217,6 @@
 					<div class="input-group" style="margin-bottom: 10px;">
 						<span class="input-group-btn"> </span>
 					</div>
-				</FORM>
 			</div>
 		</div>
 	</div>

@@ -47,6 +47,13 @@
 				<table>
 					<tr>
 						<td>
+							<h4>
+								<a href="<%=request.getContextPath()%>/back/news/listAllNews.jsp">回房市新聞</a>
+							</h4>
+						</td>
+					</tr>
+					<tr>
+						<td>
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/back/newstype/newstype.do">
 								<b>選擇新聞種類編號:</b> <select size="1" name="ntype_no">

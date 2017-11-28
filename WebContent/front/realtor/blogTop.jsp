@@ -4,10 +4,8 @@
 <%@ page import="com.realtor.model.*"%>
 <%@ page import="com.article.model.*"%>
 
-<jsp:useBean id="articleSvc" scope="page"
-	class="com.article.model.ArticleService" />
-<jsp:useBean id="realtorSvc" scope="page"
-	class="com.realtor.model.RealtorService" />
+<jsp:useBean id="articleSvc" scope="page" class="com.article.model.ArticleService" />
+<jsp:useBean id="realtorSvc" scope="page" class="com.realtor.model.RealtorService" />
 
 <%
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
