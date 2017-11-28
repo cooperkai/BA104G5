@@ -7,8 +7,7 @@
 <%@ page import="com.mem.model.*"%>
 
 
-<jsp:useBean id="realtorSvc" scope="page"
-	class="com.realtor.model.RealtorService" />
+<jsp:useBean id="realtorSvc" scope="page" class="com.realtor.model.RealtorService" />
 
 <%
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
@@ -24,7 +23,6 @@
 %>
 
 <jsp:include page="/front/realtor/blogTop.jsp" />
-
 
 <!-- 標籤面板：內容區 -->
 <div class="tab-content">
@@ -55,15 +53,21 @@
 						<h4>心情抒發	</h4>
 					</div>
 					<div class="form-group">
-							<img
-								src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorSvc.getOne(articleVO.rtr_no).getRtr_no()}"
-								class="img-thumbnail" style="width: 80px; height: 80px;">
-							<h5>${realtorSvc.getOne(articleVO.rtr_no).getRtr_name()}</h5>
+						<div class="col-sm-2 rtrPic">
+							<img src="<%=request.getContextPath()%>/tool/showimage.do?action=rtr_photo&rtr_no=${realtorSvc.getOne(articleVO.rtr_no).getRtr_no()}" class="img-thumbnail" style="width: 80px; height: 80px;">
+		        	    </div>
+		                <div class="col-sm-10">
+							<h5 style="color:#191970;font-weight:bold;">${realtorSvc.getOne(articleVO.rtr_no).getRtr_name()}</h5>
+							<div style="font-size:10px;color:#BC8F8F;">
+								<fmt:formatDate value="${articleVO.post_date}"	pattern="yyyy-MM-dd HH:mm:ss" />
+							</div>
+	                   	</div>
 					</div>
 					<div class="form-group">
-						<label for="article_body">文章內容</label>
-						<textarea rows="3"  id="article_context" class="form-control article_context" style="cursor: text;" name="article_body">${articleVO.article_body}</textarea>
-					
+						<div class="col-sm-12 rtrText">
+							<label for="article_body">文章內容</label>
+							<textarea rows="3"  id="article_context" class="form-control article_context" style="cursor: text;" name="article_body">${articleVO.article_body}</textarea>
+						</div>
 					<c:if test="${(realtorVO.rtr_no) == (articleVO.rtr_no) }"> 
 						<div class="form-group changeArt">
 							<%-- <input type="button" value="修改文章" onclick="update(event, '${articleVO.article_no}', '${articleVO.rtr_no}')"> --%>
@@ -79,15 +83,6 @@
 							<%-- <img src="<%= request.getAttribute("img")%>"> --%>
 						</div>
 					</c:if>
-					</div>
-					<div class="form-group">
-						<label for="post_date">發佈日期</label>
-						<div>
-							<h5 class="">
-								<fmt:formatDate value="${articleVO.post_date}"
-									pattern="yyyy-MM-dd HH:mm:ss" />
-							</h5>
-						</div>
 					</div>
 					<!-- <div class="form-group"> -->
 					<!-- <div class="col-sm-12"> -->

@@ -211,6 +211,7 @@ footer {
 	width: 100%;
 	padding: 25px;
 }
+
 /* realtor_search.jsp 房仲搜尋顯示結束 */
 
 /* realtor_login.jsp, realtor_forgot房仲登入、忘記密碼 */
@@ -262,4 +263,19 @@ textarea {
 #update_btn {
 	border: 2px solid #FF9224;
 }
+
+/* 房仲文章照片文章大小 */
+.rtrPic{
+	width: 80px;
+	margin-right:0;
+	margin-bottom:10px;
+	padding:0;
+}
+
+.rtrText{
+	margin-right:0;
+	padding:0;
+	margin-bottom: 10px;
+}
+
 /* myBlog.jsp 房仲私人文章結束*/
