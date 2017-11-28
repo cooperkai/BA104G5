@@ -252,6 +252,21 @@ footer {
 	cursor: pointer;
 	z-index: 1000;
 }
+
+#goback{
+	display: none;
+	padding: 10px 16px;
+	font-size: 25px;
+	background: #6495ED;
+	color: #FAFCFD;
+	cursor: pointer;
+	z-index: 10;
+	position: fixed;
+	border-radius: 50px;
+	left: 20px;
+	bottom: 30px;
+}
+
 /* allBlog.jsp 房仲文章結束*/
 
 /*關掉所有自動調整的功能*/

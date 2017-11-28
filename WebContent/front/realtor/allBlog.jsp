@@ -43,6 +43,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="goback" onclick="javascript:location.href='<%=request.getContextPath()%>/front/realtor/realtor.do?action=listQueryB'"><img alt="回到上頁" src="<%=request.getContextPath()%>/images/back.png"></div>
+	
 
 	<!-- 右邊房仲文章資料 =====================================-->
 	<c:forEach var="articleVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s">
@@ -223,14 +226,17 @@
 
 
 <!-- 回到最上面    -->
-<div id="gotop">˄</div>
+<div id="gotop"><img alt="回到最上面" src="<%=request.getContextPath()%>/images/top.png"></div>
+
 <script>
 //房仲文章回到上面用
 $(window).scroll(function() {
 	if ($(this).scrollTop() > 300) {
 		$('#gotop').fadeIn("fast");
+		$('#goback').fadeIn("fast");
 	} else {
 		$('#gotop').stop().fadeOut("fast");
+		$('#goback').stop().fadeOut("fast");
 	}
 });
 $("#gotop").click(function() {
@@ -238,6 +244,7 @@ $("#gotop").click(function() {
 		scrollTop : 0
 	}, 1000);
 });
+
 </script>
 
 

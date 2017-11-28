@@ -372,7 +372,7 @@
 	</div>
 
 	<!-- 回到最上面    -->
-	<div id="gotop">˄</div>
+	<div id="gotop"><img alt="回到最上面" src="<%=request.getContextPath()%>/images/top.png"></div>
 	<!-- end阿蓋的搜尋房仲 =========================================================================================-->
 
 	<script>
