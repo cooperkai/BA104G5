@@ -55,7 +55,7 @@
 
 /* 房仲修改照片預覽 */
 #imgpreview, .rtr_photo {
-	 max-width: 350px;
+	max-width: 350px;
 }
 
 /* 下拉顏色 */
@@ -143,7 +143,7 @@
 }
 
 .heart_size {
-	margin-top: 1em;
+	margin-top: 8px;
 	font-size: large;
 }
 
