@@ -6,7 +6,6 @@ import java.util.Set;
 
 import com.article.model.ArticleVO;
 
-
 public interface RealtorDAO_interface {
 
 	public void insert(RealtorVO realtorVO);

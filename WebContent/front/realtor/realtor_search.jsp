@@ -3,9 +3,10 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.realtor.model.*"%>
 <%@ page import="com.realestate.model.*"%>
+<%@ page import="com.resrec.model.*"%>
 
-<jsp:useBean id="realestateSvc" scope="page"
-	class="com.realestate.model.RealEstateService" />
+<jsp:useBean id="realestateSvc" scope="page" class="com.realestate.model.RealEstateService" />
+<jsp:useBean id="resrecSvc" scope="page" class="com.resrec.model.ResRecService" />
 <jsp:useBean id="list" scope="request" type="java.util.List<RealtorVO>" />
 
 <%
@@ -17,49 +18,44 @@
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
 	response.setDateHeader("Expires", 0);
+	
 %>
-
 
 <!DOCTYPE html>
 <html lang="">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>For House</title>
-<link rel="shortcut icon"
-	href="<%=request.getContextPath()%>/images/houselogo1.png" />
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/houselogo1.png" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/main.css">
 
 <!-- 必備Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front/realtor/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front/realtor/css/bootstrap-select.min.css">
 <!-- Latest compiled and minified CSS -->
 <!-- 阿蓋的css -->
 <!-- 多加的 -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front/realtor/css/realtor_cooper.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front/realtor/css/realtor_cooper.css">
 <!-- end阿蓋的css -->
 
 <script src="https://code.jquery.com/jquery.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
 
 
 <!-- realtor_cooperkai.js -->
 <script src="https://use.fontawesome.com/add3377d0a.js"></script>
-<script
-	src="<%=request.getContextPath()%>/front/realtor/js/realtor_cooper.js"></script>
+<script	src="<%=request.getContextPath()%>/front/realtor/js/realtor_cooper.js"></script>
 <!-- realtor_cooperkai.js -->
 
 <!-- 必備Latest compiled and minified JavaScript -->
-<script
-	src="<%=request.getContextPath()%>/front/realtor/js/bootstrap-select.min.js"></script>
+<script	src="<%=request.getContextPath()%>/front/realtor/js/bootstrap-select.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
+<!-- 星星 -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/tools/ratestar/jquery.rateyo.min.css" />
 
 <style type="text/css">
 
@@ -106,9 +102,26 @@
 	cursor: no-drop; 
 	background-color:#F7F7EE;
 }
-
 </style>
 
+<script type="text/javascript">
+
+$(document).ready(function(){
+        $("#n<%=a%>>td:nth-child(3)>div").rateYo({
+            rating: ${resRecVO.resr_hpric},
+            numStars: 5,
+            precision: 2,
+            readOnly: true, /////////////////////////////////////////////////////////////////
+            starWidth: "30px",
+            spacing: "3px",
+            multiColor: {
+                startColor: '#ffbf00',
+                endColor: "#ffff00"
+            }
+        });
+});
+
+</script>
 
 </head>
 <body>
@@ -220,8 +233,7 @@
 		</div>
 	</div>
 
-	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>"
-		end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<!-- 房仲簡介本體 -->
 		<div class="container">
 			<div class="row">
@@ -289,6 +301,15 @@
 						</div>
 					</div>
 					</c:if>
+					
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="post_date"><font size="5" color="#4F4F4F">綜合評分</font></label>
+								<h5 class="">
+									<font class="font_style" size="5" color="yellow">${resrecSvc.findStar(realtorVO.rtr_no)}</font>
+								</h5>
+						</div>
+					</div>
 					<div class="col-sm-12">
 						<div class="form-group">
 							<label for="rtr_intro"><font size="5" color="#4F4F4F">簡介</font></label>
