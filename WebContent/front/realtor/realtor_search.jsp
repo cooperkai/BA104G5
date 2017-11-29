@@ -56,6 +56,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <!-- 星星 -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/tools/ratestar/jquery.rateyo.min.css" />
+<script type="text/javascript" src="<%=request.getContextPath()%>/tools/ratestar/jquery.rateyo.js"></script>
 
 <style type="text/css">
 
@@ -105,22 +106,23 @@
 </style>
 
 <script type="text/javascript">
-
-$(document).ready(function(){
-        $("#n<%=a%>>td:nth-child(3)>div").rateYo({
-            rating: ${resRecVO.resr_hpric},
-            numStars: 5,
-            precision: 2,
-            readOnly: true, /////////////////////////////////////////////////////////////////
-            starWidth: "30px",
-            spacing: "3px",
-            multiColor: {
-                startColor: '#ffbf00',
-                endColor: "#ffff00"
-            }
-        });
-});
-
+	//評分星星
+	$(document).ready(function(){
+		<c:forEach var="realtorVO" items="${list}" varStatus="s">		
+	    $(".starDiv>div>.h${s.index}").rateYo({
+	    	rating: ${resrecSvc.findStar(realtorVO.rtr_no)}, 
+			numStars: 5,
+			precision: 2,
+			readOnly: true,
+			starWidth: "30px",
+			spacing: "3px",
+			multiColor: {
+				startColor: '#ffbf00',
+				endColor: "#ffff00"
+			}
+		});
+	    </c:forEach>
+	});
 </script>
 
 </head>
@@ -232,13 +234,12 @@ $(document).ready(function(){
 			<div class="col-sm-1"></div>
 		</div>
 	</div>
-
-	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s">
 		<!-- 房仲簡介本體 -->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-1"></div>
-				<div class="panel panel-default col-sm-12  col-sm-8">
+				<div class="panel panel-default col-sm-12  col-sm-8 starDiv">
 					<div class="panel-heading form-group">
 						<div class="col-sm-4">
 							<h4>房仲簡介</h4>
@@ -301,13 +302,10 @@ $(document).ready(function(){
 						</div>
 					</div>
 					</c:if>
-					
-					<div class="col-sm-12">
+					<div class="col-sm-12 starDiv">
 						<div class="form-group">
 							<label for="post_date"><font size="5" color="#4F4F4F">綜合評分</font></label>
-								<h5 class="">
-									<font class="font_style" size="5" color="yellow">${resrecSvc.findStar(realtorVO.rtr_no)}</font>
-								</h5>
+								<h5 class="h${s.index}"></h5>
 						</div>
 					</div>
 					<div class="col-sm-12">
