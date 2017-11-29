@@ -243,7 +243,7 @@
 								<span class="glyphicon glyphicon-send"></span>
 								<p class="text-right panelboxtitle">10</p>
 							</h2>
-							<p>Lorem ipsum dolor sit amet.</p>
+							<div style="font-size:20px;">©Ð¥ò«Ý¼f®Ö</div>
 						</div>
 						<div class="panel-body">
 							<p class="text-right">

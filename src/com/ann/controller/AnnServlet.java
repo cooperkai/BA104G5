@@ -133,14 +133,12 @@ public class AnnServlet extends HttpServlet {
 		if ("update".equals(action)) { // 來自update_ann_input.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 
-			Enumeration<String> allname = req.getParameterNames();
-			while (allname.hasMoreElements()) {
-				System.out.println("ann_全部的值: " + allname.nextElement());
-			}
-
 			try {
-
-				System.out.println("ann_update_try_in");
+				Enumeration<String> allname = req.getParameterNames();
+				while (allname.hasMoreElements()) {
+					System.out.println("ann_全部的值: " + allname.nextElement());
+				}
+				
 				/*****************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 *****************/
@@ -172,6 +170,8 @@ public class AnnServlet extends HttpServlet {
 				annVO.setAnn_content(ann_content);
 				annVO.setAnn_state(ann_state);
 				annVO.setEmp_no(emp_no);
+				
+				System.out.println(ann_no);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -189,7 +189,7 @@ public class AnnServlet extends HttpServlet {
 				 * 3.修改完成,準備轉交(Send the Success view)
 				 *************/
 				req.setAttribute("annVO", annVO); // 資料庫update成功後,正確的的annVO物件,存入req
-				String url = "/back/ann/listOneAnn.jsp";
+				String url = "/back/ann/listAllAnn.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneAnn.jsp
 				successView.forward(req, res);
 

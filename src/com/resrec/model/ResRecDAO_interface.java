@@ -25,5 +25,5 @@ public interface ResRecDAO_interface {
 
 	List<ResRecVO> getAll();
 	
-	public Integer findStar(String rtr_no);//計算房仲評價
+	public Double findStar(String rtr_no);//計算房仲評價
 }

@@ -171,7 +171,7 @@
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn_cooper" value="送出新增">送出新增</button>
 						</div>
-					</form>
+					</form> 
 				</div>
 			</div>
 		</div>
@@ -182,61 +182,61 @@
 
 
 	<!-- 彈出修改系統公告 ============================================================================= -->
-	<!-- 	<div class="modal2 fade" id="ann_jump_update"> -->
-	<!-- 		<div class="modal-dialog"> -->
-	<!-- 			<div class="modal-content2"> -->
-	<!-- 				<div class="modal-header2"> -->
-	<!-- 					<button type="button" class="close" data-dismiss="modal" -->
-	<!-- 						aria-hidden="true">&times;</button> -->
-	<!-- 					<h4 class="modal-title">修改系統公告</h4> -->
-	<!-- 				</div> -->
-	<!-- 				<div class="modal-body2"> -->
-	<!-- 					<form role="form" METHOD="post" ACTION="ann.do" name="ann"> -->
-	<!-- 						<div class="form-group"> -->
-	<!-- 							<label for="ann_title">公告編號</label> -->
-	<!-- 							<div> -->
-	<%-- 								<h5 class="update_color"><%=annVO.getAnn_no()%></h5> --%>
-	<!-- 							</div> -->
-	<!-- 						</div> -->
-	<!-- 						<div class="form-group"> -->
-	<!-- 							<label for="ann_title">公告標題</label> <input type="text" -->
-	<!-- 								class="form-control" name="ann_title" -->
-	<%-- 								value="<%=(annVO == null) ? "修改公告名稱" : annVO.getAnn_title()%>" /> --%>
-	<!-- 						</div> -->
-	<!-- 						<div class="form-group"> -->
-	<!-- 							<label for="ann_content">公告內容</label> -->
-	<!-- 							<textarea rows="10" class="form-control" name="ann_content" -->
-	<%-- 								value="<%=(annVO == null) ? "修改公告內容" : annVO.getAnn_content()%>"></textarea> --%>
-	<!-- 						</div> -->
-	<!-- 						<div class="form-group dropdown"> -->
-	<!-- 							<label for="ann_state">修改公告狀態</label> <select name="ann_state" -->
-	<!-- 								class="form-control btn_cooper" id="sel1"> -->
-	<!-- 								<option class="default_item">請選擇</option> -->
-	<!-- 								<option class="onitem" value="公告中" -->
-	<%-- 									${(annVO.ann_state=='公告中')? 'selected': ''}>公告中</option> --%>
-	<!-- 								<option class="onitem" value="已撤銷" -->
-	<%-- 									${(annVO.ann_state=='已撤銷')? 'selected': ''}>已撤銷</option> --%>
-	<!-- 							</select> -->
-	<!-- 						</div> -->
-	<!-- 						<div class="form-group"> -->
-	<!-- 							<label for="emp_no">員工編號</label> <input type="text" -->
-	<!-- 								class="form-control" name="emp_no" -->
-	<%-- 								value="<%=(annVO == null) ? "EM00000002" : annVO.getEmp_no()%>" /> --%>
-	<!-- 						</div> -->
+		<div class="modal2 fade" id="ann_jump_update">
+			<div class="modal-dialog">
+				<div class="modal-content2">
+					<div class="modal-header2">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">修改系統公告</h4>
+					</div>
+					<div class="modal-body2">
+						<form role="form" METHOD="post" ACTION="ann.do" name="ann">
+							<div class="form-group">
+								<label for="ann_title">公告編號</label>
+								<div>
+									<h5 class="update_color"><%=annVO.getAnn_no()%></h5>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="ann_title">公告標題</label> <input type="text"
+									class="form-control" name="ann_title"
+									value="<%=(annVO == null) ? "修改公告名稱" : annVO.getAnn_title()%>" />
+							</div>
+							<div class="form-group">
+								<label for="ann_content">公告內容</label>
+								<textarea rows="10" class="form-control" name="ann_content"
+									value="<%=(annVO == null) ? "修改公告內容" : annVO.getAnn_content()%>"></textarea>
+							</div>
+							<div class="form-group dropdown">
+								<label for="ann_state">修改公告狀態</label> <select name="ann_state"
+									class="form-control btn_cooper" id="sel1">
+									<option class="default_item">請選擇</option>
+									<option class="onitem" value="公告中"
+										${(annVO.ann_state=='公告中')? 'selected': ''}>公告中</option>
+									<option class="onitem" value="已撤銷"
+										${(annVO.ann_state=='已撤銷')? 'selected': ''}>已撤銷</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="emp_no">員工編號</label> <input type="text"
+									class="form-control" name="emp_no"
+									value="<%=(annVO == null) ? "EM00000002" : annVO.getEmp_no()%>" />
+							</div>
 
-	<!-- 						<div class="modal-footer2"> -->
-	<!-- 							<input type="hidden" name="action" value="leave"> -->
-	<!-- 							<button type="submit" class="btn btn-default" -->
-	<!-- 								data-dismiss="modal" value="離開">離開</button> -->
-	<%-- 							<input type="hidden" name="ann_no" value="${annVO.ann_no}"> --%>
-	<!-- 							<input type="hidden" name="action" value="update"> -->
-	<!-- 							<button type="submit" class="btn btn_cooper" value="送出修改">送出修改</button> -->
-	<!-- 						</div> -->
-	<!-- 					</form> -->
-	<!-- 				</div> -->
-	<!-- 			</div> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
+							<div class="modal-footer2">
+								<input type="hidden" name="action" value="leave">
+								<button type="submit" class="btn btn-default"
+									data-dismiss="modal" value="離開">離開</button>
+								<input type="hidden" name="ann_no" value="${annVO.ann_no}">
+								<input type="hidden" name="action" value="update">
+								<button type="submit" class="btn btn_cooper" value="送出修改">送出修改</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	<!-- 結束修改系統公告 ================================================================================== -->
 
 
