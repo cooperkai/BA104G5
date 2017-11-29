@@ -198,7 +198,7 @@ public class ResRecService {
 	}
 	
 	//計算房仲評價
-	public Integer findStar(String rtr_no){
+	public Double findStar(String rtr_no){
 		return dao.findStar(rtr_no);
 	}
 

@@ -103,6 +103,10 @@
 	cursor: no-drop; 
 	background-color:#F7F7EE;
 }
+
+.chatMsg,argue{
+	cursor:pointer; 
+}
 </style>
 
 <script type="text/javascript">
@@ -247,7 +251,7 @@
 						<div class="col-sm-4">	
 							<div class="form-group forward_estate">
 								<button type="button" class="btn btnMsg" id="btnMsg">
-									<label for="">
+									<label class="chatMsg" for="">
 									<font size="3" color="green">&nbsp;&nbsp;&nbsp;&nbsp;與我聊天</font>
 									</label>
 								</button>
@@ -295,12 +299,12 @@
 						</div>
 					</div>
 					<c:if test="${memVO != null}">
-					<div class="col-sm-3">
-						<div class="form-group">
-							<label for=""><font size="5" color="#FF3030">檢舉</font></label>
-							<button class="submit btn modal_jump" id="btn"></button>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label class="argue" for=""><font size="5" color="#FF3030">檢舉</font></label>
+								<button class="submit btn modal_jump" id="btn"></button>
+							</div>
 						</div>
-					</div>
 					</c:if>
 					<div class="col-sm-12 starDiv">
 						<div class="form-group">

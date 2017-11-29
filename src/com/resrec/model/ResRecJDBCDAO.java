@@ -30,7 +30,7 @@ public class ResRecJDBCDAO implements ResRecDAO_interface {
 	private static final String GET_MEM_KUEI = "SELECT RESR_NO,HOUSE_NO,RTR_NO,TO_CHAR(RESR_ORD,'YYYY-MM-DD HH:MM:SS') RESR_ORD,RESR_STATES,TO_CHAR(RESR_DATE,'YYYY-MM-DD')RESR_DATE,RESR_PERIOD,RESR_HPRIC,RESR_HSIZE,RESR_MGT,RESR_PUC,RESR_STR,RESR_WALL,RESR_LTG,RESR_VEN,RESR_TC,RESR_LC,HSE_REV,MEM_RATE,MEM_REV,RTR_RATE FROM RESREC WHERE MEM_NO = ? ORDER BY RESR_NO";
 	private static final String GET_RTR_KUEI = "SELECT RESR_NO,MEM_NO,HOUSE_NO,RTR_NO,TO_CHAR(RESR_ORD,'YYYY-MM-DD HH:MM:SS') RESR_ORD,RESR_STATES,TO_CHAR(RESR_DATE,'YYYY-MM-DD')RESR_DATE,RESR_PERIOD,RESR_HPRIC,RESR_HSIZE,RESR_MGT,RESR_PUC,RESR_STR,RESR_WALL,RESR_LTG,RESR_VEN,RESR_TC,RESR_LC,HSE_REV,MEM_RATE,MEM_REV,RTR_RATE FROM RESREC WHERE RTR_NO = ? ORDER BY RESR_NO";
 	// 計算房仲評價
-	private static final String FIND_STAR = "select avg(mem_rate) avg from resrec where rtr_no=?";
+	private static final String FIND_STAR = "select round(avg(mem_rate),2) avg from resrec where rtr_no=?";
 
 	@Override
 	public void insert(ResRecVO resRecVO) {
@@ -687,11 +687,11 @@ public class ResRecJDBCDAO implements ResRecDAO_interface {
 
 	// 計算房仲評價
 	@Override
-	public Integer findStar(String rtr_no) {
+	public Double findStar(String rtr_no) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Integer star;
+		Double star;
 
 		try {
 			Class.forName(driver);
@@ -701,7 +701,7 @@ public class ResRecJDBCDAO implements ResRecDAO_interface {
 			pstmt.setString(1, rtr_no);
 			rs = pstmt.executeQuery();
 			rs.next();
-			star = rs.getInt("avg");
+			star = rs.getDouble("avg");
 		} catch (ClassNotFoundException ce) {
 			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
 		} catch (SQLException se) {
