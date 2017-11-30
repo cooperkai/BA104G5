@@ -514,7 +514,7 @@ public class RealtorServlet extends HttpServlet {
 							pw += a + "";
 						}
 						RealtorService rtrSvc1 = new RealtorService();
-						rtrSvc1.update(rtrVO.getRtr_name(), rtrVO.getRtr_photo(), rtrVO.getRtr_area(), rtrVO.getRtr_intro(), rtrVO.getRtr_idno(), rtrVO.getRe_no(), rtrVO.getRtr_no(), pw);
+						rtrSvc1.update(rtrVO.getRtr_name(), rtrVO.getRtr_photo(), rtrVO.getRtr_area(), rtrVO.getRtr_intro(), rtrVO.getRtr_idno(), rtrVO.getRe_no(), pw, rtrVO.getRtr_no());
 //						rtrSvc1.update(rtrVO.getRtr_no(), rtrVO.getRtr_name(), rtrVO.getRtr_photo(),
 //								rtrVO.getRtr_intro(), pw);
 

@@ -111,12 +111,11 @@
 }
 
 /* 促銷修改照片預覽 */
-#imgpreview, .promo_photo, .mews_photo {
-	width: 50%;
-	height: 291.2px;
+#imgpreview, 
+.promo_photo,
+.mews_photo {
+	max-width: 350px;
 }
-
-/*關掉所有自動調整的功能*/
-textarea {
-	resize: none;
+.panel{
+	background-color:none;
 }
