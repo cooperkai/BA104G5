@@ -167,7 +167,6 @@ System.out.println(re_no);
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				System.out.println("realtor_getOne_For_Update");
 				/*************************** 1.接收請求參數 ****************************************/
 				String rtr_no = req.getParameter("rtr_no");
 
@@ -196,15 +195,11 @@ System.out.println(re_no);
 		} // 得到該房重要被修改的房仲編號結束
 
 		// 來自房仲中心修改個人資料請求
-		System.out.println(action);
+
 		if ("realtor_Change_data".equals(action)) {
 			List<String> dataErrors = new LinkedList<String>();
 			req.setAttribute("dataErrors", dataErrors);
 
-			Enumeration names = req.getParameterNames();
-			while (names.hasMoreElements()) {
-				System.out.println(names.nextElement());
-			}
 
 			RealtorService realtorSvc = new RealtorService();
 			RealtorVO realtorVOtmp = new RealtorVO();
