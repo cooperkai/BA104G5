@@ -52,9 +52,11 @@ public class CheckMailServlet extends HttpServlet {
 				String rtr_id = "eatkaikai@gmail.com";
 				String msg = "非常感謝你加入本網站[ 房仲 ]會員，已經為你開啟使用本網站服務的權利了，請一定Ipad溫開水!" + "\r\n" + "請不用懷疑，馬上點開下面網址: "
 						+ "http://localhost:8081/BA104G5/front/realtor/realtor_login.jsp";
-				RtrMailOn rtrMail = new RtrMailOn();
-				rtrMail.sendMail(rtr_name, rtr_id, msg);
-
+				
+				//改用執行序傳送
+				RtrMailOn rtrMail = new RtrMailOn(rtr_name, rtr_id, msg);
+				Thread rtrThread = new Thread(rtrMail);
+				rtrThread.start();
 				/*********************** 新增完成,準備轉交 ********************/
 
 				String url = requestURL;
@@ -124,8 +126,11 @@ public class CheckMailServlet extends HttpServlet {
 				String slr_id = "eatkaikai@gmail.com";
 				String msg = "非常感謝你加入本網站[ 廠商 ]會員，已經為你開啟使用本網站服務的權利了，請一定Ipad溫開水!" + "\r\n" + "請不用懷疑，馬上點開下面網址: "
 						+ "http://localhost:8081/BA104G5/front/realtor/realtor_login.jsp";//記得換成廠商的登入畫面
-				SlrMailOn slrMail = new SlrMailOn();
-				slrMail.sendMail(slr_name, slr_id, msg);
+				
+				//改用執行序傳送
+				SlrMailOn slrMail = new SlrMailOn(slr_name, slr_id, msg);
+				Thread slrThread = new Thread(slrMail);
+				slrThread.start();
 
 				/*********************** 新增完成,準備轉交 ********************/
 				String url = requestURL;

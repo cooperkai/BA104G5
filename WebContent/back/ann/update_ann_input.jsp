@@ -78,6 +78,7 @@
 						<button type="submit" class="btn btn_cooper" value="送出修改">送出修改</button>
 					</div>
 				</form>
+				<h4><a href="<%=request.getContextPath()%>/back/ann/listAllAnn.jsp">回系統公告</a></h4>
 			</div>
 		</div>
 	</div>

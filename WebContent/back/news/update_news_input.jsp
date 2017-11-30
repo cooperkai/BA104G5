@@ -134,6 +134,7 @@ table, th, td {
 						<button type="submit" class="btn btn_cooper" value="送出修改">送出修改</button>
 					</div>
 				</form>
+				<h4><a href="<%=request.getContextPath()%>/back/news/listAllNews.jsp">回房市最新消息</a></h4>
 			</div>
 		</div>
 		<br>送出修改的來源網頁路徑:<br> <b> <font color=blue>request.getParameter("requestURL"):</font>
