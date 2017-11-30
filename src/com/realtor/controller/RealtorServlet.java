@@ -522,13 +522,9 @@ public class RealtorServlet extends HttpServlet {
 						System.out.println((rtrVO.getRtr_id()).equals(rtr_id));
 						System.out.println((rtrVO.getRtr_name()).equals(rtr_name));
 
-						FPwMailService ms = new FPwMailService();
-						try {
-							ms.sendPassword(rtrVO.getRtr_name(), pw, "eatkaikai@gmail.com");// 信箱更換處
-						} catch (MessagingException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						FPwMailService ms = new FPwMailService(rtrVO.getRtr_name(), pw, "eatkaikai@gmail.com");
+						Thread fThread = new Thread(ms);
+						fThread.start();
 
 						String url = "/front/realtor/realtor_login.jsp";
 						RequestDispatcher successView = req.getRequestDispatcher(url);

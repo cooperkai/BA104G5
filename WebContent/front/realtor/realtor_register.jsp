@@ -4,8 +4,7 @@
 
 <%
 	RealtorVO realtorVOreg = (RealtorVO) request.getAttribute("realtorVOreg");
-%>
-<%
+
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
 	response.setDateHeader("Expires", 0);
@@ -126,8 +125,7 @@
 							<div class="col-sm-9">
 								<jsp:useBean id="realestateSvc" scope="page"
 									class="com.realestate.model.RealEstateService" />
-								<select class="selectpicker show-tick form-control" size="1"
-									name="re_no">
+								<select class="selectpicker show-tick form-control reItem" size="1" name="re_no">
 									<option name="default_item" value="">選擇服務公司</option>
 									<c:forEach var="realestateVO" items="${realestateSvc.all}">
 										<option value="${realestateVO.re_no}"
@@ -138,12 +136,11 @@
 						</div>
 						<div class="form-group">
 							<label for="rtr_area" class="col-sm-2 control-label">服務地區</label>
-							<div class="col-sm-9">
+							<div class="col-sm-9 rtr_area">
 
-								<select class="selectpicker show-tick form-control" name="rtr_area">
+								<select class="selectpicker show-tick form-control areaItem" name="rtr_area">
 									<option name="default_item" value="">選擇服務地區</option>
-									<option
-										value="<%=(realtorVOreg == null) ? "": "realtorVOreg.getRtr_area()"%>"></option>
+									<option	value="<%=(realtorVOreg == null) ? "": "realtorVOreg.getRtr_area()"%>"></option>
 									<option>北投區</option>
 									<option>中正區</option>
 									<option>士林區</option>

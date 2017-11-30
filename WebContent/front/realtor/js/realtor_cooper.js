@@ -58,7 +58,14 @@ $(document).ready(function() {
 		$("#rtr_area").val("中正區");
 		$("#rtr_idno").val("A146945341");
 		$("#rtr_intro").val("大俠愛吃漢堡堡");
+//		$(".rtr_area>.dropdown-menu li:selected").text("中正區");
+//		$(".rtr_area ul.dropdown-menu li.selected span.text").text("中正區");
+//		$(".rtr_area button span.pull-left").text("中正區");
+//		$(".reItem button span.pull-left").text("信義房屋").$(".rtr_area ul.dropdown-menu li.selected").text("2");
 		$("#aggrement2").attr("checked", "enable");
+//		alert($(".rtr_area>.areaItem option:selected").text());
+//		alert($(".rtr_area ul.dropdown-menu li.selected span.text").text());
+//		alert($(".rtr_area button span.pull-left").text());
 	});
 });
 // 房仲神奇小按鈕的script 結束
