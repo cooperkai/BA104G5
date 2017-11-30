@@ -614,8 +614,5 @@ public class RealtorServlet extends HttpServlet {
 			return;
 
 		}// 房仲FB登入結束
-		
-		
-
 	}
 }

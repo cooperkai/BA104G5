@@ -43,9 +43,7 @@ public class RealtorChange extends HttpServlet {
 			List<RealtorVO> list = realtorSvc.getIdList();
 
 			try {
-				/***********************
-				 * 1.接收請求參數 - 輸入格式的錯誤處理
-				 *************************/
+				/************************ 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
 				String rtr_id = req.getParameter("rtr_id");
 				String rtr_psw = req.getParameter("rtr_psw");
@@ -150,9 +148,7 @@ System.out.println(re_no);
 				RealtorVO realtorVO = new RealtorVO();
 				realtorVO = realtorSvc.add(rtr_id, rtr_psw, rtr_name, rtr_photo, rtr_area, rtr_intro, rtr_idno, re_no);
 
-				/****************************
-				 * 3.修改完成,準備轉交(Send the Success view)
-				 *************/
+				/***************************** 3.修改完成,準備轉交(Send the Success view)*************/
 				String url = "/front/realtor/realtor_success.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交success.jsp
 				successView.forward(req, res);
@@ -183,9 +179,7 @@ System.out.println(re_no);
 					return;
 				}
 
-				/*******************
-				 * 3.查詢完成,準備轉交(Send the Success view)
-				 *************/
+				/******************** 3.查詢完成,準備轉交(Send the Success view)*************/
 
 				HttpSession session = req.getSession();
 				session.setAttribute("realtorVO", realtorVO);
@@ -220,9 +214,7 @@ System.out.println(re_no);
 
 			try {
 
-				/***********************
-				 * 1.接收請求參數 - 輸入格式的錯誤處理
-				 *************************/
+				/************************ 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 				String rtr_name = req.getParameter("rtr_name").trim();
 				String rtr_area = req.getParameter("rtr_area");
 				String rtr_intro = req.getParameter("rtr_intro").trim();
@@ -300,10 +292,6 @@ System.out.println(re_no);
 				realtorVOtmp.setRe_no(re_no);
 				realtorVOtmp.setRtr_no(rtr_no);
 
-//				realtorVOtmp.setRtr_no(rtr_no);
-//				realtorVOtmp.setRtr_name(rtr_name);
-//				realtorVOtmp.setRtr_intro(rtr_intro);
-//				realtorVOtmp.setRtr_photo(rtr_photo);
 				if (!dataErrors.isEmpty()) {
 					req.getSession().setAttribute("realtorVO", realtorVO); // 含有輸入格式錯誤的relatorVO物件,也存入req
 					req.setAttribute("realtorVOtmp", realtorVOtmp);
@@ -319,10 +307,7 @@ System.out.println(re_no);
 				/*************************** 全部沒問題才開始包裝資料、更新db ****************************/
 //				realtorSvc.update(rtr_no, rtr_name, rtr_photo, rtr_intro, realtorVO.getRtr_psw());
 				realtorSvc.update(rtr_name, rtr_photo, rtr_area, rtr_intro, rtr_idno, re_no, realtorVO.getRtr_psw(), rtr_no);
-//				realtorVO.setRtr_no(rtr_no);
-//				realtorVO.setRtr_name(rtr_name);
-//				realtorVO.setRtr_intro(rtr_intro);
-//				realtorVO.setRtr_photo(rtr_photo);
+				
 				realtorVO.setRtr_name(rtr_name);
 				realtorVO.setRtr_photo(rtr_photo);
 				realtorVO.setRtr_area(rtr_area);
@@ -333,9 +318,7 @@ System.out.println(re_no);
 				
 				req.getSession().setAttribute("realtorVO", realtorVO);
 
-				/****************************
-				 * 更新完成,準備轉交(Send the Success view)
-				 ***********/
+				/***************************** 更新完成,準備轉交(Send the Success view)***********/
 				String url = "/front/realtor/realtor_center.jsp";
 				String dataSuccess = "更新成功";
 				req.setAttribute("dataSuccess", dataSuccess);
@@ -372,9 +355,7 @@ System.out.println(re_no);
 				if (psw_ori.equals(realtorVO.getRtr_psw())) {
 					if (psw_new1.equals(psw_new2)) {
 						realtorSvc.changePassword(psw_new1, realtorVO.getRtr_no());
-						/***************************
-						 * 更新完成,準備轉交(Send the Success view)
-						 ***********/
+						/**************************** 更新完成,準備轉交(Send the Success view) ***********/
 						String url = "/front/realtor/realtor_center.jsp";
 						RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交
 						successView.forward(req, res);
@@ -399,7 +380,5 @@ System.out.println(re_no);
 			}
 
 		} // 來自房仲中心的修改密碼請求結束
-
 	}
-
 }
