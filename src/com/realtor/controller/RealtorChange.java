@@ -87,19 +87,16 @@ System.out.println(re_no);
 				// 檢查密碼是否為空
 				if (rtr_psw.length() == 0 || rtr_psw2.length() == 0) {
 					regErrors.add("密碼不可為空!");
-					return;
 				}
 
 				// 檢查兩次密碼是否相同
 				if (!rtr_psw.equals(rtr_psw2)) {
 					regErrors.add("兩次輸入的密碼不同!");
-					return;
 				}
 
 				// 檢查簡介是否為空
 				if ((rtr_intro.trim()).length() == 0) {
 					regErrors.add("簡介不可為空!");
-					return;
 				}
 				
 				//檢查IDNO
@@ -155,7 +152,8 @@ System.out.println(re_no);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				// errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				regErrors.add("無法取得要修改的資料:" + e.getMessage());
+				req.setAttribute("regErrors", regErrors);
 				RequestDispatcher failureView = req.getRequestDispatcher("/front/realtor/realtor_register.jsp");
 				failureView.forward(req, res);
 			}
