@@ -14,10 +14,14 @@ public class jdbcUtil_CompositeQuery_Realtor {
 
 		String aCondition = null;
 		// 用於varchar
-		if ("RTR_NO".equals(columnName) || "RTR_ID".equals(columnName) || "RTR_NAME".equals(columnName)
-				|| "RTR_AREA".equals(columnName) || "RE_NO".equals(columnName) || "RTR_INTRO".equals(columnName))
-			aCondition = columnName + " like '%" + value + "%'";
-
+		if ("RTR_STATE".equals(columnName) || "RTR_NO".equals(columnName) || "RTR_ID".equals(columnName) || "RTR_NAME".equals(columnName)
+				|| "RTR_AREA".equals(columnName) || "RE_NO".equals(columnName) || "RTR_INTRO".equals(columnName)){
+			if(value == null || value.trim().length() == 0){
+				aCondition = "RTR_STATE = 'ON' ";
+			}else{
+				aCondition = "RTR_STATE = 'ON' and " + columnName + " like '%" + value + "%'";
+			}
+		}
 		return aCondition + " ";
 	}
 
@@ -30,7 +34,6 @@ public class jdbcUtil_CompositeQuery_Realtor {
 			if (value != null && value.trim().length() != 0	&& !"action".equals(key)) {
 				count++;
 				String aCondition = get_aCondition_For_Oracle(key, value.trim());
-
 				if (count == 1)
 					whereCondition.append(" where " + aCondition);
 				else
@@ -49,10 +52,10 @@ public class jdbcUtil_CompositeQuery_Realtor {
 		// java.util.Map<java.lang.String,java.lang.String[]> 之測試
 		Map<String, String[]> map = new TreeMap<String, String[]>();
 		map.put("RTR_ID", new String[] { "realtor001@gmail.com" });
-		map.put("RTR_NAME", new String[] { "葦小寶" });
-		map.put("RTR_AREA", new String[] { "北投區" });
-		map.put("RE_NO", new String[] { "RE00000001" });
-		map.put("RTR_INTRO", new String[] { "g" });
+//		map.put("RTR_STATE", new String[] { " " });
+//		map.put("RTR_AREA", new String[] { "北投區" });
+//		map.put("RE_NO", new String[] { "RE00000001" });
+//		map.put("RTR_INTRO", new String[] { "g" });
 		map.put("action", new String[] { "getXXX" }); // 注意Map裡面會含有action的key
 
 		String finalSQL = "SELECT * FROM REALTOR " + jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map)

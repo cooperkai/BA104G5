@@ -562,12 +562,17 @@ public class RealtorDAO implements RealtorDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			String finalSQL = "SELECT * FROM REALTOR " + jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map)
-					+ "ORDER BY RTR_NO";
+			String finalSQL = null;
+			if(jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map).trim().length() == 0){
+				finalSQL = "SELECT * FROM REALTOR where rtr_state='ON' ORDER BY RTR_NO";
+				
+			}else{
+				finalSQL = "SELECT * FROM REALTOR " + jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map)
+				+ "ORDER BY RTR_NO";
+			}
+			
 			pstmt = con.prepareStatement(finalSQL);
-
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 				realtorvo = new RealtorVO();
 				realtorvo.setRtr_no(rs.getString("RTR_NO"));

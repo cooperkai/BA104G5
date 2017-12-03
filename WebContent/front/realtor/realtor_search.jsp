@@ -239,6 +239,7 @@
 		</div>
 	</div>
 	<c:forEach var="realtorVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s">
+<%-- <c:if test="${(realtorVO.rtr_state == 'ON')}"> --%>
 		<!-- 房仲簡介本體 -->
 		<div class="container">
 			<div class="row">
@@ -385,6 +386,7 @@
 			</div>
 		</div>
 		<br> -->
+<%-- 		</c:if> --%>
 	</c:forEach>
 	<div class="container">
 		<div class="row">
