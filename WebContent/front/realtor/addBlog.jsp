@@ -52,7 +52,7 @@
 				<div class="form-group">
 					<label for="article_state">是否開放</label> 
 					<select	class="selectpicker show-tick form-control articleState" name="article_state">
-						<option name="default_item" value="">選擇是否開放</option>
+						<option class="defaultItem" name="default_item" value="選擇是否開放">選擇是否開放</option>
 						<option value="ON"
 							${(articleVO.article_state == 'ON') ? 'selected' : ''}>ON</option>
 						<option value="OFF"
@@ -83,8 +83,8 @@
 			var rtr_no = $(this).closest(".addBlogOut").find(".rtrNo").val();
 			var post_date = $(this).closest(".addBlogOut").find(".postDate").val();
 	    	var article_body = $(this).closest(".outpanel").find("textarea").val();
-	    	var article_state = $(this).closest(".outpanel").find(".articleState  option:selected").text();
-			
+	    	var article_state = $(this).closest(".outpanel").find(".articleState option:selected").text();
+			alert(default_item);
 			$.ajax({
 				type: 'post',
 				dataType: "json",
@@ -95,7 +95,6 @@
 					article_body: article_body,
 					article_state: article_state,
 					post_date: post_date,
-					requestURL: requestURL
 				},
 				
 			    success: function(result) {

@@ -62,14 +62,14 @@
 		<url-pattern>/front/realtor/login.do</url-pattern>
 	</servlet-mapping>
 
-	<filter>
-		<filter-name>RealtorLoginFilter</filter-name>
-		<filter-class>com.filters.RealtorLoginFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>RealtorLoginFilter</filter-name>
-		<url-pattern>/front/realtor/realtor.do</url-pattern>
-	</filter-mapping>
+<!-- 	<filter> -->
+<!-- 		<filter-name>RealtorLoginFilter</filter-name> -->
+<!-- 		<filter-class>com.filters.RealtorLoginFilter</filter-class> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>RealtorLoginFilter</filter-name> -->
+<!-- 		<url-pattern>/front/realtor/realtor.do</url-pattern> -->
+<!-- 	</filter-mapping> -->
 
 	<servlet>
 		<servlet-name>RealtorLogout</servlet-name>

@@ -143,6 +143,9 @@ public class ArticleServlet extends HttpServlet {
 				}
 
 				String article_state = req.getParameter("article_state").trim();
+				if (article_body == null || article_body.trim().length() == 0 || article_state.equals("選擇是否開放")) {
+					errorMsgs.add("請選擇是否公佈");
+				}
 
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 				Timestamp post_date = nowTime;
