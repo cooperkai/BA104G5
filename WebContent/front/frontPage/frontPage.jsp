@@ -12,12 +12,10 @@
 	RealtorVO realtorVO2 = (RealtorVO) request.getAttribute("realtorVO");
 	if (realtorVO == null) { // 如為 null, 代表此user未登入過 , 才做以下工作
 		session.setAttribute("location", request.getRequestURI()); //*工作1 : 同時記下目前位置 , 以便於login.jsp登入成功後 , 能夠直接導至此網頁(須配合LoginHandler.java)
-		response.sendRedirect("realtor_register.jsp"); //*工作2 : 請該user去房仲註冊網頁
+		response.sendRedirect(request.getContextPath() + "/front/realtor/realtor_register.jsp"); //*工作2 : 請該user去房仲註冊網頁
 		return;
 	}
-%>
 
-<%
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
 	response.setDateHeader("Expires", 0);

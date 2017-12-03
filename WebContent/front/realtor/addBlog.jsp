@@ -45,7 +45,6 @@
 				</h4>
 			</div>
 		
-<%-- 			<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/front/article/article.do"	name="form1"> --%>
 				<div class="form-group">
 					<label for="article_body">文章內容</label>
 					<textarea rows="10" class="form-control" class="articleBody" required autofocus><%=(articleVO == null) ? "文章內容" : articleVO.getArticle_body()%></textarea>
@@ -65,35 +64,30 @@
 					<input type="hidden" name="action" value="insert"> 
 					<input type="hidden" class="postDate" value=""> 
 					<input type="hidden" class="rtrNo" value="${realtorVO.rtr_no}"> 
-					<input type="hidden" class="requestURL" name="requestURL" value="<%=request.getServletPath()%>"> 
 <!-- 					<input type="submit" value="送出新增"> -->
 					<input type="button" value="送出新增" class="addBlog">
 				</div>
-<!-- 			</FORM> -->
 	
 
-<%
+<%--
 	java.sql.Timestamp post_date = null;
 	try {
 		post_date = articleVO.getPost_date();
 	} catch (Exception e) {
 		post_date = new java.sql.Timestamp(System.currentTimeMillis());
 	}
-%>
+--%>
 
 <script type="text/javascript">
-	
-		
 		$(".addBlog").click(function(){
 			var rtr_no = $(this).closest(".addBlogOut").find(".rtrNo").val();
 			var post_date = $(this).closest(".addBlogOut").find(".postDate").val();
-			var requestURL = $(this).closest(".addBlogOut").find(".requestURL").val();
 	    	var article_body = $(this).closest(".outpanel").find("textarea").val();
 	    	var article_state = $(this).closest(".outpanel").find(".articleState  option:selected").text();
-			//alert(rtr_no + " : "+ post_date + " : " + article_body + " : " + article_state);
 			
 			$.ajax({
 				type: 'post',
+				dataType: "json",
 				url: '<%=request.getContextPath()%>/front/article/article.do',
 				data: {
 					action: 'insert',
@@ -105,16 +99,18 @@
 				},
 				
 			    success: function(result) {
+			    	if(result.success){
+			    		alert(result.msg);
+			    	}else{
+			    		alert(result.msg);
+			    	}
 			        //設置時間自動挑轉
-			    	alert('已新增完成');
 			    },
 			    error: function(xhr) {
 			        alert('新增文章失敗');
 			    }
 			});		
-
 		});
-
 </script>
 
 

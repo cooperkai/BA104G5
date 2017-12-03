@@ -17,7 +17,6 @@ public interface RealtorDAO_interface {
 	public RealtorVO findById(String rtr_id);//找房仲ID
 	public void changePassword(RealtorVO realtorVO);//更換密碼 
 	
-	
 //	public List<RealtorVO> getNameList();//列出所有房仲姓名
 //	public List<RealtorVO> getAreaList();//列出所有房仲所屬地區
 

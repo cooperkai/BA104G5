@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.realtor.model.*"%>
@@ -8,7 +11,6 @@
 
 
 <jsp:useBean id="realtorSvc" scope="page" class="com.realtor.model.RealtorService" />
-
 <%
 	RealtorVO realtorVO = (RealtorVO) session.getAttribute("realtorVO");
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
@@ -87,23 +89,30 @@
 						</div>
 					</c:if>
 					</div>
-					<!-- <div class="form-group"> -->
-					<!-- <div class="col-sm-12"> -->
-					<%-- <p style="color:#191970;font-weight:bold;">${realtorSvc.getOne(articleVO.rtr_no).getRtr_name()}: ${articleVO.article_comm}</p> --%>
-					<!-- </div> -->
-					<!-- </div> -->
-					<!--<c:if test="${realtorVO != null}">
-					<form method="post" action="<%=request.getContextPath()%>/front/article/article.do">
-					<div class="input-group" style="margin-bottom: 10px;">
-						<textarea class="form-control" name="article_comm" value=""></textarea>
-						<span class="input-group-btn">
-							<button class="btn btn-primary" type="submit" style="padding: 16px;">留言</button>
-							<input type="hidden" name="action" value="Comm"> 
-							<input type="hidden" name="article_no" value="${articleVO.article_no}"> 
-						</span>
+					
+					<div class="form-group">
+						<div class="col-sm-12">
+							<c:forEach var="comm" items="${fn:split(articleVO.article_comm,',')}" ><!-- 新的 -->
+							<p style="color:#191970;font-weight:bold;">${comm}</p>
+							</c:forEach>
+						</div>
 					</div>
-					</form>
-					</c:if>-->
+					
+					
+					
+						<form method="post" action="<%=request.getContextPath()%>/front/article/article.do">
+							<div class="input-group" style="margin-bottom: 10px;">
+								<textarea class="form-control" name="article_comm" value=""></textarea>
+								<span class="input-group-btn">
+									<button class="btn btn-primary" type="submit" style="padding: 16px;">留言</button>
+									<input type="hidden" name="action" value="Comm"> 
+									<input type="hidden" name="article_no" value="${articleVO.article_no}"> 
+								</span>
+							</div>
+						</form>
+					
+					
+					
 				</div>
 			</div>
 		</div>
