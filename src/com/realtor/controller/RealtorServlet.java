@@ -310,48 +310,6 @@ public class RealtorServlet extends HttpServlet {
 		// }
 		// }
 
-		// 來自房仲登入的請求
-		if ("realtorLogin".equals(action)) {
-
-			String loginError = "";
-			req.setAttribute("loginError", loginError);
-
-			String rtr_id = req.getParameter("rtr_id").trim().toLowerCase();
-			String rtr_psw = req.getParameter("rtr_psw").trim();
-
-			Enumeration names = req.getParameterNames();
-			while (names.hasMoreElements()) {
-				System.out.println("realtorLogin: " + names.nextElement());
-			}
-
-			RealtorService realtorSvc = new RealtorService();
-			RealtorVO realtorVO = null;
-
-			try {
-				realtorVO = realtorSvc.findById(rtr_id);
-				if (realtorVO.getRtr_state().equals("OFF")) {
-					loginError = "你的帳號尚未啟用或已被鎖定";
-				} else if (!rtr_psw.equals(realtorVO.getRtr_psw())) {
-					System.out.println(realtorSvc);
-					loginError = "你的帳號或密碼無效!";
-				}
-			} catch (NullPointerException e) {
-				loginError = "你的帳號或密碼無效!";
-			} catch (Exception ignored) {
-			}
-
-			if (loginError.length() > 0) {
-				req.setAttribute("loginError", loginError);
-				RequestDispatcher failureView = req.getRequestDispatcher("realtor_login.jsp");
-				failureView.forward(req, res);
-				return;
-			}
-
-			HttpSession session = req.getSession(); // 檢查到這表示帳號密碼沒問題
-			session.setAttribute("realtorVO", realtorVO); // 在session內做已經登入過的標識
-			RequestDispatcher successView = req.getRequestDispatcher("realtor_center.jsp");
-			successView.forward(req, res);// 重導至會員中心
-		} // 來自房仲登入的請求結束
 
 		// 房仲複合查詢
 		if ("listQueryB".equals(action)) {
