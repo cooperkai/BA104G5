@@ -592,9 +592,14 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, password);
-			String finalSQL = "SELECT * FROM REALTOR " + jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map)
-					+ "ORDER BY RTR_NO";
-			pstmt = con.prepareStatement(finalSQL);
+			String finalSQL = null;
+			if(jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map).trim().length() == 0){
+				finalSQL = "SELECT * FROM REALTOR where rtr_state='ON' ORDER BY RTR_NO";
+				
+			}else{
+				finalSQL = "SELECT * FROM REALTOR " + jdbcUtil_CompositeQuery_Realtor.get_WhereCondition(map)
+				+ "ORDER BY RTR_NO";
+			}
 
 			rs = pstmt.executeQuery();
 
