@@ -161,7 +161,7 @@ body {
 					<c:if test="${not empty loginError}">
 						<font style="color: red">${loginError}</font>
 					</c:if>
-					<form class="form-horizontal loginform" action="login.do" method="post">
+					<form class="form-horizontal loginform" action="realtor.do" method="post">
 						<div class="form-group">
 							<div class="col-sm-12">
 								<input type="email" class="form-control" id="loginid"

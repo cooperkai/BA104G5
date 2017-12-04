@@ -310,7 +310,6 @@ public class RealtorServlet extends HttpServlet {
 		// }
 		// }
 
-
 		// 房仲複合查詢
 		if ("listQueryB".equals(action)) {
 
@@ -472,9 +471,11 @@ public class RealtorServlet extends HttpServlet {
 							pw += a + "";
 						}
 						RealtorService rtrSvc1 = new RealtorService();
-						rtrSvc1.update(rtrVO.getRtr_name(), rtrVO.getRtr_photo(), rtrVO.getRtr_area(), rtrVO.getRtr_intro(), rtrVO.getRtr_idno(), rtrVO.getRe_no(), pw, rtrVO.getRtr_no());
-//						rtrSvc1.update(rtrVO.getRtr_no(), rtrVO.getRtr_name(), rtrVO.getRtr_photo(),
-//								rtrVO.getRtr_intro(), pw);
+						rtrSvc1.update(rtrVO.getRtr_name(), rtrVO.getRtr_photo(), rtrVO.getRtr_area(),
+								rtrVO.getRtr_intro(), rtrVO.getRtr_idno(), rtrVO.getRe_no(), pw, rtrVO.getRtr_no());
+						// rtrSvc1.update(rtrVO.getRtr_no(),
+						// rtrVO.getRtr_name(), rtrVO.getRtr_photo(),
+						// rtrVO.getRtr_intro(), pw);
 
 						System.out.println(pw);
 						System.out.println((rtrVO.getRtr_id()).equals(rtr_id));
@@ -502,6 +503,44 @@ public class RealtorServlet extends HttpServlet {
 			}
 		} // 房仲忘記密碼結束
 
+		// 來自房仲登入的請求
+		if ("realtorLogin".equals(action)) {
+
+			String loginError = "";
+			req.setAttribute("loginError", loginError);
+
+			String rtr_id = req.getParameter("rtr_id").trim().toLowerCase();
+			String rtr_psw = req.getParameter("rtr_psw").trim();
+
+			RealtorService realtorSvc = new RealtorService();
+			RealtorVO realtorVO = null;
+
+			try {
+				realtorVO = realtorSvc.findById(rtr_id);
+				if (realtorVO.getRtr_state().equals("OFF")) {
+					loginError = "你的帳號尚未啟用或已被鎖定";
+				} else if (!rtr_psw.equals(realtorVO.getRtr_psw())) {
+					System.out.println(realtorSvc);
+					loginError = "你的帳號或密碼無效!";
+				}
+			} catch (NullPointerException e) {
+				loginError = "你的帳號或密碼無效!";
+			} catch (Exception ignored) {
+			}
+
+			if (loginError.length() > 0) {
+				req.setAttribute("loginError", loginError);
+				RequestDispatcher failureView = req.getRequestDispatcher("realtor_login.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+
+			HttpSession session = req.getSession(); // 檢查到這表示帳號密碼沒問題
+			session.setAttribute("realtorVO", realtorVO); // 在session內做已經登入過的標識
+			RequestDispatcher successView = req.getRequestDispatcher("realtor_center.jsp");
+			successView.forward(req, res);// 重導至會員中心
+		} // 來自房仲登入的請求結束
+
 		// 房仲FB登入
 		if ("FBLogin".equals(action)) {
 			String rtr_area = req.getParameter("rtr_area");
@@ -514,21 +553,22 @@ public class RealtorServlet extends HttpServlet {
 			String id = req.getParameter("id");
 			HttpSession session = req.getSession();
 			PrintWriter out = res.getWriter();
-			
-			//判斷是否用FB登入過
+
+			// 判斷是否用FB登入過
 			RealtorService realtorSvc = new RealtorService();
 			List<RealtorVO> list = realtorSvc.getAll();
 			for (RealtorVO realtorvo : list) {
 				if ((realtorvo.getRtr_id().trim().equals(email)) && realtorvo.getRtr_psw().trim().equals(id)) {
 					session.setAttribute("realtorvo", realtorvo);
-					//轉交至房仲會員中心
-					String url = req.getContextPath()+"/front/realtor/realtor.do?action=realtorLogin&rtr_id="+email+"&rtr_psw="+id+"";
+					// 轉交至房仲會員中心
+					String url = req.getContextPath() + "/front/realtor/realtor.do?action=realtorLogin&rtr_id=" + email
+							+ "&rtr_psw=" + id + "";
 					out.println("<META HTTP-EQUIV='Refresh' content='1;URL=" + url + "'>");
 					return;
 				}
 			}
-			
-			//沒有登入過走這
+
+			// 沒有登入過走這
 			String picUrl = "https://graph.facebook.com/" + id + "/picture?type=large";
 			// InputStream fin=GetURLPic.GetPic(picUrl);
 			InputStream fin = GetURLPic.GetPic(picUrl);
@@ -544,7 +584,8 @@ public class RealtorServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			byte[] data = buffer.toByteArray();
-//			realtorSvc.add(email, id, name2, data, rtr_area, rtr_intro, rtr_idno, re_no);
+			// realtorSvc.add(email, id, name2, data, rtr_area, rtr_intro,
+			// rtr_idno, re_no);
 			realtorSvc.FBAdd(email, id, name2, data, rtr_area, rtr_intro, rtr_idno, re_no);
 			System.out.println(email);
 			System.out.println(id);
@@ -563,10 +604,11 @@ public class RealtorServlet extends HttpServlet {
 			System.out.println("下:" + name2);
 			fin.close();
 			session.setAttribute("realtorVO", realtorVO);
-			
-			out.println("<META HTTP-EQUIV='Refresh' content='1;URL=" + req.getContextPath()+"/front/realtor/realtor_login.jsp" + "'>");
+
+			out.println("<META HTTP-EQUIV='Refresh' content='1;URL=" + req.getContextPath()
+					+ "/front/realtor/realtor_login.jsp" + "'>");
 			return;
 
-		}// 房仲FB登入結束
+		} // 房仲FB登入結束
 	}
 }
