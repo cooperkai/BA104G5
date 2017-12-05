@@ -821,7 +821,7 @@ public class RealtorJDBCDAO implements RealtorDAO_interface {
 		RealtorJDBCDAO dao = new RealtorJDBCDAO();
 
 		// 專門塞房仲照片以及簡介
-		for (int i = 1; i <= 12; i++) {
+		for (int i = 1; i <= 21; i++) {
 			if (i <= 9) {
 				FileInputStream in = new FileInputStream("WebContent/images/realtorphoto/realtor" + i + ".jpg");
 				String reader = getLongString("WebContent/txt/realtor_txt/realtor" + i + ".txt");
