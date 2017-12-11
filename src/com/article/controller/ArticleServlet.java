@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import com.article.model.ArticleService;
 import com.article.model.ArticleVO;
+import com.mem.model.MemVO;
 import com.realtor.model.RealtorVO;
 
 @SuppressWarnings("serial")
@@ -239,9 +240,12 @@ public class ArticleServlet extends HttpServlet {
 			try {
 
 				RealtorVO realtorVO = (RealtorVO) req.getSession().getAttribute("realtorVO");
+				MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
 				String rtrName;
-				if (realtorVO == null) {
+				if (realtorVO == null && memVO == null) {
 					rtrName = "路人";
+				} else if (memVO != null) {
+					rtrName = memVO.getMem_name();
 				} else {
 					rtrName = realtorVO.getRtr_name();
 				}
@@ -270,14 +274,14 @@ public class ArticleServlet extends HttpServlet {
 				ArticleService articleSvc = new ArticleService();
 				articleSvc.delete(article_no);
 				// 沒用到
-				PrintWriter out = res.getWriter();
-				JSONObject obj = new JSONObject();
-				String value = "45555555555555555555";
-
-				obj.put("canPass", value);
-				out.write(obj.toString());
-				out.flush();
-				out.close();
+//				PrintWriter out = res.getWriter();
+//				JSONObject obj = new JSONObject();
+//				String value = "45555555555555555555";
+//
+//				obj.put("canPass", value);
+//				out.write(obj.toString());
+//				out.flush();
+//				out.close();
 
 				System.out.println("delete");
 			} catch (Exception e) {

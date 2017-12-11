@@ -84,7 +84,6 @@
 			var post_date = $(this).closest(".addBlogOut").find(".postDate").val();
 	    	var article_body = $(this).closest(".outpanel").find("textarea").val();
 	    	var article_state = $(this).closest(".outpanel").find(".articleState option:selected").text();
-			alert(default_item);
 			$.ajax({
 				type: 'post',
 				dataType: "json",

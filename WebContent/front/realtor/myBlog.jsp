@@ -197,7 +197,7 @@
 			*要不然會選擇走下面的error
 			*還是會執行，只是會被誤導....
 			*/
-			dataType: "json",
+// 			dataType: "json",
 			data: {
 				action: 'delete',
 				article_no: event.target.id //一定要用event
