@@ -148,7 +148,7 @@ public class RtrMailOn implements Runnable {
 			// 圖檔部份，注意 html 用 cid:image，則header要設<image>
 			MimeBodyPart picturePart = new MimeBodyPart();
 			FileDataSource fds = new FileDataSource(
-					"D:/Servlet/BA104_WebApp/workspace_servlet/BA104G5/WebContent/images/realtorphoto/realtor7.jpg");
+					"C:/ServletEclipse/workspaceServlet/BA104G5/WebContent/images/For House logo.png");
 
 			picturePart.setDataHandler(new DataHandler(fds));
 			picturePart.setFileName(fds.getName());
