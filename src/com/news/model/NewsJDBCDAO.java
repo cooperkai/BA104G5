@@ -363,14 +363,14 @@ public class NewsJDBCDAO implements NewsDAO_interface {
 		String news_no = null;
 		for (int i = 1; i <= 12; i++) {
 			if (i <= 9) {
-				in = new FileInputStream("D:/Servlet/BA104_WebApp/workspace_servlet/BA104G5/WebContent/images/newsphoto/news" + i + ".jpg");
-				reader = getLongString("D:/Servlet/BA104_WebApp/workspace_servlet/BA104G5/WebContent/txt/news_txt/news" + i + ".txt");
+				in = new FileInputStream("WebContent/images/newsphoto/news" + i + ".jpg");
+				reader = getLongString("WebContent/txt/news_txt/news" + i + ".txt");
 				news_no = "NS0000000" + i;
 				newspic = new byte[in.available()];
 				in.read(newspic);
 			} else {
-				in = new FileInputStream("D:/Servlet/BA104_WebApp/workspace_servlet/BA104G5/WebContent/images/newsphoto/news" + i + ".jpg");
-				reader = getLongString("D:/Servlet/BA104_WebApp/workspace_servlet/BA104G5/WebContent/txt/news_txt/news" + i + ".txt");
+				in = new FileInputStream("WebContent/images/newsphoto/news" + i + ".jpg");
+				reader = getLongString("WebContent/txt/news_txt/news" + i + ".txt");
 				news_no = "NS000000" + i;
 				newspic = new byte[in.available()];
 				in.read(newspic);
